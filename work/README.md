@@ -1,6 +1,43 @@
 # Hiotera · React
 
-Web completa de Hiotera migrada a React y Vite. Conserva la introducción desde negro, el modelo LIBOx en 3D controlado por el scroll, el diseño adaptable, el modo escáner y las pestañas de la demostración.
+Web completa de Hiotera migrada a React y Vite, con el modelo LIBOx en 3D controlado por el scroll, diseño adaptable, modo escáner y las pestañas de la demostración.
+
+El LIBOx aparece al cargar la portada, junto al texto y el radar, y completa un
+giro de 360° al desplazarse. Conserva su posición y tamaño durante todo el giro.
+Justo después del LIBOx, la sección **La meteo** integra la estación meteorológica original:
+al bajar se separan sus siete conjuntos y al subir vuelven a montarse. El
+miniíndice destaca solo los cuatro primeros: anemómetro, veleta, embudo y
+pluviómetro. Los soportes y la garita forman parte del modelo completo. Las
+etiquetas siguen las piezas; pulsa sus nombres o los puntos numerados para
+conocer su función. Los botones **Montada** y **Despiece** permiten recorrer la
+secuencia también con el teclado. En móvil, los números corresponden a la
+lista de nombres situada bajo el modelo.
+
+La dirección **http://127.0.0.1:5173/meteo.html** abre directamente la misma
+estación en React, con su despiece al bajar y sin pasar por la portada del LIBOx.
+Esta vista se incluye también en la compilación `dist/meteo.html`.
+
+El enlace **La meteo** está visible también en móvil. Abrir directamente la URL
+con `#meteo` desplaza a la estación después de montar React; la navegación
+recalcula la posición si cambia el diseño y deja de corregirla en cuanto el
+usuario empieza a desplazarse manualmente.
+
+`npm test` comprueba la navegación directa, los enlaces a secciones y la
+restauración de su posición cuando cambian las fuentes o el diseño.
+
+El modelo completo de la web está en `public/estacion-meteo.glb`, con sus
+materiales y animación incluidos. La cámara inicial está más alejada y
+centrada para encuadrar la estación montada y en despiece.
+`src/components/MeteoScene.jsx` compone la sección,
+`src/hooks/useMeteoScene.js` sincroniza la animación con el scroll,
+`src/meteo.js` conserva nombres y anclajes, y `src/meteo.css` define su diseño.
+Se reutiliza el visor 3D instalado, sin añadir dependencias. `dist/` se mantiene
+en el repositorio como copia compilada, igual que en la entrega original.
+
+Se puede girar el LIBOx y la estación en cualquier momento arrastrando sobre
+ellos. En la estación, el botón derecho permite desplazar la vista y los
+botones **+**, **−** y **↺** acercan, alejan y restablecen la cámara. La rueda y
+el desplazamiento vertical siguen controlando el recorrido y el despiece.
 
 ## Arrancarla en tu ordenador
 
@@ -8,7 +45,7 @@ Web completa de Hiotera migrada a React y Vite. Conserva la introducción desde 
 2. Abre una terminal en esta carpeta. En tu instalación actual de Windows puedes usar:
 
    ```powershell
-   cd "C:\Users\VICKY\Documents\ChatGPT\Aplicacion Hiotera\work"
+   cd "C:\Users\dANIEL\Documents\ChatGPT\Hiotera\work"
    ```
 
 3. Instala las dependencias la primera vez:

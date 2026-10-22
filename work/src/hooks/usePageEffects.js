@@ -1,9 +1,13 @@
 import { useEffect, useRef } from "react";
+import { installHashNavigation } from "../hashNavigation.js";
 
 export function usePageEffects() {
   const progressRef = useRef(null);
   const cursorRef = useRef(null);
   const ringRef = useRef(null);
+
+  // React crea las secciones después del intento inicial de navegar al fragmento.
+  useEffect(() => installHashNavigation(), []);
 
   useEffect(() => {
     let frame = 0;
@@ -12,6 +16,16 @@ export function usePageEffects() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (progressRef.current)
         progressRef.current.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+      const meteo = document.getElementById("meteo");
+      if (meteo) {
+        const bounds = meteo.getBoundingClientRect();
+        document
+          .querySelector(".topbar")
+          ?.classList.toggle(
+            "on-meteo",
+            bounds.top <= 70 && bounds.bottom > 70,
+          );
+      }
     };
     const scheduleProgress = () => {
       if (!frame) frame = requestAnimationFrame(drawProgress);

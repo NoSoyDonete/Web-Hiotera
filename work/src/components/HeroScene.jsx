@@ -5,14 +5,10 @@ import { useSensorScene } from "../hooks/useSensorScene.js";
 
 export default function HeroScene({ onContact }) {
   const sectionRef = useRef(null),
-    pinRef = useRef(null),
-    modelRef = useRef(null),
-    cueRef = useRef(null);
+    modelRef = useRef(null);
   const { phase, modelReady, modelFailed } = useSensorScene(
     sectionRef,
-    pinRef,
     modelRef,
-    cueRef,
   );
 
   return (
@@ -23,7 +19,7 @@ export default function HeroScene({ onContact }) {
       data-scene-stage={phase}
       aria-label="Presentación interactiva del sensor Hiotera"
     >
-      <div ref={pinRef} className="sensor-pin">
+      <div className="sensor-pin">
         <div className="hero-hud">
           <span>HIOTERA / CAMPO CONECTADO</span>
           <span>nodo en línea</span>
@@ -43,9 +39,9 @@ export default function HeroScene({ onContact }) {
           id="sensor-model"
           src={assetUrl(site.modelFile)}
           alt="Sensor Hiotera LIBOx actualizado en 3D, con antena, controles y conexiones"
-          camera-orbit={`${sensorAnimation.initialYaw}deg ${sensorAnimation.initialPitch}deg ${sensorAnimation.initialRadius}%`}
+          camera-orbit={`${sensorAnimation.initialYaw}deg ${sensorAnimation.pitch}deg ${sensorAnimation.radius}%`}
+          camera-controls=""
           disable-zoom=""
-          disable-pan=""
           interaction-prompt="none"
           touch-action="pan-y"
           shadow-intensity="1.1"
@@ -106,19 +102,15 @@ export default function HeroScene({ onContact }) {
           </div>
         ))}
         <div className="scroll-cue">
-          <i /> desliza para recorrer
+          <i aria-hidden="true" /> Arrastra para girar · baja para recorrer
         </div>
+        <a className="hero-meteo-link" href="#meteo">
+          Descubre la meteo <span aria-hidden="true">↓</span>
+        </a>
         <div className="scene-counter">
           <b>{String(phase + 1).padStart(2, "0")}</b>
           <span>/</span>03
         </div>
-        {!modelFailed && (
-          <div ref={cueRef} className="wheel-cue" aria-hidden="true">
-            <span className="wheel-icon">↕</span>
-            <span>GIRA LA RUEDA PARA DESCUBRIR</span>
-            <i />
-          </div>
-        )}
         {modelFailed && (
           <p className="model-error-message" role="status">
             El visor 3D no está disponible. Puedes seguir explorando Hiotera.

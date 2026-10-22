@@ -19,9 +19,13 @@ export function Header({ onContact }) {
       <Brand />
       <nav className="nav-links">
         <a href="#nodo">El nodo</a>
+        <a href="#meteo">La meteo</a>
         <a href="#senal">La señal</a>
         <a href="#impacto">Impacto</a>
       </nav>
+      <a className="nav-meteo-link" href="#meteo">
+        La meteo <span aria-hidden="true">↓</span>
+      </a>
       <button className="nav-cta" onClick={onContact}>
         Habla con un experto <span className="arrow">↗</span>
       </button>

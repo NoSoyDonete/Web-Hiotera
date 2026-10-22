@@ -142,6 +142,25 @@ button {
   opacity: 1;
   background: rgba(217, 255, 88, 0.12);
 }
+.nav-meteo-link {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--acid);
+}
+.topbar.on-meteo {
+  color: var(--night);
+}
+.topbar.on-meteo .nav-meteo-link {
+  color: var(--forest);
+}
+.topbar.on-meteo .nav-cta {
+  color: var(--night);
+  border-color: rgba(11, 28, 23, 0.3);
+  background: rgba(249, 251, 242, 0.85);
+}
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -1353,6 +1372,9 @@ footer {
   .nav-links {
     display: none;
   }
+  .nav-meteo-link {
+    display: inline-flex;
+  }
   .hero {
     padding-top: 140px;
   }
@@ -1529,6 +1551,7 @@ footer {
   letter-spacing: 0.14em;
 }
 .sensor-pin {
+  --digital-scene: 1;
   position: sticky;
   top: 0;
   height: 100svh;
@@ -1551,6 +1574,7 @@ footer {
   pointer-events: none;
 }
 .hero-hud {
+  pointer-events: none;
   position: absolute;
   z-index: 5;
   top: 112px;
@@ -1646,7 +1670,7 @@ footer {
 .sensor-model {
   position: absolute;
   z-index: 3;
-  left: 36%;
+  left: calc(36% + min(35vw, 490px));
   top: 50%;
   width: min(70vw, 980px);
   height: min(91svh, 940px);
@@ -1716,6 +1740,7 @@ footer {
   backdrop-filter: blur(10px);
 }
 .sensor-note {
+  pointer-events: none;
   position: absolute;
   z-index: 4;
   display: grid;
@@ -1802,6 +1827,22 @@ footer {
   transform-origin: left;
   animation: cue 1.7s ease-in-out infinite;
 }
+.hero-meteo-link {
+  position: absolute;
+  z-index: 5;
+  right: 6vw;
+  bottom: 84px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 15px;
+  border: 1px solid rgba(217, 255, 88, 0.32);
+  border-radius: 999px;
+  background: rgba(11, 28, 23, 0.75);
+  color: var(--acid);
+  font-size: 0.65rem;
+  font-weight: 600;
+}
 @keyframes cue {
   50% {
     transform: scaleX(0.4);
@@ -1820,7 +1861,7 @@ footer {
     height: 74svh;
   }
   .sensor-model {
-    left: 22%;
+    left: 68%;
     top: 43%;
     width: 92vw;
     height: 74svh;
@@ -1875,6 +1916,10 @@ footer {
     right: 7vw;
     bottom: 35px;
   }
+  .hero-meteo-link {
+    bottom: 73px;
+    right: 7vw;
+  }
 }
 @media (max-width: 560px) {
   .hero.sensor-hero {
@@ -1888,7 +1933,7 @@ footer {
     height: 58svh;
   }
   .sensor-model {
-    left: 6%;
+    left: 63.5%;
     top: 30%;
     width: 115vw;
     height: 58svh;
@@ -1910,7 +1955,7 @@ footer {
   }
   .hero-phase {
     left: 6vw;
-    bottom: 12vh;
+    bottom: max(12vh, 110px);
     width: 88vw;
   }
   .hero-phase h1 {
@@ -1966,6 +2011,12 @@ footer {
     right: 6vw;
     bottom: 14px;
   }
+  .hero-meteo-link {
+    bottom: 66px;
+    right: 6vw;
+    font-size: 0.56rem;
+    padding: 8px 11px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .sensor-radar i,
@@ -1982,156 +2033,6 @@ footer {
   .node-stage::before,
   .live-dot {
     animation: none;
-  }
-}
-
-/* The LIBOx arrival is driven by the visitor's scroll, not by a timer. */
-.topbar,
-.progress,
-.hero-hud,
-.hero-phases,
-.sensor-radar,
-.scroll-cue,
-.scene-counter,
-.cursor,
-.cursor-ring,
-.sensor-hero::after {
-  transition:
-    opacity 0.55s ease,
-    visibility 0s linear;
-}
-.sensor-note {
-  transition:
-    opacity 0.45s,
-    transform 0.6s,
-    visibility 0s linear;
-}
-.wheel-cue {
-  position: absolute;
-  z-index: 6;
-  left: 50%;
-  bottom: 34px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transform: translateX(-50%);
-  color: rgba(238, 241, 231, 0.66);
-  font:
-    0.54rem "DM Mono",
-    monospace;
-  letter-spacing: 0.14em;
-  white-space: nowrap;
-  transition:
-    opacity 0.35s,
-    visibility 0.35s;
-}
-.wheel-cue i {
-  position: relative;
-  width: 48px;
-  height: 1px;
-  background: rgba(238, 241, 231, 0.19);
-  overflow: hidden;
-}
-.wheel-cue i::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: calc(var(--intro-progress, 0) * 100%);
-  background: var(--acid);
-  box-shadow: 0 0 8px var(--acid);
-}
-.wheel-icon {
-  width: 18px;
-  height: 27px;
-  border: 1px solid rgba(217, 255, 88, 0.72);
-  border-radius: 10px;
-  display: grid;
-  place-items: start center;
-  padding-top: 4px;
-  color: var(--acid);
-  font:
-    600 0.62rem "DM Mono",
-    monospace;
-  line-height: 1;
-}
-html.scroll-intro:not(.intro-landed) .topbar,
-html.scroll-intro:not(.intro-landed) .progress,
-html.scroll-intro:not(.intro-landed) .hero-hud,
-html.scroll-intro:not(.intro-landed) .sensor-radar,
-html.scroll-intro:not(.intro-landed) .hero-phases,
-html.scroll-intro:not(.intro-landed) .sensor-note,
-html.scroll-intro:not(.intro-landed) .scroll-cue,
-html.scroll-intro:not(.intro-landed) .scene-counter,
-html.scroll-intro:not(.intro-landed) .cursor,
-html.scroll-intro:not(.intro-landed) .cursor-ring,
-html.scroll-intro:not(.intro-landed) .sensor-hero::after {
-  opacity: 0 !important;
-  visibility: hidden;
-  pointer-events: none !important;
-  transition-delay: 0s, 0.55s;
-}
-html.scroll-intro:not(.intro-landed) .sensor-fallback {
-  display: none;
-}
-html.scroll-intro:not(.intro-landed) .sensor-model {
-  left: 41%;
-  top: 49%;
-  width: min(90vw, 1120px);
-  height: 125svh;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  visibility: visible;
-  pointer-events: none;
-  transition: none;
-}
-html.scroll-intro:not(.intro-landed) .sensor-model::part(default-progress-bar) {
-  opacity: 0 !important;
-}
-html.scroll-intro:not(.intro-landed) .wheel-cue {
-  opacity: 1;
-  visibility: visible;
-}
-html.scroll-intro.intro-landed .wheel-cue {
-  opacity: 0;
-  visibility: hidden;
-}
-@media (max-width: 900px) {
-  html.scroll-intro:not(.intro-landed) .sensor-model {
-    left: 41%;
-    width: min(88vw, 760px);
-    height: 58svh;
-    top: 48%;
-  }
-  .wheel-cue {
-    bottom: 25px;
-  }
-}
-@media (max-width: 560px) {
-  html.scroll-intro:not(.intro-landed) .sensor-model {
-    left: 37%;
-    width: min(105vw, 520px);
-    height: 58svh;
-    top: 45%;
-  }
-  .wheel-cue {
-    bottom: 19px;
-    font-size: 0.46rem;
-    gap: 8px;
-  }
-  .wheel-cue i {
-    width: 26px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .wheel-cue,
-  .topbar,
-  .progress,
-  .hero-hud,
-  .hero-phases,
-  .sensor-note,
-  .scroll-cue,
-  .scene-counter {
-    transition: none;
   }
 }
 
@@ -2188,6 +2089,21 @@ html.scroll-intro.intro-landed .wheel-cue {
   right: 6vw;
   color: rgba(238, 241, 231, 0.6);
   font-size: 0.7rem;
+}
+@media (max-width: 380px) {
+  .brand {
+    font-size: 1.05rem;
+    gap: 7px;
+  }
+  .nav-cta {
+    font-size: 0.6rem;
+    padding: 9px;
+    gap: 5px;
+  }
+  .nav-meteo-link {
+    font-size: 0.6rem;
+    gap: 4px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring {

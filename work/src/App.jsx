@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Header, Footer } from "./components/HeaderFooter.jsx";
 import HeroScene from "./components/HeroScene.jsx";
+import MeteoScene from "./components/MeteoScene.jsx";
 import {
   Marquee,
   StatementSection,
@@ -41,6 +42,7 @@ export default function App() {
       <main>
         <HeroScene onContact={openContact} />
         <Marquee />
+        <MeteoScene />
         <StatementSection />
         <NodeSection />
         <SignalSection />

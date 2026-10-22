@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es" class="scroll-intro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1c17" />
+  <meta name="description" content="Hiotera hace visible lo invisible del cultivo: un nodo inteligente que mide, interpreta y recomienda." />
+  <link rel="preload" href="sensor-agricola.glb" as="fetch" type="model/gltf-binary" crossorigin />
+  <title>Hiotera — El nodo que hace visible lo invisible</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root { --night:#0b1c17; --forest:#12372a; --cream:#eef1e7; --paper:#fbfaf5; --acid:#d9ff58; --mint:#a9ebc1; --hot:#ff7252; --line:rgba(11,28,23,.16); --night-line:rgba(238,241,231,.18); --radius:26px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--night); font-family:Manrope,system-ui,sans-serif; overflow-x:hidden; }
+    body.locked { overflow:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button,input,textarea { font:inherit; }
+    button { cursor:pointer; }
+    ::selection { background:var(--acid); color:var(--night); }
+    .progress { position:fixed; inset:0 auto auto 0; width:100%; height:4px; z-index:100; background:var(--acid); transform-origin:left; transform:scaleX(0); }
+    .cursor,.cursor-ring { position:fixed; left:-100px; top:-100px; pointer-events:none; z-index:120; border-radius:50%; opacity:0; mix-blend-mode:difference; }
+    .cursor { width:9px; height:9px; background:var(--acid); transform:translate(-50%,-50%); }
+    .cursor-ring { width:42px; height:42px; border:1px solid var(--acid); transform:translate(-50%,-50%); transition:width .25s,height .25s; }
+    @media (pointer:fine) { .cursor,.cursor-ring { opacity:1; } body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring { width:62px; height:62px; } }
+    .topbar { position:fixed; top:24px; left:50%; transform:translateX(-50%); width:min(1280px,calc(100% - 48px)); z-index:20; display:flex; justify-content:space-between; align-items:center; color:var(--cream); }
+    .brand { display:flex; align-items:center; gap:11px; font-family:'Space Grotesk',sans-serif; font-size:1.22rem; font-weight:700; letter-spacing:-.08em; }
+    .brand-dot { display:grid; place-items:center; width:29px; height:29px; background:var(--acid); color:var(--night); border-radius:50%; font-size:.86rem; letter-spacing:-.13em; }
+    .nav-links { display:flex; gap:4px; align-items:center; }
+    .nav-links a { padding:10px 14px; font-size:.69rem; font-weight:700; opacity:.66; transition:opacity .2s,background .2s; border-radius:999px; }
+    .nav-links a:hover { opacity:1; background:rgba(217,255,88,.12); }
+    .nav-cta { display:inline-flex; align-items:center; gap:9px; border:1px solid rgba(238,241,231,.34); color:var(--cream); background:transparent; border-radius:999px; padding:11px 16px; font-size:.69rem; font-weight:700; transition:.2s; }
+    .nav-cta:hover { color:var(--night); background:var(--acid); border-color:var(--acid); }
+    .arrow { font-size:1rem; line-height:.5; }
+    .hero { min-height:100svh; padding:160px 6vw 70px; background:var(--night); color:var(--cream); position:relative; overflow:hidden; display:flex; align-items:center; }
+    .hero::before { content:''; position:absolute; width:72vw; height:72vw; max-width:1000px; max-height:1000px; border-radius:50%; right:-27vw; top:-31vw; background:radial-gradient(circle,rgba(169,235,193,.48) 0,rgba(169,235,193,.12) 29%,transparent 68%); }
+    .hero::after { content:'HIOTERA / FIELD NOTE 001'; position:absolute; right:6vw; bottom:28px; color:rgba(238,241,231,.35); font:.61rem 'DM Mono',monospace; letter-spacing:.1em; }
+    .hero-grid { width:min(1280px,100%); margin:auto; display:grid; grid-template-columns:.96fr 1.04fr; gap:5vw; align-items:center; position:relative; z-index:1; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; font:.63rem 'DM Mono',monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--acid); }
+    .eyebrow::before { content:''; width:27px; height:1px; background:currentColor; }
+    .hero h1 { margin:24px 0 0; font:600 clamp(4.5rem,9.6vw,10rem)/.82 'Space Grotesk',sans-serif; letter-spacing:-.11em; max-width:750px; }
+    .hero h1 span { color:var(--acid); display:block; }
+    .hero-sub { max-width:450px; margin:34px 0 0; color:rgba(238,241,231,.64); font-size:1rem; line-height:1.7; }
+    .hero-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:32px; }
+    .button { min-height:47px; display:inline-flex; align-items:center; justify-content:center; gap:11px; padding:0 19px; border-radius:999px; border:1px solid currentColor; font-size:.72rem; font-weight:800; transition:transform .2s,background .2s,color .2s; }
+    .button:hover { transform:translateY(-3px); }
+    .button.acid { color:var(--night); background:var(--acid); border-color:var(--acid); }
+    .button.acid:hover { background:var(--cream); border-color:var(--cream); }
+    .button.outline { color:var(--cream); background:transparent; border-color:rgba(238,241,231,.3); }
+    .button.outline:hover { color:var(--acid); border-color:var(--acid); }
+    .hero-foot { display:flex; gap:16px; align-items:center; margin-top:76px; color:rgba(238,241,231,.42); font:.61rem 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.1em; }
+    .live-dot { width:7px; height:7px; border-radius:50%; background:var(--acid); box-shadow:0 0 0 6px rgba(217,255,88,.1); animation:pulse 2s infinite; }
+    @keyframes pulse { 50% { box-shadow:0 0 0 11px rgba(217,255,88,0); } }
+    .node-stage { min-height:630px; position:relative; display:grid; place-items:center; }
+    .node-stage::before { content:''; position:absolute; width:76%; aspect-ratio:1; border:1px solid rgba(217,255,88,.25); border-radius:50%; box-shadow:0 0 0 40px rgba(217,255,88,.025),0 0 0 80px rgba(217,255,88,.02); animation:orbit 24s linear infinite; }
+    .node-stage::after { content:''; position:absolute; width:93%; height:1px; top:51%; left:3%; background:linear-gradient(90deg,transparent,rgba(217,255,88,.44),transparent); transform:rotate(-22deg); }
+    @keyframes orbit { to { transform:rotate(360deg); } }
+    .node-frame { position:relative; width:min(40vw,490px); aspect-ratio:.88; overflow:hidden; transform:rotate(6deg); background:#c7d6b4; border:1px solid rgba(238,241,231,.45); box-shadow:20px 32px 0 rgba(217,255,88,.12),0 35px 90px rgba(0,0,0,.35); clip-path:polygon(7% 0,100% 6%,94% 100%,0 94%); }
+    .node-frame img { width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.08); transform:scale(1.04); }
+    .node-frame::before { content:''; position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,transparent 0 28%,rgba(217,255,88,.28) 28.4%,transparent 29.1% 67%,rgba(217,255,88,.12) 67.4%,transparent 68%); mix-blend-mode:screen; animation:scan 6s ease-in-out infinite; }
+    .node-frame::after { content:''; position:absolute; inset:0; z-index:3; background:linear-gradient(120deg,transparent 25%,rgba(217,255,88,.17),transparent 48%); transform:translateX(-110%); animation:sweep 7s ease-in-out infinite; }
+    @keyframes scan { 0%,100% { transform:translateY(-15%); } 50% { transform:translateY(33%); } }
+    @keyframes sweep { 0%,15% { transform:translateX(-110%); } 48%,100% { transform:translateX(110%); } }
+    .node-frame-label { position:absolute; z-index:5; left:19px; top:20px; padding:8px 10px; background:var(--acid); color:var(--night); font:.58rem 'DM Mono',monospace; line-height:1.35; }
+    .node-frame-label strong { display:block; font:700 .78rem Manrope,sans-serif; }
+    .node-pin { position:absolute; z-index:6; width:14px; height:14px; border:2px solid var(--acid); border-radius:50%; box-shadow:0 0 0 7px rgba(217,255,88,.18); }
+    .pin-a { top:33%; left:56%; }.pin-b { bottom:27%; left:25%; }.pin-c { top:22%; right:17%; }
+    .node-callout { position:absolute; z-index:7; padding:10px 12px; background:rgba(11,28,23,.8); border:1px solid rgba(217,255,88,.42); backdrop-filter:blur(10px); color:var(--cream); font:.57rem 'DM Mono',monospace; line-height:1.45; }
+    .node-callout strong { display:block; color:var(--acid); font:700 .73rem Manrope,sans-serif; }
+    .callout-a { top:13%; right:0; }.callout-b { bottom:16%; left:-2%; }.callout-c { bottom:5%; right:7%; }
+    .stage-index { position:absolute; right:1%; top:18%; color:rgba(238,241,231,.42); writing-mode:vertical-rl; font:.6rem 'DM Mono',monospace; letter-spacing:.14em; }
+    .marquee { overflow:hidden; white-space:nowrap; background:var(--acid); color:var(--night); padding:18px 0; font:600 clamp(1.3rem,2.8vw,2.8rem)/1 'Space Grotesk',sans-serif; letter-spacing:-.06em; }
+    .marquee-track { display:inline-flex; gap:25px; animation:move 20s linear infinite; }.marquee i { opacity:.4; font-style:normal; }
+    @keyframes move { to { transform:translateX(-50%); } }
+    .section { padding:150px 6vw; }.section-inner { width:min(1180px,100%); margin:auto; }
+    .section-label { margin-bottom:24px; color:rgba(11,28,23,.53); font:.62rem 'DM Mono',monospace; letter-spacing:.13em; text-transform:uppercase; }
+    .statement { background:var(--cream); }.statement-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:8vw; }.statement h2 { margin:0; font:600 clamp(3rem,6.3vw,7.2rem)/.88 'Space Grotesk',sans-serif; letter-spacing:-.1em; }.statement h2 span { color:#69c98e; }.statement-copy { padding-top:44px; max-width:470px; color:rgba(11,28,23,.66); line-height:1.72; font-size:1rem; }.statement-copy p { margin:0 0 28px; }.micro-link { display:inline-flex; align-items:center; gap:9px; font-size:.74rem; font-weight:800; }.micro-link b { display:grid; place-items:center; width:35px; height:35px; border-radius:50%; background:var(--acid); font-size:1rem; }
+    .node-lab { background:var(--night); color:var(--cream); padding-top:120px; padding-bottom:160px; }.lab-top { display:grid; grid-template-columns:1.05fr .95fr; gap:8vw; align-items:end; }.lab-top h2 { margin:0; font:500 clamp(3.2rem,6.8vw,7.6rem)/.86 'Space Grotesk',sans-serif; letter-spacing:-.1em; }.lab-top h2 span { color:var(--acid); }.lab-top p { margin:0; max-width:370px; color:rgba(238,241,231,.6); font-size:.88rem; line-height:1.65; }.lab-layout { display:grid; grid-template-columns:.9fr 1.1fr; gap:9vw; margin-top:83px; align-items:start; }.lab-visual { position:sticky; top:110px; min-height:590px; }.lab-photo { position:relative; width:min(100%,480px); margin:auto; aspect-ratio:.9; background:var(--forest); overflow:hidden; border:1px solid rgba(238,241,231,.2); }.lab-photo img { width:100%; height:100%; object-fit:cover; filter:saturate(.75) contrast(1.08); opacity:.85; transition:filter .5s,transform .7s; }.lab-photo::before { content:''; position:absolute; z-index:2; inset:0; background-image:linear-gradient(rgba(217,255,88,.32) 1px,transparent 1px),linear-gradient(90deg,rgba(217,255,88,.32) 1px,transparent 1px); background-size:45px 45px; mix-blend-mode:screen; opacity:.5; }.lab-photo::after { content:'HIOTERA LIBOX / INSTALLED'; position:absolute; z-index:4; left:15px; bottom:13px; color:var(--acid); font:.59rem 'DM Mono',monospace; letter-spacing:.08em; }.lab-visual.is-inspecting .lab-photo img { filter:grayscale(1) contrast(1.35) brightness(.8); transform:scale(1.07); }.lab-visual.is-inspecting .lab-photo::before { opacity:.95; background-size:25px 25px; }.lab-mark { position:absolute; z-index:5; width:47px; height:47px; border:1px solid var(--acid); border-radius:50%; display:grid; place-items:center; color:var(--acid); font:.55rem 'DM Mono',monospace; background:rgba(11,28,23,.63); }.lab-mark.m1 { top:17%; left:16%; }.lab-mark.m2 { top:45%; right:11%; }.lab-mark.m3 { bottom:17%; left:34%; }.lab-meta { display:flex; justify-content:space-between; width:min(100%,480px); margin:12px auto 0; color:rgba(238,241,231,.4); font:.58rem 'DM Mono',monospace; }.inspect-button { display:inline-flex; margin-top:24px; border:0; color:var(--acid); padding:0; background:transparent; font-size:.7rem; font-weight:800; }.inspect-button span { display:inline-block; margin-left:6px; transition:transform .25s; }.is-inspecting .inspect-button span { transform:rotate(45deg); }.lab-steps { border-top:1px solid var(--night-line); }.lab-step { display:grid; grid-template-columns:65px 1fr; gap:25px; border-bottom:1px solid var(--night-line); padding:31px 0 36px; transition:padding .3s; }.lab-step:hover { padding-left:12px; }.lab-no { color:var(--acid); font:.64rem 'DM Mono',monospace; }.lab-step h3 { margin:0 0 12px; font:500 2.25rem/.95 'Space Grotesk',sans-serif; letter-spacing:-.07em; }.lab-step p { max-width:450px; margin:0; color:rgba(238,241,231,.57); font-size:.82rem; line-height:1.65; }.lab-step em { color:var(--acid); font-style:normal; }
+    .signal-section { background:var(--paper); }.signal-head { display:flex; justify-content:space-between; gap:40px; align-items:end; margin-bottom:55px; }.signal-head h2 { margin:0; font:600 clamp(3rem,6vw,6.8rem)/.87 'Space Grotesk',sans-serif; letter-spacing:-.1em; }.signal-head h2 span { color:#69c98e; }.signal-head p { max-width:270px; margin:0; color:rgba(11,28,23,.57); font-size:.8rem; line-height:1.6; }.signal-card { background:var(--forest); color:var(--cream); border-radius:var(--radius); overflow:hidden; box-shadow:0 24px 70px rgba(11,28,23,.18); }.signal-tabs { display:flex; justify-content:space-between; align-items:center; padding:17px 20px; border-bottom:1px solid var(--night-line); }.tabs { display:flex; gap:5px; }.tab { padding:9px 13px; border:0; border-radius:999px; background:transparent; color:rgba(238,241,231,.48); font-size:.69rem; font-weight:800; }.tab.active,.tab:hover { color:var(--night); background:var(--acid); }.signal-time { color:rgba(238,241,231,.44); font:.57rem 'DM Mono',monospace; }.signal-main { display:grid; grid-template-columns:.86fr 1.14fr; min-height:400px; }.signal-readout { padding:31px; border-right:1px solid var(--night-line); }.readout-label { margin:0 0 10px; color:rgba(238,241,231,.48); font-size:.72rem; }.readout-number { font:500 clamp(5rem,8vw,8.3rem)/.8 'Space Grotesk',sans-serif; letter-spacing:-.13em; }.readout-number small { font-size:1.35rem; letter-spacing:-.04em; }.readout-delta { display:inline-flex; margin-top:18px; color:var(--acid); font:.62rem 'DM Mono',monospace; }.mini-readings { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:53px; }.mini-reading { padding:12px; border:1px solid var(--night-line); border-radius:12px; }.mini-reading small { display:block; margin-bottom:8px; color:rgba(238,241,231,.4); font-size:.58rem; }.mini-reading b { font:500 .82rem 'DM Mono',monospace; }.signal-chart { padding:30px; }.chart-caption { display:flex; justify-content:space-between; gap:20px; font-size:.76rem; }.chart-caption span { color:rgba(238,241,231,.42); font:.58rem 'DM Mono',monospace; }.chart { height:240px; margin-top:28px; border-bottom:1px solid var(--night-line); background:repeating-linear-gradient(to bottom,transparent 0,transparent 59px,rgba(238,241,231,.08) 60px); position:relative; }.chart svg { width:100%; height:100%; overflow:visible; }.chart-area { fill:url(#fill); opacity:.7; }.chart-path { fill:none; stroke:var(--acid); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 7px rgba(217,255,88,.4)); }.chart-tip { position:absolute; right:9%; top:4%; padding:9px 11px; color:var(--acid); border:1px solid rgba(217,255,88,.35); border-radius:9px; background:var(--night); font:.57rem 'DM Mono',monospace; }.chart-dot { position:absolute; top:28%; right:14%; width:12px; height:12px; border:3px solid var(--acid); background:var(--night); border-radius:50%; box-shadow:0 0 0 6px rgba(217,255,88,.15); }.chart-labels { display:flex; justify-content:space-between; margin-top:11px; color:rgba(238,241,231,.35); font:.57rem 'DM Mono',monospace; }
+    .impact { padding-top:120px; background:var(--cream); }.impact-top { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:54px; }.impact-top h2 { margin:0; font:600 clamp(3.2rem,6vw,7rem)/.86 'Space Grotesk',sans-serif; letter-spacing:-.1em; }.impact-top p { max-width:275px; color:rgba(11,28,23,.57); font-size:.82rem; line-height:1.6; }.impact-grid { display:grid; grid-template-columns:1.18fr .82fr .82fr; gap:12px; }.impact-card { position:relative; min-height:275px; padding:24px; overflow:hidden; border-radius:20px; background:var(--mint); transition:transform .25s; }.impact-card:hover { transform:translateY(-6px) rotate(-.5deg); }.impact-card:nth-child(2) { background:var(--acid); }.impact-card:nth-child(3) { color:var(--paper); background:var(--hot); }.impact-card:nth-child(4) { grid-column:span 2; min-height:210px; background:var(--paper); }.impact-index { color:rgba(11,28,23,.6); font:.6rem 'DM Mono',monospace; }.impact-card:nth-child(3) .impact-index { color:rgba(251,250,245,.7); }.impact-card h3 { margin:43px 0 9px; font:600 2.5rem/.9 'Space Grotesk',sans-serif; letter-spacing:-.08em; }.impact-card p { max-width:240px; margin:0; font-size:.75rem; line-height:1.55; opacity:.68; }.impact-stamp { position:absolute; right:20px; bottom:19px; width:72px; height:72px; border:1px solid currentColor; border-radius:50%; display:grid; place-items:center; opacity:.7; font:.58rem 'DM Mono',monospace; text-align:center; }.impact-stamp::before { content:''; width:35px; height:46px; border:1px solid currentColor; border-radius:100% 0 100% 0; transform:rotate(35deg); position:absolute; }.impact-card:nth-child(4) .impact-stamp { width:155px; height:70px; border-radius:70% 0 70% 0; right:8%; bottom:24%; }.impact-card:nth-child(4) .impact-stamp::before { width:125px; height:48px; border-radius:100% 0 100% 0; }
+    .steps { background:var(--acid); }.steps-layout { display:grid; grid-template-columns:.87fr 1.13fr; gap:10vw; }.steps h2 { margin:0; font:600 clamp(3.6rem,7vw,8rem)/.82 'Space Grotesk',sans-serif; letter-spacing:-.11em; }.steps-intro p { max-width:315px; margin:30px 0 0; color:rgba(11,28,23,.67); font-size:.82rem; line-height:1.6; }.step-list { border-top:1px solid rgba(11,28,23,.3); }.step { display:grid; grid-template-columns:65px 1fr; gap:27px; border-bottom:1px solid rgba(11,28,23,.3); padding:28px 0; }.step-no { font:.65rem 'DM Mono',monospace; opacity:.6; }.step h3 { margin:0 0 10px; font:500 2.05rem/.95 'Space Grotesk',sans-serif; letter-spacing:-.07em; }.step p { max-width:450px; margin:0; color:rgba(11,28,23,.64); font-size:.78rem; line-height:1.6; }
+    .closing { position:relative; overflow:hidden; padding:155px 6vw 75px; background:var(--paper); }.closing::after { content:'h'; position:absolute; z-index:0; right:-2%; bottom:-29%; color:var(--mint); font:700 45vw/.65 'Space Grotesk',sans-serif; opacity:.37; letter-spacing:-.2em; }.closing-inner { position:relative; z-index:1; width:min(1180px,100%); margin:auto; }.closing h2 { max-width:950px; margin:0; font:600 clamp(4.4rem,9.4vw,10.5rem)/.8 'Space Grotesk',sans-serif; letter-spacing:-.12em; }.closing h2 span { color:#69c98e; }.closing-row { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-top:77px; }.closing-row p { max-width:350px; margin:0; color:rgba(11,28,23,.6); font-size:.87rem; line-height:1.65; }.dark-button { color:var(--paper); background:var(--night); border-color:var(--night); }.dark-button:hover { color:var(--night); background:var(--acid); border-color:var(--acid); }
+    footer { padding:27px 6vw 32px; color:var(--cream); background:var(--night); }.footer-inner { width:min(1180px,100%); margin:auto; display:flex; justify-content:space-between; align-items:end; gap:20px; }.footer-brand { display:flex; align-items:center; gap:11px; font:1.25rem 'Space Grotesk',sans-serif; font-weight:700; letter-spacing:-.08em; }.footer-brand .brand-dot { color:var(--night); background:var(--acid); }.footer-meta { display:flex; flex-wrap:wrap; justify-content:end; gap:18px; color:rgba(238,241,231,.46); font:.57rem 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }.footer-meta a:hover { color:var(--acid); }
+    .modal { position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:20px; background:rgba(11,28,23,.65); backdrop-filter:blur(9px); opacity:0; pointer-events:none; transition:opacity .25s; }.modal.open { opacity:1; pointer-events:auto; }.modal-card { width:min(560px,100%); padding:34px; border-radius:24px; background:var(--paper); box-shadow:0 30px 90px rgba(0,0,0,.3); position:relative; transform:translateY(18px); transition:transform .25s; }.modal.open .modal-card { transform:translateY(0); }.close-modal { position:absolute; top:14px; right:14px; display:grid; place-items:center; width:34px; height:34px; border:1px solid var(--line); border-radius:50%; background:transparent; font-size:1.15rem; }.modal-card h2 { margin:0; font:600 3.5rem/.87 'Space Grotesk',sans-serif; letter-spacing:-.1em; }.modal-card p { color:rgba(11,28,23,.58); font-size:.82rem; line-height:1.5; }.form-grid { display:grid; gap:10px; margin-top:24px; }.form-grid input,.form-grid textarea { width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:11px; outline:none; background:rgba(255,255,255,.6); color:var(--night); }.form-grid input:focus,.form-grid textarea:focus { border-color:#69c98e; box-shadow:0 0 0 3px rgba(105,201,142,.16); }.form-grid textarea { min-height:105px; resize:vertical; }.form-grid .button { width:100%; color:var(--paper); background:var(--night); border-color:var(--night); }.form-grid .button:hover { color:var(--night); background:var(--acid); border-color:var(--acid); }
+    .toast { position:fixed; z-index:220; bottom:24px; left:50%; padding:13px 18px; border:1px solid rgba(217,255,88,.35); border-radius:999px; color:var(--paper); background:var(--night); font-size:.73rem; opacity:0; transform:translate(-50%,20px); pointer-events:none; transition:.3s; }.toast.show { opacity:1; transform:translate(-50%,0); }
+    @media (max-width:900px) { .nav-links{display:none}.hero{padding-top:140px}.hero-grid,.statement-grid,.lab-top,.lab-layout,.signal-main,.steps-layout{grid-template-columns:1fr;gap:45px}.node-stage{min-height:590px}.node-frame{width:min(78vw,490px)}.lab-visual{position:relative;top:0;min-height:auto}.signal-readout{border-right:0;border-bottom:1px solid var(--night-line)}.impact-grid{grid-template-columns:1fr 1fr}.impact-card:nth-child(4){grid-column:span 2}.signal-head,.impact-top{align-items:start;flex-direction:column}.signal-head p,.impact-top p{max-width:500px}.footer-inner{align-items:start;flex-direction:column}.footer-meta{justify-content:start} }
+    @media (max-width:560px) { .topbar{top:14px;width:calc(100% - 30px)}.nav-cta{padding:10px 12px}.hero{padding:128px 20px 55px}.hero h1{font-size:clamp(4.2rem,20vw,6.7rem)}.hero-foot{margin-top:48px}.node-stage{min-height:470px}.node-frame{width:91vw}.node-callout{font-size:.51rem;padding:8px 9px}.callout-a{right:-2%}.callout-b{left:-4%}.stage-index{display:none}.section{padding:100px 20px}.statement-copy{padding-top:0}.lab-top h2,.signal-head h2,.impact-top h2{font-size:clamp(3.1rem,15vw,5.4rem)}.lab-step{grid-template-columns:43px 1fr;gap:13px}.lab-step h3{font-size:1.85rem}.signal-tabs{align-items:start;flex-direction:column}.signal-readout,.signal-chart{padding:23px}.mini-readings{margin-top:38px}.impact-grid{grid-template-columns:1fr}.impact-card:nth-child(4){grid-column:span 1}.impact-card{min-height:255px}.steps h2{font-size:clamp(4rem,19vw,7rem)}.closing{padding:100px 20px 60px}.closing h2{font-size:clamp(4.1rem,19vw,7rem)}.closing-row{align-items:start;flex-direction:column}.modal-card{padding:28px 22px}.modal-card h2{font-size:2.8rem} }
+    /* Scroll-led sensor reveal */
+    .hero.sensor-hero { min-height:280vh; min-height:280svh; padding:0; display:block; overflow:clip; background:#000; isolation:isolate; }
+    .sensor-hero::before { width:100%;height:100%;max-width:none;max-height:none;inset:0;right:auto;top:auto;border-radius:0;background:none; }
+    .sensor-hero::after { content:'HIOTERA / FIELD NODE 001';right:5vw;bottom:24px;color:rgba(238,241,231,.34);font:.56rem 'DM Mono',monospace;letter-spacing:.14em; }
+    .sensor-pin { position:sticky;top:0;height:100svh;min-height:100svh;overflow:hidden;background:#000;color:var(--cream); }
+    .sensor-pin::before { content:'';position:absolute;z-index:1;inset:0;opacity:calc(var(--digital-scene,0) * .15);background-image:linear-gradient(rgba(238,241,231,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(238,241,231,.12) 1px,transparent 1px);background-size:76px 76px;mask-image:linear-gradient(90deg,black,transparent 78%);pointer-events:none; }
+    .hero-hud { position:absolute;z-index:5;top:112px;left:6vw;right:6vw;display:flex;justify-content:space-between;color:rgba(238,241,231,.42);font:.55rem 'DM Mono',monospace;letter-spacing:.13em;text-transform:uppercase; }
+    .hero-hud span:last-child { display:flex;align-items:center;gap:9px; }.hero-hud span:last-child::before { content:'';width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 14px var(--acid); }
+    .sensor-radar { position:absolute;z-index:2;left:69%;top:52%;width:min(60vw,850px);aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(217,255,88,.17);border-radius:50%;box-shadow:0 0 0 34px rgba(217,255,88,.018),0 0 0 84px rgba(217,255,88,.014),0 0 0 150px rgba(217,255,88,.01); }
+    .sensor-radar::before,.sensor-radar::after { content:'';position:absolute;inset:12%;border:1px solid rgba(217,255,88,.12);border-radius:50%; }.sensor-radar::after { inset:27%; }
+    .sensor-radar i { position:absolute;left:50%;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 18px 4px rgba(217,255,88,.44);animation:radar 5.5s linear infinite;transform-origin:0 calc(min(30vw,425px) + 3px); }
+    @keyframes radar { to { transform:rotate(360deg); } }
+    .sensor-fallback { position:absolute;z-index:1;left:36%;top:50%;width:min(70vw,980px);height:min(91svh,940px);object-fit:cover;transform:translateY(-50%);filter:saturate(.72) brightness(.55) contrast(1.15);mask-image:radial-gradient(ellipse at 52% 50%,black 18%,rgba(0,0,0,.84) 52%,transparent 78%);opacity:.68;transition:opacity 1.3s cubic-bezier(.2,.8,.2,1); }
+    .model-loaded .sensor-fallback { opacity:0; }
+    .sensor-model { position:absolute;z-index:3;left:36%;top:50%;width:min(70vw,980px);height:min(91svh,940px);transform:translate(-50%,-50%);opacity:0;filter:drop-shadow(0 35px 60px rgba(0,0,0,.35));transition:opacity 1.2s cubic-bezier(.2,.8,.2,1);--poster-color:transparent;--progress-bar-color:var(--acid);--progress-bar-height:2px; }
+    .model-loaded .sensor-model { opacity:1; }
+    .sensor-model::part(default-progress-bar) { height:2px; }
+    .hero-phases { position:absolute;z-index:4;inset:0;pointer-events:none; }
+    .hero-phase { position:absolute;left:8vw;top:50%;width:min(43vw,600px);transform:translateY(calc(-50% + 22px));opacity:0;transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1); }
+    .hero-phase.active { opacity:1;transform:translateY(-50%);pointer-events:auto; }
+    .hero-phase .eyebrow { font-size:.59rem; }
+    .hero-phase h1 { max-width:680px;margin:25px 0 0;font:500 clamp(4.2rem,8.5vw,9.1rem)/.82 'Space Grotesk',sans-serif;letter-spacing:-.115em; }
+    .hero-phase h1 span { display:block;color:var(--acid); }
+    .hero-phase p { max-width:350px;margin:27px 0 0;color:rgba(238,241,231,.62);font-size:.88rem;line-height:1.7; }
+    .hero-phase .hero-actions { margin-top:25px; }
+    .hero-phase .button.outline { background:rgba(7,19,16,.38);backdrop-filter:blur(10px); }
+    .sensor-note { position:absolute;z-index:4;display:grid;gap:4px;padding:10px 13px;border-left:1px solid var(--acid);background:rgba(7,19,16,.47);backdrop-filter:blur(9px);font:.55rem 'DM Mono',monospace;letter-spacing:.08em;color:rgba(238,241,231,.58);transition:opacity .45s,transform .6s; }
+    .sensor-note b { color:var(--acid);font:600 .66rem 'DM Mono',monospace;letter-spacing:.11em; }
+    .sensor-note.note-a { top:28%;right:11%; }.sensor-note.note-b { bottom:23%;right:7%; }.sensor-note.note-c { top:25%;left:51%; }
+    .sensor-hero[data-scene-stage="0"] .note-b,.sensor-hero[data-scene-stage="0"] .note-c,.sensor-hero[data-scene-stage="1"] .note-a,.sensor-hero[data-scene-stage="1"] .note-c,.sensor-hero[data-scene-stage="2"] .note-a,.sensor-hero[data-scene-stage="2"] .note-b { opacity:0;transform:translateY(8px); }
+    .scene-counter { position:absolute;z-index:5;right:6vw;bottom:46px;display:flex;gap:8px;align-items:center;color:rgba(238,241,231,.4);font:.53rem 'DM Mono',monospace;letter-spacing:.13em; }
+    .scene-counter b { color:var(--acid);font-weight:500; }
+    .scroll-cue { position:absolute;z-index:5;left:8vw;bottom:46px;display:flex;align-items:center;gap:12px;color:rgba(238,241,231,.48);font:.54rem 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase; }
+    .scroll-cue i { display:block;width:39px;height:1px;background:var(--acid);transform-origin:left;animation:cue 1.7s ease-in-out infinite; }
+    @keyframes cue { 50% { transform:scaleX(.4);opacity:.35; } }
+    @media (max-width:900px) { .hero.sensor-hero{min-height:280vh;min-height:280svh}.sensor-fallback{left:22%;top:43%;width:92vw;height:74svh}.sensor-model{left:22%;top:43%;width:92vw;height:74svh}.sensor-radar{left:60%;top:43%;width:min(86vw,680px)}.hero-phase{left:7vw;top:auto;bottom:11vh;width:min(76vw,570px);transform:translateY(18px)}.hero-phase.active{transform:translateY(0)}.hero-phase h1{font-size:clamp(4.3rem,12vw,8rem)}.hero-phase p{max-width:310px;margin-top:17px}.hero-phase .hero-actions{margin-top:17px}.hero-hud{top:91px;left:7vw;right:7vw}.sensor-note.note-a{top:19%;right:8%}.sensor-note.note-b{bottom:45%;right:5%}.sensor-note.note-c{top:18%;left:12%}.scroll-cue{left:7vw;bottom:35px}.scene-counter{right:7vw;bottom:35px} }
+    @media (max-width:560px) { .hero.sensor-hero{min-height:270vh;min-height:270svh}.sensor-fallback{left:6%;top:30%;width:115vw;height:58svh}.sensor-model{left:6%;top:30%;width:115vw;height:58svh}.sensor-radar{left:56%;top:36%;width:112vw;box-shadow:0 0 0 22px rgba(217,255,88,.018),0 0 0 50px rgba(217,255,88,.014)}.hero-hud{top:82px;font-size:.48rem}.hero-hud span:first-child{max-width:53%}.hero-phase{left:6vw;bottom:12vh;width:88vw}.hero-phase h1{font-size:clamp(4.1rem,18vw,6.5rem);margin-top:17px}.hero-phase p{font-size:.78rem;max-width:290px}.hero-phase .hero-actions{gap:8px}.hero-phase .button{min-height:43px;padding:0 13px;font-size:.64rem}.sensor-note{font-size:.47rem;padding:8px 9px}.sensor-note b{font-size:.56rem}.sensor-note.note-a{top:17%;right:5%}.sensor-note.note-b{bottom:45%;right:4%}.sensor-note.note-c{top:17%;left:6%}.scroll-cue{left:6vw;bottom:29px;font-size:.47rem}.scroll-cue i{width:24px}.scene-counter{right:6vw;bottom:29px;font-size:.47rem}.sensor-hero::after{font-size:.45rem;right:6vw;bottom:14px} }
+    @media (prefers-reduced-motion:reduce) { .sensor-radar i,.scroll-cue i { animation:none }.sensor-model { transition:none }.hero-phase { transition:opacity .01ms }.marquee-track,.node-stage::before,.live-dot { animation:none } }
+
+    /* The LIBOx arrival is driven by the visitor's scroll, not by a timer. */
+    .topbar,.progress,.hero-hud,.hero-phases,.sensor-radar,.scroll-cue,.scene-counter,.cursor,.cursor-ring,.sensor-hero::after { transition:opacity .55s ease,visibility 0s linear; }
+    .sensor-note { transition:opacity .45s,transform .6s,visibility 0s linear; }
+    .wheel-cue { position:absolute;z-index:6;left:50%;bottom:34px;display:flex;align-items:center;gap:12px;transform:translateX(-50%);color:rgba(238,241,231,.66);font:.54rem 'DM Mono',monospace;letter-spacing:.14em;white-space:nowrap;transition:opacity .35s,visibility .35s; }
+    .wheel-cue i { position:relative;width:48px;height:1px;background:rgba(238,241,231,.19);overflow:hidden; }
+    .wheel-cue i::after { content:'';position:absolute;inset:0 auto 0 0;width:calc(var(--intro-progress,0) * 100%);background:var(--acid);box-shadow:0 0 8px var(--acid); }
+    .wheel-icon { width:18px;height:27px;border:1px solid rgba(217,255,88,.72);border-radius:10px;display:grid;place-items:start center;padding-top:4px;color:var(--acid);font:600 .62rem 'DM Mono',monospace;line-height:1; }
+    html.scroll-intro:not(.intro-landed) .topbar,html.scroll-intro:not(.intro-landed) .progress,html.scroll-intro:not(.intro-landed) .hero-hud,html.scroll-intro:not(.intro-landed) .sensor-radar,html.scroll-intro:not(.intro-landed) .hero-phases,html.scroll-intro:not(.intro-landed) .sensor-note,html.scroll-intro:not(.intro-landed) .scroll-cue,html.scroll-intro:not(.intro-landed) .scene-counter,html.scroll-intro:not(.intro-landed) .cursor,html.scroll-intro:not(.intro-landed) .cursor-ring,html.scroll-intro:not(.intro-landed) .sensor-hero::after { opacity:0!important;visibility:hidden;pointer-events:none!important;transition-delay:0s,.55s; }
+    html.scroll-intro:not(.intro-landed) .sensor-fallback { display:none; }
+    html.scroll-intro:not(.intro-landed) .sensor-model { left:41%;top:49%;width:min(90vw,1120px);height:125svh;transform:translate(-50%,-50%);opacity:0;visibility:visible;pointer-events:none;transition:none; }
+    html.scroll-intro:not(.intro-landed) .sensor-model::part(default-progress-bar) { opacity:0!important; }
+    html.scroll-intro:not(.intro-landed) .wheel-cue { opacity:1;visibility:visible; }
+    html.scroll-intro.intro-landed .wheel-cue { opacity:0;visibility:hidden; }
+    @media (max-width:900px) { html.scroll-intro:not(.intro-landed) .sensor-model { left:41%;width:min(88vw,760px);height:58svh;top:48%; }.wheel-cue { bottom:25px; } }
+    @media (max-width:560px) { html.scroll-intro:not(.intro-landed) .sensor-model { left:37%;width:min(105vw,520px);height:58svh;top:45%; }.wheel-cue { bottom:19px;font-size:.46rem;gap:8px; }.wheel-cue i { width:26px; } }
+    @media (prefers-reduced-motion:reduce) { .wheel-cue,.topbar,.progress,.hero-hud,.hero-phases,.sensor-note,.scroll-cue,.scene-counter { transition:none; } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div><div class="cursor" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+  <header class="topbar" aria-label="Navegación principal"><a class="brand" href="#inicio" aria-label="Hiotera, inicio"><span class="brand-dot">h</span><span>hiotera</span></a><nav class="nav-links"><a href="#nodo">El nodo</a><a href="#senal">La señal</a><a href="#impacto">Impacto</a></nav><button class="nav-cta open-contact">Habla con un experto <span class="arrow">↗</span></button></header>
+  <main>
+    <section class="hero sensor-hero" id="inicio" data-scene-stage="0" aria-label="Presentación interactiva del sensor Hiotera">
+      <div class="sensor-pin">
+        <div class="hero-hud"><span>HIOTERA / CAMPO CONECTADO</span><span>nodo en línea</span></div>
+        <div class="sensor-radar" aria-hidden="true"><i></i></div>
+        <img class="sensor-fallback" src="libox-invernadero.webp" alt="" aria-hidden="true">
+        <model-viewer class="sensor-model" id="sensor-model" src="sensor-agricola.glb" alt="Sensor Hiotera LIBOx actualizado en 3D, con antena, controles y conexiones" camera-orbit="-18deg 77deg 135%" disable-zoom disable-pan interaction-prompt="none" touch-action="pan-y" shadow-intensity="1.1" exposure="1.05" environment-image="neutral" interpolation-decay="90" loading="eager" reveal="auto"></model-viewer>
+        <div class="hero-phases">
+          <div class="hero-phase active" data-phase="0"><div class="eyebrow">UN NUEVO PUNTO DE VISTA</div><h1>El campo<br><span>habla.</span></h1><p>Este es el punto donde empieza todo: un sensor real, dentro del cultivo, escuchando lo que todavía no se ve.</p><div class="hero-actions"><a class="button acid" href="#nodo">Descubre el nodo <span class="arrow">↘</span></a><button class="button outline open-contact">Cuéntanos tu finca</button></div></div>
+          <div class="hero-phase" data-phase="1"><div class="eyebrow">01 / ESCUCHA CONTINUA</div><h1>Lo invisible<br><span>señala.</span></h1><p>Humedad, temperatura, luz y más. Cada variación dibuja una imagen más clara de lo que necesita la planta.</p></div>
+          <div class="hero-phase" data-phase="2"><div class="eyebrow">02 / INTELIGENCIA DE CULTIVO</div><h1>Entiende.<br><span>Actúa.</span></h1><p>Hiotera traduce las señales en decisiones concretas para anticiparte, optimizar y cultivar con más criterio.</p><div class="hero-actions"><a class="button acid" href="#senal">Ver cómo funciona <span class="arrow">↘</span></a></div></div>
+        </div>
+        <div class="sensor-note note-a"><b>LECTURA ACTIVA</b><span>dato directo desde el cultivo</span></div><div class="sensor-note note-b"><b>24 H / 7 D</b><span>una señal que no se detiene</span></div><div class="sensor-note note-c"><b>NODO 001</b><span>instalado. conectado. leyendo.</span></div>
+        <div class="scroll-cue"><i></i> desliza para recorrer</div><div class="scene-counter"><b>01</b><span>/</span>03</div>
+        <div class="wheel-cue" aria-hidden="true"><span class="wheel-icon">↕</span><span>GIRA LA RUEDA PARA DESCUBRIR</span><i></i></div>
+      </div>
+    </section>
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><b>MIDE</b><i>✳</i><b>INTERPRETA</b><i>✳</i><b>RECOMIENDA</b><i>✳</i><b>MIDE</b><i>✳</i><b>INTERPRETA</b><i>✳</i><b>RECOMIENDA</b><i>✳</i></div></div>
+    <section class="section statement"><div class="section-inner"><div class="statement-grid"><div><div class="section-label">01 / la idea</div><h2>El cultivo<br>ya está<br><span>hablando.</span></h2></div><div class="statement-copy"><p>La humedad, la temperatura, la luz y el CO₂ cambian antes de que el ojo lo vea. Hiotera convierte esas señales en una lectura sencilla para que el siguiente movimiento llegue a tiempo.</p><a class="micro-link" href="#senal"><b>↘</b> ver la señal en acción</a></div></div></div></section>
+    <section class="section node-lab" id="nodo"><div class="section-inner"><div class="lab-top"><div><div class="section-label" style="color:rgba(238,241,231,.45)">02 / el nodo</div><h2>Una pieza<br>pequeña.<br><span>Una visión<br>enorme.</span></h2></div><p>El hardware de Hiotera vive dentro del invernadero, cerca de la planta y lejos del ruido. Desde ahí recopila la información que la plataforma necesita para cuidar mejor cada campaña.</p></div><div class="lab-layout"><div class="lab-visual" id="lab-visual"><div class="lab-photo"><img src="libox-invernadero.webp" alt="LIBOx instalado en un invernadero entre el cultivo"><span class="lab-mark m1">01</span><span class="lab-mark m2">02</span><span class="lab-mark m3">03</span></div><div class="lab-meta"><span>PHOTO / REAL INSTALLATION</span><span>HIOTERA LIBOx</span></div><button class="inspect-button" id="inspect-button" type="button">Activar modo escáner <span>↗</span></button></div><div class="lab-steps"><article class="lab-step"><span class="lab-no">01</span><div><h3>Está cerca del cultivo.</h3><p>Sensores que registran humedad, temperatura, iluminancia, conductividad, CO₂ y más. <em>El dato aparece donde ocurre.</em></p></div></article><article class="lab-step"><span class="lab-no">02</span><div><h3>Se conecta con la plataforma.</h3><p>La información viaja a un entorno sencillo, con histórico, gráficas y alertas para ver la finca desde cualquier lugar.</p></div></article><article class="lab-step"><span class="lab-no">03</span><div><h3>Te dice qué merece atención.</h3><p>Hiotera transforma el dato en recomendaciones para riego, ventilación, humedad y control de los sistemas instalados.</p></div></article></div></div></div></section>
+    <section class="section signal-section" id="senal"><div class="section-inner"><div class="signal-head"><div><div class="section-label">03 / la señal</div><h2>Del ruido<br>a la <span>señal.</span></h2></div><p>Una demo de cómo se ordena la información dentro de Hiotera. Cambia de capa y mira cómo el dato se convierte en decisión.</p></div><div class="signal-card"><div class="signal-tabs"><div class="tabs"><button class="tab active" data-panel="measure">Mide</button><button class="tab" data-panel="understand">Interpreta</button><button class="tab" data-panel="act">Recomienda</button></div><span class="signal-time">finca 01 · actualizado ahora</span></div><div class="signal-main"><aside class="signal-readout"><p class="readout-label">Humedad del suelo</p><div class="readout-number">72<small>%</small></div><div class="readout-delta">↗ +4.2% esta semana</div><div class="mini-readings"><div class="mini-reading"><small>Temperatura</small><b>18.4 °C</b></div><div class="mini-reading"><small>Conductividad</small><b>1.42 mS</b></div><div class="mini-reading"><small>CO₂</small><b>824 ppm</b></div><div class="mini-reading"><small>Iluminancia</small><b>680 lux</b></div></div></aside><div class="signal-chart"><div class="chart-caption"><strong>Ritmo del cultivo</strong><span>últimas 24 horas</span></div><div class="chart"><svg viewBox="0 0 600 250" preserveAspectRatio="none" role="img" aria-label="Gráfico de evolución de la señal"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d9ff58" stop-opacity=".3"/><stop offset="1" stop-color="#d9ff58" stop-opacity="0"/></linearGradient></defs><path class="chart-area" d="M0,195 C44,175 57,192 100,160 S166,130 206,157 S268,198 311,147 S369,95 408,132 S477,194 523,112 S567,80 600,96 L600,250 L0,250 Z"></path><path class="chart-path" d="M0,195 C44,175 57,192 100,160 S166,130 206,157 S268,198 311,147 S369,95 408,132 S477,194 523,112 S567,80 600,96"></path></svg><div class="chart-dot"></div><div class="chart-tip">óptimo · 12:40</div></div><div class="chart-labels"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>ahora</span></div></div></div></div></div></section>
+    <section class="section impact" id="impacto"><div class="section-inner"><div class="impact-top"><h2>Menos ruido.<br>Más <span style="color:#69c98e">rendimiento.</span></h2><p>La tecnología hace su trabajo en segundo plano. Tú tomas mejores decisiones sobre lo que más importa.</p></div><div class="impact-grid"><article class="impact-card"><span class="impact-index">01 / agua</span><h3>Riega con<br>criterio.</h3><p>Ajusta tiempos e intervalos con datos reales de cada cultivo.</p><span class="impact-stamp">WATER<br>FLOW</span></article><article class="impact-card"><span class="impact-index">02 / suelo</span><h3>Alimenta<br>mejor.</h3><p>Optimiza fertilizantes y reduce el desperdicio.</p><span class="impact-stamp">SOIL<br>READ</span></article><article class="impact-card"><span class="impact-index">03 / riesgo</span><h3>Anticípate<br>al cambio.</h3><p>Detecta anomalías y meteorología adversa antes de que pesen.</p><span class="impact-stamp">RISK<br>OFF</span></article><article class="impact-card"><span class="impact-index">04 / control</span><h3>Tu finca.<br>Desde cualquier lugar.</h3><p>Supervisa y controla tus sistemas desde una app móvil o desde la nube.</p><span class="impact-stamp">FIELD<br>ONLINE</span></article></div></div></section>
+    <section class="section steps"><div class="section-inner"><div class="steps-layout"><div class="steps-intro"><div class="section-label">04 / el camino</div><h2>Empieza<br>simple.</h2><p>Una tecnología abierta y modular que se adapta a la finca que tienes hoy y a la que quieres construir mañana.</p></div><div class="step-list"><div class="step"><span class="step-no">01</span><div><h3>Instala Hiotera</h3><p>Conecta tus invernaderos y empieza a recopilar la información sensible de tus cultivos.</p></div></div><div class="step"><span class="step-no">02</span><div><h3>Optimiza la producción</h3><p>Mide, entiende y automatiza los procesos que mantienen el equilibrio perfecto.</p></div></div><div class="step"><span class="step-no">03</span><div><h3>Gana tranquilidad</h3><p>Decide con datos y deja que el sistema te acompañe en cada campaña.</p></div></div></div></div></div></section>
+    <section class="closing"><div class="closing-inner"><div class="section-label">05 / siguiente paso</div><h2>Tu mejor<br>cultivo <span>empieza aquí.</span></h2><div class="closing-row"><p>Cuéntanos qué cultivas, cómo trabajas hoy y qué quieres mejorar. Te enseñamos cómo el nodo puede empezar a leer tu finca.</p><button class="button dark-button open-contact">Habla con un experto <span class="arrow">↗</span></button></div></div></section>
+  </main>
+  <footer><div class="footer-inner"><a class="footer-brand" href="#inicio"><span class="brand-dot">h</span><span>hiotera</span></a><div class="footer-meta"><span>El Ejido · Almería</span><a href="tel:+34698155496">+34 698 155 496</a><span>© Hiotera 2024</span></div></div></footer>
+  <div class="modal" id="contact-modal" aria-hidden="true" role="dialog" aria-labelledby="contact-title"><div class="modal-card"><button class="close-modal" aria-label="Cerrar">×</button><div class="section-label">Hablemos de tu finca</div><h2 id="contact-title">Hagamos que<br>crezca mejor.</h2><p>Déjanos tus datos y te enseñaremos cómo leer mejor tu cultivo.</p><form class="form-grid" id="contact-form"><input type="text" name="name" placeholder="Nombre" required><input type="email" name="email" placeholder="Email" required><input type="text" name="crop" placeholder="¿Qué cultivas?" required><textarea name="message" placeholder="Cuéntanos qué te gustaría mejorar"></textarea><button class="button" type="submit">Enviar mensaje <span class="arrow">↗</span></button></form></div></div><div class="toast" role="status">Mensaje preparado. Te contactaremos pronto.</div>
+  <script>
+    const $ = (selector, scope = document) => scope.querySelector(selector); const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+    const progress = $('.progress'); const updateScroll = () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.transform = `scaleX(${max ? window.scrollY / max : 0})`; }; window.addEventListener('scroll', updateScroll, { passive:true }); updateScroll();
+    const sensorHero = $('.sensor-hero');
+    const sensorPin = $('.sensor-pin');
+    const sensorModel = $('#sensor-model');
+    const sceneCounter = $('.scene-counter b');
+    const introRoot = document.documentElement;
+    const wheelCue = $('.wheel-cue');
+    const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    let sceneRaf = 0;
+    let sceneProgress = 0;
+    let targetSceneProgress = 0;
+    let previousFrame = 0;
+    let modelLoaded = false;
+    let controlsEnabled = false;
+    const introEnd = .62;
+    const clamp = value => Math.max(0, Math.min(1, value));
+    const smoother = value => { const t = clamp(value); return t * t * t * (t * (t * 6 - 15) + 10); };
+    const renderSensorReveal = timestamp => {
+        sceneRaf = 0;
+        const frameDelta = previousFrame ? Math.min(timestamp - previousFrame, 50) : 16;
+        previousFrame = timestamp;
+        if (prefersReducedMotion.matches) sceneProgress = targetSceneProgress;
+        else sceneProgress += (targetSceneProgress - sceneProgress) * (1 - Math.exp(-frameDelta / 145));
+        if (Math.abs(targetSceneProgress - sceneProgress) < .0005) sceneProgress = targetSceneProgress;
+
+        const progress = sceneProgress;
+        const rawIntro = clamp(progress / introEnd);
+        const introProgress = smoother(rawIntro);
+        const landed = rawIntro >= .96;
+        const fullyLanded = rawIntro >= .995;
+        introRoot.classList.toggle('intro-landed', landed);
+        wheelCue.style.setProperty('--intro-progress', String(rawIntro));
+        sensorPin.style.setProperty('--digital-scene', String(smoother((rawIntro - .1) / .45)));
+        sensorModel.style.opacity = String(smoother(rawIntro / .14));
+
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        let from = { left:41, top:49, width:Math.min(width * .90, 1120), height:height * 1.25 };
+        let to = { left:36 + Math.min(width * .70, 980) / width * 50, top:50, width:Math.min(width * .70, 980), height:Math.min(height * .91, 940) };
+        if (width <= 900) {
+          from = { left:41, top:48, width:Math.min(width * .88, 760), height:height * .58 };
+          to = { left:68, top:43, width:width * .92, height:height * .74 };
+        }
+        if (width <= 560) {
+          from = { left:37, top:45, width:Math.min(width * 1.05, 520), height:height * .58 };
+          to = { left:63.5, top:30, width:width * 1.15, height:height * .58 };
+        }
+        const lerp = (start, end) => start + (end - start) * introProgress;
+        sensorModel.style.left = `${lerp(from.left, to.left)}%`;
+        sensorModel.style.top = `${lerp(from.top, to.top)}%`;
+        sensorModel.style.width = `${lerp(from.width, to.width)}px`;
+        sensorModel.style.height = `${lerp(from.height, to.height)}px`;
+        sensorModel.style.transform = 'translate(-50%,-50%)';
+
+        if (fullyLanded !== controlsEnabled) {
+          controlsEnabled = fullyLanded;
+          if (controlsEnabled) sensorModel.setAttribute('camera-controls', '');
+          else sensorModel.removeAttribute('camera-controls');
+        }
+        const phaseProgress = clamp((progress - introEnd) / (1 - introEnd));
+        const phase = Math.min(2, Math.floor(phaseProgress * 3));
+        sensorHero.dataset.sceneStage = String(phase);
+        sceneCounter.textContent = `0${phase + 1}`;
+        $$('.hero-phase').forEach((item, index) => item.classList.toggle('active', index === phase));
+
+        const turn = prefersReducedMotion.matches ? rawIntro * .1 : introProgress;
+        const yaw = -18 + turn * 360;
+        const pitch = prefersReducedMotion.matches ? 77 : 77 - Math.sin(introProgress * Math.PI) * 7;
+        const radius = 135 - introProgress * 23;
+        sensorModel.cameraOrbit = `${yaw}deg ${pitch}deg ${radius}%`;
+        if (sceneProgress !== targetSceneProgress) sceneRaf = requestAnimationFrame(renderSensorReveal);
+    };
+    const updateSensorReveal = () => {
+      const travel = sensorHero.offsetHeight - window.innerHeight;
+      targetSceneProgress = travel > 0 ? clamp(-sensorHero.getBoundingClientRect().top / travel) : 0;
+      if (!sceneRaf) sceneRaf = requestAnimationFrame(renderSensorReveal);
+    };
+    sensorModel.addEventListener('load', () => {
+      modelLoaded = true;
+      sensorHero.classList.add('model-loaded');
+      updateSensorReveal();
+    }, { once:true });
+    sensorModel.addEventListener('error', () => {
+      introRoot.classList.remove('scroll-intro');
+      sensorModel.style.opacity = '';
+      wheelCue.remove();
+      updateScroll();
+      updateSensorReveal();
+    }, { once:true });
+    window.addEventListener('scroll', updateSensorReveal, { passive:true });
+    window.addEventListener('resize', updateSensorReveal);
+    updateSensorReveal();
+    const cursor = $('.cursor'); const ring = $('.cursor-ring'); window.addEventListener('pointermove', event => { cursor.style.left = `${event.clientX}px`; cursor.style.top = `${event.clientY}px`; ring.animate({ left:`${event.clientX}px`, top:`${event.clientY}px` }, { duration:180, fill:'forwards' }); }, { passive:true });
+    const lab = $('#lab-visual'); $('#inspect-button').addEventListener('click', () => { lab.classList.toggle('is-inspecting'); $('#inspect-button').firstChild.textContent = lab.classList.contains('is-inspecting') ? 'Desactivar modo escáner ' : 'Activar modo escáner '; });
+    const panels = { measure:{label:'Humedad del suelo',number:'72<small>%</small>',delta:'↗ +4.2% esta semana',caption:'Ritmo del cultivo',time:'últimas 24 horas',values:['18.4 °C','1.42 mS','824 ppm','680 lux']}, understand:{label:'Índice de equilibrio',number:'86<small>/100</small>',delta:'↗ condiciones estables',caption:'Lectura de la campaña',time:'últimos 7 días',values:['óptima','estable','en rango','ascendente']}, act:{label:'Siguiente acción',number:'12<small> min</small>',delta:'● recomendación activa',caption:'Ventana de riego',time:'próximas 6 horas',values:['18.4 °C','1.42 mS','824 ppm','680 lux']} };
+    $$('.tab').forEach(tab => tab.addEventListener('click', () => { $$('.tab').forEach(item => item.classList.remove('active')); tab.classList.add('active'); const data = panels[tab.dataset.panel]; $('.readout-label').textContent = data.label; $('.readout-number').innerHTML = data.number; $('.readout-delta').textContent = data.delta; $('.chart-caption strong').textContent = data.caption; $('.chart-caption span').textContent = data.time; $$('.mini-reading b').forEach((item,index) => item.textContent = data.values[index]); }));
+    const modal = $('#contact-modal'); const toast = $('.toast'); const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('locked'); }; $$('.open-contact').forEach(button => button.addEventListener('click', () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('locked'); setTimeout(() => $('input', modal)?.focus(), 120); })); $('.close-modal').addEventListener('click', closeModal); modal.addEventListener('click', event => { if (event.target === modal) closeModal(); }); document.addEventListener('keydown', event => { if (event.key === 'Escape') closeModal(); }); $('#contact-form').addEventListener('submit', event => { event.preventDefault(); closeModal(); event.target.reset(); toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'),4200); });
+  </script>
+</body>
+</html>

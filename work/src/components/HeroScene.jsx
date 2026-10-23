@@ -1,23 +1,19 @@
 import { useRef } from "react";
-import { assetUrl, site, sensorAnimation } from "../config.js";
+import { assetUrl, site } from "../config.js";
 import { heroPhases } from "../content.js";
-import { useSensorScene } from "../hooks/useSensorScene.js";
+import { useHeroPhases } from "../hooks/useHeroPhases.js";
 
 export default function HeroScene({ onContact }) {
-  const sectionRef = useRef(null),
-    modelRef = useRef(null);
-  const { phase, modelReady, modelFailed } = useSensorScene(
-    sectionRef,
-    modelRef,
-  );
+  const sectionRef = useRef(null);
+  const phase = useHeroPhases(sectionRef);
 
   return (
     <section
       ref={sectionRef}
-      className={`hero sensor-hero${modelReady ? " model-loaded" : ""}${modelFailed ? " model-error" : ""}`}
+      className="hero sensor-hero photo-hero"
       id="inicio"
       data-scene-stage={phase}
-      aria-label="Presentación interactiva del sensor Hiotera"
+      aria-label="Presentación de Hiotera"
     >
       <div className="sensor-pin">
         <div className="hero-hud">
@@ -32,24 +28,7 @@ export default function HeroScene({ onContact }) {
           src={assetUrl(site.installationPhoto)}
           alt=""
           aria-hidden="true"
-        />
-        <model-viewer
-          ref={modelRef}
-          className="sensor-model"
-          id="sensor-model"
-          src={assetUrl(site.modelFile)}
-          alt="Sensor Hiotera LIBOx actualizado en 3D, con antena, controles y conexiones"
-          camera-orbit={`${sensorAnimation.initialYaw}deg ${sensorAnimation.pitch}deg ${sensorAnimation.radius}%`}
-          camera-controls=""
-          disable-zoom=""
-          interaction-prompt="none"
-          touch-action="pan-y"
-          shadow-intensity="1.1"
-          exposure="1.05"
-          environment-image="neutral"
-          interpolation-decay="90"
-          loading="eager"
-          reveal="auto"
+          fetchPriority="high"
         />
         <div className="hero-phases">
           {heroPhases.map((item, index) => (
@@ -102,20 +81,12 @@ export default function HeroScene({ onContact }) {
           </div>
         ))}
         <div className="scroll-cue">
-          <i aria-hidden="true" /> Arrastra para girar · baja para recorrer
+          <i aria-hidden="true" /> Desliza para recorrer
         </div>
-        <a className="hero-meteo-link" href="#meteo">
-          Descubre la meteo <span aria-hidden="true">↓</span>
-        </a>
         <div className="scene-counter">
           <b>{String(phase + 1).padStart(2, "0")}</b>
           <span>/</span>03
         </div>
-        {modelFailed && (
-          <p className="model-error-message" role="status">
-            El visor 3D no está disponible. Puedes seguir explorando Hiotera.
-          </p>
-        )}
       </div>
     </section>
   );

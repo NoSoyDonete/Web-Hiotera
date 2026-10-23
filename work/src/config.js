@@ -5,7 +5,7 @@ export const site = {
   phoneHref: "tel:+34698155496",
   location: "El Ejido · Almería",
   copyright: "© Hiotera 2024",
-  modelFile: "sensor-agricola.glb",
+  modelFile: "libox-sin-cables.glb",
   installationPhoto: "libox-invernadero.webp",
 };
 

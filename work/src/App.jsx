@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { Header, Footer } from "./components/HeaderFooter.jsx";
 import HeroScene from "./components/HeroScene.jsx";
+import LiboxScene from "./components/LiboxScene.jsx";
 import MeteoScene from "./components/MeteoScene.jsx";
+import CatalogSection from "./components/CatalogSection.jsx";
 import {
   Marquee,
   StatementSection,
-  NodeSection,
   ImpactSection,
   JourneySection,
   ClosingSection,
@@ -41,12 +42,13 @@ export default function App() {
       <Header onContact={openContact} />
       <main>
         <HeroScene onContact={openContact} />
-        <Marquee />
+        <LiboxScene />
         <MeteoScene />
+        <Marquee />
         <StatementSection />
-        <NodeSection />
         <SignalSection />
         <ImpactSection />
+        <CatalogSection onContact={openContact} />
         <JourneySection />
         <ClosingSection onContact={openContact} />
       </main>

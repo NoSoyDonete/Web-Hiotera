@@ -1,0 +1,1161 @@
+/* Portada fotográfica, LIBOx interactivo, aplicación real y catálogo. */
+.topbar {
+  top: 16px;
+  padding: 9px 13px;
+  border: 1px solid #ffffff2b;
+  border-radius: 18px;
+  background: #10281ee6;
+  backdrop-filter: blur(18px);
+  color: #f7faf1;
+}
+.topbar.on-meteo {
+  background: #f7faf1ef;
+  border-color: #27433122;
+  color: var(--night);
+}
+.topbar .nav-cta {
+  background: #e6f5dd0c;
+}
+.nav-cta-short {
+  display: none;
+}
+.brand,
+.footer-brand {
+  letter-spacing: -0.045em;
+  gap: 9px;
+}
+.brand-icon {
+  width: 39px;
+  height: 39px;
+  border-radius: 11px;
+  object-fit: contain;
+}
+.field-hero {
+  min-height: 100svh;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #f8f9ee;
+  background: #203529;
+  display: flex;
+  align-items: center;
+  padding: 155px max(6vw, 24px) 150px;
+}
+.field-hero-photo,
+.field-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.field-hero-photo {
+  width: 140%;
+  right: auto;
+  object-fit: cover;
+  object-position: 60% 35%;
+}
+.field-hero-shade {
+  background:
+    linear-gradient(90deg, #081b12eb 0%, #0b2218a6 33%, #0b22180d 66%),
+    linear-gradient(0deg, #071c12cc, transparent 35%, #0b22182a);
+}
+.field-hero-copy {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+}
+.field-hero .eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+}
+.field-hero h1 {
+  margin: 25px 0 28px;
+  font:
+    500 clamp(5.5rem, 10.6vw, 10.5rem)/0.87 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.085em;
+}
+.field-hero h1 span {
+  color: var(--acid);
+}
+.field-hero-copy > p {
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: #f8f9eecc;
+}
+.field-hero-bottom {
+  position: absolute;
+  bottom: 32px;
+  left: 6vw;
+  right: 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 25px;
+  font:
+    0.53rem/1.7 "DM Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.field-hero-bottom > span:last-child {
+  text-align: right;
+}
+.field-hero-bottom a {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.field-hero-bottom b {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #f3f9e770;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+.libox-section {
+  height: auto;
+  background: #eef0e7;
+  color: var(--night);
+}
+.libox-pin {
+  position: relative;
+  top: 0;
+  height: 100svh;
+  min-height: 720px;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 67% 48%, #fffefa, #eff1e7 65%);
+}
+.libox-heading {
+  position: absolute;
+  top: 12%;
+  left: 6%;
+  width: 42%;
+  z-index: 2;
+  pointer-events: none;
+}
+.libox-heading .section-label {
+  color: #6b7c60;
+  font-size: 0.55rem;
+}
+.libox-heading h2 {
+  margin: 18px 0;
+  font:
+    500 clamp(2.7rem, 4.7vw, 5rem)/1 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.07em;
+}
+.libox-heading h2 span {
+  color: #778c59;
+}
+.libox-heading p {
+  max-width: 360px;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #65765d;
+}
+.libox-stage {
+  position: absolute;
+  inset: 20% 2% 10% 39%;
+}
+.libox-model {
+  width: 100%;
+  height: 100%;
+  display: block;
+  --poster-color: transparent;
+  --progress-bar-color: #778c59;
+  --progress-bar-height: 2px;
+}
+.libox-stage::before {
+  content: "";
+  position: absolute;
+  width: 80%;
+  aspect-ratio: 1;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid #aab89a44;
+  pointer-events: none;
+}
+.libox-watermark {
+  position: absolute;
+  top: 37%;
+  width: 100%;
+  text-align: center;
+  font:
+    600 clamp(7rem, 16vw, 17rem)/1 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.08em;
+  color: #cad2bc66;
+  pointer-events: none;
+}
+.libox-guide {
+  position: absolute;
+  top: 45%;
+  left: 6%;
+  width: 31%;
+  z-index: 3;
+}
+.libox-guide-label {
+  display: flex;
+  justify-content: space-between;
+  font:
+    0.51rem "DM Mono",
+    monospace;
+  color: #839173;
+  margin-bottom: 8px;
+}
+.libox-parts-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+.libox-parts-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #5f735725;
+  padding: 10px 0;
+  background: transparent;
+  text-align: left;
+  color: #576c48;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+.libox-parts-list button span {
+  font:
+    0.52rem "DM Mono",
+    monospace;
+  opacity: 0.65;
+}
+.libox-parts-list button i {
+  font-style: normal;
+  margin-left: auto;
+}
+.libox-parts-list button.is-selected {
+  color: #182f22;
+  font-weight: 800;
+  border-color: #7a954d;
+}
+.libox-detail {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #617a3e44;
+  min-height: 152px;
+}
+.libox-detail > span {
+  color: #7b8d67;
+  font:
+    0.48rem/1.6 "DM Mono",
+    monospace;
+}
+.libox-detail h3 {
+  font:
+    500 1.45rem/1.1 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.04em;
+  margin: 10px 0;
+}
+.libox-detail p {
+  font-size: 0.76rem;
+  line-height: 1.75;
+  color: #61705b;
+  margin: 0;
+  max-width: 400px;
+}
+.depth-indicators {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.depth-indicators span {
+  padding: 7px 11px;
+  background: #dbe4c8;
+  border-radius: 30px;
+  font:
+    0.6rem "DM Mono",
+    monospace;
+}
+.libox-hotspot {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #ffffff;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  opacity: 1;
+}
+.libox-hotspot > span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #173e30;
+  border: 2px solid #ffffff;
+  font:
+    700 0.75rem "DM Mono",
+    monospace;
+  box-shadow:
+    0 2px 12px #0b1c1740,
+    0 0 0 3px #173e3026;
+}
+.libox-hotspot:focus-visible > span {
+  outline: 3px solid #173e30;
+  outline-offset: 3px;
+}
+.libox-hotspot > b {
+  display: none;
+  font:
+    0.52rem "DM Mono",
+    monospace;
+  background: #173e30;
+  padding: 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.libox-hotspot.is-selected > span {
+  background: var(--acid);
+  color: #152b18;
+}
+.libox-hotspot.is-selected > b {
+  display: block;
+}
+.libox-tools {
+  position: absolute;
+  right: 6%;
+  top: 3%;
+  display: flex;
+  gap: 5px;
+}
+.libox-tools button {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #95a88080;
+  border-radius: 50%;
+  color: #344e2b;
+  background: #f7f9f0ee;
+  font-size: 0.9rem;
+}
+.libox-tools button:disabled {
+  opacity: 0.4;
+  cursor: wait;
+}
+.libox-tools button:hover:not(:disabled) {
+  background: var(--acid);
+}
+.libox-model-caption {
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  right: 8%;
+  text-align: center;
+  display: grid;
+  gap: 9px;
+  color: #7b8b68;
+  font:
+    0.47rem "DM Mono",
+    monospace;
+  pointer-events: none;
+}
+.libox-model-caption span:first-child {
+  color: #4e6343;
+  letter-spacing: 0.15em;
+}
+.libox-status {
+  position: absolute;
+  top: 45%;
+  left: 15%;
+  right: 15%;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #5e754b;
+}
+.libox-error .libox-model {
+  visibility: hidden;
+}
+.libox-next {
+  position: absolute;
+  bottom: 4%;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #667b4c33;
+  color: #546b40;
+  font-size: 0.7rem;
+}
+.libox-next span {
+  font:
+    0.51rem "DM Mono",
+    monospace;
+}
+.meteo-heading {
+  top: 12%;
+}
+.meteo-heading .section-label {
+  line-height: 1.7;
+}
+.platform-section {
+  background: #10281f;
+  color: #f2f4e9;
+}
+.platform-heading,
+.catalog-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 45px;
+}
+.platform-heading h2,
+.catalog-heading h2 {
+  font:
+    500 clamp(3rem, 5.8vw, 6rem)/0.98 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.07em;
+  margin: 20px 0 0;
+}
+.platform-heading h2 span {
+  color: var(--acid);
+}
+.platform-heading > p,
+.catalog-heading > p {
+  max-width: 330px;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.85;
+  color: #dce9d3a6;
+}
+.platform-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.platform-tabs button {
+  border: 1px solid #f4f8ea30;
+  border-radius: 30px;
+  background: transparent;
+  color: #e2ecd3;
+  padding: 13px 20px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 0.7rem;
+}
+.platform-tabs button > span {
+  font:
+    0.55rem "DM Mono",
+    monospace;
+  opacity: 0.5;
+}
+.platform-tabs button[aria-selected="true"] {
+  background: var(--acid);
+  color: #112c1b;
+  border-color: var(--acid);
+}
+.platform-window {
+  border: 1px solid #b4c5a766;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f9fbf8;
+  box-shadow: 0 20px 70px #00130740;
+}
+.platform-window-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  min-height: 45px;
+  padding: 10px 17px;
+  color: #71836c;
+  background: #e5ebde;
+}
+.platform-window-bar > span {
+  display: flex;
+  gap: 5px;
+}
+.platform-window-bar i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #819a6d;
+}
+.platform-window-bar b {
+  font:
+    0.5rem "DM Mono",
+    monospace;
+  font-weight: 400;
+}
+.platform-window-bar button {
+  border: 0;
+  padding: 3px;
+  background: transparent;
+  color: #314e2d;
+  font-size: 0.65rem;
+}
+.platform-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 30px 0;
+}
+.platform-caption > div {
+  max-width: 620px;
+}
+.platform-caption > div > span {
+  font:
+    0.5rem "DM Mono",
+    monospace;
+  color: #a8bd92;
+}
+.platform-caption h3 {
+  font:
+    500 1.8rem "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.04em;
+  margin: 12px 0;
+}
+.platform-caption p {
+  font-size: 0.76rem;
+  line-height: 1.8;
+  color: #c9d7bfa6;
+}
+.platform-caption ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 240px;
+}
+.platform-caption li {
+  padding: 11px 0;
+  border-bottom: 1px solid #edf5e11f;
+  font-size: 0.65rem;
+}
+.platform-caption li > span {
+  color: var(--acid);
+  margin-right: 15px;
+}
+.platform-disclaimer {
+  font:
+    0.45rem/1.8 "DM Mono",
+    monospace;
+  letter-spacing: 0.07em;
+  color: #9aaf896e;
+}
+.platform-dialog {
+  width: min(1600px, 96vw);
+  max-width: none;
+  padding: 18px;
+  border: 1px solid #688451;
+  border-radius: 15px;
+  background: #f5f8ef;
+  color: #1a3524;
+}
+.platform-dialog::backdrop {
+  background: #03160dde;
+  backdrop-filter: blur(10px);
+}
+.platform-dialog-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 20px;
+}
+.platform-dialog-top h3 {
+  margin: 0;
+  font:
+    500 1rem "Space Grotesk",
+    sans-serif;
+}
+.platform-dialog-top button {
+  border: 1px solid #687a5c55;
+  border-radius: 30px;
+  background: transparent;
+  color: inherit;
+  padding: 8px 14px;
+  font-size: 0.7rem;
+}
+.impact-card {
+  display: flex;
+  flex-direction: column;
+}
+.impact-stamp,
+.impact-card:nth-child(4) .impact-stamp {
+  position: static;
+  width: fit-content;
+  height: auto;
+  min-width: 90px;
+  border: 1px solid currentColor;
+  border-radius: 50px;
+  padding: 10px 17px;
+  margin: 25px 0 0 auto;
+  opacity: 0.8;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  display: block;
+  transform: none;
+}
+.impact-stamp::before,
+.impact-card:nth-child(4) .impact-stamp::before {
+  content: none;
+}
+.catalog-section {
+  background: #e8eddf;
+}
+.catalog-heading h2 span {
+  color: #738a54;
+}
+.catalog-heading > p {
+  color: #5f7156;
+}
+.catalog-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  border-top: 1px solid #61754b33;
+  padding-top: 25px;
+}
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.catalog-filters button {
+  padding: 10px 18px;
+  border: 1px solid #5d754a33;
+  border-radius: 30px;
+  background: transparent;
+  color: #49633b;
+  font-size: 0.68rem;
+}
+.catalog-filters button[aria-pressed="true"] {
+  background: #203d2b;
+  color: #f5f8ec;
+  border-color: #203d2b;
+}
+.catalog-search {
+  display: grid;
+  gap: 5px;
+}
+.catalog-search label {
+  font:
+    0.47rem "DM Mono",
+    monospace;
+  text-transform: uppercase;
+  color: #738366;
+}
+.catalog-search input {
+  width: 260px;
+  border: 1px solid #6b805140;
+  border-radius: 8px;
+  padding: 11px 13px;
+  background: #f6f8ef;
+  color: #25402c;
+  font-size: 0.72rem;
+}
+.catalog-count {
+  margin: 22px 0 16px;
+  color: #7b8c6c;
+  font:
+    0.5rem "DM Mono",
+    monospace;
+}
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+.catalog-card {
+  background: #fafbf4;
+  border: 1px solid #a9b7983f;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.catalog-visual {
+  position: relative;
+  padding: 20px 20px 5px;
+  background: #dce4d0;
+  color: #526d3d;
+}
+.catalog-category {
+  font:
+    0.5rem "DM Mono",
+    monospace;
+  text-transform: uppercase;
+}
+.model-libox {
+  background: #cfe7bd;
+}
+.model-solar {
+  background: #e8e9c6;
+}
+.model-temperature {
+  background: #dfe4d5;
+}
+.model-light {
+  background: #e7efc7;
+}
+.catalog-card-copy {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.catalog-card small {
+  font:
+    0.48rem/1.6 "DM Mono",
+    monospace;
+  text-transform: uppercase;
+  color: #839271;
+}
+.catalog-card h3 {
+  font:
+    500 1.5rem/1.1 "Space Grotesk",
+    sans-serif;
+  margin: 12px 0;
+  letter-spacing: -0.04em;
+}
+.catalog-card p {
+  margin: 0 0 20px;
+  font-size: 0.71rem;
+  line-height: 1.8;
+  color: #6b7c5f;
+}
+.catalog-card .catalog-action {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 16px 0 0;
+  margin-top: auto;
+  border: 0;
+  border-top: 1px solid #8f9f762b;
+  background: transparent;
+  text-align: left;
+  color: #3d5b31;
+  font-size: 0.64rem;
+}
+.catalog-empty {
+  padding: 40px 0;
+  text-align: center;
+  color: #536e40;
+}
+.catalog-empty button {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  color: inherit;
+}
+.catalog-grow {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  padding: 32px 0 0;
+  margin-top: 40px;
+  border-top: 1px solid #7f94613d;
+}
+.catalog-grow > span {
+  color: #849c65;
+  font-size: 2.4rem;
+}
+.catalog-grow h3 {
+  font:
+    500 1.45rem "Space Grotesk",
+    sans-serif;
+  margin: 0 0 9px;
+  letter-spacing: -0.04em;
+}
+.catalog-grow p {
+  font-size: 0.72rem;
+  color: #77896b;
+  margin: 0;
+}
+.catalog-grow .button {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #84ae46;
+  outline-offset: 4px;
+}
+@media (max-width: 1050px) {
+  .libox-guide {
+    width: 34%;
+  }
+  .libox-parts-list {
+    grid-template-columns: 1fr;
+  }
+  .libox-parts-list button {
+    padding: 6px 0;
+    font-size: 0.68rem;
+  }
+  .libox-detail {
+    min-height: 130px;
+    margin-top: 13px;
+  }
+  .libox-detail h3 {
+    font-size: 1.2rem;
+  }
+  .libox-detail p {
+    font-size: 0.7rem;
+  }
+}
+@media (max-width: 900px) {
+  .platform-heading,
+  .catalog-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+  .platform-heading > p,
+  .catalog-heading > p {
+    max-width: 550px;
+  }
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .catalog-toolbar {
+    flex-wrap: wrap;
+  }
+  .field-hero-photo {
+    object-position: 60% 35%;
+  }
+  .libox-heading {
+    top: 12%;
+  }
+  .platform-caption {
+    gap: 30px;
+  }
+}
+@media (max-width: 600px) {
+  .topbar {
+    top: 10px;
+    padding: 7px 9px;
+    width: calc(100% - 20px);
+    border-radius: 13px;
+  }
+  .brand {
+    font-size: 1rem;
+    gap: 5px;
+  }
+  .brand-icon {
+    width: 31px;
+    height: 31px;
+    border-radius: 8px;
+  }
+  .nav-cta {
+    font-size: 0.66rem;
+    padding: 9px 10px;
+    gap: 5px;
+  }
+  .nav-cta-label {
+    display: none;
+  }
+  .nav-cta-short {
+    display: inline;
+  }
+  .nav-meteo-link {
+    font-size: 0.56rem;
+    gap: 3px;
+  }
+  .field-hero {
+    padding: 150px 24px 170px;
+    align-items: flex-start;
+    min-height: 100svh;
+  }
+  .field-hero-photo {
+    width: 160%;
+    left: -5%;
+    object-position: 58% 50%;
+  }
+  .field-hero-shade {
+    background: linear-gradient(
+      180deg,
+      #071e17d9,
+      #0c271943 45%,
+      #071e1780 75%,
+      #071e17ed
+    );
+  }
+  .field-hero h1 {
+    font-size: clamp(4.1rem, 19vw, 5.2rem);
+    margin: 22px 0;
+  }
+  .field-hero .eyebrow {
+    font-size: 0.46rem;
+  }
+  .field-hero-copy > p {
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+  .field-hero .hero-actions {
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .field-hero .button {
+    min-height: 41px;
+    padding: 0 13px;
+    font-size: 0.61rem;
+  }
+  .field-hero-bottom {
+    bottom: 28px;
+    left: 24px;
+    right: 24px;
+    font-size: 0.43rem;
+  }
+  .field-hero-bottom > span:last-child {
+    display: none;
+  }
+  .field-hero-bottom a {
+    gap: 10px;
+  }
+  .field-hero-bottom a span {
+    max-width: 75px;
+  }
+  .field-hero-bottom b {
+    width: 35px;
+    height: 35px;
+  }
+  .libox-section {
+    height: auto;
+  }
+  .libox-pin {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 340px auto auto;
+    gap: 24px;
+    padding: 100px 6% 25px;
+    min-height: 0;
+    height: auto;
+  }
+  .libox-heading {
+    position: static;
+    width: 100%;
+  }
+  .libox-heading .section-label {
+    font-size: 0.43rem;
+  }
+  .libox-heading h2 {
+    font-size: clamp(2.2rem, 9.3vw, 3rem);
+    margin: 13px 0;
+  }
+  .libox-heading p {
+    font-size: 0.72rem;
+    max-width: 330px;
+  }
+  .libox-stage {
+    position: relative;
+    inset: auto;
+    width: calc(100% + 30px);
+    margin: 0 -15px;
+  }
+  .libox-watermark {
+    font-size: 28vw;
+  }
+  .libox-tools {
+    top: 0;
+    right: 6%;
+  }
+  .libox-tools button {
+    width: 28px;
+    height: 28px;
+  }
+  .libox-hotspot > span {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+  .libox-hotspot > b {
+    font-size: 0.6rem;
+    padding: 5px;
+  }
+  .libox-model-caption {
+    bottom: 1%;
+    font-size: 0.39rem;
+    gap: 5px;
+  }
+  .libox-guide {
+    position: static;
+    width: 100%;
+  }
+  .libox-guide-label {
+    font-size: 0.43rem;
+  }
+  .libox-parts-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 13px;
+  }
+  .libox-parts-list button {
+    padding: 5px 0;
+    font-size: 0.68rem;
+    gap: 5px;
+  }
+  .libox-parts-list button span {
+    font-size: 0.44rem;
+  }
+  .libox-detail {
+    padding-top: 9px;
+    margin-top: 10px;
+    min-height: 100px;
+  }
+  .libox-detail > span {
+    font-size: 0.4rem;
+  }
+  .libox-detail h3 {
+    margin: 6px 0;
+    font-size: 1.05rem;
+  }
+  .libox-detail p {
+    font-size: 0.72rem;
+    line-height: 1.65;
+  }
+  .depth-indicators {
+    margin-top: 5px;
+  }
+  .depth-indicators span {
+    padding: 4px 8px;
+    font-size: 0.45rem;
+  }
+  .libox-next {
+    position: static;
+    font-size: 0.57rem;
+  }
+  .libox-next span {
+    font-size: 0.4rem;
+  }
+  .meteo-heading {
+    top: 11%;
+  }
+  .meteo-stage {
+    inset: 29% -2% 33%;
+  }
+  .platform-heading h2,
+  .catalog-heading h2 {
+    font-size: clamp(2.7rem, 11.5vw, 4rem);
+  }
+  .platform-heading > p,
+  .catalog-heading > p {
+    font-size: 0.72rem;
+  }
+  .platform-tabs {
+    gap: 6px;
+  }
+  .platform-tabs button {
+    padding: 10px 12px;
+    font-size: 0.57rem;
+    gap: 6px;
+  }
+  .platform-tabs button > span {
+    font-size: 0.43rem;
+  }
+  .platform-window-bar {
+    gap: 8px;
+    padding: 10px;
+    min-height: 37px;
+  }
+  .platform-window-bar b {
+    font-size: 0.36rem;
+  }
+  .platform-window-bar button {
+    font-size: 0.5rem;
+  }
+  .platform-caption {
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 22px;
+  }
+  .platform-caption h3 {
+    font-size: 1.5rem;
+  }
+  .platform-caption p {
+    font-size: 0.68rem;
+  }
+  .platform-disclaimer {
+    font-size: 0.37rem;
+  }
+  .platform-dialog {
+    padding: 10px;
+    overflow-x: auto;
+    max-height: 90svh;
+  }
+  .platform-dialog-top {
+    position: sticky;
+    left: 0;
+  }
+  .platform-dialog-top h3 {
+    font-size: 0.7rem;
+  }
+  .platform-dialog-top button {
+    font-size: 0.55rem;
+    padding: 6px 10px;
+  }
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+  .catalog-toolbar {
+    gap: 20px;
+  }
+  .catalog-filters button {
+    font-size: 0.6rem;
+    padding: 9px 14px;
+  }
+  .catalog-search,
+  .catalog-search input {
+    width: 100%;
+  }
+  .catalog-grow {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .catalog-grow > span {
+    display: none;
+  }
+  .catalog-grow .button {
+    margin-left: 0;
+  }
+  .impact-stamp,
+  .impact-card:nth-child(4) .impact-stamp {
+    font-size: 0.67rem;
+    min-width: 85px;
+  }
+}
+@media (max-height: 740px) and (min-width: 601px) {
+  .libox-pin {
+    min-height: 660px;
+  }
+  .libox-heading {
+    top: 14%;
+  }
+  .libox-heading h2 {
+    font-size: 3rem;
+  }
+  .libox-guide {
+    top: 43%;
+  }
+  .libox-detail p {
+    font-size: 0.62rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .libox-hotspot {
+    transition: none;
+  }
+}

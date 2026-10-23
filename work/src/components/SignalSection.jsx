@@ -1,133 +1,161 @@
-import { useId, useRef, useState } from "react";
-import { signalPanels } from "../content.js";
-
-const curve =
-  "M0,195 C44,175 57,192 100,160 S166,130 206,157 S268,198 311,147 S369,95 408,132 S477,194 523,112 S567,80 600,96";
-const readingLabels = ["Temperatura", "Conductividad", "CO₂", "Iluminancia"];
+import { useEffect, useRef, useState } from "react";
+import { platformViews } from "../demoData.js";
+import ApplicationDemo, { useDemoExperience } from "./ApplicationDemo.jsx";
 
 export default function SignalSection() {
-  const [activePanel, setActivePanel] = useState("measure");
-  const keys = Object.keys(signalPanels);
-  const data = signalPanels[activePanel];
-  const gradientId = useId();
-  const tabsRef = useRef([]);
-  const changeTabWithKeyboard = (event, index) => {
+  const [active, setActive] = useState(0),
+    [expanded, setExpanded] = useState(false);
+  const tabs = useRef([]),
+    dialog = useRef(null);
+  const view = platformViews[active];
+  const experience = useDemoExperience();
+  const select = (index) => {
+    setActive(index);
+    experience.setMetric(null);
+  };
+  const selectView = (id) =>
+    select(platformViews.findIndex((item) => item.id === id));
+  useEffect(() => {
+    const element = dialog.current;
+    if (expanded && !element.open) element.showModal();
+    if (!expanded && element.open) element.close();
+  }, [expanded]);
+  const keyboard = (event, index) => {
     let next;
-    if (event.key === "ArrowRight") next = (index + 1) % keys.length;
+    if (event.key === "ArrowRight") next = (index + 1) % platformViews.length;
     else if (event.key === "ArrowLeft")
-      next = (index + keys.length - 1) % keys.length;
+      next = (index + platformViews.length - 1) % platformViews.length;
     else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = keys.length - 1;
+    else if (event.key === "End") next = platformViews.length - 1;
     else return;
     event.preventDefault();
-    setActivePanel(keys[next]);
-    tabsRef.current[next]?.focus();
+    select(next);
+    tabs.current[next]?.focus();
   };
-
   return (
-    <section className="section signal-section" id="senal">
+    <section
+      id="senal"
+      className="section platform-section"
+      aria-labelledby="platform-title"
+    >
       <div className="section-inner">
-        <div className="signal-head">
+        <div className="platform-heading">
           <div>
-            <div className="section-label">03 / la señal</div>
-            <h2>
-              Del ruido
-              <br />a la <span>señal.</span>
+            <div className="section-label">DEL CAMPO A TU PANTALLA</div>
+            <h2 id="platform-title">
+              No son solo datos.
+              <br />
+              <span>Es tu cultivo.</span>
             </h2>
           </div>
           <p>
-            Una demo de cómo se ordena la información dentro de Hiotera. Cambia
-            de capa y mira cómo el dato se convierte en decisión.
+            Ambiente, suelo y meteorología en una misma aplicación. Cada
+            parámetro tiene su propia gráfica histórica. Aquí puedes ver algunos
+            ejemplos con un invernadero completamente ficticio.
           </p>
         </div>
-        <div className="signal-card">
-          <div className="signal-tabs">
-            <div className="tabs" role="tablist" aria-label="Capas de la señal">
-              {keys.map((key, index) => (
-                <button
-                  ref={(element) => {
-                    tabsRef.current[index] = element;
-                  }}
-                  className={`tab${key === activePanel ? " active" : ""}`}
-                  role="tab"
-                  id={`tab-${key}`}
-                  aria-selected={activePanel === key}
-                  aria-controls="signal-panel"
-                  tabIndex={activePanel === key ? 0 : -1}
-                  key={key}
-                  onClick={() => setActivePanel(key)}
-                  onKeyDown={(event) => changeTabWithKeyboard(event, index)}
-                >
-                  {signalPanels[key].tab}
-                </button>
-              ))}
+        <div
+          role="tablist"
+          aria-label="Vistas de la aplicación Hiotera"
+          className="platform-tabs"
+        >
+          {platformViews.map((item, index) => (
+            <button
+              key={item.id}
+              ref={(element) => {
+                tabs.current[index] = element;
+              }}
+              role="tab"
+              id={`platform-tab-${item.id}`}
+              aria-controls="platform-panel"
+              aria-selected={active === index}
+              tabIndex={active === index ? 0 : -1}
+              onClick={() => select(index)}
+              onKeyDown={(event) => keyboard(event, index)}
+            >
+              <span>0{index + 1}</span>
+              {item.tab}
+            </button>
+          ))}
+        </div>
+        <div
+          id="platform-panel"
+          role="tabpanel"
+          aria-labelledby={`platform-tab-${view.id}`}
+          tabIndex={0}
+        >
+          <div className="platform-window">
+            <div className="platform-window-bar">
+              <span>
+                <i />
+                <i />
+                <i />
+              </span>
+              <b>HIOTERA / DEMOSTRACIÓN</b>
+              <button
+                onClick={() => setExpanded(true)}
+                aria-label={`Ampliar demostración: ${view.tab}`}
+              >
+                Ampliar <span aria-hidden="true">↗</span>
+              </button>
             </div>
-            <span className="signal-time">
-              finca 01 · datos de demostración
-            </span>
+            <ApplicationDemo
+              view={view.id}
+              onView={selectView}
+              experience={experience}
+            />
           </div>
-          <div
-            className="signal-main"
-            role="tabpanel"
-            id="signal-panel"
-            aria-labelledby={`tab-${activePanel}`}
-            tabIndex={0}
-          >
-            <aside className="signal-readout">
-              <p className="readout-label">{data.label}</p>
-              <div className="readout-number">
-                {data.number}
-                <small>{data.unit}</small>
-              </div>
-              <div className="readout-delta">{data.delta}</div>
-              <div className="mini-readings">
-                {readingLabels.map((label, index) => (
-                  <div className="mini-reading" key={label}>
-                    <small>{label}</small>
-                    <b>{data.values[index]}</b>
-                  </div>
-                ))}
-              </div>
-            </aside>
-            <div className="signal-chart">
-              <div className="chart-caption">
-                <strong>{data.caption}</strong>
-                <span>{data.time}</span>
-              </div>
-              <div className="chart">
-                <svg
-                  viewBox="0 0 600 250"
-                  preserveAspectRatio="none"
-                  role="img"
-                  aria-label={`Gráfico de demostración: ${data.caption}`}
-                >
-                  <defs>
-                    <linearGradient id={gradientId} x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0" stopColor="#d9ff58" stopOpacity=".3" />
-                      <stop offset="1" stopColor="#d9ff58" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    className="chart-area"
-                    style={{ fill: `url(#${gradientId})` }}
-                    d={`${curve} L600,250 L0,250 Z`}
-                  />
-                  <path className="chart-path" d={curve} />
-                </svg>
-                <div className="chart-dot" />
-                <div className="chart-tip">óptimo · 12:40</div>
-              </div>
-              <div className="chart-labels">
-                <span>00:00</span>
-                <span>06:00</span>
-                <span>12:00</span>
-                <span>18:00</span>
-                <span>ahora</span>
-              </div>
+          <div className="platform-caption">
+            <div>
+              <span>{view.category}</span>
+              <h3>{view.title}</h3>
+              <p>{view.description}</p>
             </div>
+            <ul>
+              {view.notes.map((note) => (
+                <li key={note}>
+                  <span aria-hidden="true">↗</span>
+                  {note}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+        <p className="platform-disclaimer">
+          INTERFAZ RECREADA · NOMBRES, FECHAS, FASES, LECTURAS Y CURVAS
+          TOTALMENTE FICTICIOS · SIN DATOS REALES NI CONEXIÓN CON CUENTAS.
+        </p>
       </div>
+      <dialog
+        ref={dialog}
+        className="platform-dialog"
+        onCancel={(event) => {
+          event.preventDefault();
+          setExpanded(false);
+        }}
+        onClose={() => setExpanded(false)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) setExpanded(false);
+        }}
+        aria-labelledby="demo-expanded-title"
+      >
+        <div className="platform-dialog-top">
+          <h3 id="demo-expanded-title">{view.tab} · Datos simulados</h3>
+          <button
+            onClick={() => setExpanded(false)}
+            aria-label="Cerrar demostración ampliada"
+          >
+            Cerrar ×
+          </button>
+        </div>
+        {expanded && (
+          <ApplicationDemo
+            view={view.id}
+            onView={selectView}
+            experience={experience}
+          />
+        )}
+      </dialog>
     </section>
   );
 }

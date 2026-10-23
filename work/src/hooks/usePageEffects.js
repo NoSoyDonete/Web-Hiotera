@@ -43,9 +43,14 @@ export function usePageEffects() {
     window.addEventListener("scroll", scheduleProgress, { passive: true });
     window.addEventListener("resize", scheduleProgress);
     window.addEventListener("pointermove", moveCursor, { passive: true });
+    // La portada y sus fuentes pueden cambiar el diseño después del primer
+    // cálculo. Recalcular evita conservar el color de la meteo en el inicio.
+    const layoutObserver = new ResizeObserver(scheduleProgress);
+    layoutObserver.observe(document.body);
     drawProgress();
     return () => {
       cancelAnimationFrame(frame);
+      layoutObserver.disconnect();
       window.removeEventListener("scroll", scheduleProgress);
       window.removeEventListener("resize", scheduleProgress);
       window.removeEventListener("pointermove", moveCursor);

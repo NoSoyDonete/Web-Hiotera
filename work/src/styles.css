@@ -532,23 +532,20 @@ button {
   color: var(--night);
   padding: 18px 0;
   font:
-    600 clamp(1.3rem, 2.8vw, 2.8rem)/1 "Space Grotesk",
+    600 clamp(0.9rem, 2.8vw, 2.8rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.06em;
 }
 .marquee-track {
-  display: inline-flex;
-  gap: 25px;
-  animation: move 20s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 2vw, 32px);
+  padding: 0 12px;
 }
 .marquee i {
   opacity: 0.4;
   font-style: normal;
-}
-@keyframes move {
-  to {
-    transform: translateX(-50%);
-  }
 }
 .section {
   padding: 150px 6vw;

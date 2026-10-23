@@ -1,9 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { meteoParts, meteoProgress, meteoCameraRadius } from "../meteo.js";
+import { createMeteoPlayback } from "../meteoPlayback.js";
 
 export function useMeteoScene(sectionRef, modelRef, progressRef) {
   const [status, setStatus] = useState("loading");
   const [stage, setStage] = useState("assembled");
+  const [motionEnabled, setMotionEnabled] = useState(
+    () => !matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const motionRef = useRef(motionEnabled);
+  const playbackRef = useRef(null);
+  const toggleMotion = useCallback(
+    () => setMotionEnabled((enabled) => !enabled),
+    [],
+  );
+
+  useEffect(() => {
+    motionRef.current = motionEnabled;
+    playbackRef.current?.sync();
+  }, [motionEnabled]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -17,6 +32,11 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
     let progress = meteoProgress(section),
       target = progress,
       lastStage = "";
+    const playback = createMeteoPlayback(
+      model,
+      () => ready && motionRef.current && !document.hidden,
+    );
+    playbackRef.current = playback;
 
     const draw = (time) => {
       frame = 0;
@@ -25,11 +45,16 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       previousTime = time;
       progress = reduced.matches
         ? target
-        : progress + (target - progress) * (1 - Math.exp(-delta / 110));
+        : progress + (target - progress) * (1 - Math.exp(-delta / 90));
       if (Math.abs(target - progress) < 0.0001) progress = target;
       // El GLB incluye el easing de las piezas: las etiquetas lo siguen.
       const separation = progress * progress * (3 - 2 * progress);
-      model.currentTime = Math.min(model.duration - 0.0001, 2.5 + progress * 4);
+      model.appendAnimation("Despiece", {
+        time: Math.min(6.5 - 0.0001, 2.5 + progress * 4),
+        timeScale: 0,
+        fade: false,
+      });
+      playback.sync(true);
       for (const part of meteoParts) {
         model.updateHotspot({
           name: `hotspot-${part.key}`,
@@ -81,31 +106,45 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
     };
     const loaded = async () => {
       await model.updateComplete;
-      if (disposed) return;
+      if (disposed || ready) return;
       if (
-        !model.availableAnimations.includes("Despiece") ||
-        model.duration <= 0
+        !["Despiece", "Viento", "Veleta", "Lluvia"].every((name) =>
+          model.availableAnimations.includes(name),
+        ) ||
+        typeof model.appendAnimation !== "function"
       ) {
         failed();
         return;
       }
-      model.pause();
+      model.play();
+      model.appendAnimation("Veleta", { fade: false });
+      model.appendAnimation("Lluvia", { fade: false });
       ready = true;
+      playback.sync();
       setStatus("ready");
       progress = target = meteoProgress(section);
       resize();
+    };
+    const visibilityChanged = () => playback.sync();
+    const preferenceChanged = () => {
+      motionRef.current = !reduced.matches;
+      setMotionEnabled(!reduced.matches);
+      playback.sync();
+      update();
     };
     const failed = () => {
       if (disposed) return;
       ready = false;
       cancelAnimationFrame(frame);
+      playback.sync();
       setStatus("error");
     };
     model.addEventListener("load", loaded);
     model.addEventListener("error", failed);
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", resize);
-    reduced.addEventListener("change", update);
+    reduced.addEventListener("change", preferenceChanged);
+    document.addEventListener("visibilitychange", visibilityChanged);
     const observer = new ResizeObserver(resize);
     observer.observe(model);
     import("@google/model-viewer")
@@ -122,8 +161,11 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       model.removeEventListener("error", failed);
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", resize);
-      reduced.removeEventListener("change", update);
+      reduced.removeEventListener("change", preferenceChanged);
+      document.removeEventListener("visibilitychange", visibilityChanged);
+      playback.dispose();
+      if (playbackRef.current === playback) playbackRef.current = null;
     };
   }, [sectionRef, modelRef, progressRef]);
-  return { status, stage };
+  return { status, stage, motionEnabled, toggleMotion };
 }

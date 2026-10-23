@@ -16,7 +16,11 @@ export default function MeteoScene() {
     modelRef = useRef(null),
     progressRef = useRef(null);
   const [selected, setSelected] = useState(0);
-  const { status, stage } = useMeteoScene(sectionRef, modelRef, progressRef);
+  const { status, stage, motionEnabled, toggleMotion } = useMeteoScene(
+    sectionRef,
+    modelRef,
+    progressRef,
+  );
   const selectedIndex = Math.min(selected, meteoParts.length - 1);
   const part = meteoParts[selectedIndex];
 
@@ -76,7 +80,7 @@ export default function MeteoScene() {
             className="meteo-model"
             src={assetUrl(meteoModelFile)}
             alt="Estación meteorológica Hiotera completa en 3D. Arrastra para girar el modelo; baja para separar las piezas. El miniíndice destaca el anemómetro, la veleta, el embudo y el pluviómetro."
-            animation-name="Despiece"
+            animation-name="Viento"
             animation-crossfade-duration="0"
             camera-target={meteoCameraTarget}
             camera-orbit="-145deg 64deg 10.5m"
@@ -114,6 +118,23 @@ export default function MeteoScene() {
             role="group"
             aria-label="Controles de la vista 3D"
           >
+            <button
+              type="button"
+              onClick={toggleMotion}
+              disabled={status !== "ready"}
+              aria-label={
+                motionEnabled
+                  ? "Pausar viento y lluvia"
+                  : "Reanudar viento y lluvia"
+              }
+              title={
+                motionEnabled
+                  ? "Pausar viento y lluvia"
+                  : "Reanudar viento y lluvia"
+              }
+            >
+              <span aria-hidden="true">{motionEnabled ? "Ⅱ" : "▷"}</span>
+            </button>
             <button
               type="button"
               onClick={() => zoom(0.8)}

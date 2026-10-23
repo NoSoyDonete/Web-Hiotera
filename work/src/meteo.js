@@ -1,6 +1,6 @@
 // Anclajes y desplazamientos del modelo original de Estacion-meteo-web.
 // Despiece dura 6,5 s; la separación sucede entre los segundos 2,5 y 6,5.
-export const meteoModelFile = "estacion-meteo.glb";
+export const meteoModelFile = "estacion-meteo-viva.glb";
 export const meteoCameraTarget = "0m 1.5m -0.3m";
 
 export const meteoCameraRadius = (model) =>

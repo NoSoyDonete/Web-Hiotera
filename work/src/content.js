@@ -6,7 +6,7 @@ export const heroPhases = [
     highlight: "habla.",
     description:
       "Este es el punto donde empieza todo: un sensor real, dentro del cultivo, escuchando lo que todavía no se ve.",
-    action: { href: "#nodo", label: "Descubre el nodo" },
+    action: { href: "#catalogo", label: "Explora el catálogo" },
     contact: true,
     note: ["LECTURA ACTIVA", "dato directo desde el cultivo"],
   },
@@ -15,7 +15,7 @@ export const heroPhases = [
     title: "Lo invisible",
     highlight: "señala.",
     description:
-      "Humedad, temperatura, luz y más. Cada variación dibuja una imagen más clara de lo que necesita la planta.",
+      "Humedad, temperatura, radiación y más. Cada variación dibuja una imagen más clara de lo que necesita la planta.",
     note: ["24 H / 7 D", "una señal que no se detiene"],
   },
   {
@@ -33,7 +33,7 @@ export const nodeSteps = [
   {
     title: "Está cerca del cultivo.",
     description:
-      "Sensores que registran humedad, temperatura, iluminancia, conductividad, CO₂ y más.",
+      "Sensores que registran humedad, temperatura, radiación, conductividad, CO₂ y más.",
     emphasis: "El dato aparece donde ocurre.",
   },
   {
@@ -87,26 +87,27 @@ export const impactCards = [
     title: ["Riega con", "criterio."],
     description:
       "Ajusta tiempos e intervalos con datos reales de cada cultivo.",
-    stamp: ["WATER", "FLOW"],
+    stamp: ["AGUA"],
   },
   {
     category: "suelo",
     title: ["Alimenta", "mejor."],
     description: "Optimiza fertilizantes y reduce el desperdicio.",
-    stamp: ["SOIL", "READ"],
+    stamp: ["SUELO"],
   },
   {
-    category: "riesgo",
-    title: ["Anticípate", "al cambio."],
-    description: "Detecta anomalías y meteorología adversa antes de que pesen.",
-    stamp: ["RISK", "OFF"],
+    category: "riego",
+    title: ["Lee el suelo.", "Decide el riego."],
+    description:
+      "Consulta la tensión del suelo a 15 y 30 cm para decidir con más información.",
+    stamp: ["RIEGO"],
   },
   {
     category: "control",
     title: ["Tu finca.", "Desde cualquier lugar."],
     description:
       "Supervisa y controla tus sistemas desde una app móvil o desde la nube.",
-    stamp: ["FIELD", "ONLINE"],
+    stamp: ["CONTROL"],
   },
 ];
 

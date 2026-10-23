@@ -14,18 +14,13 @@ function Lines({ items }) {
 
 export function Marquee() {
   return (
-    <div className="marquee" aria-hidden="true">
+    <div className="marquee" aria-label="Mide, interpreta y recomienda">
       <div className="marquee-track">
-        {Array.from({ length: 2 }, (_, index) => (
-          <Fragment key={index}>
-            <b>MIDE</b>
-            <i>✳</i>
-            <b>INTERPRETA</b>
-            <i>✳</i>
-            <b>RECOMIENDA</b>
-            <i>✳</i>
-          </Fragment>
-        ))}
+        <b>MIDE</b>
+        <i aria-hidden="true">✳</i>
+        <b>INTERPRETA</b>
+        <i aria-hidden="true">✳</i>
+        <b>RECOMIENDA</b>
       </div>
     </div>
   );
@@ -48,8 +43,8 @@ export function StatementSection() {
           </div>
           <div className="statement-copy">
             <p>
-              La humedad, la temperatura, la luz y el CO₂ cambian antes de que
-              el ojo lo vea. Hiotera convierte esas señales en una lectura
+              La humedad, la temperatura, la radiación y el CO₂ cambian antes de
+              que el ojo lo vea. Hiotera convierte esas señales en una lectura
               sencilla para que el siguiente movimiento llegue a tiempo.
             </p>
             <a className="micro-link" href="#senal">

@@ -1,6 +1,6 @@
 .meteo-section {
   position: relative;
-  height: 350svh;
+  height: 310svh;
   background: #e9eddf;
   color: var(--night);
   scroll-margin-top: 0;
@@ -426,7 +426,7 @@
 }
 @media (max-width: 900px) {
   .meteo-section {
-    height: 330svh;
+    height: 295svh;
   }
   .meteo-heading {
     top: 5%;
@@ -471,7 +471,7 @@
 }
 @media (max-width: 600px) {
   .meteo-section {
-    height: 310svh;
+    height: 280svh;
   }
   .meteo-heading {
     top: 5%;

@@ -4,7 +4,17 @@ export const site = {
   phone: "+34 698 155 496",
   phoneHref: "tel:+34698155496",
   location: "El Ejido · Almería",
-  copyright: "© Hiotera 2024",
+  officeAddress: "Av. de Nicolás Salmerón, 69, 04700 El Ejido, Almería",
+  officeMap:
+    "https://www.google.com/maps/search/?api=1&query=Av.%20de%20Nicol%C3%A1s%20Salmer%C3%B3n%2069%2C%2004700%20El%20Ejido%2C%20Almer%C3%ADa",
+  email: "contacto@hiotera.com",
+  privacyEmail: "dpd@hiotera.com",
+  company: "Hiotera, S.L.",
+  taxId: "B04925343",
+  registeredAddress: "Bulevar, 465, 23 A, 04700 El Ejido, Almería, España",
+  registry:
+    "Registro Mercantil de Almería, tomo 2027, folio 128, inscripción 1.ª, hoja AL-51829",
+  copyright: "© Hiotera 2026",
   modelFile: "libox-sin-cables.glb",
   installationPhoto: "libox-invernadero.webp",
 };

@@ -400,9 +400,6 @@
     0.51rem "DM Mono",
     monospace;
 }
-.meteo-heading {
-  top: 12%;
-}
 .meteo-heading .section-label {
   line-height: 1.7;
 }
@@ -555,7 +552,7 @@
   color: #9aaf896e;
 }
 .platform-dialog {
-  width: min(1600px, 96vw);
+  width: min(1920px, 98vw);
   max-width: none;
   padding: 18px;
   border: 1px solid #688451;
@@ -1040,12 +1037,6 @@ input:focus-visible {
   }
   .libox-next span {
     font-size: 0.4rem;
-  }
-  .meteo-heading {
-    top: 11%;
-  }
-  .meteo-stage {
-    inset: 29% -2% 33%;
   }
   .platform-heading h2,
   .catalog-heading h2 {

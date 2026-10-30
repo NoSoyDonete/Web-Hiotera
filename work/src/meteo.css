@@ -42,16 +42,18 @@
   top: 0;
   height: 100svh;
   min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 20px clamp(20px, 3vw, 52px);
+  padding: 100px 6% 28px;
   overflow: hidden;
   isolation: isolate;
   background: radial-gradient(ellipse at 70% 46%, #fafbf5 0%, #e9eddf 65%);
 }
 .meteo-heading {
-  position: absolute;
-  z-index: 3;
-  top: 9%;
-  left: 6%;
-  width: 28%;
+  position: static;
+  width: auto;
   pointer-events: none;
 }
 .meteo-heading .section-label {
@@ -60,24 +62,29 @@
   letter-spacing: 0.12em;
 }
 .meteo-heading h2 {
-  margin: 22px 0 20px;
+  margin: 16px 0 18px;
   font:
-    500 clamp(3rem, 4.6vw, 5.8rem)/0.96 "Space Grotesk",
+    500 clamp(2rem, min(15cqi, 6svh), 4rem)/1 "Space Grotesk",
     sans-serif;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
 }
 .meteo-heading h2 span {
   color: #698250;
 }
 .meteo-heading p {
-  max-width: 280px;
+  max-width: 34ch;
+  margin: 0;
   color: #60705c;
   font-size: 0.78rem;
   line-height: 1.75;
 }
 .meteo-stage {
-  position: absolute;
-  inset: 5% 1% 11% 29%;
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  min-height: 0;
 }
 .meteo-stage::before {
   content: "";
@@ -179,12 +186,9 @@
   background: #748e4a;
 }
 .meteo-parts {
-  position: absolute;
-  z-index: 4;
-  left: 6%;
-  top: 46%;
-  width: 24%;
-  max-width: 310px;
+  position: static;
+  width: 100%;
+  max-width: none;
 }
 .meteo-parts-caption {
   margin-bottom: 12px;
@@ -307,11 +311,10 @@
   pointer-events: auto;
 }
 .meteo-transport {
-  position: absolute;
+  position: relative;
+  grid-column: 1 / -1;
+  grid-row: 2;
   z-index: 5;
-  bottom: 4%;
-  left: 6%;
-  right: 6%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
@@ -406,95 +409,94 @@
 .meteo-error .meteo-model {
   visibility: hidden;
 }
-@media (min-width: 901px) and (max-height: 780px) {
-  .meteo-heading {
-    top: 6%;
-  }
-  .meteo-heading h2 {
-    font-size: 3.7rem;
-    margin: 15px 0;
-  }
-  .meteo-parts {
-    top: 39%;
-  }
-  .meteo-part-list button {
-    padding: 7px 0;
-  }
-  .meteo-part-detail {
-    padding-top: 10px;
-  }
+
+/* The description and parts share a flow: translations cannot overlap them. */
+.meteo-copy {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 3svh, 34px);
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #91a181 transparent;
+  padding-right: 10px;
+  container-type: inline-size;
 }
-@media (max-width: 900px) {
-  .meteo-section {
-    height: 295svh;
+.meteo-copy > * {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) and (min-width: 601px) {
+  .meteo-pin {
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+    column-gap: 20px;
   }
-  .meteo-heading {
-    top: 5%;
-    left: 6%;
-    width: 50%;
+  .meteo-copy {
+    gap: 22px;
   }
   .meteo-heading h2 {
-    font-size: clamp(2.8rem, 6vw, 4rem);
-    margin: 14px 0;
+    font-size: clamp(1.8rem, 15cqi, 3rem);
   }
   .meteo-heading p {
-    max-width: 230px;
-    font-size: 0.7rem;
-  }
-  .meteo-stage {
-    inset: 14% 0 24% 25%;
-  }
-  .meteo-parts {
-    top: 42%;
-    width: 25%;
-  }
-  .meteo-part-list button {
-    font-size: 0.62rem;
-    padding: 9px 0;
-    gap: 8px;
-  }
-  .meteo-part-detail p {
-    font-size: 0.6rem;
+    font-size: 0.73rem;
   }
   .meteo-hotspot > b {
     font-size: 0.52rem;
     padding: 5px;
   }
   .meteo-transport {
-    gap: 15px;
-    bottom: 3%;
-    grid-template-columns: 1.2fr 0.7fr 1fr;
+    gap: 16px;
+    grid-template-columns: 1.2fr 0.6fr 1fr;
   }
-  .meteo-scroll-hint p {
-    font-size: 0.59rem;
+  .meteo-view-buttons button {
+    padding: 9px 12px;
   }
 }
 @media (max-width: 600px) {
   .meteo-section {
     height: 280svh;
   }
+  .meteo-pin {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(90px, 1fr) auto auto;
+    grid-template-areas: "heading" "model" "parts" "transport";
+    gap: 12px;
+    padding: 82px 6% 18px;
+    overflow-y: auto;
+  }
+  .meteo-copy {
+    display: contents;
+  }
   .meteo-heading {
-    top: 5%;
-    width: 90%;
+    grid-area: heading;
+    z-index: 3;
   }
   .meteo-heading .section-label {
     font-size: 0.48rem;
   }
   .meteo-heading h2 {
-    font-size: 2.45rem;
-    margin: 12px 0 8px;
+    font-size: clamp(1.8rem, 7.8vw, 2.65rem);
+    margin: 10px 0;
   }
-  .meteo-heading h2 span {
-    display: inline;
+  .meteo-heading h2 br {
+    display: none;
+  }
+  .meteo-heading h2 span::before {
+    content: " ";
+    white-space: pre;
   }
   .meteo-heading p {
-    max-width: 290px;
-    font-size: 0.65rem;
-    margin: 0;
+    max-width: 48ch;
+    font-size: 0.7rem;
     line-height: 1.6;
   }
   .meteo-stage {
-    inset: 25% -2% 36%;
+    grid-area: model;
   }
   .meteo-stage::before {
     width: 65%;
@@ -503,23 +505,15 @@
   .meteo-watermark {
     font-size: 24vw;
   }
-  .meteo-view-label {
-    bottom: -1%;
-    font-size: 0.4rem;
-  }
   .meteo-camera-tools {
     top: 0;
-    right: 7%;
+    right: 0;
     gap: 4px;
   }
   .meteo-camera-tools button {
     width: 29px;
     height: 29px;
     font-size: 0.9rem;
-  }
-  .meteo-camera-hint {
-    font-size: 0.4rem;
-    bottom: 5%;
   }
   .meteo-hotspot > span {
     width: 21px;
@@ -530,14 +524,11 @@
     display: none;
   }
   .meteo-parts {
-    top: auto;
-    bottom: 14%;
-    left: 6%;
-    width: 88%;
-    max-width: none;
+    grid-area: parts;
+    z-index: 4;
   }
   .meteo-parts-caption {
-    font-size: 0.43rem;
+    font-size: 0.48rem;
     margin-bottom: 6px;
   }
   .meteo-part-list {
@@ -545,39 +536,39 @@
     gap: 0 18px;
   }
   .meteo-part-list button {
-    padding: 5px 0;
-    font-size: 0.57rem;
+    padding: 8px 0;
+    font-size: 0.65rem;
     gap: 6px;
   }
   .meteo-part-list button span {
-    font-size: 0.45rem;
+    font-size: 0.48rem;
   }
   .meteo-part-detail {
-    padding-top: 7px;
-    min-height: 46px;
+    padding-top: 8px;
+    min-height: 48px;
   }
   .meteo-part-detail > span {
-    font-size: 0.44rem;
+    font-size: 0.48rem;
   }
   .meteo-part-detail p {
-    font-size: 0.56rem;
-    line-height: 1.45;
-    margin-top: 3px;
+    font-size: 0.65rem;
+    line-height: 1.5;
+    margin-top: 4px;
   }
   .meteo-transport {
-    bottom: 3%;
-    gap: 8px 15px;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 10px;
+    grid-area: transport;
+    gap: 10px 15px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-top: 12px;
   }
   .meteo-scroll-hint {
     gap: 8px;
   }
   .meteo-scroll-hint p {
-    font-size: 0.52rem;
+    font-size: 0.59rem;
   }
   .meteo-scroll-hint small {
-    font-size: 0.45rem;
+    font-size: 0.5rem;
     margin-top: 3px;
   }
   .meteo-scroll-hint > span {
@@ -600,95 +591,35 @@
     font-size: 0.46rem;
   }
   .meteo-view-buttons button {
-    padding: 8px 12px;
-    font-size: 0.5rem;
+    padding: 8px 10px;
+    font-size: 0.56rem;
   }
 }
 @media (min-width: 601px) and (max-height: 680px) {
-  .meteo-heading {
-    top: 6%;
-    width: 29%;
+  .meteo-pin {
+    padding-top: 90px;
+    padding-bottom: 18px;
+    row-gap: 14px;
+  }
+  .meteo-copy {
+    gap: 20px;
   }
   .meteo-heading h2 {
-    font-size: 2.3rem;
-    margin: 10px 0;
-  }
-  .meteo-heading p {
-    font-size: 0.6rem;
-    line-height: 1.5;
-  }
-  .meteo-stage {
-    inset: 4% 0 15% 31%;
-  }
-  .meteo-parts {
-    top: auto;
-    bottom: 19%;
-    width: 27%;
-    max-width: none;
-  }
-  .meteo-parts-caption {
-    font-size: 0.42rem;
-    margin-bottom: 5px;
-  }
-  .meteo-part-list {
-    grid-template-columns: 1fr 1fr;
-    gap: 0 10px;
-  }
-  .meteo-part-list button {
-    padding: 5px 0;
-    font-size: 0.52rem;
-    gap: 5px;
-  }
-  .meteo-part-list button span {
-    font-size: 0.44rem;
-  }
-  .meteo-part-list button i {
-    display: none;
-  }
-  .meteo-part-detail {
-    display: none;
+    font-size: clamp(1.8rem, 5.5svh, 2.7rem);
+    margin: 10px 0 12px;
   }
   .meteo-transport {
-    padding-top: 10px;
-    bottom: 4%;
-  }
-  .meteo-hotspot > b {
-    font-size: 0.46rem;
+    padding-top: 12px;
   }
 }
 @media (max-width: 600px) and (max-height: 720px) {
-  .meteo-heading {
-    top: 4%;
+  .meteo-pin {
+    padding-top: 76px;
+    gap: 10px;
   }
   .meteo-heading h2 {
-    font-size: 2rem;
-    margin: 8px 0 6px;
-  }
-  .meteo-heading h2 br {
-    display: none;
-  }
-  .meteo-heading h2 span::before {
-    content: " ";
-    white-space: pre;
-  }
-  .meteo-heading p {
-    font-size: 0.59rem;
-    max-width: 270px;
-  }
-  .meteo-stage {
-    inset: 21% -2% 43%;
-  }
-  .meteo-parts {
-    bottom: 16%;
-  }
-  .meteo-part-detail {
-    min-height: 45px;
-  }
-  .meteo-part-list button {
-    padding: 4px 0;
-  }
-  .meteo-transport {
-    bottom: 4%;
+    font-size: clamp(1.7rem, 7vw, 2.1rem);
+    margin: 8px 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {

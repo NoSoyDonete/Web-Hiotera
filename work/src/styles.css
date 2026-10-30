@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "./fonts.css";
 
 :root {
   --night: #0b1c17;
@@ -98,8 +98,8 @@ button {
   transform: translateX(-50%);
   width: min(1280px, calc(100% - 48px));
   z-index: 20;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   color: var(--cream);
 }
@@ -127,6 +127,12 @@ button {
   display: flex;
   gap: 4px;
   align-items: center;
+  justify-self: center;
+}
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .nav-links a {
   padding: 10px 14px;
@@ -211,7 +217,7 @@ button {
   );
 }
 .hero::after {
-  content: "HIOTERA / FIELD NOTE 001";
+  content: none;
   position: absolute;
   right: 6vw;
   bottom: 28px;
@@ -644,8 +650,7 @@ button {
   align-items: start;
 }
 .lab-visual {
-  position: sticky;
-  top: 110px;
+  position: relative;
   min-height: 590px;
 }
 .lab-photo {
@@ -1366,8 +1371,14 @@ footer {
   transform: translate(-50%, 0);
 }
 @media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: auto 1fr;
+  }
   .nav-links {
     display: none;
+  }
+  .topbar-actions {
+    justify-self: end;
   }
   .nav-meteo-link {
     display: inline-flex;
@@ -1516,10 +1527,9 @@ footer {
     font-size: 2.8rem;
   }
 }
-/* Scroll-led sensor reveal */
+/* Portada de flujo normal, con mensajes seleccionables. */
 .hero.sensor-hero {
-  min-height: 280vh;
-  min-height: 280svh;
+  min-height: 100svh;
   padding: 0;
   display: block;
   overflow: clip;
@@ -1538,7 +1548,7 @@ footer {
   background: none;
 }
 .sensor-hero::after {
-  content: "HIOTERA / FIELD NODE 001";
+  content: none;
   right: 5vw;
   bottom: 24px;
   color: rgba(238, 241, 231, 0.34);
@@ -1549,10 +1559,12 @@ footer {
 }
 .sensor-pin {
   --digital-scene: 1;
-  position: sticky;
-  top: 0;
-  height: 100svh;
+  position: relative;
+  height: auto;
   min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 175px 8vw 115px;
   overflow: hidden;
   background: #000;
   color: var(--cream);
@@ -1685,27 +1697,36 @@ footer {
 .sensor-model::part(default-progress-bar) {
   height: 2px;
 }
-.hero-phases {
-  position: absolute;
+.hero-copy {
+  position: relative;
   z-index: 4;
-  inset: 0;
+  width: min(43vw, 600px);
+  min-width: 0;
+}
+.hero-phases {
+  display: grid;
   pointer-events: none;
 }
 .hero-phase {
-  position: absolute;
-  left: 8vw;
-  top: 50%;
-  width: min(43vw, 600px);
-  transform: translateY(calc(-50% + 22px));
+  position: relative;
+  grid-area: 1 / 1;
+  min-width: 0;
+  width: 100%;
+  transform: translateY(16px);
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transition:
     opacity 0.55s ease,
-    transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s 0.55s;
 }
 .hero-phase.active {
   opacity: 1;
-  transform: translateY(-50%);
+  visibility: visible;
+  transform: translateY(0);
   pointer-events: auto;
+  transition-delay: 0s;
 }
 .hero-phase .eyebrow {
   font-size: 0.59rem;
@@ -1735,6 +1756,52 @@ footer {
 .hero-phase .button.outline {
   background: rgba(7, 19, 16, 0.38);
   backdrop-filter: blur(10px);
+}
+.hero-tabs {
+  display: flex;
+  gap: clamp(10px, 1.5vw, 23px);
+  margin-top: 36px;
+  border-top: 1px solid #eef1e72b;
+}
+.hero-tab {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #eef1e79c;
+  background: transparent;
+  text-align: left;
+  font:
+    500 0.7rem/1.5 "Space Grotesk",
+    sans-serif;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.hero-tab > span {
+  font:
+    0.52rem "DM Mono",
+    monospace;
+  color: #eef1e770;
+}
+.hero-tab[aria-selected="true"] {
+  color: var(--acid);
+  border-bottom-color: var(--acid);
+}
+.hero-tab[aria-selected="true"] > span,
+.hero-tab:hover {
+  color: var(--acid);
+}
+.hero-tab:focus-visible,
+.hero-phase:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 6px;
+  border-radius: 2px;
 }
 .sensor-note {
   pointer-events: none;
@@ -1847,9 +1914,12 @@ footer {
   }
 }
 @media (max-width: 900px) {
-  .hero.sensor-hero {
-    min-height: 280vh;
-    min-height: 280svh;
+  .sensor-pin {
+    align-items: flex-end;
+    padding: 240px 7vw 110px;
+  }
+  .hero-copy {
+    width: min(76vw, 570px);
   }
   .sensor-fallback {
     left: 22%;
@@ -1867,16 +1937,6 @@ footer {
     left: 60%;
     top: 43%;
     width: min(86vw, 680px);
-  }
-  .hero-phase {
-    left: 7vw;
-    top: auto;
-    bottom: 11vh;
-    width: min(76vw, 570px);
-    transform: translateY(18px);
-  }
-  .hero-phase.active {
-    transform: translateY(0);
   }
   .hero-phase h1 {
     font-size: clamp(4.3rem, 12vw, 8rem);
@@ -1919,9 +1979,11 @@ footer {
   }
 }
 @media (max-width: 560px) {
-  .hero.sensor-hero {
-    min-height: 270vh;
-    min-height: 270svh;
+  .sensor-pin {
+    padding: 230px 6vw 95px;
+  }
+  .hero-copy {
+    width: 100%;
   }
   .sensor-fallback {
     left: 6%;
@@ -1950,11 +2012,6 @@ footer {
   .hero-hud span:first-child {
     max-width: 53%;
   }
-  .hero-phase {
-    left: 6vw;
-    bottom: max(12vh, 110px);
-    width: 88vw;
-  }
   .hero-phase h1 {
     font-size: clamp(4.1rem, 18vw, 6.5rem);
     margin-top: 17px;
@@ -1970,6 +2027,17 @@ footer {
     min-height: 43px;
     padding: 0 13px;
     font-size: 0.64rem;
+  }
+  .hero-tabs {
+    margin-top: 26px;
+    gap: 12px;
+  }
+  .hero-tab {
+    gap: 6px;
+    font-size: 0.67rem;
+  }
+  .hero-tab > span {
+    font-size: 0.47rem;
   }
   .sensor-note {
     font-size: 0.47rem;
@@ -2024,7 +2092,11 @@ footer {
     transition: none;
   }
   .hero-phase {
-    transition: opacity 0.01ms;
+    transition: none;
+    transform: none;
+  }
+  .hero-tab {
+    transition: none;
   }
   .marquee-track,
   .node-stage::before,

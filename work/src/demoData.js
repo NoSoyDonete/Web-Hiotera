@@ -1,11 +1,13 @@
 // Escenario totalmente ficticio. No se importan capturas ni lecturas de clientes.
 export const demoFarm = Object.freeze({
-  name: "Invernadero Aurora",
-  sector: "Sector A · finca de demostración",
-  device: "DEMO-07",
-  crop: "Tomate cherry",
-  phase: "Cuajado · fase ficticia",
-  campaignDay: 38,
+  name: "Finca Demo1",
+  person: "Demo1",
+  email: "demo1@example.com",
+  sector: "Invernadero de demostración",
+  device: "000",
+  crop: "Pimiento",
+  phase: "Primeros frutos",
+  campaignDay: 54,
   battery: 87,
   coverage: "Buena",
   end: "2030-05-09T16:00:00.000Z",
@@ -26,11 +28,12 @@ export const demoMetrics = [
   },
   {
     id: "radiation",
-    name: "Radiación interior",
+    name: "Radiación Interior",
     unit: "W/m²",
     group: "Ambiente",
     color: "#0f8574",
     decimals: 0,
+    band: [0, 700],
   },
   {
     id: "humidity",
@@ -43,11 +46,12 @@ export const demoMetrics = [
   },
   {
     id: "vpd",
-    name: "Déficit de presión de vapor",
+    name: "Déficit de presión de vapor (DPV)",
     unit: "kPa",
     group: "Ambiente",
     color: "#8b569e",
     decimals: 2,
+    band: [0.2, 1.5],
   },
   {
     id: "deficit",
@@ -56,10 +60,11 @@ export const demoMetrics = [
     group: "Ambiente",
     color: "#bc6e43",
     decimals: 1,
+    band: [1.4, 11.3],
   },
   {
     id: "dew",
-    name: "Temperatura de rocío",
+    name: "Temperatura punto de rocío",
     unit: "°C",
     group: "Ambiente",
     color: "#427baa",
@@ -80,6 +85,7 @@ export const demoMetrics = [
     group: "Ambiente",
     color: "#397552",
     decimals: 0,
+    band: [350, 1000],
   },
   {
     id: "voc",
@@ -91,7 +97,7 @@ export const demoMetrics = [
   },
   {
     id: "soil",
-    name: "Temperatura del suelo · sonda",
+    name: "Temperatura del Suelo sonda 30cm",
     unit: "°C",
     group: "Suelo",
     color: "#bd7c0f",
@@ -100,39 +106,43 @@ export const demoMetrics = [
   },
   {
     id: "soil1",
-    name: "Temperatura suelo · pincho 1",
+    name: "Temperatura suelo pincho 1",
     unit: "°C",
     group: "Suelo",
     color: "#508f42",
     decimals: 1,
+    band: [20, 26],
   },
   {
     id: "soil2",
-    name: "Temperatura suelo · pincho 2",
+    name: "Temperatura suelo pincho 2",
     unit: "°C",
     group: "Suelo",
     color: "#427baa",
     decimals: 1,
+    band: [20, 26],
   },
   {
     id: "moisture1",
-    name: "Humedad del suelo · pincho 1",
+    name: "Humedad suelo pincho 1",
     unit: "%",
     group: "Suelo",
     color: "#248572",
     decimals: 1,
+    band: [26, 43],
   },
   {
     id: "moisture2",
-    name: "Humedad del suelo · pincho 2",
+    name: "Humedad suelo pincho 2",
     unit: "%",
     group: "Suelo",
     color: "#427baa",
     decimals: 1,
+    band: [26, 43],
   },
   {
     id: "tension15",
-    name: "Tensiómetro · 15 cm",
+    name: "Tensiómetro 15 cm",
     unit: "cbar",
     group: "Suelo",
     color: "#418d2c",
@@ -141,7 +151,7 @@ export const demoMetrics = [
   },
   {
     id: "tension30",
-    name: "Tensiómetro · 30 cm",
+    name: "Tensiómetro 30 cm",
     unit: "cbar",
     group: "Suelo",
     color: "#bc7e14",
@@ -150,19 +160,21 @@ export const demoMetrics = [
   },
   {
     id: "ec1",
-    name: "Conductividad eléctrica · pincho 1",
+    name: "Conductividad eléctrica pincho 1",
     unit: "dS/m",
     group: "Suelo",
     color: "#7d6397",
     decimals: 2,
+    band: [0.6, 1.5],
   },
   {
     id: "ec2",
-    name: "Conductividad eléctrica · pincho 2",
+    name: "Conductividad eléctrica pincho 2",
     unit: "dS/m",
     group: "Suelo",
     color: "#35877a",
     decimals: 2,
+    band: [0.6, 1.5],
   },
   {
     id: "outside",
@@ -182,7 +194,7 @@ export const demoMetrics = [
   },
   {
     id: "outsideDew",
-    name: "Punto de rocío exterior",
+    name: "Temperatura punto de rocío exterior",
     unit: "°C",
     group: "Meteo",
     color: "#427baa",
@@ -239,7 +251,7 @@ export const demoMetrics = [
   },
   {
     id: "wind",
-    name: "Velocidad del viento",
+    name: "Velocidad viento",
     unit: "km/h",
     group: "Meteo",
     color: "#3b885a",
@@ -247,7 +259,7 @@ export const demoMetrics = [
   },
   {
     id: "gust",
-    name: "Racha de viento",
+    name: "Velocidad viento racha",
     unit: "km/h",
     group: "Meteo",
     color: "#b77e1f",
@@ -270,6 +282,10 @@ const hourMs = 3600000;
 const end = Date.parse(demoFarm.end);
 const start = end - 30 * 24 * hourMs;
 const round = (value) => Math.round(value * 1000) / 1000;
+const noise = (index) => {
+  const value = Math.sin(index * 127.1 + 311.7) * 43758.5453;
+  return value - Math.floor(value);
+};
 const saturation = (temperature) =>
   0.6108 * Math.exp((17.27 * temperature) / (temperature + 237.3));
 const dewPoint = (temperature, humidity) => {
@@ -293,9 +309,20 @@ export const demoSamples = Array.from({ length: 721 }, (_, index) => {
   previousDay = dayKey;
   const sun = Math.max(0, Math.sin(((hour - 6) / 12) * Math.PI));
   const clouds =
-    0.77 + 0.14 * Math.sin(day * 0.8) + 0.07 * Math.cos(hour * 0.7);
-  const air = 18.6 + 10.1 * sun * clouds + 0.9 * Math.sin(day * 0.65);
-  const humidity = 81 - 25 * sun + 2.2 * Math.cos(day * 0.9 + hour * 0.2);
+    0.69 +
+    0.14 * Math.sin(day * 0.8) +
+    0.07 * Math.cos(hour * 0.7) +
+    0.15 * noise(index);
+  const air =
+    18.6 +
+    10.1 * sun * clouds +
+    0.9 * Math.sin(day * 0.65) +
+    0.6 * noise(index + 7);
+  const humidity =
+    81 -
+    25 * sun +
+    2.2 * Math.cos(day * 0.9 + hour * 0.2) +
+    2 * noise(index + 19);
   const outside = air - 2.8 + 0.4 * Math.cos(hour * 0.6);
   const outsideHumidity = humidity - 5 + 2.4 * Math.sin(hour * 0.5);
   const sinceIrrigation = ((hour + 22) % 24) / 24;
@@ -440,120 +467,103 @@ export const demoAlerts = [
     metric: "tension15",
     state: "Atención",
     date: "09/05/2030 · 16:00",
-    title: "Tensión del suelo por encima de la banda de ejemplo",
+    title: "El agua del suelo resulta más difícil de absorber",
     detail:
-      "La lectura simulada a 15 cm supera el límite ilustrativo de 18 cbar. Abre el histórico para ver la evolución; este aviso no corresponde a una finca real.",
+      "La tensión del agua a 15 cm está por encima del valor de ejemplo. Abre la gráfica para ver cuándo cambió. Este aviso usa datos inventados.",
   },
   {
     id: "humidity-event",
     metric: "humidity",
     state: "Resuelto",
     date: "08/05/2030 · 07:00",
-    title: "Humedad relativa fuera de la banda de ejemplo",
+    title: "La humedad del aire ha salido del intervalo de ejemplo",
     detail:
-      "Evento ficticio ya cerrado. El historial permite revisar cuándo cambió la humedad y compararla con otras señales.",
+      "El aviso de ejemplo ya está resuelto. En la gráfica puedes revisar cuándo cambió la humedad del aire.",
   },
   {
     id: "device-check",
     metric: "radiation",
     state: "Informativo",
     date: "07/05/2030 · 12:00",
-    title: "Ejemplo de revisión de una señal",
+    title: "Revisión del sensor de radiación",
     detail:
-      "Aviso de demostración asociado a la radiación interior. Los nombres, las fechas y los valores de este entorno están inventados.",
+      "Ejemplo de aviso para revisar la lectura de la energía solar dentro del invernadero. No corresponde a un equipo real.",
   },
 ];
 
 export const platformViews = [
   {
     id: "telemetry",
-    tab: "Vista general",
-    category: "TELEMETRÍA LIBOx",
-    title: "Tu cultivo, en contexto.",
+    tab: "LIBOx",
+    category: "LOS SENSORES DE TU CULTIVO",
+    title: "Mira cómo está tu cultivo.",
     description:
-      "Cada parámetro tiene su propia gráfica histórica. Entra en los indicadores de este invernadero ficticio para explorar sus lecturas de ejemplo.",
+      "Consulta la batería y la conexión de cada LIBOx, la etapa de las plantas y las medidas del suelo y del aire. Pulsa una lectura para ver su gráfica.",
     notes: [
-      "Invernadero y equipo ficticios",
-      "18 indicadores de ambiente y suelo",
-      "Histórico de cada parámetro",
-    ],
-  },
-  {
-    id: "environment",
-    tab: "Ambiente",
-    category: "AMBIENTE Y RADIACIÓN",
-    title: "Tres señales. Una misma historia.",
-    description:
-      "Temperatura, humedad y radiación comparten el mismo período. Cada curva tiene su unidad y su escala para que las lecturas no se confundan.",
-    notes: [
-      "Radiación expresada en W/m²",
-      "Series inventadas, no copiadas",
-      "24 horas, 7 días o 30 días",
-    ],
-  },
-  {
-    id: "water",
-    tab: "Humedad y tensión",
-    category: "HISTÓRICO DEL SUELO",
-    title: "Lo que ocurre bajo tierra.",
-    description:
-      "Una secuencia simulada de riegos cambia la humedad y la tensión a dos profundidades. Compara las series sin utilizar datos de una explotación real.",
-    notes: [
-      "Tensiómetros a 15 y 30 cm",
-      "Humedad en dos pinchos",
-      "Escalas y unidades separadas",
-    ],
-  },
-  {
-    id: "temperature",
-    tab: "Temperatura del suelo",
-    category: "HISTÓRICO / TEMPERATURA",
-    title: "Cada cambio tiene una curva.",
-    description:
-      "La sonda y los dos pinchos muestran ciclos de temperatura creados para esta demostración. Los valores coinciden con los indicadores del resumen.",
-    notes: [
-      "Tres series comparables",
-      "Mismo calendario ficticio",
-      "Lecturas totalmente simuladas",
+      "18 medidas del suelo y del aire",
+      "Una gráfica para cada medida",
+      "Compara medidas y crea tus gráficas",
     ],
   },
   {
     id: "meteo",
-    tab: "Meteorología",
+    tab: "Meteo",
     category: "ESTACIÓN METEOROLÓGICA",
     title: "El exterior también cuenta.",
     description:
-      "Viento, rachas y episodios de lluvia inventados, junto al resto de indicadores meteorológicos. Pulsa cualquier lectura para abrir su histórico.",
+      "Mira la temperatura, la humedad, la energía del sol, la lluvia y el viento fuera del invernadero. Abre sus gráficas para ver cómo han cambiado.",
     notes: [
-      "Viento y rachas en km/h",
-      "Precipitación en mm",
-      "12 indicadores con historial",
+      "12 medidas con su gráfica",
+      "Dirección del viento",
+      "24 horas, 7 días o 30 días",
     ],
   },
   {
-    id: "custom",
-    tab: "Crea tu gráfica",
-    category: "GRÁFICAS A MEDIDA",
-    title: "Elige qué quieres comparar.",
+    id: "notebook",
+    tab: "Cuaderno de campo",
+    category: "LA ACTIVIDAD, ORGANIZADA",
+    title: "El día a día de tu explotación.",
     description:
-      "Pon un nombre de ejemplo y selecciona hasta seis parámetros. La vista previa usa exclusivamente las series ficticias de esta demo; no guarda ni envía información.",
+      "Organiza los datos de la finca, las personas y los equipos. Apunta riegos, tareas y observaciones. Prueba el cuaderno con datos de ejemplo.",
     notes: [
-      "Selección de hasta seis medidas",
-      "Búsqueda por parámetro",
-      "Vista previa sin conexión a cuentas",
+      "Resumen de los cinco apartados",
+      "Registros de ejemplo",
+      "Cambios temporales, sin envío de datos",
+    ],
+  },
+  {
+    id: "farms",
+    tab: "Fincas",
+    category: "TU EXPLOTACIÓN, EN UN VISTAZO",
+    title: "Todo empieza en tu finca.",
+    description:
+      "Encuentra tus fincas en una lista o en el mapa. Abre su ficha para ver los cultivos y los sensores. Aquí te mostramos la finca de ejemplo Demo1.",
+    notes: ["Finca Demo1", "LIBOx 000 y 001", "Lista, mapa y ficha de finca"],
+  },
+  {
+    id: "guides",
+    tab: "Guías",
+    category: "ENTIENDE LO QUE MIDES",
+    title: "Entiende lo que estás midiendo.",
+    description:
+      "Aprende qué mide cada sensor y qué significa su lectura. Encontrarás explicaciones sobre el suelo, el ambiente y las partes del invernadero.",
+    notes: [
+      "22 guías organizadas por tema",
+      "Búsqueda por palabra",
+      "Acceso al historial desde las guías",
     ],
   },
   {
     id: "alerts",
     tab: "Avisos",
-    category: "SEÑALES QUE MERECEN ATENCIÓN",
-    title: "Del indicador al contexto.",
+    category: "LO QUE CONVIENE REVISAR",
+    title: "Ten claro qué revisar.",
     description:
-      "Estos avisos ficticios muestran cómo presentar un cambio, su estado y el acceso al histórico correspondiente. No son alertas activas de agricultores.",
+      "Consulta qué ha cambiado, en qué equipo y cuándo. Desde cada aviso puedes abrir la gráfica de esa medida. Los avisos de esta demo son inventados.",
     notes: [
-      "Estados de ejemplo",
+      "Avisos de equipo y cultivo",
       "Fechas y equipos inventados",
-      "Histórico vinculado al parámetro",
+      "Gráfica de la medida relacionada",
     ],
   },
 ];

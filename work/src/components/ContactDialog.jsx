@@ -1,7 +1,10 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { useEffect, useRef } from "react";
+import { legalUrl } from "../i18n.js";
 import { site } from "../config.js";
 
 export default function ContactDialog({ open, onClose, onPrepared }) {
+  const { localize, language } = useLanguage();
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
   }, [open, onClose]);
 
   if (!open) return null;
-  return (
+  return localize(
     <div
       ref={dialogRef}
       className="modal open"
@@ -108,11 +111,20 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
           <p className="form-note">
             Formulario de demostración. Los datos todavía no se envían.
           </p>
+          <p className="form-privacy">
+            <a
+              href={legalUrl("privacidad", language)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Política de privacidad
+            </a>
+          </p>
           <button className="button" type="submit">
             Preparar consulta <span className="arrow">↗</span>
           </button>
         </form>
       </div>
-    </div>
+    </div>,
   );
 }

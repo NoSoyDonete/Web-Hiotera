@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { liboxParts } from "../src/libox.js";
 import { catalogItems, filterCatalog } from "../src/catalog.js";
-import { heroPhaseAt } from "../src/hooks/useHeroPhases.js";
+import { heroTabTarget } from "../src/hooks/useHeroPhases.js";
 import { heroPhases } from "../src/content.js";
 
 test("el LIBOx conserva las conexiones y funciones confirmadas", () => {
@@ -102,18 +102,19 @@ test("el catálogo filtra por categoría y texto sin distinguir tildes", () => {
   assert.equal(filterCatalog("Sensores", "").length, 4);
   assert.equal(filterCatalog("Todos", "tensiometros")[0].id, "tension");
   assert.equal(filterCatalog("Energía", "solar")[0].id, "solar");
-  assert.equal(filterCatalog("Sensores", "solar").length, 0);
+  assert.equal(filterCatalog("Sensores", "solar")[0].id, "light");
   assert.equal(filterCatalog("Todos", "desconocido").length, 0);
 });
 
-test("el catálogo incluye tensiómetros analógicos y cámaras con consulta propia", () => {
+test("el catálogo incluye el tensiómetro digital confirmado y cámaras con consulta propia", () => {
   assert.equal(catalogItems.length, 8);
   assert.equal(new Set(catalogItems.map((item) => item.id)).size, 8);
-  const analog = filterCatalog("Sensores", "tensiometros analogicos");
+  const digital = filterCatalog("Sensores", "tensiometro digital");
   const cameras = filterCatalog("Equipos", "videovigilancia");
-  assert.equal(analog.length, 1);
+  assert.equal(digital.length, 1);
+  assert.equal(filterCatalog("Todos", "analógico").length, 0);
   assert.equal(cameras.length, 1);
-  for (const item of [analog[0], cameras[0]]) {
+  for (const item of [digital[0], cameras[0]]) {
     assert.equal(item.contact, true);
     assert.equal(item.href, undefined);
     assert.equal(item.action, "Consultar equipo");
@@ -148,7 +149,7 @@ test("la portada es fotográfica y el LIBOx aparece inmediatamente antes de la m
   assert.ok(hero.includes("site.installationPhoto"));
   assert.ok(hero.includes("sensor-radar"));
   assert.ok(hero.includes("sensor-fallback"));
-  assert.ok(hero.includes("hero-hud"));
+  assert.ok(!hero.includes("hero-hud"));
   assert.ok(!hero.includes("model-loaded"));
   assert.match(
     app,
@@ -157,10 +158,109 @@ test("la portada es fotográfica y el LIBOx aparece inmediatamente antes de la m
 });
 
 test("la portada conserva los tres textos originales sin depender de un modelo", () => {
-  assert.equal(heroPhaseAt(-1), 0);
-  assert.equal(heroPhaseAt(0), 0);
-  assert.equal(heroPhaseAt(0.34), 1);
-  assert.equal(heroPhaseAt(0.68), 2);
-  assert.equal(heroPhaseAt(1), 2);
-  assert.equal(heroPhaseAt(2), 2);
+  assert.deepEqual(
+    heroPhases.map((item) => item.title),
+    ["El campo", "Lo invisible", "Entiende."],
+  );
+  assert.deepEqual(
+    heroPhases.map((item) => item.tab),
+    ["El campo", "Las señales", "Las decisiones"],
+  );
+});
+
+test("las pestañas de portada se recorren con flechas, Inicio y Fin", () => {
+  assert.equal(heroTabTarget("ArrowRight", 0), 1);
+  assert.equal(heroTabTarget("ArrowRight", 2), 0);
+  assert.equal(heroTabTarget("ArrowLeft", 0), 2);
+  assert.equal(heroTabTarget("ArrowLeft", 2), 1);
+  assert.equal(heroTabTarget("Home", 2), 0);
+  assert.equal(heroTabTarget("End", 0), 2);
+  assert.equal(heroTabTarget("Tab", 0), null);
+  assert.equal(heroTabTarget("ArrowDown", 1), null);
+});
+
+test("la portada cambia solo con pestañas accesibles, no con scroll ni temporizadores", async () => {
+  const hero = await readFile(
+    new URL("../src/components/HeroScene.jsx", import.meta.url),
+    "utf8",
+  );
+  const hook = await readFile(
+    new URL("../src/hooks/useHeroPhases.js", import.meta.url),
+    "utf8",
+  );
+  assert.match(hero, /role="tablist"\s+aria-label="Mensajes de Hiotera"/);
+  assert.match(hero, /role="tab"/);
+  assert.match(hero, /role="tabpanel"/);
+  assert.match(hero, /aria-controls=\{`hero-panel-\$\{index\}`\}/);
+  assert.match(hero, /aria-labelledby=\{`hero-tab-\$\{index\}`\}/);
+  assert.match(hero, /aria-selected=\{phase === index\}/);
+  assert.match(hero, /inert=\{phase !== index\}/);
+  assert.match(hero, /onClick=\{\(\) => selectPhase\(index\)\}/);
+  assert.match(hero, /onKeyDown=\{\(event\) => onTabKeyDown\(event, index\)\}/);
+  assert.match(hook, /useState\(0\)/);
+  assert.match(hook, /event\.preventDefault\(\)/);
+  assert.match(hook, /\?\.focus\(\)/);
+  assert.doesNotMatch(
+    hook,
+    /addEventListener|requestAnimationFrame|setTimeout|setInterval|window\.|getBoundingClientRect/,
+  );
+  assert.doesNotMatch(hero, /Desliza para recorrer/);
+  assert.doesNotMatch(hero, /scroll-cue|sensor-note/);
+});
+
+test("las secciones no repiten rótulos decorativos ni mensajes de transición", async () => {
+  const sources = await Promise.all(
+    [
+      "HeroScene.jsx",
+      "LiboxScene.jsx",
+      "MeteoScene.jsx",
+      "CatalogModel.jsx",
+    ].map((name) =>
+      readFile(new URL(`../src/components/${name}`, import.meta.url), "utf8"),
+    ),
+  );
+  assert.doesNotMatch(
+    sources.join("\n"),
+    /hero-hud|sensor-note|scroll-cue|libox-model-caption|libox-next|meteo-camera-hint|meteo-view-label|<figcaption>|ARRASTRA PARA GIRAR|VER LA ESTACIÓN METEOROLÓGICA/,
+  );
+  assert.match(sources[0], /role="tablist"/);
+  assert.match(sources[1], /aria-label="Acercar LIBOx"/);
+  assert.match(sources[1], /libox-hotspot/);
+  assert.match(sources[2], /Pausar viento y lluvia/);
+  assert.match(sources[2], /Montada/);
+  assert.match(sources[3], /Ampliar modelo 3D de/);
+  const css = await readFile(
+    new URL("../src/styles.css", import.meta.url),
+    "utf8",
+  );
+  assert.doesNotMatch(css, /HIOTERA \/ FIELD (?:NODE|NOTE) 001/);
+  assert.match(css, /\.sensor-hero::after\s*\{\s*content: none;/);
+});
+
+test("solo la meteo retiene una escena al bajar; portada y LIBOx siguen el flujo", async () => {
+  const css = await readFile(
+    new URL("../src/styles.css", import.meta.url),
+    "utf8",
+  );
+  const experience = await readFile(
+    new URL("../src/experience.css", import.meta.url),
+    "utf8",
+  );
+  const meteo = await readFile(
+    new URL("../src/meteo.css", import.meta.url),
+    "utf8",
+  );
+  assert.match(css, /\.hero\.sensor-hero\s*\{[^}]*min-height: 100svh;/);
+  assert.match(
+    css,
+    /\.sensor-pin\s*\{[^}]*position: relative;[^}]*height: auto;/,
+  );
+  assert.match(css, /\.hero-phases\s*\{[^}]*display: grid;/);
+  assert.match(css, /\.hero-phase\s*\{[^}]*grid-area: 1 \/ 1;/);
+  assert.doesNotMatch(css, /position: sticky/);
+  assert.doesNotMatch(css, /min-height: 2[78]0s?vh/);
+  assert.match(experience, /\.libox-section\s*\{[^}]*height: auto;/);
+  assert.match(experience, /\.libox-pin\s*\{[^}]*position: relative;/);
+  assert.match(meteo, /\.meteo-pin\s*\{[^}]*position: sticky;/);
+  assert.match(meteo, /\.meteo-section\s*\{[^}]*height: 310svh;/);
 });

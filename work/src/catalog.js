@@ -6,12 +6,12 @@ export const catalogItems = [
     id: "libox",
     category: "Equipos",
     name: "LIBOx",
-    type: "Nodo de campo",
+    type: "Conecta los sensores con la aplicación",
     model: { file: "libox-sin-cables.glb", orbit: "28deg 78deg 112%" },
     href: "#nodo",
     action: "Explorar el LIBOx",
     description:
-      "El punto de conexión entre las sondas del cultivo y la aplicación de Hiotera.",
+      "Reúne las lecturas de los sensores para que puedas consultar cómo está tu cultivo en la aplicación.",
   },
   {
     id: "meteo",
@@ -22,28 +22,27 @@ export const catalogItems = [
     href: "#meteo",
     action: "Explorar la estación",
     description:
-      "Anemómetro, veleta, embudo colector y pluviómetro en un mismo conjunto.",
+      "Mide la velocidad y la dirección del viento, y cuánta lluvia cae en tu finca.",
   },
   {
     id: "temperature",
     category: "Sensores",
-    name: "Sonda de temperatura",
-    type: "Temperatura del suelo",
+    name: "Sonda de temperatura y humedad",
+    type: "Temperatura y humedad del suelo",
     model: {
-      file: "catalog-models/soil-probe.glb",
-      orbit: "18deg 65deg 110%",
-      orientation: "180deg 0deg 0deg",
+      file: "catalog-models/soil-probe-v2.glb",
+      orbit: "25deg 55deg 110%",
     },
-    modelNote: "Modelo del pincho de suelo",
+    modelNote: "Sonda de suelo",
     href: "#nodo",
     action: "Ver su conexión",
     description:
-      "Mide la temperatura del suelo y se conecta a la salida inferior izquierda del LIBOx.",
+      "Mide la temperatura y la humedad del suelo para conocer las condiciones en las que crecen las raíces.",
   },
   {
     id: "tension",
     category: "Sensores",
-    name: "Tensiómetros",
+    name: "Tensiómetros para LIBOx",
     type: "A 15 y 30 cm de profundidad",
     model: {
       file: "catalog-models/tensiometer.glb",
@@ -53,13 +52,13 @@ export const catalogItems = [
     href: "#nodo",
     action: "Ver sus conexiones",
     description:
-      "Dos puntos de lectura de la tensión del agua en el suelo, a distintas profundidades.",
+      "Ayudan a saber cuánto les cuesta a las raíces absorber el agua. Comparan el suelo a 15 y 30 cm de profundidad.",
   },
   {
     id: "light",
     category: "Sensores",
     name: "Sensor de radiación",
-    type: "Radiación en el cultivo",
+    type: "Energía solar que recibe el cultivo",
     model: {
       file: "catalog-models/radiation-sensor.glb",
       orbit: "22deg 75deg 112%",
@@ -67,7 +66,7 @@ export const catalogItems = [
     href: "#nodo",
     action: "Ver su conexión",
     description:
-      "Mide la radiación que recibe el cultivo y se conecta al cable que sale por la parte superior del LIBOx.",
+      "Mide la energía del sol que llega al cultivo. Puedes ver cómo cambia durante el día en la aplicación.",
   },
   {
     id: "solar",
@@ -81,19 +80,22 @@ export const catalogItems = [
     href: "#nodo",
     action: "Ver la conexión de carga",
     description:
-      "Se conecta bajo la antena lateral para suministrar carga al equipo.",
+      "Aprovecha la luz del sol para cargar el LIBOx. Se enchufa en el conector situado debajo de la antena.",
   },
   {
-    id: "analog-tensiometers",
+    id: "digital-tensiometer",
     category: "Sensores",
-    name: "Tensiómetros analógicos",
-    type: "Lectura con manómetro",
-    model: null,
-    modelNote: "Modelo 3D pendiente de aportar",
+    name: "Tensiómetro digital",
+    type: "Lectura directa en pantalla",
+    model: {
+      file: "catalog-models/digital-tensiometer.glb",
+      orbit: "25deg 65deg 110%",
+      orientation: "0deg -90deg 0deg",
+    },
     contact: true,
     action: "Consultar equipo",
     description:
-      "Lectura directa de la tensión del agua en el suelo mediante un manómetro analógico.",
+      "Permite consultar en su pantalla la tensión del agua en el suelo: una medida de lo difícil que es para las raíces absorberla.",
   },
   {
     id: "surveillance-cameras",
@@ -108,11 +110,11 @@ export const catalogItems = [
     contact: true,
     action: "Consultar equipo",
     description:
-      "Cámaras para supervisar visualmente la finca y sus instalaciones. Consúltanos las opciones disponibles.",
+      "Te permiten ver qué ocurre en la finca y sus instalaciones. Pregúntanos qué opciones se adaptan a lo que necesitas.",
   },
 ];
 
-export function filterCatalog(category, query) {
+export function filterCatalog(category, query, translate = (value) => value) {
   const normalise = (value) =>
     value
       .normalize("NFD")
@@ -123,8 +125,8 @@ export function filterCatalog(category, query) {
   return catalogItems.filter(
     (item) =>
       (category === "Todos" || item.category === category) &&
-      normalise(`${item.name} ${item.type} ${item.description}`).includes(
-        search,
-      ),
+      normalise(
+        `${item.name} ${item.type} ${item.description} ${translate(item.name)} ${translate(item.type)} ${translate(item.description)}`,
+      ).includes(search),
   );
 }

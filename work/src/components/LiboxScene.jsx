@@ -1,3 +1,4 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { assetUrl, site } from "../config.js";
 import { liboxOverview, liboxParts } from "../libox.js";
@@ -5,6 +6,7 @@ import { liboxOverview, liboxParts } from "../libox.js";
 const label = (index) => String(index + 1).padStart(2, "0");
 
 export default function LiboxScene() {
+  const { localize } = useLanguage();
   const modelRef = useRef(null),
     selectedRef = useRef(null);
   const [selected, setSelected] = useState(null);
@@ -70,7 +72,7 @@ export default function LiboxScene() {
   };
   const part = selected === null ? null : liboxParts[selected];
 
-  return (
+  return localize(
     <section
       id="nodo"
       className={`libox-section libox-${status}`}
@@ -78,17 +80,16 @@ export default function LiboxScene() {
     >
       <div className="libox-pin">
         <div className="libox-heading">
-          <div className="section-label">
-            01 / EL NODO. POR DENTRO Y POR FUERA.
-          </div>
+          <div className="section-label">01 / CONOCE EL LIBOx</div>
           <h2 id="libox-title">
-            Pequeño por fuera.
+            Tus sensores.
             <br />
-            <span>Conectado a todo.</span>
+            <span>Un mismo equipo.</span>
           </h2>
           <p>
-            Este es el LIBOx. Gíralo, acércate y descubre qué conecta cada
-            salida y qué hace cada mando.
+            El LIBOx conecta los sensores con la aplicación. Gira el modelo y
+            pulsa los números para ver dónde se enchufa cada sensor y para qué
+            sirve cada botón.
           </p>
         </div>
         <div className="libox-stage">
@@ -159,10 +160,6 @@ export default function LiboxScene() {
               ↺
             </button>
           </div>
-          <div className="libox-model-caption">
-            <span>LIBOx / VISTA SIN CABLES</span>
-            <span>ARRASTRA PARA GIRAR · PULSA LOS PUNTOS</span>
-          </div>
           {status === "loading" && (
             <p className="libox-status" role="status">
               Preparando el LIBOx…
@@ -202,11 +199,11 @@ export default function LiboxScene() {
             ))}
           </div>
           <div className="libox-detail" aria-live="polite" aria-atomic="true">
-            <span>{part?.category ?? "UN MISMO NODO. DISTINTAS SEÑALES."}</span>
-            <h3>{part?.name ?? "Cada conexión tiene un porqué."}</h3>
+            <span>{part?.category ?? "SENSORES, CARGA Y CONTROLES"}</span>
+            <h3>{part?.name ?? "¿Qué se conecta aquí?"}</h3>
             <p>
               {part?.description ??
-                "El suelo, la radiación y la energía llegan a un mismo punto. Selecciona una conexión o un control para verlo de cerca y conocer su función."}
+                "Pulsa un número para ver qué sensor se conecta en ese punto. También puedes localizar la carga solar y los botones de encendido y reinicio."}
             </p>
             {selected === 1 && (
               <div className="depth-indicators">
@@ -216,10 +213,7 @@ export default function LiboxScene() {
             )}
           </div>
         </aside>
-        <a className="libox-next" href="#meteo">
-          Y ahora, mira al cielo.<span>DESCUBRE LA METEO ↓</span>
-        </a>
       </div>
-    </section>
+    </section>,
   );
 }

@@ -1,31 +1,34 @@
 // Contenido editable: cada objeto representa una pieza de la página.
 export const heroPhases = [
   {
+    tab: "El campo",
     eyebrow: "UN NUEVO PUNTO DE VISTA",
     title: "El campo",
     highlight: "habla.",
     description:
-      "Este es el punto donde empieza todo: un sensor real, dentro del cultivo, escuchando lo que todavía no se ve.",
+      "Conoce cómo está tu cultivo. Los sensores miden lo que ocurre en el suelo y en el aire, y tú lo consultas en una sola aplicación.",
     action: { href: "#catalogo", label: "Explora el catálogo" },
     contact: true,
-    note: ["LECTURA ACTIVA", "dato directo desde el cultivo"],
+    note: ["SENSORES EN EL CULTIVO", "información del suelo y del aire"],
   },
   {
-    eyebrow: "01 / ESCUCHA CONTINUA",
+    tab: "Las señales",
+    eyebrow: "01 / CONOCE TU CULTIVO",
     title: "Lo invisible",
     highlight: "señala.",
     description:
-      "Humedad, temperatura, radiación y más. Cada variación dibuja una imagen más clara de lo que necesita la planta.",
-    note: ["24 H / 7 D", "una señal que no se detiene"],
+      "¿Está seco el suelo? ¿Hace demasiado calor? Consulta la humedad, la temperatura y la energía del sol que recibe tu cultivo.",
+    note: ["SUELO Y AMBIENTE", "consulta cómo cambian con el tiempo"],
   },
   {
-    eyebrow: "02 / INTELIGENCIA DE CULTIVO",
+    tab: "Las decisiones",
+    eyebrow: "02 / DECIDE CON MÁS INFORMACIÓN",
     title: "Entiende.",
     highlight: "Actúa.",
     description:
-      "Hiotera traduce las señales en decisiones concretas para anticiparte, optimizar y cultivar con más criterio.",
+      "Revisa las gráficas y los avisos para decidir mejor cuándo regar o revisar el ambiente del invernadero.",
     action: { href: "#senal", label: "Ver cómo funciona" },
-    note: ["NODO 001", "instalado. conectado. leyendo."],
+    note: ["TODO EN UNA APLICACIÓN", "lecturas, gráficas y avisos"],
   },
 ];
 
@@ -33,18 +36,18 @@ export const nodeSteps = [
   {
     title: "Está cerca del cultivo.",
     description:
-      "Sensores que registran humedad, temperatura, radiación, conductividad, CO₂ y más.",
-    emphasis: "El dato aparece donde ocurre.",
+      "Los sensores miden la humedad y la temperatura del suelo y las condiciones del aire.",
+    emphasis: "Sabes qué ocurre junto a tus plantas.",
   },
   {
     title: "Se conecta con la plataforma.",
     description:
-      "La información viaja a un entorno sencillo, con histórico, gráficas y alertas para ver la finca desde cualquier lugar.",
+      "Consulta las lecturas, sus gráficas y los avisos desde el móvil o el ordenador.",
   },
   {
     title: "Te dice qué merece atención.",
     description:
-      "Hiotera transforma el dato en recomendaciones para riego, ventilación, humedad y control de los sistemas instalados.",
+      "Los avisos te ayudan a detectar cambios que conviene revisar en el suelo o en el ambiente.",
   },
 ];
 
@@ -86,27 +89,28 @@ export const impactCards = [
     category: "agua",
     title: ["Riega con", "criterio."],
     description:
-      "Ajusta tiempos e intervalos con datos reales de cada cultivo.",
+      "Consulta la humedad del suelo antes de decidir cuándo volver a regar.",
     stamp: ["AGUA"],
   },
   {
     category: "suelo",
-    title: ["Alimenta", "mejor."],
-    description: "Optimiza fertilizantes y reduce el desperdicio.",
+    title: ["Conoce", "tu suelo."],
+    description:
+      "Sigue su temperatura, humedad y nivel de sales desde la aplicación.",
     stamp: ["SUELO"],
   },
   {
     category: "riego",
     title: ["Lee el suelo.", "Decide el riego."],
     description:
-      "Consulta la tensión del suelo a 15 y 30 cm para decidir con más información.",
+      "Compara a 15 y 30 cm cuánto les cuesta a las raíces absorber el agua del suelo.",
     stamp: ["RIEGO"],
   },
   {
     category: "control",
     title: ["Tu finca.", "Desde cualquier lugar."],
     description:
-      "Supervisa y controla tus sistemas desde una app móvil o desde la nube.",
+      "Revisa las lecturas y los avisos desde el móvil o el ordenador.",
     stamp: ["CONTROL"],
   },
 ];
@@ -115,16 +119,16 @@ export const journeySteps = [
   {
     title: "Instala Hiotera",
     description:
-      "Conecta tus invernaderos y empieza a recopilar la información sensible de tus cultivos.",
+      "Coloca los sensores en tu finca y empieza a medir las condiciones del cultivo.",
   },
   {
-    title: "Optimiza la producción",
+    title: "Conoce lo que ocurre",
     description:
-      "Mide, entiende y automatiza los procesos que mantienen el equilibrio perfecto.",
+      "Mira las lecturas y las gráficas para entender cómo cambian el suelo y el ambiente.",
   },
   {
     title: "Gana tranquilidad",
     description:
-      "Decide con datos y deja que el sistema te acompañe en cada campaña.",
+      "Usa los avisos para saber qué revisar y toma decisiones con más información.",
   },
 ];

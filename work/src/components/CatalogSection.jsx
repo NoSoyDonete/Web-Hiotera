@@ -1,8 +1,10 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { useEffect, useId, useRef, useState } from "react";
 import { catalogCategories, filterCatalog } from "../catalog.js";
 import CatalogModel from "./CatalogModel.jsx";
 
 export default function CatalogSection({ onContact }) {
+  const { localize, t } = useLanguage();
   const [category, setCategory] = useState("Todos"),
     [query, setQuery] = useState("");
   const inputId = useId();
@@ -13,8 +15,8 @@ export default function CatalogSection({ onContact }) {
     if (activeModel && !dialog.open) dialog.showModal();
     if (!activeModel && dialog.open) dialog.close();
   }, [activeModel]);
-  const items = filterCatalog(category, query);
-  return (
+  const items = filterCatalog(category, query, t);
+  return localize(
     <section
       id="catalogo"
       className="section catalog-section"
@@ -23,18 +25,16 @@ export default function CatalogSection({ onContact }) {
       <div className="section-inner">
         <div className="catalog-heading">
           <div>
-            <div className="section-label">
-              EL ECOSISTEMA / CATÁLOGO HIOTERA
-            </div>
+            <div className="section-label">EQUIPOS Y SENSORES HIOTERA</div>
             <h2 id="catalog-title">
-              Cada utensilio.
+              Equipos para
               <br />
-              <span>Su lugar en el campo.</span>
+              <span>conocer tu cultivo.</span>
             </h2>
           </div>
           <p>
-            Un mismo sistema, distintas piezas. Explora los equipos, las sondas
-            y la energía que conectan tu cultivo.
+            Descubre qué mide cada sensor y para qué sirve cada equipo. Puedes
+            girar los modelos y ampliarlos para verlos de cerca.
           </p>
         </div>
         <div className="catalog-toolbar">
@@ -82,7 +82,7 @@ export default function CatalogSection({ onContact }) {
                   <button
                     className="catalog-action"
                     onClick={onContact}
-                    aria-label={`Consultar ${item.name.toLowerCase()}`}
+                    aria-label={`Consultar ${item.name}`}
                   >
                     {item.action}
                     <span aria-hidden="true">↗</span>
@@ -110,7 +110,7 @@ export default function CatalogSection({ onContact }) {
         </div>
         {items.length === 0 && (
           <div className="catalog-empty">
-            <p>No encontramos ese utensilio en esta selección.</p>
+            <p>No encontramos equipos con esa búsqueda.</p>
             <button
               onClick={() => {
                 setCategory("Todos");
@@ -124,9 +124,10 @@ export default function CatalogSection({ onContact }) {
         <div className="catalog-grow">
           <span aria-hidden="true">＋</span>
           <div>
-            <h3>El campo cambia. El catálogo crece.</h3>
+            <h3>¿No sabes qué equipo necesitas?</h3>
             <p>
-              Este espacio seguirá reuniendo los utensilios del sistema Hiotera.
+              Cuéntanos qué cultivas y qué te gustaría medir. Te ayudamos a
+              elegir.
             </p>
           </div>
           <button className="button dark-button" onClick={onContact}>
@@ -163,6 +164,6 @@ export default function CatalogSection({ onContact }) {
           <CatalogModel key={activeModel.id} item={activeModel} large />
         )}
       </dialog>
-    </section>
+    </section>,
   );
 }

@@ -1,3 +1,4 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { useRef, useState } from "react";
 import { assetUrl } from "../config.js";
 import {
@@ -12,6 +13,7 @@ import "../meteo.css";
 const number = (index) => String(index + 1).padStart(2, "0");
 
 export default function MeteoScene() {
+  const { localize } = useLanguage();
   const sectionRef = useRef(null),
     modelRef = useRef(null),
     progressRef = useRef(null);
@@ -49,7 +51,7 @@ export default function MeteoScene() {
     });
   };
 
-  return (
+  return localize(
     <section
       ref={sectionRef}
       id="meteo"
@@ -58,17 +60,53 @@ export default function MeteoScene() {
       aria-labelledby="meteo-title"
     >
       <div className="meteo-pin">
-        <div className="meteo-heading">
-          <div className="section-label">ESTACIÓN METEOROLÓGICA / HIOTERA</div>
-          <h2 id="meteo-title">
-            Cada pieza.
-            <br />
-            <span>Una señal.</span>
-          </h2>
-          <p>
-            El tiempo también forma parte de tu cultivo. Baja y descubre la
-            estación, pieza a pieza.
-          </p>
+        <div className="meteo-copy">
+          <div className="meteo-heading">
+            <div className="section-label">
+              ESTACIÓN METEOROLÓGICA / HIOTERA
+            </div>
+            <h2 id="meteo-title">
+              Viento y lluvia.
+              <br />
+              <span>Conoce cada pieza.</span>
+            </h2>
+            <p>
+              Esta estación mide el viento y la lluvia. Baja para separar las
+              piezas y pulsa los números para conocer qué hace cada una.
+            </p>
+          </div>
+
+          <aside
+            className="meteo-parts"
+            aria-label="Partes de la estación meteorológica"
+          >
+            <div className="meteo-parts-caption">
+              {String(meteoParts.length).padStart(2, "0")} PARTES DESTACADAS
+            </div>
+            <div className="meteo-part-list">
+              {meteoParts.map((item, index) => (
+                <button
+                  type="button"
+                  key={item.key}
+                  className={selectedIndex === index ? "is-selected" : ""}
+                  aria-pressed={selectedIndex === index}
+                  onClick={() => setSelected(index)}
+                >
+                  <span>{number(index)}</span>
+                  {item.name}
+                  <i aria-hidden="true">↗</i>
+                </button>
+              ))}
+            </div>
+            <div
+              className="meteo-part-detail"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <span>{part.category}</span>
+              <p>{part.description}</p>
+            </div>
+          </aside>
         </div>
 
         <div className="meteo-stage">
@@ -163,9 +201,6 @@ export default function MeteoScene() {
               ↺
             </button>
           </div>
-          <p className="meteo-camera-hint">
-            Arrastra para girar · + y − para acercar
-          </p>
           {status === "loading" && (
             <p className="meteo-loading" role="status">
               Cargando la estación 3D…
@@ -179,43 +214,7 @@ export default function MeteoScene() {
               </a>
             </div>
           )}
-          <div className="meteo-view-label">
-            <span className="meteo-live-dot" />
-            HIOTERA / ESTACIÓN METEOROLÓGICA
-          </div>
         </div>
-
-        <aside
-          className="meteo-parts"
-          aria-label="Partes de la estación meteorológica"
-        >
-          <div className="meteo-parts-caption">
-            {String(meteoParts.length).padStart(2, "0")} PARTES DESTACADAS
-          </div>
-          <div className="meteo-part-list">
-            {meteoParts.map((item, index) => (
-              <button
-                type="button"
-                key={item.key}
-                className={selectedIndex === index ? "is-selected" : ""}
-                aria-pressed={selectedIndex === index}
-                onClick={() => setSelected(index)}
-              >
-                <span>{number(index)}</span>
-                {item.name}
-                <i aria-hidden="true">↗</i>
-              </button>
-            ))}
-          </div>
-          <div
-            className="meteo-part-detail"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            <span>{part.category}</span>
-            <p>{part.description}</p>
-          </div>
-        </aside>
 
         <div className="meteo-transport">
           <div className="meteo-scroll-hint">
@@ -259,6 +258,6 @@ export default function MeteoScene() {
           </div>
         </div>
       </div>
-    </section>
+    </section>,
   );
 }

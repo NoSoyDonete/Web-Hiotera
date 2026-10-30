@@ -7,7 +7,7 @@ export const liboxParts = [
     name: "Temperatura del suelo",
     category: "SONDA / SALIDA INFERIOR IZQUIERDA",
     description:
-      "De la salida inferior izquierda sale el cable de la sonda que mide la temperatura del suelo. La lectura se consulta en la aplicación junto al resto de señales del cultivo.",
+      "En la salida inferior izquierda se conecta la sonda de temperatura del suelo. En la aplicación puedes ver su lectura y cómo cambia a lo largo del día.",
     anchors: [[-0.03, -0.084, -0.01]],
     normals: [[0, -1, 0]],
     orbit: "-22deg 112deg 103%",
@@ -18,7 +18,7 @@ export const liboxParts = [
     name: "Tensiómetros · 15 y 30 cm",
     category: "DOS SONDAS / DOS PROFUNDIDADES",
     description:
-      "Las otras dos salidas inferiores conectan los tensiómetros: uno se clava a 15 cm y el otro a 30 cm. Miden la tensión del agua en el suelo para conocer cómo cambia su disponibilidad a ambas profundidades.",
+      "Las otras dos salidas inferiores conectan los tensiómetros, a 15 cm y 30 cm de profundidad. Miden cuánto cuesta extraer el agua del suelo y permiten comparar lo que ocurre a las dos profundidades.",
     anchors: [
       [0, -0.084, -0.01],
       [0.03, -0.084, -0.01],
@@ -35,7 +35,7 @@ export const liboxParts = [
     name: "Radiación",
     category: "SENSOR DE RADIACIÓN / SALIDA SUPERIOR",
     description:
-      "El cable superior conecta el LIBOx con el sensor de radiación. Registra la radiación que recibe el cultivo y permite consultar su evolución en la aplicación, en W/m².",
+      "El cable superior conecta el sensor de radiación: mide la energía del sol que llega al cultivo. La aplicación muestra cómo cambia durante el día, en W/m².",
     anchors: [[0.0165, 0.083, -0.009]],
     normals: [[0, 1, 0]],
     orbit: "-25deg 58deg 108%",
@@ -46,7 +46,7 @@ export const liboxParts = [
     name: "Carga solar",
     category: "ALIMENTACIÓN / CONECTOR LATERAL",
     description:
-      "Debajo de la antena está el conector donde se enchufa la placa solar para cargar el LIBOx. Es la conexión de alimentación solar, no una salida de sonda.",
+      "La placa solar se enchufa debajo de la antena para cargar el LIBOx con la luz del sol. Este conector es para la carga, no para un sensor.",
     anchors: [[-0.068, -0.031, -0.0125]],
     normals: [[-1, 0, 0]],
     orbit: "-65deg 80deg 108%",
@@ -68,7 +68,7 @@ export const liboxParts = [
     name: "Encendido · I / O",
     category: "CONTROL / INTERRUPTOR PRINCIPAL",
     description:
-      "El interruptor basculante es el mando de encendido y apagado. Las marcas I y O permiten identificar sus dos posiciones, por separado del pulsador de reinicio.",
+      "Este interruptor enciende y apaga el equipo: I es encendido y O es apagado. El botón pequeño que hay encima sirve para reiniciarlo.",
     anchors: [[0.072, -0.017, -0.007]],
     normals: [[1, 0, 0]],
     orbit: "65deg 92deg 105%",
@@ -79,7 +79,7 @@ export const liboxParts = [
     name: "Antena",
     category: "COMUNICACIÓN / LATERAL",
     description:
-      "La antena lateral forma parte de la comunicación del LIBOx. El modelo sin cables deja ver su posición y la separación entre las conexiones de datos y de carga.",
+      "La antena ayuda al LIBOx a comunicarse para que puedas consultar las lecturas. Está en el lateral, encima de la conexión de la placa solar.",
     anchors: [[-0.092, 0.045, -0.01]],
     normals: [[-1, 0, 0]],
     orbit: "-48deg 75deg 112%",

@@ -1,11 +1,13 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { Fragment, useState } from "react";
 import { assetUrl, site } from "../config.js";
 import { impactCards, journeySteps, nodeSteps } from "../content.js";
 
 const indexLabel = (index) => String(index + 1).padStart(2, "0");
 function Lines({ items }) {
+  const { t } = useLanguage();
   return items.map((line, index) => (
-    <Fragment key={line}>
+    <Fragment key={t(line)}>
       {index > 0 && <br />}
       {line}
     </Fragment>
@@ -13,7 +15,8 @@ function Lines({ items }) {
 }
 
 export function Marquee() {
-  return (
+  const { localize } = useLanguage();
+  return localize(
     <div className="marquee" aria-label="Mide, interpreta y recomienda">
       <div className="marquee-track">
         <b>MIDE</b>
@@ -22,12 +25,13 @@ export function Marquee() {
         <i aria-hidden="true">✳</i>
         <b>RECOMIENDA</b>
       </div>
-    </div>
+    </div>,
   );
 }
 
 export function StatementSection() {
-  return (
+  const { localize } = useLanguage();
+  return localize(
     <section className="section statement">
       <div className="section-inner">
         <div className="statement-grid">
@@ -43,23 +47,24 @@ export function StatementSection() {
           </div>
           <div className="statement-copy">
             <p>
-              La humedad, la temperatura, la radiación y el CO₂ cambian antes de
-              que el ojo lo vea. Hiotera convierte esas señales en una lectura
-              sencilla para que el siguiente movimiento llegue a tiempo.
+              No siempre se ve a simple vista si el suelo necesita agua o si
+              cambia el ambiente del invernadero. Hiotera reúne las lecturas de
+              los sensores para que puedas comprobarlo en la aplicación.
             </p>
             <a className="micro-link" href="#senal">
-              <b>↘</b> ver la señal en acción
+              <b>↘</b> ver la aplicación
             </a>
           </div>
         </div>
       </div>
-    </section>
+    </section>,
   );
 }
 
 export function NodeSection() {
+  const { localize } = useLanguage();
   const [inspecting, setInspecting] = useState(false);
-  return (
+  return localize(
     <section className="section node-lab" id="nodo">
       <div className="section-inner">
         <div className="lab-top">
@@ -130,23 +135,24 @@ export function NodeSection() {
           </div>
         </div>
       </div>
-    </section>
+    </section>,
   );
 }
 
 export function ImpactSection() {
-  return (
+  const { localize } = useLanguage();
+  return localize(
     <section className="section impact" id="impacto">
       <div className="section-inner">
         <div className="impact-top">
           <h2>
-            Menos ruido.
+            Conoce tu finca.
             <br />
-            Más <span className="green-text">rendimiento.</span>
+            Decide <span className="green-text">mejor.</span>
           </h2>
           <p>
-            La tecnología hace su trabajo en segundo plano. Tú tomas mejores
-            decisiones sobre lo que más importa.
+            Saber cómo están el suelo y el ambiente te ayuda a decidir qué
+            necesita atención en tu finca.
           </p>
         </div>
         <div className="impact-grid">
@@ -166,12 +172,13 @@ export function ImpactSection() {
           ))}
         </div>
       </div>
-    </section>
+    </section>,
   );
 }
 
 export function JourneySection() {
-  return (
+  const { localize } = useLanguage();
+  return localize(
     <section className="section steps">
       <div className="section-inner">
         <div className="steps-layout">
@@ -183,8 +190,8 @@ export function JourneySection() {
               simple.
             </h2>
             <p>
-              Una tecnología abierta y modular que se adapta a la finca que
-              tienes hoy y a la que quieres construir mañana.
+              Empieza por lo que necesitas medir. Podemos ayudarte a elegir los
+              sensores para tu finca.
             </p>
           </div>
           <div className="step-list">
@@ -200,12 +207,13 @@ export function JourneySection() {
           </div>
         </div>
       </div>
-    </section>
+    </section>,
   );
 }
 
 export function ClosingSection({ onContact }) {
-  return (
+  const { localize } = useLanguage();
+  return localize(
     <section className="closing">
       <div className="closing-inner">
         <div className="section-label">05 / siguiente paso</div>
@@ -217,13 +225,13 @@ export function ClosingSection({ onContact }) {
         <div className="closing-row">
           <p>
             Cuéntanos qué cultivas, cómo trabajas hoy y qué quieres mejorar. Te
-            enseñamos cómo el nodo puede empezar a leer tu finca.
+            enseñamos qué puedes medir y cómo verlo en la aplicación.
           </p>
           <button className="button dark-button" onClick={onContact}>
             Habla con un experto <span className="arrow">↗</span>
           </button>
         </div>
       </div>
-    </section>
+    </section>,
   );
 }

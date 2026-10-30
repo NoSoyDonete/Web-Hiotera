@@ -3,13 +3,35 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { catalogItems } from "../src/catalog.js";
 
-test("siete productos tienen GLB y el analógico queda pendiente por decisión del usuario", () => {
-  assert.equal(catalogItems.filter((item) => item.model).length, 7);
-  const pending = catalogItems.filter((item) => !item.model);
-  assert.equal(pending.length, 1);
-  assert.equal(pending[0].id, "analog-tensiometers");
-  assert.match(pending[0].modelNote, /pendiente/);
+test("los ocho productos tienen modelo y el tensiómetro con pantalla se identifica como digital", () => {
+  assert.equal(catalogItems.filter((item) => item.model).length, 8);
+  const digital = catalogItems.find(
+    (item) => item.id === "digital-tensiometer",
+  );
+  assert.equal(digital.name, "Tensiómetro digital");
+  assert.equal(digital.model.file, "catalog-models/digital-tensiometer.glb");
+  assert.match(digital.description, /pantalla/);
+  assert.doesNotMatch(digital.description, /manómetro|analógico|LIBOx/);
   assert.ok(catalogItems.every((item) => !item.illustration));
+});
+
+test("la sonda actualizada no incluye textos ni identificadores y el digital incluye pantalla", async () => {
+  const probe = catalogItems.find((item) => item.id === "temperature");
+  assert.equal(probe.name, "Sonda de temperatura y humedad");
+  assert.equal(probe.model.file, "catalog-models/soil-probe-v2.glb");
+  const readModel = async (file) => {
+    const data = await readFile(new URL(`../public/${file}`, import.meta.url));
+    return JSON.parse(data.subarray(20, 20 + data.readUInt32LE(12)).toString());
+  };
+  const gltf = await readModel(probe.model.file);
+  assert.ok(gltf.nodes.some((node) => node.name === "Carcasa_blanca_0"));
+  assert.ok(gltf.nodes.some((node) => node.name === "Horquilla_negra_0"));
+  assert.ok(
+    gltf.nodes.every((node) => !/MAC|Logo|texto|serial/i.test(node.name ?? "")),
+  );
+  assert.equal(gltf.images?.length ?? 0, 0);
+  const digital = await readModel("catalog-models/digital-tensiometer.glb");
+  assert.ok(digital.nodes.some((node) => node.name === "12_Pantalla_LCD"));
 });
 
 test("los modelos existen, son autocontenidos y sus buffers son válidos", async () => {

@@ -17,23 +17,17 @@ import {
   toggleDemoMetric,
 } from "../src/demoData.js";
 
-test("el escenario y sus siete vistas se identifican como ficticios", () => {
-  assert.equal(demoFarm.name, "Invernadero Aurora");
-  assert.equal(demoFarm.device, "DEMO-07");
+test("el escenario y sus seis apartados usan Demo1 y equipos ficticios", () => {
+  assert.equal(demoFarm.name, "Finca Demo1");
+  assert.equal(demoFarm.person, "Demo1");
+  assert.equal(demoFarm.email, "demo1@example.com");
+  assert.equal(demoFarm.device, "000");
   assert.equal(demoFarm.notice, "DATOS SIMULADOS");
-  assert.match(demoFarm.phase, /ficticia/);
-  assert.equal(platformViews.length, 7);
+  assert.equal(demoFarm.phase, "Primeros frutos");
+  assert.equal(platformViews.length, 6);
   assert.deepEqual(
     platformViews.map((view) => view.id),
-    [
-      "telemetry",
-      "environment",
-      "water",
-      "temperature",
-      "meteo",
-      "custom",
-      "alerts",
-    ],
+    ["telemetry", "meteo", "notebook", "farms", "guides", "alerts"],
   );
   for (const view of platformViews) assert.equal(view.file, undefined);
 });

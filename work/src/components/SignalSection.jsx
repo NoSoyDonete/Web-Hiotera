@@ -1,20 +1,40 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { useEffect, useRef, useState } from "react";
 import { platformViews } from "../demoData.js";
 import ApplicationDemo, { useDemoExperience } from "./ApplicationDemo.jsx";
 
 export default function SignalSection() {
+  const { localize, language } = useLanguage();
   const [active, setActive] = useState(0),
+    [page, setPage] = useState("telemetry"),
     [expanded, setExpanded] = useState(false);
   const tabs = useRef([]),
     dialog = useRef(null);
   const view = platformViews[active];
   const experience = useDemoExperience();
   const select = (index) => {
+    if (index < 0 || index >= platformViews.length) return;
     setActive(index);
+    setPage(platformViews[index].id);
+    experience.setGuide(null);
     experience.setMetric(null);
+    experience.setGraph(null);
   };
-  const selectView = (id) =>
-    select(platformViews.findIndex((item) => item.id === id));
+  const selectView = (id) => {
+    const index = platformViews.findIndex((item) => item.id === id);
+    if (index >= 0) select(index);
+    else if (["custom", "farm-telemetry"].includes(id)) {
+      setPage(id);
+      setActive(
+        platformViews.findIndex(
+          (item) =>
+            item.id === (id === "farm-telemetry" ? "farms" : "telemetry"),
+        ),
+      );
+      experience.setMetric(null);
+      experience.setGraph(null);
+    }
+  };
   useEffect(() => {
     const element = dialog.current;
     if (expanded && !element.open) element.showModal();
@@ -32,7 +52,7 @@ export default function SignalSection() {
     select(next);
     tabs.current[next]?.focus();
   };
-  return (
+  return localize(
     <section
       id="senal"
       className="section platform-section"
@@ -49,9 +69,9 @@ export default function SignalSection() {
             </h2>
           </div>
           <p>
-            Ambiente, suelo y meteorología en una misma aplicación. Cada
-            parámetro tiene su propia gráfica histórica. Aquí puedes ver algunos
-            ejemplos con un invernadero completamente ficticio.
+            Consulta tu cultivo desde el móvil o el ordenador. Cada parámetro
+            tiene su propia gráfica histórica para ver cómo cambia con el
+            tiempo. Aquí puedes ver algunos ejemplos con datos inventados.
           </p>
         </div>
         <div
@@ -99,11 +119,13 @@ export default function SignalSection() {
                 Ampliar <span aria-hidden="true">↗</span>
               </button>
             </div>
-            <ApplicationDemo
-              view={view.id}
-              onView={selectView}
-              experience={experience}
-            />
+            <div lang="es" translate="no">
+              <ApplicationDemo
+                view={page}
+                onView={selectView}
+                experience={experience}
+              />
+            </div>
           </div>
           <div className="platform-caption">
             <div>
@@ -121,9 +143,14 @@ export default function SignalSection() {
             </ul>
           </div>
         </div>
+        {language !== "es" && (
+          <p className="demo-language-note">
+            La demostración de la aplicación se muestra en español.
+          </p>
+        )}
         <p className="platform-disclaimer">
-          INTERFAZ RECREADA · NOMBRES, FECHAS, FASES, LECTURAS Y CURVAS
-          TOTALMENTE FICTICIOS · SIN DATOS REALES NI CONEXIÓN CON CUENTAS.
+          ES UNA DEMOSTRACIÓN: LOS NOMBRES, LAS FECHAS Y LOS DATOS SON
+          INVENTADOS. NO ESTÁ CONECTADA A NINGUNA FINCA REAL.
         </p>
       </div>
       <dialog
@@ -149,13 +176,15 @@ export default function SignalSection() {
           </button>
         </div>
         {expanded && (
-          <ApplicationDemo
-            view={view.id}
-            onView={selectView}
-            experience={experience}
-          />
+          <div lang="es" translate="no">
+            <ApplicationDemo
+              view={page}
+              onView={selectView}
+              experience={experience}
+            />
+          </div>
         )}
       </dialog>
-    </section>
+    </section>,
   );
 }

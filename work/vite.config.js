@@ -12,6 +12,7 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL("./index.html", import.meta.url)),
         meteo: fileURLToPath(new URL("./meteo.html", import.meta.url)),
+        legal: fileURLToPath(new URL("./legal.html", import.meta.url)),
       },
     },
   },

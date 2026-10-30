@@ -15,8 +15,7 @@ export const meteoParts = [
     key: "anemometer",
     name: "Anemómetro",
     category: "Velocidad del viento",
-    description:
-      "Sus tres cazoletas giran con el viento y permiten medir la velocidad del aire.",
+    description: "Gira con el viento para medir a qué velocidad sopla.",
     anchor: [-1.54, 2.455, 0.5],
     offset: [-0.48, 0.68, 0.1],
   },
@@ -34,16 +33,16 @@ export const meteoParts = [
     name: "Embudo colector",
     category: "Captación de lluvia",
     description:
-      "Recoge la lluvia y la conduce hacia el mecanismo de medida del interior.",
+      "Recoge el agua de lluvia y la lleva al medidor que hay debajo.",
     anchor: [0.39, 2.345, -1],
     offset: [0, 0.94, -0.24],
   },
   {
     key: "rain",
     name: "Pluviómetro",
-    category: "Precipitación",
+    category: "Cantidad de lluvia",
     description:
-      "Un balancín interior permite medir la lluvia acumulada. Al separar el embudo queda al descubierto.",
+      "Mide cuánta lluvia ha caído. Está debajo del embudo; al separar las piezas puedes ver su mecanismo.",
     anchor: [0.4, 1.995, -1],
     offset: [0, 0.13, -0.3],
   },

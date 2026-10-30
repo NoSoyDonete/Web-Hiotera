@@ -1,8 +1,10 @@
+import { useLanguage } from "./LanguageProvider.jsx";
 import { useEffect, useRef, useState } from "react";
 import { assetUrl } from "../config.js";
 import "../catalog-model.css";
 
 function ModelViewer({ item, large, onExpand }) {
+  const { localize } = useLanguage();
   const frameRef = useRef(null),
     viewerRef = useRef(null);
   const [near, setNear] = useState(large);
@@ -61,7 +63,7 @@ function ModelViewer({ item, large, onExpand }) {
     const orbit = viewer.getCameraOrbit();
     viewer.cameraOrbit = `${orbit.theta}rad ${orbit.phi}rad ${orbit.radius * factor}m`;
   };
-  return (
+  return localize(
     <figure
       ref={frameRef}
       className={`catalog-model-frame catalog-model-${status}`}
@@ -143,25 +145,19 @@ function ModelViewer({ item, large, onExpand }) {
           </button>
         )}
       </div>
-      <figcaption>
-        <span>{item.modelNote ?? "MODELO 3D"}</span>
-        <span>ARRASTRA PARA GIRAR{large ? " · + / − PARA ACERCAR" : ""}</span>
-      </figcaption>
-    </figure>
+    </figure>,
   );
 }
 
 export default function CatalogModel({ item, large = false, onExpand }) {
+  const { localize } = useLanguage();
   if (!item.model)
-    return (
+    return localize(
       <div className="catalog-model-pending">
         <span aria-hidden="true">3D</span>
-        <p>Modelo pendiente</p>
-        <small>
-          Se añadirá cuando esté disponible el archivo del tensiómetro
-          analógico.
-        </small>
-      </div>
+        <p>Vista 3D no disponible</p>
+        <small>Puedes consultar la descripción del equipo debajo.</small>
+      </div>,
     );
   return <ModelViewer item={item} large={large} onExpand={onExpand} />;
 }

@@ -14,8 +14,10 @@ import {
 import SignalSection from "./components/SignalSection.jsx";
 import ContactDialog from "./components/ContactDialog.jsx";
 import { usePageEffects } from "./hooks/usePageEffects.js";
+import { useLanguage } from "./components/LanguageProvider.jsx";
 
 export default function App() {
+  const { t } = useLanguage();
   const [contactOpen, setContactOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const { progressRef, cursorRef, ringRef } = usePageEffects();
@@ -52,7 +54,7 @@ export default function App() {
         <JourneySection />
         <ClosingSection onContact={openContact} />
       </main>
-      <Footer />
+      <Footer onContact={openContact} />
       <ContactDialog
         open={contactOpen}
         onClose={closeContact}
@@ -63,7 +65,7 @@ export default function App() {
         role="status"
         aria-live="polite"
       >
-        {notice}
+        {t(notice)}
       </div>
     </>
   );

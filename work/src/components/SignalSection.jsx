@@ -61,7 +61,7 @@ export default function SignalSection() {
       <div className="section-inner">
         <div className="platform-heading">
           <div>
-            <div className="section-label">DEL CAMPO A TU PANTALLA</div>
+            <div className="section-label">03 / La aplicación</div>
             <h2 id="platform-title">
               No son solo datos.
               <br />
@@ -148,10 +148,6 @@ export default function SignalSection() {
             La demostración de la aplicación se muestra en español.
           </p>
         )}
-        <p className="platform-disclaimer">
-          ES UNA DEMOSTRACIÓN: LOS NOMBRES, LAS FECHAS Y LOS DATOS SON
-          INVENTADOS. NO ESTÁ CONECTADA A NINGUNA FINCA REAL.
-        </p>
       </div>
       <dialog
         ref={dialog}

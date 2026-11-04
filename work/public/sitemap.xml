@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hiotera.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/meteo.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/meteo.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/meteo.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/meteo.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/meteo.html?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/meteo.html" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/meteo.html?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/meteo.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/meteo.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/meteo.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/meteo.html?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/meteo.html" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/meteo.html?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/meteo.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/meteo.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/meteo.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/meteo.html?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/meteo.html" />
+  </url>
+  <url>
+    <loc>https://hiotera.com/meteo.html?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://hiotera.com/meteo.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://hiotera.com/meteo.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hiotera.com/meteo.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://hiotera.com/meteo.html?lang=de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hiotera.com/meteo.html" />
+  </url>
+</urlset>

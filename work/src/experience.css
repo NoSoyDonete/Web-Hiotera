@@ -407,6 +407,9 @@
   background: #10281f;
   color: #f2f4e9;
 }
+.platform-section .section-label {
+  color: var(--acid);
+}
 .platform-heading,
 .catalog-heading {
   display: flex;

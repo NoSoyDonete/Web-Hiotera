@@ -63,13 +63,13 @@ export default function MeteoScene() {
         <div className="meteo-copy">
           <div className="meteo-heading">
             <div className="section-label">
-              ESTACIÓN METEOROLÓGICA / HIOTERA
+              02 / Conoce la estación meteorológica
             </div>
-            <h2 id="meteo-title">
+            <h1 id="meteo-title">
               Viento y lluvia.
               <br />
               <span>Conoce cada pieza.</span>
-            </h2>
+            </h1>
             <p>
               Esta estación mide el viento y la lluvia. Baja para separar las
               piezas y pulsa los números para conocer qué hace cada una.
@@ -117,7 +117,7 @@ export default function MeteoScene() {
             ref={modelRef}
             className="meteo-model"
             src={assetUrl(meteoModelFile)}
-            alt="Estación meteorológica Hiotera completa en 3D. Arrastra para girar el modelo; baja para separar las piezas. El miniíndice destaca el anemómetro, la veleta, el embudo y el pluviómetro."
+            alt="Estación meteorológica Hiotera completa en 3D. Arrastra para girar el modelo y baja para separar sus piezas: anemómetro, veleta, embudo, pluviómetro, placa solar y depósito colector."
             animation-name="Viento"
             animation-crossfade-duration="0"
             camera-target={meteoCameraTarget}

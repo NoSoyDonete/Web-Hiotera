@@ -36,7 +36,6 @@ export function StatementSection() {
       <div className="section-inner">
         <div className="statement-grid">
           <div>
-            <div className="section-label">01 / la idea</div>
             <h2>
               El cultivo
               <br />
@@ -183,7 +182,6 @@ export function JourneySection() {
       <div className="section-inner">
         <div className="steps-layout">
           <div className="steps-intro">
-            <div className="section-label">04 / el camino</div>
             <h2>
               Empieza
               <br />
@@ -216,7 +214,6 @@ export function ClosingSection({ onContact }) {
   return localize(
     <section className="closing">
       <div className="closing-inner">
-        <div className="section-label">05 / siguiente paso</div>
         <h2>
           Tu mejor
           <br />

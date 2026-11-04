@@ -15,7 +15,10 @@ const documentKey = Object.hasOwn(legalDocuments, requestedKey)
   : "aviso-legal";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LanguageProvider pageTitle={legalDocuments[documentKey].title}>
+    <LanguageProvider
+      pageKey="legal"
+      pageTitle={legalDocuments[documentKey].title}
+    >
       <LegalPage documentKey={documentKey} />
     </LanguageProvider>
   </StrictMode>,

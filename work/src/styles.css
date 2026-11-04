@@ -1664,12 +1664,17 @@ footer {
   object-fit: cover;
   transform: translateY(-50%);
   filter: saturate(0.72) brightness(0.55) contrast(1.15);
-  mask-image: radial-gradient(
-    ellipse at 52% 50%,
-    black 18%,
-    rgba(0, 0, 0, 0.84) 52%,
-    transparent 78%
-  );
+  /* Keep the crop on the right foliage; hide the bright central enclosure that
+     otherwise flashes as a full-height cream column while the hero appears. */
+  mask-image:
+    linear-gradient(90deg, transparent 0%, transparent 56%, #000 72%),
+    radial-gradient(
+      ellipse at 52% 50%,
+      black 18%,
+      rgba(0, 0, 0, 0.84) 52%,
+      transparent 78%
+    );
+  mask-composite: intersect;
   opacity: 0.68;
   transition: opacity 1.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

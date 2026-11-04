@@ -46,6 +46,25 @@ export const meteoParts = [
     anchor: [0.4, 1.995, -1],
     offset: [0, 0.13, -0.3],
   },
+  {
+    key: "solar",
+    name: "Placa solar",
+    category: "Energía de la estación",
+    description:
+      "Capta la luz del sol y suministra energía para que la estación funcione.",
+    // Panel_superior_84 dentro de Chasis_en_Y (y global = 1.76 + 0.081).
+    anchor: [0, 1.84, -0.45],
+    offset: [0, 0, 0],
+  },
+  {
+    key: "collector",
+    name: "Depósito colector",
+    category: "Recogida de lluvia",
+    description:
+      "Recibe el agua que baja del embudo y la conduce al mecanismo que mide la lluvia.",
+    anchor: [0.4, 1.68, -1.08],
+    offset: [0.2, -0.42, -0.22],
+  },
 ];
 
 export const meteoProgress = (section) => {

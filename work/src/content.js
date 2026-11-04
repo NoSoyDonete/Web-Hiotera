@@ -2,11 +2,11 @@
 export const heroPhases = [
   {
     tab: "El campo",
-    eyebrow: "UN NUEVO PUNTO DE VISTA",
+    eyebrow: "SENSORES PARA INVERNADEROS · EL EJIDO, ALMERÍA",
     title: "El campo",
     highlight: "habla.",
     description:
-      "Conoce cómo está tu cultivo. Los sensores miden lo que ocurre en el suelo y en el aire, y tú lo consultas en una sola aplicación.",
+      "Consulta la humedad y la temperatura del suelo y las condiciones del invernadero desde una aplicación sencilla, en el móvil o el ordenador.",
     action: { href: "#catalogo", label: "Explora el catálogo" },
     contact: true,
     note: ["SENSORES EN EL CULTIVO", "información del suelo y del aire"],
@@ -117,9 +117,9 @@ export const impactCards = [
 
 export const journeySteps = [
   {
-    title: "Instala Hiotera",
+    title: "Instalación y formación",
     description:
-      "Coloca los sensores en tu finca y empieza a medir las condiciones del cultivo.",
+      "La compra de cualquiera de nuestros packs incluye la instalación y un año de mantenimiento gratis. El técnico te enseña a usar el sistema el día de la instalación.",
   },
   {
     title: "Conoce lo que ocurre",
@@ -127,8 +127,8 @@ export const journeySteps = [
       "Mira las lecturas y las gráficas para entender cómo cambian el suelo y el ambiente.",
   },
   {
-    title: "Gana tranquilidad",
+    title: "Atención de oficina",
     description:
-      "Usa los avisos para saber qué revisar y toma decisiones con más información.",
+      "Si tienes dudas, puedes llamar o escribir a la oficina de lunes a viernes, de 8:00 a 16:00.",
   },
 ];

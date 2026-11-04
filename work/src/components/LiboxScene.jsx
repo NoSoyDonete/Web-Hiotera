@@ -80,7 +80,7 @@ export default function LiboxScene() {
     >
       <div className="libox-pin">
         <div className="libox-heading">
-          <div className="section-label">01 / CONOCE EL LIBOx</div>
+          <div className="section-label">01 / Nuestro LIBOx</div>
           <h2 id="libox-title">
             Tus sensores.
             <br />

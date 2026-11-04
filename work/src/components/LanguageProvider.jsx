@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import { isLanguage, languageStorageKey, translate } from "../i18n.js";
+import { updatePageSeo } from "../seo.js";
 
 const translatedAttributes = [
   "aria-label",
@@ -55,7 +56,12 @@ function initialValue() {
     return "es";
   }
 }
-export function LanguageProvider({ children, initialLanguage, pageTitle }) {
+export function LanguageProvider({
+  children,
+  initialLanguage,
+  pageTitle,
+  pageKey = "home",
+}) {
   const [language, update] = useState(() =>
     isLanguage(initialLanguage) ? initialLanguage : initialValue(),
   );
@@ -83,17 +89,8 @@ export function LanguageProvider({ children, initialLanguage, pageTitle }) {
     window.history.replaceState(null, "", url);
   };
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.title = pageTitle
-      ? `${translate(pageTitle, language)} — Hiotera`
-      : translate("Hiotera — Conoce tu cultivo", language);
-    const description = document.querySelector('meta[name="description"]');
-    if (description)
-      description.content = translate(
-        "Conoce las condiciones de tu cultivo con los sensores y la aplicación de Hiotera.",
-        language,
-      );
-  }, [language, pageTitle]);
+    updatePageSeo({ pageKey, language, pageTitle });
+  }, [language, pageKey, pageTitle]);
   const value = useMemo(
     () => ({
       language,

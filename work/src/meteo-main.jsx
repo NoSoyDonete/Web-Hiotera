@@ -27,7 +27,7 @@ function MeteoPreview() {
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LanguageProvider>
+    <LanguageProvider pageKey="meteo">
       <MeteoPreview />
     </LanguageProvider>
   </StrictMode>,

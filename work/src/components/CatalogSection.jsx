@@ -25,7 +25,7 @@ export default function CatalogSection({ onContact }) {
       <div className="section-inner">
         <div className="catalog-heading">
           <div>
-            <div className="section-label">EQUIPOS Y SENSORES HIOTERA</div>
+            <div className="section-label">04 / Catálogo</div>
             <h2 id="catalog-title">
               Equipos para
               <br />

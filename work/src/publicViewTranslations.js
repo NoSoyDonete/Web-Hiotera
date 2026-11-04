@@ -1,6 +1,72 @@
 // Public platform captions are separate from the unchanged Spanish application demo.
 export const publicViewTranslations = [
   [
+    "Sensores para invernaderos en Almería | Hiotera",
+    "Greenhouse sensors in Almería, Spain | Hiotera",
+    "Capteurs pour serres à Almería, Espagne | Hiotera",
+    "Sensoren für Gewächshäuser in Almería, Spanien | Hiotera",
+  ],
+  [
+    "Sensores de suelo y clima y una aplicación sencilla para conocer tu cultivo. Instalación, formación y 1 año de mantenimiento gratis. Oficina en El Ejido.",
+    "Soil and climate sensors with an easy-to-use app to understand your crops. Installation, training and one year of maintenance included. Office in El Ejido, Spain.",
+    "Des capteurs du sol et du climat, et une application simple pour suivre vos cultures. Installation, formation et une année de maintenance incluses. Bureau à El Ejido, Espagne.",
+    "Boden- und Klimasensoren mit einer einfach bedienbaren App für den Überblick über Ihre Kulturen. Installation, Einweisung und ein Jahr Wartung inklusive. Büro in El Ejido, Spanien.",
+  ],
+  [
+    "Estación meteorológica para invernaderos | Hiotera",
+    "Weather station for greenhouses | Hiotera",
+    "Station météo pour serres | Hiotera",
+    "Wetterstation für Gewächshäuser | Hiotera",
+  ],
+  [
+    "Conoce la estación meteorológica de Hiotera: mide el viento y la lluvia en tu finca y descubre cada pieza con un modelo 3D interactivo.",
+    "Explore Hiotera’s weather station: measure wind and rainfall on your farm and discover each part in an interactive 3D model.",
+    "Découvrez la station météo Hiotera : mesurez le vent et la pluie sur votre exploitation et explorez chaque élément en 3D.",
+    "Entdecken Sie die Hiotera-Wetterstation: Messen Sie Wind und Niederschlag auf Ihrem Betrieb und erkunden Sie jedes Teil im interaktiven 3D-Modell.",
+  ],
+  [
+    "Consulta el aviso legal, la política de privacidad y la política de cookies de Hiotera.",
+    "Read Hiotera’s legal notice, privacy policy and cookie policy.",
+    "Consultez les mentions légales, la politique de confidentialité et la politique relative aux cookies de Hiotera.",
+    "Lesen Sie das Impressum sowie die Datenschutz- und Cookie-Richtlinie von Hiotera.",
+  ],
+  [
+    "SENSORES PARA INVERNADEROS · EL EJIDO, ALMERÍA",
+    "GREENHOUSE SENSORS · EL EJIDO, ALMERÍA, SPAIN",
+    "CAPTEURS POUR SERRES · EL EJIDO, ALMERÍA, ESPAGNE",
+    "SENSOREN FÜR GEWÄCHSHÄUSER · EL EJIDO, ALMERÍA, SPANIEN",
+  ],
+  [
+    "Consulta la humedad y la temperatura del suelo y las condiciones del invernadero desde una aplicación sencilla, en el móvil o el ordenador.",
+    "Check soil moisture and temperature, and greenhouse conditions, in one easy-to-use app on your phone or computer.",
+    "Consultez l’humidité et la température du sol ainsi que les conditions de la serre dans une application simple, sur mobile ou ordinateur.",
+    "Prüfen Sie Bodenfeuchte, Bodentemperatur und Gewächshausbedingungen in einer einfachen App auf dem Smartphone oder Computer.",
+  ],
+  [
+    "Instalación y formación",
+    "Installation and training",
+    "Installation et formation",
+    "Installation und Einweisung",
+  ],
+  [
+    "La compra de cualquiera de nuestros packs incluye la instalación y un año de mantenimiento gratis. El técnico te enseña a usar el sistema el día de la instalación.",
+    "Every pack includes installation and one year of maintenance at no extra cost. The technician shows you how to use the system on installation day.",
+    "L’achat de l’un de nos packs comprend l’installation et un an de maintenance sans frais. Le technicien vous montre comment utiliser le système le jour de l’installation.",
+    "Beim Kauf eines unserer Pakete sind Installation und ein Jahr Wartung ohne Aufpreis enthalten. Der Techniker erklärt Ihnen am Installationstag die Bedienung.",
+  ],
+  [
+    "Atención de oficina",
+    "Office support",
+    "Assistance du bureau",
+    "Unterstützung durch unser Büro",
+  ],
+  [
+    "Si tienes dudas, puedes llamar o escribir a la oficina de lunes a viernes, de 8:00 a 16:00.",
+    "If you have questions, call or email our office Monday to Friday, 8:00 to 16:00.",
+    "Pour toute question, appelez ou écrivez à notre bureau du lundi au vendredi, de 8 h à 16 h.",
+    "Bei Fragen erreichen Sie unser Büro montags bis freitags von 8:00 bis 16:00 Uhr telefonisch oder per E-Mail.",
+  ],
+  [
     "LOS SENSORES DE TU CULTIVO",
     "YOUR CROP SENSORS",
     "LES CAPTEURS DE VOTRE CULTURE",

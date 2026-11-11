@@ -1657,24 +1657,19 @@ footer {
 .sensor-fallback {
   position: absolute;
   z-index: 1;
-  left: 36%;
+  left: 0;
   top: 50%;
-  width: min(70vw, 980px);
-  height: min(91svh, 940px);
+  width: 100%;
+  height: 100svh;
   object-fit: cover;
   transform: translateY(-50%);
   filter: saturate(0.72) brightness(0.55) contrast(1.15);
-  /* Keep the crop on the right foliage; hide the bright central enclosure that
-     otherwise flashes as a full-height cream column while the hero appears. */
-  mask-image:
-    linear-gradient(90deg, transparent 0%, transparent 56%, #000 72%),
-    radial-gradient(
-      ellipse at 52% 50%,
-      black 18%,
-      rgba(0, 0, 0, 0.84) 52%,
-      transparent 78%
-    );
-  mask-composite: intersect;
+  mask-image: radial-gradient(
+    ellipse at 52% 50%,
+    black 18%,
+    rgba(0, 0, 0, 0.84) 52%,
+    transparent 78%
+  );
   opacity: 0.68;
   transition: opacity 1.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -1927,10 +1922,10 @@ footer {
     width: min(76vw, 570px);
   }
   .sensor-fallback {
-    left: 22%;
-    top: 43%;
-    width: 92vw;
-    height: 74svh;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 100svh;
   }
   .sensor-model {
     left: 68%;
@@ -1991,10 +1986,10 @@ footer {
     width: 100%;
   }
   .sensor-fallback {
-    left: 6%;
-    top: 30%;
-    width: 115vw;
-    height: 58svh;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 100svh;
   }
   .sensor-model {
     left: 63.5%;

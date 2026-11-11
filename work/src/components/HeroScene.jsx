@@ -24,6 +24,7 @@ export default function HeroScene({ onContact }) {
           alt=""
           aria-hidden="true"
           fetchPriority="high"
+          onLoad={(event) => event.currentTarget.classList.add("photo-ready")}
         />
         <div className="hero-copy">
           <div className="hero-phases">

@@ -18,7 +18,7 @@ function Brand({ footer = false }) {
         width="44"
         height="44"
       />
-      <span>Hiotera</span>
+      {footer && <span>Hiotera</span>}
     </a>,
   );
 }

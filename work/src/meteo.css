@@ -1,6 +1,6 @@
 .meteo-section {
   position: relative;
-  height: 310svh;
+  height: calc(310svh / var(--zoom));
   background: #e9eddf;
   color: var(--night);
   scroll-margin-top: 0;
@@ -40,12 +40,12 @@
 .meteo-pin {
   position: sticky;
   top: 0;
-  height: 100svh;
+  height: calc(100svh / var(--zoom));
   min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
   grid-template-rows: minmax(0, 1fr) auto;
-  gap: 20px clamp(20px, 3vw, 52px);
+  gap: 20px clamp(20px, calc(3vw / var(--zoom)), 52px);
   padding: 100px 6% 28px;
   overflow: hidden;
   isolation: isolate;
@@ -64,7 +64,7 @@
 .meteo-heading h1 {
   margin: 16px 0 18px;
   font:
-    500 clamp(2rem, min(15cqi, 6svh), 4rem)/1 "Space Grotesk",
+    500 clamp(2rem, min(15cqi, calc(6svh / var(--zoom))), 4rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.055em;
   overflow-wrap: anywhere;
@@ -106,7 +106,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font:
-    600 clamp(6rem, 15vw, 16rem)/1 "Space Grotesk",
+    600 clamp(6rem, calc(15vw / var(--zoom)), 16rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.07em;
   color: #c6cfb92c;
@@ -409,7 +409,7 @@
 /* El estado va con prefijo propio: «meteo-loading» es el aviso de carga y
    reutilizarlo en la sección la sacaba del flujo y la ponía sobre la portada. */
 .meteo-section.meteo-status-error {
-  height: 100svh;
+  height: calc(100svh / var(--zoom));
 }
 .meteo-status-error .meteo-model {
   visibility: hidden;
@@ -423,7 +423,7 @@
   z-index: 4;
   display: flex;
   flex-direction: column;
-  gap: clamp(22px, 3svh, 34px);
+  gap: clamp(22px, calc(3svh / var(--zoom)), 34px);
   min-width: 0;
   min-height: 0;
   overflow-y: auto;
@@ -464,7 +464,7 @@
 }
 @media (max-width: 600px) {
   .meteo-section {
-    height: 280svh;
+    height: calc(280svh / var(--zoom));
   }
   .meteo-pin {
     grid-template-columns: minmax(0, 1fr);
@@ -485,7 +485,7 @@
     font-size: 0.908rem;
   }
   .meteo-heading h1 {
-    font-size: clamp(1.8rem, 7.8vw, 2.65rem);
+    font-size: clamp(1.8rem, calc(7.8vw / var(--zoom)), 2.65rem);
     margin: 10px 0;
   }
   .meteo-heading h1 br {
@@ -508,7 +508,7 @@
     left: 17.5%;
   }
   .meteo-watermark {
-    font-size: 24vw;
+    font-size: calc(24vw / var(--zoom));
   }
   .meteo-camera-tools {
     top: 0;
@@ -610,7 +610,7 @@
     gap: 20px;
   }
   .meteo-heading h1 {
-    font-size: clamp(1.8rem, 5.5svh, 2.7rem);
+    font-size: clamp(1.8rem, calc(5.5svh / var(--zoom)), 2.7rem);
     margin: 10px 0 12px;
   }
   .meteo-transport {
@@ -623,7 +623,7 @@
     gap: 10px;
   }
   .meteo-heading h1 {
-    font-size: clamp(1.7rem, 7vw, 2.1rem);
+    font-size: clamp(1.7rem, calc(7vw / var(--zoom)), 2.1rem);
     margin: 8px 0;
   }
 }

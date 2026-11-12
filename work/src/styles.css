@@ -11,6 +11,18 @@
   --line: rgba(11, 28, 23, 0.16);
   --night-line: rgba(238, 241, 231, 0.18);
   --radius: 26px;
+  /* Escala general de la página. En escritorio se ve al 90 %, como con el
+     zoom del navegador a 90 %. Las unidades vh/vw de todos los estilos se
+     dividen por este valor para que lo que ocupa la pantalla la siga llenando. */
+  --zoom: 1;
+}
+@media (min-width: 1200px) {
+  :root {
+    --zoom: 0.9;
+  }
+  html {
+    zoom: var(--zoom);
+  }
 }
 * {
   box-sizing: border-box;
@@ -60,7 +72,8 @@ button {
   left: -100px;
   top: -100px;
   pointer-events: none;
-  z-index: 120;
+  /* Por encima del formulario de contacto (200) y de los avisos (220). */
+  z-index: 300;
   border-radius: 50%;
   opacity: 0;
   mix-blend-mode: difference;
@@ -90,13 +103,32 @@ button {
     width: 62px;
     height: 62px;
   }
+  /* Solo se ve el cursor de la web: se oculta el puntero del sistema. */
+  html,
+  body,
+  body *:not(input, textarea, select),
+  model-viewer {
+    cursor: none !important;
+  }
+  /* Los <dialog> ampliados se pintan por encima de todo, incluido el cursor
+     de la web; dentro de ellos se usa el puntero normal. */
+  dialog[open],
+  dialog[open] *:not(input, textarea, select) {
+    cursor: auto !important;
+  }
+  dialog[open] :is(a, button, summary, [role="button"]) {
+    cursor: pointer !important;
+  }
+  body:has(dialog[open]) :is(.cursor, .cursor-ring) {
+    opacity: 0;
+  }
 }
 .topbar {
   position: fixed;
   top: 24px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1840px, calc(100% - 6vw));
+  width: min(1840px, calc(100% - calc(6vw / var(--zoom))));
   z-index: 20;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -191,8 +223,8 @@ button {
   line-height: 0.5;
 }
 .hero {
-  min-height: 100svh;
-  padding: 160px 6vw 70px;
+  min-height: calc(100svh / var(--zoom));
+  padding: 160px calc(6vw / var(--zoom)) 70px;
   background: var(--night);
   color: var(--cream);
   position: relative;
@@ -203,13 +235,13 @@ button {
 .hero::before {
   content: "";
   position: absolute;
-  width: 72vw;
-  height: 72vw;
+  width: calc(72vw / var(--zoom));
+  height: calc(72vw / var(--zoom));
   max-width: 1000px;
   max-height: 1000px;
   border-radius: 50%;
-  right: -27vw;
-  top: -31vw;
+  right: calc(-27vw / var(--zoom));
+  top: calc(-31vw / var(--zoom));
   background: radial-gradient(
     circle,
     rgba(169, 235, 193, 0.48) 0,
@@ -220,7 +252,7 @@ button {
 .hero::after {
   content: none;
   position: absolute;
-  right: 6vw;
+  right: calc(6vw / var(--zoom));
   bottom: 28px;
   color: rgba(238, 241, 231, 0.35);
   font:
@@ -233,7 +265,7 @@ button {
   margin: auto;
   display: grid;
   grid-template-columns: 0.96fr 1.04fr;
-  gap: 5vw;
+  gap: calc(5vw / var(--zoom));
   align-items: center;
   position: relative;
   z-index: 1;
@@ -258,7 +290,7 @@ button {
 .hero h1 {
   margin: 24px 0 0;
   font:
-    600 clamp(4.5rem, 9.6vw, 10rem)/0.82 "Space Grotesk",
+    600 clamp(4.5rem, calc(9.6vw / var(--zoom)), 10rem)/0.82 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.11em;
   max-width: 750px;
@@ -382,7 +414,7 @@ button {
 }
 .node-frame {
   position: relative;
-  width: min(40vw, 490px);
+  width: min(calc(40vw / var(--zoom)), 490px);
   aspect-ratio: 0.88;
   overflow: hidden;
   transform: rotate(6deg);
@@ -539,7 +571,7 @@ button {
   color: var(--night);
   padding: 18px 0;
   font:
-    600 clamp(1.013rem, 2.8vw, 2.8rem)/1 "Space Grotesk",
+    600 clamp(1.013rem, calc(2.8vw / var(--zoom)), 2.8rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.06em;
 }
@@ -547,7 +579,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(8px, 2vw, 32px);
+  gap: clamp(8px, calc(2vw / var(--zoom)), 32px);
   padding: 0 12px;
 }
 .marquee i {
@@ -555,7 +587,7 @@ button {
   font-style: normal;
 }
 .section {
-  padding: 150px 3vw;
+  padding: 150px calc(3vw / var(--zoom));
 }
 /* Todas las secciones aprovechan casi todo el ancho, como la meteo y la demo. */
 .section-inner {
@@ -577,12 +609,12 @@ button {
 .statement-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 8vw;
+  gap: calc(8vw / var(--zoom));
 }
 .statement h2 {
   margin: 0;
   font:
-    600 clamp(3rem, 6.3vw, 7.2rem)/0.88 "Space Grotesk",
+    600 clamp(3rem, calc(6.3vw / var(--zoom)), 7.2rem)/0.88 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.1em;
 }
@@ -624,13 +656,13 @@ button {
 .lab-top {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 8vw;
+  gap: calc(8vw / var(--zoom));
   align-items: end;
 }
 .lab-top h2 {
   margin: 0;
   font:
-    500 clamp(3.2rem, 6.8vw, 7.6rem)/0.86 "Space Grotesk",
+    500 clamp(3.2rem, calc(6.8vw / var(--zoom)), 7.6rem)/0.86 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.1em;
 }
@@ -647,7 +679,7 @@ button {
 .lab-layout {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: 9vw;
+  gap: calc(9vw / var(--zoom));
   margin-top: 83px;
   align-items: start;
 }
@@ -812,7 +844,7 @@ button {
 .signal-head h2 {
   margin: 0;
   font:
-    600 clamp(3rem, 6vw, 6.8rem)/0.87 "Space Grotesk",
+    600 clamp(3rem, calc(6vw / var(--zoom)), 6.8rem)/0.87 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.1em;
 }
@@ -880,7 +912,7 @@ button {
 }
 .readout-number {
   font:
-    500 clamp(5rem, 8vw, 8.3rem)/0.8 "Space Grotesk",
+    500 clamp(5rem, calc(8vw / var(--zoom)), 8.3rem)/0.8 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.13em;
 }
@@ -1009,7 +1041,7 @@ button {
 .impact-top h2 {
   margin: 0;
   font:
-    600 clamp(3.2rem, 6vw, 7rem)/0.86 "Space Grotesk",
+    600 clamp(3.2rem, calc(6vw / var(--zoom)), 7rem)/0.86 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.1em;
 }
@@ -1114,12 +1146,12 @@ button {
 .steps-layout {
   display: grid;
   grid-template-columns: 0.87fr 1.13fr;
-  gap: 10vw;
+  gap: calc(10vw / var(--zoom));
 }
 .steps h2 {
   margin: 0;
   font:
-    600 clamp(3.6rem, 7vw, 8rem)/0.82 "Space Grotesk",
+    600 clamp(3.6rem, calc(7vw / var(--zoom)), 8rem)/0.82 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.11em;
 }
@@ -1163,7 +1195,7 @@ button {
 .closing {
   position: relative;
   overflow: hidden;
-  padding: 155px 6vw 75px;
+  padding: 155px calc(6vw / var(--zoom)) 75px;
   background: var(--paper);
 }
 .closing::after {
@@ -1174,7 +1206,7 @@ button {
   bottom: -29%;
   color: var(--mint);
   font:
-    700 45vw/0.65 "Space Grotesk",
+    700 calc(45vw / var(--zoom))/0.65 "Space Grotesk",
     sans-serif;
   opacity: 0.37;
   letter-spacing: -0.2em;
@@ -1189,7 +1221,7 @@ button {
   max-width: 950px;
   margin: 0;
   font:
-    600 clamp(4.4rem, 9.4vw, 10.5rem)/0.8 "Space Grotesk",
+    600 clamp(4.4rem, calc(9.4vw / var(--zoom)), 10.5rem)/0.8 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.12em;
 }
@@ -1221,7 +1253,7 @@ button {
   border-color: var(--acid);
 }
 footer {
-  padding: 27px 6vw 32px;
+  padding: 27px calc(6vw / var(--zoom)) 32px;
   color: var(--cream);
   background: var(--night);
 }
@@ -1401,7 +1433,7 @@ footer {
     min-height: 590px;
   }
   .node-frame {
-    width: min(78vw, 490px);
+    width: min(calc(78vw / var(--zoom)), 490px);
   }
   .lab-visual {
     position: relative;
@@ -1447,7 +1479,7 @@ footer {
     padding: 128px 20px 55px;
   }
   .hero h1 {
-    font-size: clamp(4.2rem, 20vw, 6.7rem);
+    font-size: clamp(4.2rem, calc(20vw / var(--zoom)), 6.7rem);
   }
   .hero-foot {
     margin-top: 48px;
@@ -1456,7 +1488,7 @@ footer {
     min-height: 470px;
   }
   .node-frame {
-    width: 91vw;
+    width: calc(91vw / var(--zoom));
   }
   .node-callout {
     font-size: 0.915rem;
@@ -1480,7 +1512,7 @@ footer {
   .lab-top h2,
   .signal-head h2,
   .impact-top h2 {
-    font-size: clamp(3.1rem, 15vw, 5.4rem);
+    font-size: clamp(3.1rem, calc(15vw / var(--zoom)), 5.4rem);
   }
   .lab-step {
     grid-template-columns: 43px 1fr;
@@ -1510,13 +1542,13 @@ footer {
     min-height: 255px;
   }
   .steps h2 {
-    font-size: clamp(4rem, 19vw, 7rem);
+    font-size: clamp(4rem, calc(19vw / var(--zoom)), 7rem);
   }
   .closing {
     padding: 100px 20px 60px;
   }
   .closing h2 {
-    font-size: clamp(4.1rem, 19vw, 7rem);
+    font-size: clamp(4.1rem, calc(19vw / var(--zoom)), 7rem);
   }
   .closing-row {
     align-items: start;
@@ -1531,7 +1563,7 @@ footer {
 }
 /* Portada de flujo normal, con mensajes seleccionables. */
 .hero.sensor-hero {
-  min-height: 100svh;
+  min-height: calc(100svh / var(--zoom));
   padding: 0;
   display: block;
   overflow: clip;
@@ -1551,7 +1583,7 @@ footer {
 }
 .sensor-hero::after {
   content: none;
-  right: 5vw;
+  right: calc(5vw / var(--zoom));
   bottom: 24px;
   color: rgba(238, 241, 231, 0.34);
   font:
@@ -1563,10 +1595,10 @@ footer {
   --digital-scene: 1;
   position: relative;
   height: auto;
-  min-height: 100svh;
+  min-height: calc(100svh / var(--zoom));
   display: flex;
   align-items: center;
-  padding: 175px 8vw 115px;
+  padding: 175px calc(8vw / var(--zoom)) 115px;
   overflow: hidden;
   background: #000;
   color: var(--cream);
@@ -1589,8 +1621,8 @@ footer {
   position: absolute;
   z-index: 5;
   top: 112px;
-  left: 6vw;
-  right: 6vw;
+  left: calc(6vw / var(--zoom));
+  right: calc(6vw / var(--zoom));
   display: flex;
   justify-content: space-between;
   color: rgba(238, 241, 231, 0.42);
@@ -1618,7 +1650,7 @@ footer {
   z-index: 2;
   left: 69%;
   top: 52%;
-  width: min(60vw, 850px);
+  width: min(calc(60vw / var(--zoom)), 850px);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(217, 255, 88, 0.17);
@@ -1649,7 +1681,7 @@ footer {
   background: var(--acid);
   box-shadow: 0 0 18px 4px rgba(217, 255, 88, 0.44);
   animation: radar 5.5s linear infinite;
-  transform-origin: 0 calc(min(30vw, 425px) + 3px);
+  transform-origin: 0 calc(min(calc(30vw / var(--zoom)), 425px) + 3px);
 }
 @keyframes radar {
   to {
@@ -1661,8 +1693,8 @@ footer {
   z-index: 1;
   left: 36%;
   top: 50%;
-  width: min(70vw, 980px);
-  height: min(91svh, 940px);
+  width: min(calc(70vw / var(--zoom)), 980px);
+  height: min(calc(91svh / var(--zoom)), 940px);
   object-fit: cover;
   transform: translateY(-50%);
   filter: saturate(0.72) brightness(0.55) contrast(1.15);
@@ -1681,10 +1713,10 @@ footer {
 .sensor-model {
   position: absolute;
   z-index: 3;
-  left: calc(36% + min(35vw, 490px));
+  left: calc(36% + min(calc(35vw / var(--zoom)), 490px));
   top: 50%;
-  width: min(70vw, 980px);
-  height: min(91svh, 940px);
+  width: min(calc(70vw / var(--zoom)), 980px);
+  height: min(calc(91svh / var(--zoom)), 940px);
   transform: translate(-50%, -50%);
   opacity: 0;
   filter: drop-shadow(0 35px 60px rgba(0, 0, 0, 0.35));
@@ -1706,7 +1738,7 @@ footer {
 .hero-copy {
   position: relative;
   z-index: 4;
-  width: min(43vw, 600px);
+  width: min(calc(43vw / var(--zoom)), 600px);
   min-width: 0;
 }
 .hero-phases {
@@ -1741,7 +1773,7 @@ footer {
   max-width: 680px;
   margin: 25px 0 0;
   font:
-    500 clamp(4.2rem, 8.5vw, 9.1rem)/0.82 "Space Grotesk",
+    500 clamp(4.2rem, calc(8.5vw / var(--zoom)), 9.1rem)/0.82 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.115em;
 }
@@ -1765,7 +1797,7 @@ footer {
 }
 .hero-tabs {
   display: flex;
-  gap: clamp(10px, 1.5vw, 23px);
+  gap: clamp(10px, calc(1.5vw / var(--zoom)), 23px);
   margin-top: 36px;
   border-top: 1px solid #eef1e72b;
 }
@@ -1859,7 +1891,7 @@ footer {
 .scene-counter {
   position: absolute;
   z-index: 5;
-  right: 6vw;
+  right: calc(6vw / var(--zoom));
   bottom: 46px;
   display: flex;
   gap: 8px;
@@ -1877,7 +1909,7 @@ footer {
 .scroll-cue {
   position: absolute;
   z-index: 5;
-  left: 8vw;
+  left: calc(8vw / var(--zoom));
   bottom: 46px;
   display: flex;
   align-items: center;
@@ -1900,7 +1932,7 @@ footer {
 .hero-meteo-link {
   position: absolute;
   z-index: 5;
-  right: 6vw;
+  right: calc(6vw / var(--zoom));
   bottom: 84px;
   display: inline-flex;
   gap: 10px;
@@ -1922,30 +1954,30 @@ footer {
 @media (max-width: 900px) {
   .sensor-pin {
     align-items: flex-end;
-    padding: 240px 7vw 110px;
+    padding: 240px calc(7vw / var(--zoom)) 110px;
   }
   .hero-copy {
-    width: min(76vw, 570px);
+    width: min(calc(76vw / var(--zoom)), 570px);
   }
   .sensor-fallback {
     left: 22%;
     top: 43%;
-    width: 92vw;
-    height: 74svh;
+    width: calc(92vw / var(--zoom));
+    height: calc(74svh / var(--zoom));
   }
   .sensor-model {
     left: 68%;
     top: 43%;
-    width: 92vw;
-    height: 74svh;
+    width: calc(92vw / var(--zoom));
+    height: calc(74svh / var(--zoom));
   }
   .sensor-radar {
     left: 60%;
     top: 43%;
-    width: min(86vw, 680px);
+    width: min(calc(86vw / var(--zoom)), 680px);
   }
   .hero-phase h1 {
-    font-size: clamp(4.3rem, 12vw, 8rem);
+    font-size: clamp(4.3rem, calc(12vw / var(--zoom)), 8rem);
   }
   .hero-phase p {
     max-width: 310px;
@@ -1956,8 +1988,8 @@ footer {
   }
   .hero-hud {
     top: 91px;
-    left: 7vw;
-    right: 7vw;
+    left: calc(7vw / var(--zoom));
+    right: calc(7vw / var(--zoom));
   }
   .sensor-note.note-a {
     top: 19%;
@@ -1972,21 +2004,21 @@ footer {
     left: 12%;
   }
   .scroll-cue {
-    left: 7vw;
+    left: calc(7vw / var(--zoom));
     bottom: 35px;
   }
   .scene-counter {
-    right: 7vw;
+    right: calc(7vw / var(--zoom));
     bottom: 35px;
   }
   .hero-meteo-link {
     bottom: 73px;
-    right: 7vw;
+    right: calc(7vw / var(--zoom));
   }
 }
 @media (max-width: 560px) {
   .sensor-pin {
-    padding: 230px 6vw 95px;
+    padding: 230px calc(6vw / var(--zoom)) 95px;
   }
   .hero-copy {
     width: 100%;
@@ -1994,19 +2026,19 @@ footer {
   .sensor-fallback {
     left: 6%;
     top: 30%;
-    width: 115vw;
-    height: 58svh;
+    width: calc(115vw / var(--zoom));
+    height: calc(58svh / var(--zoom));
   }
   .sensor-model {
     left: 63.5%;
     top: 30%;
-    width: 115vw;
-    height: 58svh;
+    width: calc(115vw / var(--zoom));
+    height: calc(58svh / var(--zoom));
   }
   .sensor-radar {
     left: 56%;
     top: 36%;
-    width: 112vw;
+    width: calc(112vw / var(--zoom));
     box-shadow:
       0 0 0 22px rgba(217, 255, 88, 0.018),
       0 0 0 50px rgba(217, 255, 88, 0.014);
@@ -2019,7 +2051,7 @@ footer {
     max-width: 53%;
   }
   .hero-phase h1 {
-    font-size: clamp(4.1rem, 18vw, 6.5rem);
+    font-size: clamp(4.1rem, calc(18vw / var(--zoom)), 6.5rem);
     margin-top: 17px;
   }
   .hero-phase p {
@@ -2065,7 +2097,7 @@ footer {
     left: 6%;
   }
   .scroll-cue {
-    left: 6vw;
+    left: calc(6vw / var(--zoom));
     bottom: 29px;
     font-size: 0.905rem;
   }
@@ -2073,18 +2105,18 @@ footer {
     width: 24px;
   }
   .scene-counter {
-    right: 6vw;
+    right: calc(6vw / var(--zoom));
     bottom: 29px;
     font-size: 0.905rem;
   }
   .sensor-hero::after {
     font-size: 0.9rem;
-    right: 6vw;
+    right: calc(6vw / var(--zoom));
     bottom: 14px;
   }
   .hero-meteo-link {
     bottom: 66px;
-    right: 6vw;
+    right: calc(6vw / var(--zoom));
     font-size: 0.928rem;
     padding: 8px 11px;
   }
@@ -2130,7 +2162,7 @@ footer {
   outline-offset: 5px;
 }
 .modal-card {
-  max-height: calc(100svh - 32px);
+  max-height: calc(calc(100svh / var(--zoom)) - 32px);
   overflow-y: auto;
 }
 .modal-card .form-note {
@@ -2144,10 +2176,10 @@ footer {
   text-underline-offset: 3px;
 }
 .toast {
-  max-width: min(92vw, 480px);
+  max-width: min(calc(92vw / var(--zoom)), 480px);
 }
 .hero.sensor-hero.model-error {
-  min-height: 100svh;
+  min-height: calc(100svh / var(--zoom));
 }
 .model-error .sensor-model {
   display: none;
@@ -2160,8 +2192,8 @@ footer {
   position: absolute;
   z-index: 6;
   bottom: 18px;
-  left: 6vw;
-  right: 6vw;
+  left: calc(6vw / var(--zoom));
+  right: calc(6vw / var(--zoom));
   color: rgba(238, 241, 231, 0.6);
   font-size: 0.963rem;
 }

@@ -31,15 +31,24 @@ export function usePageEffects() {
       if (!frame) frame = requestAnimationFrame(drawProgress);
     };
     const finePointer = matchMedia("(pointer: fine)");
+    // La página puede llevar «zoom» en <html> (ver --zoom en styles.css): las
+    // coordenadas del ratón se dividen por él para que el cursor no se desplace.
+    const pageZoom = () =>
+      parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+    let zoom = pageZoom();
     const moveCursor = (event) => {
       if (!finePointer.matches) return;
       for (const element of [cursorRef.current, ringRef.current]) {
         if (element) {
-          element.style.left = `${event.clientX}px`;
-          element.style.top = `${event.clientY}px`;
+          element.style.left = `${event.clientX / zoom}px`;
+          element.style.top = `${event.clientY / zoom}px`;
         }
       }
     };
+    const updateZoom = () => {
+      zoom = pageZoom();
+    };
+    window.addEventListener("resize", updateZoom);
     window.addEventListener("scroll", scheduleProgress, { passive: true });
     window.addEventListener("resize", scheduleProgress);
     window.addEventListener("pointermove", moveCursor, { passive: true });
@@ -53,6 +62,7 @@ export function usePageEffects() {
       layoutObserver.disconnect();
       window.removeEventListener("scroll", scheduleProgress);
       window.removeEventListener("resize", scheduleProgress);
+      window.removeEventListener("resize", updateZoom);
       window.removeEventListener("pointermove", moveCursor);
     };
   }, []);

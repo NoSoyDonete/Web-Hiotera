@@ -121,9 +121,9 @@
   text-transform: none;
 }
 .catalog-model-dialog {
-  width: min(850px, 94vw);
+  width: min(850px, calc(94vw / var(--zoom)));
   max-width: none;
-  max-height: 92svh;
+  max-height: calc(92svh / var(--zoom));
   border: 1px solid #91a17b;
   border-radius: 16px;
   padding: 24px;
@@ -163,7 +163,7 @@
   white-space: nowrap;
 }
 .catalog-model-dialog .catalog-model-frame {
-  height: min(65svh, 600px);
+  height: min(calc(65svh / var(--zoom)), 600px);
   margin: 10px 0 0;
 }
 .catalog-model-dialog .catalog-model-tools {
@@ -188,6 +188,6 @@
     font-size: 14.35px;
   }
   .catalog-model-dialog .catalog-model-frame {
-    height: 58svh;
+    height: calc(58svh / var(--zoom));
   }
 }

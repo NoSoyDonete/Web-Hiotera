@@ -63,7 +63,7 @@
   background: #e7efdc;
 }
 .site-footer {
-  padding: 58px 6vw 25px;
+  padding: 58px calc(6vw / var(--zoom)) 25px;
 }
 .site-footer-grid {
   display: grid;
@@ -191,7 +191,7 @@
 .legal-page h1 {
   margin: 20px 0;
   font:
-    600 clamp(2.5rem, 6vw, 4rem)/1.1 "Space Grotesk",
+    600 clamp(2.5rem, calc(6vw / var(--zoom)), 4rem)/1.1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.04em;
 }

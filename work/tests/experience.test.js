@@ -250,7 +250,10 @@ test("solo la meteo retiene una escena al bajar; portada y LIBOx siguen el flujo
     new URL("../src/meteo.css", import.meta.url),
     "utf8",
   );
-  assert.match(css, /\.hero\.sensor-hero\s*\{[^}]*min-height: 100svh;/);
+  assert.match(
+    css,
+    /\.hero\.sensor-hero\s*\{[^}]*min-height: calc\(100svh \/ var\(--zoom\)\);/,
+  );
   assert.match(
     css,
     /\.sensor-pin\s*\{[^}]*position: relative;[^}]*height: auto;/,
@@ -262,5 +265,8 @@ test("solo la meteo retiene una escena al bajar; portada y LIBOx siguen el flujo
   assert.match(experience, /\.libox-section\s*\{[^}]*height: auto;/);
   assert.match(experience, /\.libox-pin\s*\{[^}]*position: relative;/);
   assert.match(meteo, /\.meteo-pin\s*\{[^}]*position: sticky;/);
-  assert.match(meteo, /\.meteo-section\s*\{[^}]*height: 310svh;/);
+  assert.match(
+    meteo,
+    /\.meteo-section\s*\{[^}]*height: calc\(310svh \/ var\(--zoom\)\);/,
+  );
 });

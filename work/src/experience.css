@@ -31,7 +31,7 @@
   object-fit: contain;
 }
 .field-hero {
-  min-height: 100svh;
+  min-height: calc(100svh / var(--zoom));
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -39,7 +39,7 @@
   background: #203529;
   display: flex;
   align-items: center;
-  padding: 155px max(6vw, 24px) 150px;
+  padding: 155px max(calc(6vw / var(--zoom)), 24px) 150px;
 }
 .field-hero-photo,
 .field-hero-shade {
@@ -71,7 +71,7 @@
 .field-hero h1 {
   margin: 25px 0 28px;
   font:
-    500 clamp(5.5rem, 10.6vw, 10.5rem)/0.87 "Space Grotesk",
+    500 clamp(5.5rem, calc(10.6vw / var(--zoom)), 10.5rem)/0.87 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.085em;
 }
@@ -86,8 +86,8 @@
 .field-hero-bottom {
   position: absolute;
   bottom: 32px;
-  left: 6vw;
-  right: 6vw;
+  left: calc(6vw / var(--zoom));
+  right: calc(6vw / var(--zoom));
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -122,7 +122,7 @@
 .libox-pin {
   position: relative;
   top: 0;
-  height: 100svh;
+  height: calc(100svh / var(--zoom));
   min-height: 720px;
   overflow: hidden;
   isolation: isolate;
@@ -143,7 +143,7 @@
 .libox-heading h2 {
   margin: 18px 0;
   font:
-    500 clamp(2.7rem, 4.7vw, 5rem)/1 "Space Grotesk",
+    500 clamp(2.7rem, calc(4.7vw / var(--zoom)), 5rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.07em;
 }
@@ -192,7 +192,7 @@
   width: 100%;
   text-align: center;
   font:
-    600 clamp(7rem, 16vw, 17rem)/1 "Space Grotesk",
+    600 clamp(7rem, calc(16vw / var(--zoom)), 17rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.08em;
   color: #cad2bc66;
@@ -415,7 +415,7 @@
 }
 @media (min-width: 901px) {
   .platform-section {
-    padding-inline: 1.5vw;
+    padding-inline: calc(1.5vw / var(--zoom));
   }
 }
 /* La demo reproduce una pantalla de 1920 px a escala: como la meteo y el
@@ -437,7 +437,7 @@
 .platform-heading h2,
 .catalog-heading h2 {
   font:
-    500 clamp(3rem, 5.8vw, 6rem)/0.98 "Space Grotesk",
+    500 clamp(3rem, calc(5.8vw / var(--zoom)), 6rem)/0.98 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.07em;
   margin: 20px 0 0;
@@ -571,7 +571,7 @@
   color: #9aaf896e;
 }
 .platform-dialog {
-  width: min(1920px, 98vw);
+  width: min(1920px, calc(98vw / var(--zoom)));
   max-width: none;
   padding: 18px;
   border: 1px solid #688451;
@@ -895,7 +895,7 @@ input:focus-visible {
   .field-hero {
     padding: 150px 24px 170px;
     align-items: flex-start;
-    min-height: 100svh;
+    min-height: calc(100svh / var(--zoom));
   }
   .field-hero-photo {
     width: 160%;
@@ -912,7 +912,7 @@ input:focus-visible {
     );
   }
   .field-hero h1 {
-    font-size: clamp(4.1rem, 19vw, 5.2rem);
+    font-size: clamp(4.1rem, calc(19vw / var(--zoom)), 5.2rem);
     margin: 22px 0;
   }
   .field-hero .eyebrow {
@@ -970,7 +970,7 @@ input:focus-visible {
     font-size: 0.895rem;
   }
   .libox-heading h2 {
-    font-size: clamp(2.2rem, 9.3vw, 3rem);
+    font-size: clamp(2.2rem, calc(9.3vw / var(--zoom)), 3rem);
     margin: 13px 0;
   }
   .libox-heading p {
@@ -984,7 +984,7 @@ input:focus-visible {
     margin: 0 -15px;
   }
   .libox-watermark {
-    font-size: 28vw;
+    font-size: calc(28vw / var(--zoom));
   }
   .libox-tools {
     top: 0;
@@ -1059,7 +1059,7 @@ input:focus-visible {
   }
   .platform-heading h2,
   .catalog-heading h2 {
-    font-size: clamp(2.7rem, 11.5vw, 4rem);
+    font-size: clamp(2.7rem, calc(11.5vw / var(--zoom)), 4rem);
   }
   .platform-heading > p,
   .catalog-heading > p {
@@ -1104,7 +1104,7 @@ input:focus-visible {
   .platform-dialog {
     padding: 10px;
     overflow-x: auto;
-    max-height: 90svh;
+    max-height: calc(90svh / var(--zoom));
   }
   .platform-dialog-top {
     position: sticky;
@@ -1181,12 +1181,12 @@ input:focus-visible {
   .statement-grid {
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 6vw;
+    gap: calc(6vw / var(--zoom));
   }
   .statement-copy {
     max-width: 660px;
     padding-top: 0;
-    font-size: clamp(1.2rem, 1.25vw, 1.5rem);
+    font-size: clamp(1.2rem, calc(1.25vw / var(--zoom)), 1.5rem);
     line-height: 1.6;
   }
   .statement-copy .micro-link {
@@ -1196,7 +1196,7 @@ input:focus-visible {
   /* Impacto: cuatro tarjetas iguales en una fila */
   .impact-top p {
     max-width: 440px;
-    font-size: clamp(1.1rem, 1.1vw, 1.35rem);
+    font-size: clamp(1.1rem, calc(1.1vw / var(--zoom)), 1.35rem);
   }
   .impact-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1210,7 +1210,7 @@ input:focus-visible {
   }
   .impact-card h3 {
     margin-top: 56px;
-    font-size: clamp(1.9rem, 2vw, 2.6rem);
+    font-size: clamp(1.9rem, calc(2vw / var(--zoom)), 2.6rem);
   }
   .impact-card p {
     max-width: 360px;
@@ -1220,7 +1220,7 @@ input:focus-visible {
   /* Catálogo */
   .catalog-heading > p {
     max-width: 460px;
-    font-size: clamp(1.1rem, 1.1vw, 1.35rem);
+    font-size: clamp(1.1rem, calc(1.1vw / var(--zoom)), 1.35rem);
     line-height: 1.6;
   }
   .catalog-filters button {
@@ -1255,18 +1255,18 @@ input:focus-visible {
   /* Recorrido «Empieza simple» */
   .steps-layout {
     grid-template-columns: 0.8fr 1.2fr;
-    gap: 6vw;
+    gap: calc(6vw / var(--zoom));
   }
   .steps-intro p {
     max-width: 460px;
-    font-size: clamp(1.1rem, 1.15vw, 1.4rem);
+    font-size: clamp(1.1rem, calc(1.15vw / var(--zoom)), 1.4rem);
   }
   .step {
     grid-template-columns: 80px 1fr;
     padding: 34px 0;
   }
   .step h3 {
-    font-size: clamp(2rem, 2.2vw, 2.7rem);
+    font-size: clamp(2rem, calc(2.2vw / var(--zoom)), 2.7rem);
   }
   .step p {
     max-width: 720px;
@@ -1275,14 +1275,14 @@ input:focus-visible {
 
   /* Cierre */
   .closing {
-    padding-inline: 3vw;
+    padding-inline: calc(3vw / var(--zoom));
   }
   .closing h2 {
     max-width: none;
   }
   .closing-row p {
     max-width: 600px;
-    font-size: clamp(1.2rem, 1.25vw, 1.5rem);
+    font-size: clamp(1.2rem, calc(1.25vw / var(--zoom)), 1.5rem);
     line-height: 1.6;
   }
   .closing-row .button {
@@ -1292,7 +1292,7 @@ input:focus-visible {
 
   /* Pie: alineado con el resto y con textos más legibles */
   footer.site-footer {
-    padding-inline: 3vw;
+    padding-inline: calc(3vw / var(--zoom));
   }
   footer.site-footer h3 {
     font-size: 19px;
@@ -1340,7 +1340,7 @@ input:focus-visible {
 .included-heading h2 {
   margin: 0;
   font:
-    600 clamp(3rem, 6vw, 7rem)/0.88 "Space Grotesk",
+    600 clamp(3rem, calc(6vw / var(--zoom)), 7rem)/0.88 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.09em;
 }
@@ -1351,7 +1351,7 @@ input:focus-visible {
   max-width: 440px;
   margin: 0;
   color: rgba(238, 241, 231, 0.72);
-  font-size: clamp(1.05rem, 1.1vw, 1.35rem);
+  font-size: clamp(1.05rem, calc(1.1vw / var(--zoom)), 1.35rem);
   line-height: 1.6;
 }
 .included-grid {
@@ -1374,7 +1374,7 @@ input:focus-visible {
 .included-card h3 {
   margin: 48px 0 12px;
   font:
-    600 clamp(1.7rem, 1.9vw, 2.3rem)/1 "Space Grotesk",
+    600 clamp(1.7rem, calc(1.9vw / var(--zoom)), 2.3rem)/1 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.05em;
 }
@@ -1391,13 +1391,13 @@ input:focus-visible {
 .faq-layout {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 6vw;
+  gap: calc(6vw / var(--zoom));
   align-items: start;
 }
 .faq-intro h2 {
   margin: 0 0 44px;
   font:
-    600 clamp(3rem, 6vw, 7rem)/0.88 "Space Grotesk",
+    600 clamp(3rem, calc(6vw / var(--zoom)), 7rem)/0.88 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.09em;
 }
@@ -1457,7 +1457,7 @@ input:focus-visible {
   cursor: pointer;
   list-style: none;
   font:
-    500 clamp(1.3rem, 1.5vw, 1.8rem)/1.2 "Space Grotesk",
+    500 clamp(1.3rem, calc(1.5vw / var(--zoom)), 1.8rem)/1.2 "Space Grotesk",
     sans-serif;
   letter-spacing: -0.03em;
 }

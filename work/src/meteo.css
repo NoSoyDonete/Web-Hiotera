@@ -1,6 +1,8 @@
 .meteo-section {
   position: relative;
-  height: calc(310svh / var(--zoom));
+  /* El despiece se controla con la rueda dentro del círculo, no con el
+     scroll de la página: la sección ocupa una sola pantalla. */
+  height: calc(100svh / var(--zoom));
   background: #e9eddf;
   color: var(--night);
   scroll-margin-top: 0;

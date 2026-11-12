@@ -66,10 +66,3 @@ export const meteoParts = [
     offset: [0.2, -0.42, -0.22],
   },
 ];
-
-export const meteoProgress = (section) => {
-  const travel = section.offsetHeight - window.innerHeight;
-  const progress =
-    travel > 0 ? -section.getBoundingClientRect().top / travel : 0;
-  return Math.max(0, Math.min(1, (progress - 0.08) / 0.8));
-};

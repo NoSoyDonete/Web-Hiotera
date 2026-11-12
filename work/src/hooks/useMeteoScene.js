@@ -1,8 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { meteoParts, meteoProgress, meteoCameraRadius } from "../meteo.js";
+import { meteoParts, meteoCameraRadius } from "../meteo.js";
 import { createMeteoPlayback } from "../meteoPlayback.js";
 
+const clamp = (value) => Math.max(0, Math.min(1, value));
+// Píxeles de rueda necesarios para pasar de montada a despiece completo.
+const WHEEL_TRAVEL = 900;
+
 export function useMeteoScene(sectionRef, modelRef, progressRef) {
+  // Permite a los botones «Montada» y «Despiece» fijar la separación.
+  const explodeRef = useRef(() => {});
+  const setExplosion = useCallback((value) => explodeRef.current(value), []);
   const [status, setStatus] = useState("loading");
   const [stage, setStage] = useState("assembled");
   const [motionEnabled, setMotionEnabled] = useState(
@@ -29,9 +36,12 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       frame = 0,
       previousTime = 0;
     let previousRadius = null;
-    let progress = meteoProgress(section),
-      target = progress,
+    // La separación ya no depende del scroll de la página: solo cambia con la
+    // rueda dentro del círculo del modelo o con los botones.
+    let progress = 0,
+      target = 0,
       lastStage = "";
+    const stage = model.parentElement;
     const playback = createMeteoPlayback(
       model,
       () => ready && motionRef.current && !document.hidden,
@@ -87,8 +97,34 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       if (progress !== target) frame = requestAnimationFrame(draw);
     };
     const update = () => {
-      target = meteoProgress(section);
       if (ready && !frame) frame = requestAnimationFrame(draw);
+    };
+    explodeRef.current = (value) => {
+      target = clamp(value);
+      update();
+    };
+    // Rueda del ratón: solo actúa dentro del círculo dibujado alrededor del
+    // modelo (.meteo-stage::before). Al llegar a montada o a despiece completo
+    // deja pasar el scroll para que la página siga bajando o subiendo.
+    const insideCircle = (event) => {
+      const rect = stage.getBoundingClientRect();
+      const ratio =
+        parseFloat(getComputedStyle(stage, "::before").width) /
+          stage.clientWidth || 0.76;
+      const radius = (rect.width * ratio) / 2;
+      const dx = event.clientX - (rect.left + rect.width / 2);
+      const dy = event.clientY - (rect.top + rect.height / 2);
+      return dx * dx + dy * dy <= radius * radius;
+    };
+    const wheel = (event) => {
+      if (!ready || event.ctrlKey || !insideCircle(event)) return;
+      const unit =
+        event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1;
+      const pixels = event.deltaY * unit;
+      if ((pixels > 0 && target >= 1) || (pixels < 0 && target <= 0)) return;
+      event.preventDefault();
+      target = clamp(target + pixels / WHEEL_TRAVEL);
+      update();
     };
     const resize = () => {
       // Una distancia explícita evita que cambie el encuadre al animar el GLB.
@@ -122,7 +158,6 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       ready = true;
       playback.sync();
       setStatus("ready");
-      progress = target = meteoProgress(section);
       resize();
     };
     const visibilityChanged = () => playback.sync();
@@ -141,7 +176,7 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
     };
     model.addEventListener("load", loaded);
     model.addEventListener("error", failed);
-    window.addEventListener("scroll", update, { passive: true });
+    stage.addEventListener("wheel", wheel, { passive: false });
     window.addEventListener("resize", resize);
     reduced.addEventListener("change", preferenceChanged);
     document.addEventListener("visibilitychange", visibilityChanged);
@@ -159,7 +194,8 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       observer.disconnect();
       model.removeEventListener("load", loaded);
       model.removeEventListener("error", failed);
-      window.removeEventListener("scroll", update);
+      stage.removeEventListener("wheel", wheel);
+      explodeRef.current = () => {};
       window.removeEventListener("resize", resize);
       reduced.removeEventListener("change", preferenceChanged);
       document.removeEventListener("visibilitychange", visibilityChanged);
@@ -167,5 +203,5 @@ export function useMeteoScene(sectionRef, modelRef, progressRef) {
       if (playbackRef.current === playback) playbackRef.current = null;
     };
   }, [sectionRef, modelRef, progressRef]);
-  return { status, stage, motionEnabled, toggleMotion };
+  return { status, stage, motionEnabled, toggleMotion, setExplosion };
 }

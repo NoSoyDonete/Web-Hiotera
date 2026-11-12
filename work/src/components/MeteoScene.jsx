@@ -18,7 +18,8 @@ export default function MeteoScene() {
     modelRef = useRef(null),
     progressRef = useRef(null);
   const [selected, setSelected] = useState(0);
-  const { status, stage, motionEnabled, toggleMotion } = useMeteoScene(
+  const { status, stage, motionEnabled, toggleMotion, setExplosion } =
+    useMeteoScene(
     sectionRef,
     modelRef,
     progressRef,
@@ -39,17 +40,7 @@ export default function MeteoScene() {
     model.cameraOrbit = `-145deg 64deg ${meteoCameraRadius(model)}m`;
   };
 
-  const goTo = (explosion) => {
-    const section = sectionRef.current;
-    const top = section.getBoundingClientRect().top + window.scrollY;
-    const travel = section.offsetHeight - window.innerHeight;
-    window.scrollTo({
-      top: top + travel * (0.08 + explosion * 0.8),
-      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
-    });
-  };
+  const goTo = (explosion) => setExplosion(explosion);
 
   return localize(
     <section
@@ -71,7 +62,10 @@ export default function MeteoScene() {
               <span>Conoce cada pieza.</span>
             </h1>
             <p>
-              Esta estación mide 12 parámetros del exterior: temperatura, humedad, lluvia, presión, radiación y viento. Baja para separar las piezas y pulsa los números para conocer qué hace cada una.
+              Esta estación mide 12 parámetros del exterior: temperatura,
+              humedad, lluvia, presión, radiación y viento. Usa la rueda del
+              ratón sobre la estación para separar las piezas y pulsa los
+              números para conocer qué hace cada una.
             </p>
           </div>
 
@@ -221,8 +215,8 @@ export default function MeteoScene() {
             <p>
               {stage === "exploded"
                 ? "Cada pieza, al descubierto"
-                : "Baja para separar las piezas"}
-              <small>Sube para volver a montarlas</small>
+                : "Usa la rueda sobre la estación"}
+              <small>o pulsa «Montada» y «Despiece»</small>
             </p>
           </div>
           <div

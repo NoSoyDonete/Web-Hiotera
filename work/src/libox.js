@@ -1,6 +1,13 @@
+import { catalogItems } from "./catalog.js";
+
 // Funciones confirmadas por Hiotera. Coordenadas del GLB, en metros.
 // No se presupone qué tensiómetro ocupa el conector central o el derecho.
 export const liboxOverview = "28deg 78deg 112%";
+
+// Modelo 3D del sensor que va en cada conector. Se reutiliza el del catálogo
+// (mismo «id» que la «key» de la parte); las partes sin modelo devuelven null.
+export const liboxPartModel = (part) =>
+  catalogItems.find((item) => item.id === part?.key)?.model ?? null;
 export const liboxParts = [
   {
     key: "temperature",

@@ -1558,3 +1558,91 @@ input:focus-visible {
     clip: rect(0 0 0 0);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   LIBOx: al elegir un conector con modelo propio, el sensor sustituye al
+   LIBOx en el mismo sitio con una transición suave.
+   --------------------------------------------------------------------------- */
+.libox-model {
+  transition:
+    opacity 0.45s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease;
+}
+.libox-part-model {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.82);
+  pointer-events: none;
+  transition:
+    opacity 0.45s ease 0.15s,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+  --poster-color: transparent;
+  --progress-bar-height: 0px;
+}
+.libox-showing-part .libox-model {
+  opacity: 0;
+  transform: scale(1.12);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.libox-showing-part .libox-part-model {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.libox-part-loading {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #f7f9f0ee;
+  color: #4e6343;
+  font:
+    0.95rem "DM Mono",
+    monospace;
+  white-space: nowrap;
+}
+.libox-back {
+  position: absolute;
+  z-index: 3;
+  left: 6%;
+  top: 3%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid #95a88080;
+  border-radius: 999px;
+  background: #f7f9f0ee;
+  color: #26402d;
+  font-size: 1rem;
+  font-weight: 700;
+  animation: libox-back-in 0.4s ease both;
+}
+.libox-back:hover {
+  background: var(--acid);
+}
+@keyframes libox-back-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .libox-model,
+  .libox-part-model {
+    transition: opacity 0.2s ease;
+    transform: none !important;
+    filter: none !important;
+  }
+  .libox-back {
+    animation: none;
+  }
+}

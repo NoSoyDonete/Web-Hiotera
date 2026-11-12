@@ -1,20 +1,41 @@
 import { useLanguage } from "./LanguageProvider.jsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { assetUrl, site } from "../config.js";
-import { liboxOverview, liboxParts } from "../libox.js";
+import { liboxOverview, liboxPartModel, liboxParts } from "../libox.js";
 
 const label = (index) => String(index + 1).padStart(2, "0");
 
 export default function LiboxScene() {
   const { localize } = useLanguage();
   const modelRef = useRef(null),
+    partModelRef = useRef(null),
+    partFileRef = useRef(null),
     selectedRef = useRef(null);
   const [selected, setSelected] = useState(null);
   const [status, setStatus] = useState("loading");
+  // Modelo del sensor del conector elegido. Se muestra en lugar del LIBOx
+  // cuando termina de cargar, para que la transición no deje el hueco vacío.
+  const [partFile, setPartFile] = useState(null);
+  const [partReady, setPartReady] = useState(false);
+
+  const part = selected === null ? null : liboxParts[selected];
+  const partModel = liboxPartModel(part);
+  const showingPart = Boolean(partModel) && partReady;
 
   const select = useCallback((index) => {
     selectedRef.current = index;
     setSelected(index);
+    const sensor = liboxPartModel(liboxParts[index]);
+    if (sensor) {
+      if (partFileRef.current !== sensor.file) setPartReady(false);
+      partFileRef.current = sensor.file;
+      setPartFile(sensor.file);
+      return;
+    }
+    // Sin modelo propio: vuelve al LIBOx y encuadra ese punto.
+    partFileRef.current = null;
+    setPartFile(null);
+    setPartReady(false);
     const model = modelRef.current;
     if (model?.loaded) {
       model.resetTurntableRotation?.();
@@ -40,7 +61,7 @@ export default function LiboxScene() {
       }
     };
     const explore = (event) => {
-      const index = liboxParts.findIndex((part) => part.key === event.detail);
+      const index = liboxParts.findIndex((item) => item.key === event.detail);
       if (index >= 0) select(index);
     };
     model.addEventListener("load", loaded);
@@ -58,24 +79,67 @@ export default function LiboxScene() {
       window.removeEventListener("hiotera:libox-part", explore);
     };
   }, [select]);
-  const reset = () => {
+
+  // Carga del modelo del sensor elegido.
+  useEffect(() => {
+    const viewer = partModelRef.current;
+    if (!viewer || !partFile) return;
+    let disposed = false;
+    const loaded = () => {
+      if (!disposed) setPartReady(true);
+    };
+    const failed = () => {
+      // Si falla, se queda el LIBOx con la descripción del conector.
+      if (disposed) return;
+      partFileRef.current = null;
+      setPartFile(null);
+    };
+    viewer.addEventListener("load", loaded);
+    viewer.addEventListener("error", failed);
+    import("@google/model-viewer").then(() => {
+      if (viewer.loaded && viewer.src.endsWith(partFile)) loaded();
+    });
+    return () => {
+      disposed = true;
+      viewer.removeEventListener("load", loaded);
+      viewer.removeEventListener("error", failed);
+    };
+  }, [partFile]);
+
+  const backToLibox = () => {
     setSelected(null);
     selectedRef.current = null;
-    modelRef.current.resetTurntableRotation?.();
-    modelRef.current.cameraOrbit = liboxOverview;
-    modelRef.current.cameraTarget = "auto auto auto";
+    partFileRef.current = null;
+    setPartFile(null);
+    setPartReady(false);
+    const model = modelRef.current;
+    model.resetTurntableRotation?.();
+    model.cameraOrbit = liboxOverview;
+    model.cameraTarget = "auto auto auto";
+  };
+  const reset = () => {
+    if (showingPart) {
+      const viewer = partModelRef.current;
+      viewer.resetTurntableRotation?.();
+      viewer.cameraOrbit = partModel.orbit;
+      viewer.cameraTarget = "auto auto auto";
+      return;
+    }
+    backToLibox();
   };
   const zoom = (factor) => {
-    const model = modelRef.current,
+    const model = showingPart ? partModelRef.current : modelRef.current,
       orbit = model.getCameraOrbit();
-    model.cameraOrbit = `${orbit.theta}rad ${orbit.phi}rad ${Math.max(0.18, Math.min(1.5, orbit.radius * factor))}m`;
+    const radius = showingPart
+      ? orbit.radius * factor
+      : Math.max(0.18, Math.min(1.5, orbit.radius * factor));
+    model.cameraOrbit = `${orbit.theta}rad ${orbit.phi}rad ${radius}m`;
   };
-  const part = selected === null ? null : liboxParts[selected];
 
   return localize(
     <section
       id="nodo"
-      className={`libox-section libox-${status}`}
+      className={`libox-section libox-${status}${showingPart ? " libox-showing-part" : ""}`}
       aria-labelledby="libox-title"
     >
       <div className="libox-pin">
@@ -115,6 +179,7 @@ export default function LiboxScene() {
             interpolation-decay="140"
             loading="lazy"
             reveal="auto"
+            inert={showingPart}
           >
             {liboxParts.flatMap((item, index) =>
               item.anchors.map((anchor, point) => (
@@ -134,6 +199,43 @@ export default function LiboxScene() {
               )),
             )}
           </model-viewer>
+          {partFile && (
+            <model-viewer
+              ref={partModelRef}
+              className="libox-part-model"
+              src={assetUrl(partFile)}
+              alt={`Modelo 3D de ${part?.name ?? ""}`}
+              camera-orbit={partModel?.orbit}
+              orientation={partModel?.orientation ?? "0deg 0deg 0deg"}
+              camera-controls=""
+              disable-zoom=""
+              disable-pan=""
+              touch-action="pan-y"
+              min-camera-orbit="auto 12deg 30%"
+              max-camera-orbit="auto 168deg 300%"
+              interaction-prompt="none"
+              shadow-intensity="0.8"
+              exposure="1.1"
+              environment-image="neutral"
+              interpolation-decay="140"
+              reveal="auto"
+              inert={!showingPart}
+            />
+          )}
+          {partModel && !partReady && (
+            <p className="libox-part-loading" role="status">
+              Cargando {part.name}…
+            </p>
+          )}
+          {showingPart && (
+            <button
+              type="button"
+              className="libox-back"
+              onClick={backToLibox}
+            >
+              <span aria-hidden="true">←</span> Volver al LIBOx
+            </button>
+          )}
           <div
             className="libox-tools"
             role="group"

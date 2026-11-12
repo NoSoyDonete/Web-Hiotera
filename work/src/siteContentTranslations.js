@@ -1,5 +1,8 @@
 // Textos añadidos o revisados en noviembre de 2026: [es, en, fr, de].
 export const siteContentTranslations = [
+  // LIBOx: modelo 3D de cada conector
+  ["Volver al LIBOx", "Back to the LIBOx", "Retour au LIBOx", "Zurück zum LIBOx"],
+  ["Cargando", "Loading", "Chargement :", "Wird geladen:"],
   // Franja
   ["CONSULTA", "CHECK", "CONSULTE", "PRÜFEN"],
   ["DECIDE", "DECIDE", "DÉCIDE", "ENTSCHEIDEN"],

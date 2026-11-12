@@ -267,6 +267,6 @@ test("solo la meteo retiene una escena al bajar; portada y LIBOx siguen el flujo
   assert.match(meteo, /\.meteo-pin\s*\{[^}]*position: sticky;/);
   assert.match(
     meteo,
-    /\.meteo-section\s*\{[^}]*height: calc\(310svh \/ var\(--zoom\)\);/,
+    /\.meteo-section\s*\{[^}]*height: calc\(100svh \/ var\(--zoom\)\);/,
   );
 });

@@ -4,14 +4,14 @@ export const liboxOverview = "28deg 78deg 112%";
 export const liboxParts = [
   {
     key: "temperature",
-    name: "Temperatura del suelo",
+    name: "Sonda de suelo",
     category: "SONDA / SALIDA INFERIOR IZQUIERDA",
     description:
-      "En la salida inferior izquierda se conecta la sonda de temperatura del suelo. En la aplicación puedes ver su lectura y cómo cambia a lo largo del día.",
+      "En la salida inferior izquierda se conecta la sonda de suelo. Mide la temperatura, la humedad y la conductividad, y en la aplicación puedes ver cómo cambian a lo largo del día.",
     anchors: [[-0.03, -0.084, -0.01]],
     normals: [[0, -1, 0]],
     orbit: "-22deg 112deg 103%",
-    tag: "Temperatura",
+    tag: "Sonda de suelo",
   },
   {
     key: "tension",

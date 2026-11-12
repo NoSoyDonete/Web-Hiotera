@@ -65,7 +65,7 @@
   margin: 0 auto;
 }
 .field-hero .eyebrow {
-  font-size: 0.6rem;
+  font-size: 0.938rem;
   letter-spacing: 0.12em;
 }
 .field-hero h1 {
@@ -79,7 +79,7 @@
   color: var(--acid);
 }
 .field-hero-copy > p {
-  font-size: 0.98rem;
+  font-size: 1.04rem;
   line-height: 1.8;
   color: #f8f9eecc;
 }
@@ -93,7 +93,7 @@
   align-items: flex-end;
   gap: 25px;
   font:
-    0.53rem/1.7 "DM Mono",
+    0.92rem/1.7 "DM Mono",
     monospace;
   letter-spacing: 0.08em;
 }
@@ -138,7 +138,7 @@
 }
 .libox-heading .section-label {
   color: #6b7c60;
-  font-size: 0.55rem;
+  font-size: 0.925rem;
 }
 .libox-heading h2 {
   margin: 18px 0;
@@ -152,7 +152,7 @@
 }
 .libox-heading p {
   max-width: 360px;
-  font-size: 0.78rem;
+  font-size: 0.983rem;
   line-height: 1.75;
   color: #65765d;
 }
@@ -164,9 +164,15 @@
   width: 100%;
   height: 100%;
   display: block;
+  opacity: 0;
+  transition: opacity 0.35s ease;
   --poster-color: transparent;
   --progress-bar-color: #778c59;
   --progress-bar-height: 2px;
+}
+.libox-ready .libox-model {
+  visibility: visible;
+  opacity: 1;
 }
 .libox-stage::before {
   content: "";
@@ -203,7 +209,7 @@
   display: flex;
   justify-content: space-between;
   font:
-    0.51rem "DM Mono",
+    0.915rem "DM Mono",
     monospace;
   color: #839173;
   margin-bottom: 8px;
@@ -224,12 +230,12 @@
   background: transparent;
   text-align: left;
   color: #576c48;
-  font-size: 0.72rem;
+  font-size: 0.968rem;
   line-height: 1.45;
 }
 .libox-parts-list button span {
   font:
-    0.52rem "DM Mono",
+    0.918rem "DM Mono",
     monospace;
   opacity: 0.65;
 }
@@ -251,7 +257,7 @@
 .libox-detail > span {
   color: #7b8d67;
   font:
-    0.48rem/1.6 "DM Mono",
+    0.908rem/1.6 "DM Mono",
     monospace;
 }
 .libox-detail h3 {
@@ -262,7 +268,7 @@
   margin: 10px 0;
 }
 .libox-detail p {
-  font-size: 0.76rem;
+  font-size: 0.978rem;
   line-height: 1.75;
   color: #61705b;
   margin: 0;
@@ -278,7 +284,7 @@
   background: #dbe4c8;
   border-radius: 30px;
   font:
-    0.6rem "DM Mono",
+    0.938rem "DM Mono",
     monospace;
 }
 .libox-hotspot {
@@ -300,7 +306,7 @@
   background: #173e30;
   border: 2px solid #ffffff;
   font:
-    700 0.75rem "DM Mono",
+    700 0.975rem "DM Mono",
     monospace;
   box-shadow:
     0 2px 12px #0b1c1740,
@@ -313,7 +319,7 @@
 .libox-hotspot > b {
   display: none;
   font:
-    0.52rem "DM Mono",
+    0.918rem "DM Mono",
     monospace;
   background: #173e30;
   padding: 7px;
@@ -343,7 +349,7 @@
   border-radius: 50%;
   color: #344e2b;
   background: #f7f9f0ee;
-  font-size: 0.9rem;
+  font-size: 1.013rem;
 }
 .libox-tools button:disabled {
   opacity: 0.4;
@@ -362,7 +368,7 @@
   gap: 9px;
   color: #7b8b68;
   font:
-    0.47rem "DM Mono",
+    0.905rem "DM Mono",
     monospace;
   pointer-events: none;
 }
@@ -376,7 +382,7 @@
   left: 15%;
   right: 15%;
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.963rem;
   color: #5e754b;
 }
 .libox-error .libox-model {
@@ -393,11 +399,11 @@
   padding-top: 15px;
   border-top: 1px solid #667b4c33;
   color: #546b40;
-  font-size: 0.7rem;
+  font-size: 0.963rem;
 }
 .libox-next span {
   font:
-    0.51rem "DM Mono",
+    0.915rem "DM Mono",
     monospace;
 }
 .meteo-heading .section-label {
@@ -406,6 +412,16 @@
 .platform-section {
   background: #10281f;
   color: #f2f4e9;
+}
+@media (min-width: 901px) {
+  .platform-section {
+    padding-inline: 1.5vw;
+  }
+}
+/* La demo reproduce una pantalla de 1920 px a escala: como la meteo y el
+   LIBOx, ocupa casi todo el ancho para que sus letras se lean bien. */
+.platform-section > .section-inner {
+  width: min(1920px, 100%);
 }
 .platform-section .section-label {
   color: var(--acid);
@@ -433,7 +449,7 @@
 .catalog-heading > p {
   max-width: 330px;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.988rem;
   line-height: 1.85;
   color: #dce9d3a6;
 }
@@ -452,11 +468,11 @@
   display: flex;
   align-items: center;
   gap: 13px;
-  font-size: 0.7rem;
+  font-size: 0.963rem;
 }
 .platform-tabs button > span {
   font:
-    0.55rem "DM Mono",
+    0.925rem "DM Mono",
     monospace;
   opacity: 0.5;
 }
@@ -494,7 +510,7 @@
 }
 .platform-window-bar b {
   font:
-    0.5rem "DM Mono",
+    0.913rem "DM Mono",
     monospace;
   font-weight: 400;
 }
@@ -503,7 +519,7 @@
   padding: 3px;
   background: transparent;
   color: #314e2d;
-  font-size: 0.65rem;
+  font-size: 0.95rem;
 }
 .platform-caption {
   display: flex;
@@ -516,7 +532,7 @@
 }
 .platform-caption > div > span {
   font:
-    0.5rem "DM Mono",
+    0.913rem "DM Mono",
     monospace;
   color: #a8bd92;
 }
@@ -528,7 +544,7 @@
   margin: 12px 0;
 }
 .platform-caption p {
-  font-size: 0.76rem;
+  font-size: 0.978rem;
   line-height: 1.8;
   color: #c9d7bfa6;
 }
@@ -541,7 +557,7 @@
 .platform-caption li {
   padding: 11px 0;
   border-bottom: 1px solid #edf5e11f;
-  font-size: 0.65rem;
+  font-size: 0.95rem;
 }
 .platform-caption li > span {
   color: var(--acid);
@@ -549,7 +565,7 @@
 }
 .platform-disclaimer {
   font:
-    0.45rem/1.8 "DM Mono",
+    0.9rem/1.8 "DM Mono",
     monospace;
   letter-spacing: 0.07em;
   color: #9aaf896e;
@@ -577,7 +593,7 @@
 .platform-dialog-top h3 {
   margin: 0;
   font:
-    500 1rem "Space Grotesk",
+    500 1.05rem "Space Grotesk",
     sans-serif;
 }
 .platform-dialog-top button {
@@ -586,7 +602,7 @@
   background: transparent;
   color: inherit;
   padding: 8px 14px;
-  font-size: 0.7rem;
+  font-size: 0.963rem;
 }
 .impact-card {
   display: flex;
@@ -603,7 +619,7 @@
   padding: 10px 17px;
   margin: 25px 0 0 auto;
   opacity: 0.8;
-  font-size: 0.7rem;
+  font-size: 0.963rem;
   letter-spacing: 0.12em;
   line-height: 1.2;
   display: block;
@@ -641,7 +657,7 @@
   border-radius: 30px;
   background: transparent;
   color: #49633b;
-  font-size: 0.68rem;
+  font-size: 0.958rem;
 }
 .catalog-filters button[aria-pressed="true"] {
   background: #203d2b;
@@ -654,7 +670,7 @@
 }
 .catalog-search label {
   font:
-    0.47rem "DM Mono",
+    0.905rem "DM Mono",
     monospace;
   text-transform: uppercase;
   color: #738366;
@@ -666,13 +682,13 @@
   padding: 11px 13px;
   background: #f6f8ef;
   color: #25402c;
-  font-size: 0.72rem;
+  font-size: 0.968rem;
 }
 .catalog-count {
   margin: 22px 0 16px;
   color: #7b8c6c;
   font:
-    0.5rem "DM Mono",
+    0.913rem "DM Mono",
     monospace;
 }
 .catalog-grid {
@@ -696,7 +712,7 @@
 }
 .catalog-category {
   font:
-    0.5rem "DM Mono",
+    0.913rem "DM Mono",
     monospace;
   text-transform: uppercase;
 }
@@ -720,7 +736,7 @@
 }
 .catalog-card small {
   font:
-    0.48rem/1.6 "DM Mono",
+    0.908rem/1.6 "DM Mono",
     monospace;
   text-transform: uppercase;
   color: #839271;
@@ -734,7 +750,7 @@
 }
 .catalog-card p {
   margin: 0 0 20px;
-  font-size: 0.71rem;
+  font-size: 0.965rem;
   line-height: 1.8;
   color: #6b7c5f;
 }
@@ -749,7 +765,7 @@
   background: transparent;
   text-align: left;
   color: #3d5b31;
-  font-size: 0.64rem;
+  font-size: 0.948rem;
 }
 .catalog-empty {
   padding: 40px 0;
@@ -782,7 +798,7 @@
   letter-spacing: -0.04em;
 }
 .catalog-grow p {
-  font-size: 0.72rem;
+  font-size: 0.968rem;
   color: #77896b;
   margin: 0;
 }
@@ -805,7 +821,7 @@ input:focus-visible {
   }
   .libox-parts-list button {
     padding: 6px 0;
-    font-size: 0.68rem;
+    font-size: 0.958rem;
   }
   .libox-detail {
     min-height: 130px;
@@ -815,7 +831,7 @@ input:focus-visible {
     font-size: 1.2rem;
   }
   .libox-detail p {
-    font-size: 0.7rem;
+    font-size: 0.963rem;
   }
 }
 @media (max-width: 900px) {
@@ -853,7 +869,7 @@ input:focus-visible {
     border-radius: 13px;
   }
   .brand {
-    font-size: 1rem;
+    font-size: 1.05rem;
     gap: 5px;
   }
   .brand-icon {
@@ -862,7 +878,7 @@ input:focus-visible {
     border-radius: 8px;
   }
   .nav-cta {
-    font-size: 0.66rem;
+    font-size: 0.953rem;
     padding: 9px 10px;
     gap: 5px;
   }
@@ -873,7 +889,7 @@ input:focus-visible {
     display: inline;
   }
   .nav-meteo-link {
-    font-size: 0.56rem;
+    font-size: 0.928rem;
     gap: 3px;
   }
   .field-hero {
@@ -900,10 +916,10 @@ input:focus-visible {
     margin: 22px 0;
   }
   .field-hero .eyebrow {
-    font-size: 0.46rem;
+    font-size: 0.903rem;
   }
   .field-hero-copy > p {
-    font-size: 0.75rem;
+    font-size: 0.975rem;
     line-height: 1.65;
   }
   .field-hero .hero-actions {
@@ -913,13 +929,13 @@ input:focus-visible {
   .field-hero .button {
     min-height: 41px;
     padding: 0 13px;
-    font-size: 0.61rem;
+    font-size: 0.94rem;
   }
   .field-hero-bottom {
     bottom: 28px;
     left: 24px;
     right: 24px;
-    font-size: 0.43rem;
+    font-size: 0.895rem;
   }
   .field-hero-bottom > span:last-child {
     display: none;
@@ -951,14 +967,14 @@ input:focus-visible {
     width: 100%;
   }
   .libox-heading .section-label {
-    font-size: 0.43rem;
+    font-size: 0.895rem;
   }
   .libox-heading h2 {
     font-size: clamp(2.2rem, 9.3vw, 3rem);
     margin: 13px 0;
   }
   .libox-heading p {
-    font-size: 0.72rem;
+    font-size: 0.968rem;
     max-width: 330px;
   }
   .libox-stage {
@@ -984,12 +1000,12 @@ input:focus-visible {
     font-size: 0.7rem;
   }
   .libox-hotspot > b {
-    font-size: 0.6rem;
+    font-size: 0.938rem;
     padding: 5px;
   }
   .libox-model-caption {
     bottom: 1%;
-    font-size: 0.39rem;
+    font-size: 0.885rem;
     gap: 5px;
   }
   .libox-guide {
@@ -997,7 +1013,7 @@ input:focus-visible {
     width: 100%;
   }
   .libox-guide-label {
-    font-size: 0.43rem;
+    font-size: 0.895rem;
   }
   .libox-parts-list {
     grid-template-columns: 1fr 1fr;
@@ -1005,11 +1021,11 @@ input:focus-visible {
   }
   .libox-parts-list button {
     padding: 5px 0;
-    font-size: 0.68rem;
+    font-size: 0.958rem;
     gap: 5px;
   }
   .libox-parts-list button span {
-    font-size: 0.44rem;
+    font-size: 0.898rem;
   }
   .libox-detail {
     padding-top: 9px;
@@ -1017,14 +1033,14 @@ input:focus-visible {
     min-height: 100px;
   }
   .libox-detail > span {
-    font-size: 0.4rem;
+    font-size: 0.888rem;
   }
   .libox-detail h3 {
     margin: 6px 0;
-    font-size: 1.05rem;
+    font-size: 1.075rem;
   }
   .libox-detail p {
-    font-size: 0.72rem;
+    font-size: 0.968rem;
     line-height: 1.65;
   }
   .depth-indicators {
@@ -1032,14 +1048,14 @@ input:focus-visible {
   }
   .depth-indicators span {
     padding: 4px 8px;
-    font-size: 0.45rem;
+    font-size: 0.9rem;
   }
   .libox-next {
     position: static;
-    font-size: 0.57rem;
+    font-size: 0.93rem;
   }
   .libox-next span {
-    font-size: 0.4rem;
+    font-size: 0.888rem;
   }
   .platform-heading h2,
   .catalog-heading h2 {
@@ -1047,18 +1063,18 @@ input:focus-visible {
   }
   .platform-heading > p,
   .catalog-heading > p {
-    font-size: 0.72rem;
+    font-size: 0.968rem;
   }
   .platform-tabs {
     gap: 6px;
   }
   .platform-tabs button {
     padding: 10px 12px;
-    font-size: 0.57rem;
+    font-size: 0.93rem;
     gap: 6px;
   }
   .platform-tabs button > span {
-    font-size: 0.43rem;
+    font-size: 0.895rem;
   }
   .platform-window-bar {
     gap: 8px;
@@ -1066,10 +1082,10 @@ input:focus-visible {
     min-height: 37px;
   }
   .platform-window-bar b {
-    font-size: 0.36rem;
+    font-size: 0.878rem;
   }
   .platform-window-bar button {
-    font-size: 0.5rem;
+    font-size: 0.913rem;
   }
   .platform-caption {
     flex-direction: column;
@@ -1080,10 +1096,10 @@ input:focus-visible {
     font-size: 1.5rem;
   }
   .platform-caption p {
-    font-size: 0.68rem;
+    font-size: 0.958rem;
   }
   .platform-disclaimer {
-    font-size: 0.37rem;
+    font-size: 0.88rem;
   }
   .platform-dialog {
     padding: 10px;
@@ -1095,10 +1111,10 @@ input:focus-visible {
     left: 0;
   }
   .platform-dialog-top h3 {
-    font-size: 0.7rem;
+    font-size: 0.963rem;
   }
   .platform-dialog-top button {
-    font-size: 0.55rem;
+    font-size: 0.925rem;
     padding: 6px 10px;
   }
   .catalog-grid {
@@ -1108,7 +1124,7 @@ input:focus-visible {
     gap: 20px;
   }
   .catalog-filters button {
-    font-size: 0.6rem;
+    font-size: 0.938rem;
     padding: 9px 14px;
   }
   .catalog-search,
@@ -1127,7 +1143,7 @@ input:focus-visible {
   }
   .impact-stamp,
   .impact-card:nth-child(4) .impact-stamp {
-    font-size: 0.67rem;
+    font-size: 0.955rem;
     min-width: 85px;
   }
 }
@@ -1145,11 +1161,400 @@ input:focus-visible {
     top: 43%;
   }
   .libox-detail p {
-    font-size: 0.62rem;
+    font-size: 0.943rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .libox-hotspot {
     transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Secciones de contenido a ancho completo (escritorio).
+   Manifiesto, impacto, catálogo, recorrido, cierre y pie se reparten en el
+   ancho amplio con textos de lectura cómoda. Portada, LIBOx, meteo y la demo
+   de la aplicación no se tocan aquí. En móvil se mantiene el diseño anterior.
+   --------------------------------------------------------------------------- */
+@media (min-width: 901px) {
+  /* Manifiesto */
+  .statement-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 6vw;
+  }
+  .statement-copy {
+    max-width: 660px;
+    padding-top: 0;
+    font-size: clamp(1.2rem, 1.25vw, 1.5rem);
+    line-height: 1.6;
+  }
+  .statement-copy .micro-link {
+    font-size: 1.1rem;
+  }
+
+  /* Impacto: cuatro tarjetas iguales en una fila */
+  .impact-top p {
+    max-width: 440px;
+    font-size: clamp(1.1rem, 1.1vw, 1.35rem);
+  }
+  .impact-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .impact-card,
+  .impact-card:nth-child(4) {
+    grid-column: auto;
+    min-height: 360px;
+    padding: 30px;
+  }
+  .impact-card h3 {
+    margin-top: 56px;
+    font-size: clamp(1.9rem, 2vw, 2.6rem);
+  }
+  .impact-card p {
+    max-width: 360px;
+    font-size: 1.1rem;
+  }
+
+  /* Catálogo */
+  .catalog-heading > p {
+    max-width: 460px;
+    font-size: clamp(1.1rem, 1.1vw, 1.35rem);
+    line-height: 1.6;
+  }
+  .catalog-filters button {
+    padding: 12px 22px;
+    font-size: 1.05rem;
+  }
+  .catalog-search input {
+    width: 340px;
+    padding: 13px 15px;
+    font-size: 1.05rem;
+  }
+  .catalog-card-copy {
+    padding: 28px;
+  }
+  .catalog-card h3 {
+    font-size: 1.75rem;
+  }
+  .catalog-card p {
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+  .catalog-card .catalog-action {
+    font-size: 1.02rem;
+  }
+  .catalog-grow h3 {
+    font-size: 1.9rem;
+  }
+  .catalog-grow p {
+    font-size: 1.15rem;
+  }
+
+  /* Recorrido «Empieza simple» */
+  .steps-layout {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 6vw;
+  }
+  .steps-intro p {
+    max-width: 460px;
+    font-size: clamp(1.1rem, 1.15vw, 1.4rem);
+  }
+  .step {
+    grid-template-columns: 80px 1fr;
+    padding: 34px 0;
+  }
+  .step h3 {
+    font-size: clamp(2rem, 2.2vw, 2.7rem);
+  }
+  .step p {
+    max-width: 720px;
+    font-size: 1.15rem;
+  }
+
+  /* Cierre */
+  .closing {
+    padding-inline: 3vw;
+  }
+  .closing h2 {
+    max-width: none;
+  }
+  .closing-row p {
+    max-width: 600px;
+    font-size: clamp(1.2rem, 1.25vw, 1.5rem);
+    line-height: 1.6;
+  }
+  .closing-row .button {
+    padding: 18px 28px;
+    font-size: 1.1rem;
+  }
+
+  /* Pie: alineado con el resto y con textos más legibles */
+  footer.site-footer {
+    padding-inline: 3vw;
+  }
+  footer.site-footer h3 {
+    font-size: 19px;
+  }
+  footer.site-footer nav a,
+  footer.site-footer p,
+  footer.site-footer .footer-office > a,
+  footer.site-footer .footer-office address {
+    font-size: 17.5px;
+  }
+  footer.site-footer .footer-intro p {
+    max-width: 320px;
+  }
+  footer.site-footer .footer-office .footer-phone {
+    font-size: 21px;
+  }
+}
+
+/* Entre tablet y portátil, dos tarjetas de impacto por fila y tres de catálogo. */
+@media (min-width: 901px) and (max-width: 1400px) {
+  .impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1401px) {
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Secciones nuevas: «Todo incluido», preguntas frecuentes y WhatsApp.
+   --------------------------------------------------------------------------- */
+.included {
+  background: var(--night);
+  color: var(--cream);
+}
+.included-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 54px;
+}
+.included-heading h2 {
+  margin: 0;
+  font:
+    600 clamp(3rem, 6vw, 7rem)/0.88 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.09em;
+}
+.included-heading h2 span {
+  color: var(--acid);
+}
+.included-heading p {
+  max-width: 440px;
+  margin: 0;
+  color: rgba(238, 241, 231, 0.72);
+  font-size: clamp(1.05rem, 1.1vw, 1.35rem);
+  line-height: 1.6;
+}
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.included-card {
+  padding: 30px;
+  border: 1px solid var(--night-line);
+  border-radius: 20px;
+  background: rgba(238, 241, 231, 0.04);
+}
+.included-no {
+  color: var(--acid);
+  font:
+    1rem "DM Mono",
+    monospace;
+}
+.included-card h3 {
+  margin: 48px 0 12px;
+  font:
+    600 clamp(1.7rem, 1.9vw, 2.3rem)/1 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.05em;
+}
+.included-card p {
+  margin: 0;
+  color: rgba(238, 241, 231, 0.72);
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.faq {
+  background: var(--cream);
+}
+.faq-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 6vw;
+  align-items: start;
+}
+.faq-intro h2 {
+  margin: 0 0 44px;
+  font:
+    600 clamp(3rem, 6vw, 7rem)/0.88 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.09em;
+}
+.faq-intro h2 span {
+  color: #69c98e;
+}
+.faq-office {
+  max-width: 460px;
+  padding: 30px;
+  border-radius: 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.faq-office h3 {
+  margin: 0 0 14px;
+  font:
+    600 1.6rem "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.04em;
+}
+.faq-phone {
+  display: block;
+  margin-bottom: 10px;
+  font:
+    600 1.8rem "Space Grotesk",
+    sans-serif;
+}
+.faq-office p {
+  margin: 0 0 6px;
+  color: rgba(11, 28, 23, 0.66);
+  font-size: 1.05rem;
+}
+.faq-office-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+.faq-map {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.faq-list {
+  border-top: 1px solid rgba(11, 28, 23, 0.25);
+}
+.faq-item {
+  border-bottom: 1px solid rgba(11, 28, 23, 0.25);
+}
+.faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 0;
+  cursor: pointer;
+  list-style: none;
+  font:
+    500 clamp(1.3rem, 1.5vw, 1.8rem)/1.2 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.03em;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary span {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--acid);
+  font-size: 1.5rem;
+  transition: transform 0.2s;
+}
+.faq-item[open] summary span {
+  transform: rotate(45deg);
+}
+.faq-item p {
+  max-width: 760px;
+  margin: 0 0 26px;
+  color: rgba(11, 28, 23, 0.7);
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.whatsapp-button {
+  position: fixed;
+  z-index: 90;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px 13px 15px;
+  border-radius: 999px;
+  color: #fff;
+  background: #1f8f4e;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.whatsapp-button svg {
+  width: 26px;
+  height: 26px;
+}
+.whatsapp-button:hover {
+  background: #17763f;
+}
+
+/* Formulario de contacto: datos personales en dos columnas. */
+@media (min-width: 601px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-grid input[name="crop"],
+  .form-grid textarea,
+  .form-grid .form-privacy,
+  .form-grid .button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1400px) {
+  .included-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .included-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 600px) {
+  .included-grid {
+    grid-template-columns: 1fr;
+  }
+  .included-card h3 {
+    margin-top: 28px;
+  }
+  .whatsapp-button {
+    right: 14px;
+    bottom: 14px;
+    padding: 13px;
+  }
+  .whatsapp-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
   }
 }

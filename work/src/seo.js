@@ -13,7 +13,7 @@ export const seoPages = {
     path: "/meteo.html",
     title: "Estación meteorológica para invernaderos | Hiotera",
     description:
-      "Conoce la estación meteorológica de Hiotera: mide el viento y la lluvia en tu finca y descubre cada pieza con un modelo 3D interactivo.",
+      "Conoce la estación meteorológica de Hiotera: mide la temperatura, la humedad, la lluvia y el viento en tu finca y descubre cada pieza con un modelo 3D interactivo.",
   },
   legal: { path: "/legal.html" },
 };

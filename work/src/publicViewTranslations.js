@@ -19,10 +19,10 @@ export const publicViewTranslations = [
     "Wetterstation für Gewächshäuser | Hiotera",
   ],
   [
-    "Conoce la estación meteorológica de Hiotera: mide el viento y la lluvia en tu finca y descubre cada pieza con un modelo 3D interactivo.",
-    "Explore Hiotera’s weather station: measure wind and rainfall on your farm and discover each part in an interactive 3D model.",
-    "Découvrez la station météo Hiotera : mesurez le vent et la pluie sur votre exploitation et explorez chaque élément en 3D.",
-    "Entdecken Sie die Hiotera-Wetterstation: Messen Sie Wind und Niederschlag auf Ihrem Betrieb und erkunden Sie jedes Teil im interaktiven 3D-Modell.",
+    "Conoce la estación meteorológica de Hiotera: mide la temperatura, la humedad, la lluvia y el viento en tu finca y descubre cada pieza con un modelo 3D interactivo.",
+    "Explore Hiotera’s weather station: measure temperature, humidity, rainfall and wind on your farm and discover each part in an interactive 3D model.",
+    "Découvrez la station météo Hiotera : mesurez la température, l’humidité, la pluie et le vent sur votre exploitation et explorez chaque élément en 3D.",
+    "Entdecken Sie die Hiotera-Wetterstation: Messen Sie Temperatur, Luftfeuchte, Niederschlag und Wind auf Ihrem Betrieb und erkunden Sie jedes Teil im interaktiven 3D-Modell.",
   ],
   [
     "Consulta el aviso legal, la política de privacidad y la política de cookies de Hiotera.",

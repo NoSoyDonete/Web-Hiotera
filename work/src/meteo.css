@@ -17,23 +17,23 @@
   gap: 12px;
   color: #526548;
   font:
-    0.58rem "DM Mono",
+    0.933rem "DM Mono",
     monospace;
 }
 .meteo-preview-nav a {
   font-weight: 700;
 }
 .meteo-preview-nav > span {
-  font-size: 0.48rem;
+  font-size: 0.908rem;
   letter-spacing: 0.06em;
 }
 @media (max-width: 600px) {
   .meteo-preview-nav {
     top: 10px;
-    font-size: 0.49rem;
+    font-size: 0.91rem;
   }
   .meteo-preview-nav > span {
-    font-size: 0.39rem;
+    font-size: 0.885rem;
     letter-spacing: 0;
   }
 }
@@ -58,7 +58,7 @@
 }
 .meteo-heading .section-label {
   color: #637558;
-  font-size: 0.55rem;
+  font-size: 0.925rem;
   letter-spacing: 0.12em;
 }
 .meteo-heading h1 {
@@ -76,7 +76,7 @@
   max-width: 34ch;
   margin: 0;
   color: #60705c;
-  font-size: 0.78rem;
+  font-size: 0.983rem;
   line-height: 1.75;
 }
 .meteo-stage {
@@ -142,7 +142,7 @@
   border-radius: 50%;
   background: #f7f9f0ee;
   color: #344e2b;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 .meteo-camera-tools button:disabled {
   opacity: 0.45;
@@ -160,7 +160,7 @@
   white-space: nowrap;
   color: #71845d;
   font:
-    0.5rem "DM Mono",
+    0.913rem "DM Mono",
     monospace;
   pointer-events: none;
 }
@@ -174,7 +174,7 @@
   align-items: center;
   white-space: nowrap;
   font:
-    0.52rem "DM Mono",
+    0.918rem "DM Mono",
     monospace;
   letter-spacing: 0.1em;
   color: #78856b;
@@ -193,7 +193,7 @@
 .meteo-parts-caption {
   margin-bottom: 12px;
   font:
-    0.51rem "DM Mono",
+    0.915rem "DM Mono",
     monospace;
   letter-spacing: 0.1em;
   color: #8a9580;
@@ -211,12 +211,12 @@
   border-bottom: 1px solid #1d3a2018;
   color: #5d6b55;
   background: transparent;
-  font-size: 0.71rem;
+  font-size: 0.965rem;
   transition: color 0.2s;
 }
 .meteo-part-list button span {
   font:
-    0.56rem "DM Mono",
+    0.928rem "DM Mono",
     monospace;
   color: #96a186;
 }
@@ -242,14 +242,14 @@
   color: #788d62;
   text-transform: uppercase;
   font:
-    0.51rem "DM Mono",
+    0.915rem "DM Mono",
     monospace;
   letter-spacing: 0.07em;
 }
 .meteo-part-detail p {
   color: #697760;
   margin: 8px 0 0;
-  font-size: 0.68rem;
+  font-size: 0.958rem;
   line-height: 1.65;
 }
 .meteo-hotspot {
@@ -273,7 +273,7 @@
   border-radius: 50%;
   background: #f5f8eceb;
   font:
-    0.54rem "DM Mono",
+    0.923rem "DM Mono",
     monospace;
   box-shadow: 0 2px 12px #182c1910;
 }
@@ -286,7 +286,7 @@
   border: 1px solid #8ca17144;
   border-radius: 3px;
   font:
-    500 0.62rem "DM Mono",
+    500 0.943rem "DM Mono",
     monospace;
 }
 .meteo-hotspot.is-selected > span {
@@ -336,13 +336,13 @@
 }
 .meteo-scroll-hint p {
   margin: 0;
-  font-size: 0.68rem;
+  font-size: 0.958rem;
   color: #3b5230;
 }
 .meteo-scroll-hint small {
   display: block;
   margin-top: 6px;
-  font-size: 0.57rem;
+  font-size: 0.93rem;
   color: #8a967e;
 }
 .meteo-progress {
@@ -367,7 +367,7 @@
   min-width: 4ch;
   color: #6c805b;
   font:
-    0.63rem "DM Mono",
+    0.945rem "DM Mono",
     monospace;
 }
 .meteo-view-buttons {
@@ -381,7 +381,7 @@
   background: transparent;
   color: #536c3b;
   padding: 10px 17px;
-  font-size: 0.63rem;
+  font-size: 0.945rem;
 }
 .meteo-view-buttons button:last-child {
   background: #253f2b;
@@ -400,16 +400,18 @@
   transform: translate(-50%, -50%);
   text-align: center;
   color: #6c805b;
-  font-size: 0.75rem;
+  font-size: 0.975rem;
 }
 .meteo-fallback a {
   text-decoration: underline;
   text-underline-offset: 5px;
 }
-.meteo-section.meteo-error {
+/* El estado va con prefijo propio: «meteo-loading» es el aviso de carga y
+   reutilizarlo en la sección la sacaba del flujo y la ponía sobre la portada. */
+.meteo-section.meteo-status-error {
   height: 100svh;
 }
-.meteo-error .meteo-model {
+.meteo-status-error .meteo-model {
   visibility: hidden;
 }
 
@@ -446,10 +448,10 @@
     font-size: clamp(1.8rem, 15cqi, 3rem);
   }
   .meteo-heading p {
-    font-size: 0.73rem;
+    font-size: 0.97rem;
   }
   .meteo-hotspot > b {
-    font-size: 0.52rem;
+    font-size: 0.918rem;
     padding: 5px;
   }
   .meteo-transport {
@@ -480,7 +482,7 @@
     z-index: 3;
   }
   .meteo-heading .section-label {
-    font-size: 0.48rem;
+    font-size: 0.908rem;
   }
   .meteo-heading h1 {
     font-size: clamp(1.8rem, 7.8vw, 2.65rem);
@@ -495,7 +497,7 @@
   }
   .meteo-heading p {
     max-width: 48ch;
-    font-size: 0.7rem;
+    font-size: 0.963rem;
     line-height: 1.6;
   }
   .meteo-stage {
@@ -516,12 +518,12 @@
   .meteo-camera-tools button {
     width: 29px;
     height: 29px;
-    font-size: 0.9rem;
+    font-size: 1.013rem;
   }
   .meteo-hotspot > span {
     width: 21px;
     height: 21px;
-    font-size: 0.45rem;
+    font-size: 0.9rem;
   }
   .meteo-hotspot > b {
     display: none;
@@ -531,7 +533,7 @@
     z-index: 4;
   }
   .meteo-parts-caption {
-    font-size: 0.48rem;
+    font-size: 0.908rem;
     margin-bottom: 6px;
   }
   .meteo-part-list {
@@ -540,21 +542,21 @@
   }
   .meteo-part-list button {
     padding: 8px 0;
-    font-size: 0.65rem;
+    font-size: 0.95rem;
     gap: 6px;
   }
   .meteo-part-list button span {
-    font-size: 0.48rem;
+    font-size: 0.908rem;
   }
   .meteo-part-detail {
     padding-top: 8px;
     min-height: 48px;
   }
   .meteo-part-detail > span {
-    font-size: 0.48rem;
+    font-size: 0.908rem;
   }
   .meteo-part-detail p {
-    font-size: 0.65rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     margin-top: 4px;
   }
@@ -568,10 +570,10 @@
     gap: 8px;
   }
   .meteo-scroll-hint p {
-    font-size: 0.59rem;
+    font-size: 0.935rem;
   }
   .meteo-scroll-hint small {
-    font-size: 0.5rem;
+    font-size: 0.913rem;
     margin-top: 3px;
   }
   .meteo-scroll-hint > span {
@@ -591,11 +593,11 @@
     position: absolute;
     right: 0;
     top: -16px;
-    font-size: 0.46rem;
+    font-size: 0.903rem;
   }
   .meteo-view-buttons button {
     padding: 8px 10px;
-    font-size: 0.56rem;
+    font-size: 0.928rem;
   }
 }
 @media (min-width: 601px) and (max-height: 680px) {

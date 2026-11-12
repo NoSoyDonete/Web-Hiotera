@@ -91,10 +91,24 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
           <input
             type="email"
             name="email"
-            aria-label="Email"
+            aria-label="Correo electrónico"
             autoComplete="email"
-            placeholder="Email"
+            placeholder="Correo electrónico"
             required
+          />
+          <input
+            type="tel"
+            name="phone"
+            aria-label="Teléfono"
+            autoComplete="tel"
+            placeholder="Teléfono"
+          />
+          <input
+            type="text"
+            name="town"
+            aria-label="Municipio"
+            autoComplete="address-level2"
+            placeholder="Municipio"
           />
           <input
             type="text"

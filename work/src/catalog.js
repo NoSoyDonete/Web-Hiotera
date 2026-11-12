@@ -17,18 +17,18 @@ export const catalogItems = [
     id: "meteo",
     category: "Equipos",
     name: "Estación meteorológica",
-    type: "Viento y precipitación",
+    type: "Clima exterior",
     model: { file: "estacion-meteo-viva.glb", orbit: "-145deg 68deg 112%" },
     href: "#meteo",
     action: "Explorar la estación",
     description:
-      "Mide la velocidad y la dirección del viento, y cuánta lluvia cae en tu finca.",
+      "Mide la temperatura, la humedad, la lluvia, la presión, la radiación y el viento fuera del invernadero.",
   },
   {
     id: "temperature",
     category: "Sensores",
-    name: "Sonda de temperatura y humedad",
-    type: "Temperatura y humedad del suelo",
+    name: "Sonda de suelo",
+    type: "Temperatura, humedad y conductividad",
     model: {
       file: "catalog-models/soil-probe-v2.glb",
       orbit: "25deg 55deg 110%",
@@ -37,7 +37,7 @@ export const catalogItems = [
     href: "#nodo",
     action: "Ver su conexión",
     description:
-      "Mide la temperatura y la humedad del suelo para conocer las condiciones en las que crecen las raíces.",
+      "Mide la temperatura, la humedad y la conductividad del suelo, que indica su nivel de sales. Así conoces las condiciones en las que crecen las raíces.",
   },
   {
     id: "tension",

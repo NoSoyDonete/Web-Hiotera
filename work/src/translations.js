@@ -2,7 +2,9 @@
 import { publicViewTranslations } from "./publicViewTranslations.js";
 import { legalTranslations } from "./legalTranslations.js";
 import { accessibilityTranslations } from "./accessibilityTranslations.js";
+import { siteContentTranslations } from "./siteContentTranslations.js";
 export const translationRows = [
+  ...siteContentTranslations,
   ...publicViewTranslations,
   ...legalTranslations,
   ...accessibilityTranslations,
@@ -48,6 +50,13 @@ export const translationRows = [
     "Parlez à un expert",
     "Mit einem Experten sprechen",
   ],
+  [
+    "Acceso a la aplicación",
+    "Access the app",
+    "Accéder à l’application",
+    "Zur App",
+  ],
+  ["Acceder", "Log in", "Se connecter", "Anmelden"],
   ["Hablemos", "Let’s talk", "Parlons-en", "Kontakt"],
   ["Menú", "Menu", "Menu", "Menü"],
   ["Legal", "Legal", "Informations légales", "Rechtliches"],
@@ -378,10 +387,10 @@ export const translationRows = [
     "Jedes Bauteil kennenlernen.",
   ],
   [
-    "Esta estación mide el viento y la lluvia. Baja para separar las piezas y pulsa los números para conocer qué hace cada una.",
-    "This station measures wind and rain. Scroll down to separate the parts and select a number to learn what each one does.",
-    "Cette station mesure le vent et la pluie. Faites défiler pour séparer les pièces et sélectionnez les numéros pour découvrir leurs fonctions.",
-    "Diese Station misst Wind und Regen. Scrollen Sie nach unten, um die Teile auseinanderzuziehen, und wählen Sie die Nummern, um ihre Funktionen kennenzulernen.",
+    "Esta estación mide 12 parámetros del exterior: temperatura, humedad, lluvia, presión, radiación y viento. Baja para separar las piezas y pulsa los números para conocer qué hace cada una.",
+    "This station measures 12 outdoor parameters: temperature, humidity, rainfall, pressure, solar radiation and wind. Scroll down to separate the parts and select a number to learn what each one does.",
+    "Cette station mesure 12 paramètres extérieurs : température, humidité, pluie, pression, rayonnement et vent. Faites défiler pour séparer les pièces et sélectionnez les numéros pour découvrir leurs fonctions.",
+    "Diese Station misst 12 Außenwerte: Temperatur, Luftfeuchte, Niederschlag, Luftdruck, Strahlung und Wind. Scrollen Sie nach unten, um die Teile auseinanderzuziehen, und wählen Sie die Nummern, um ihre Funktionen kennenzulernen.",
   ],
   [
     "Estación meteorológica Hiotera completa en 3D. Arrastra para girar el modelo y baja para separar sus piezas: anemómetro, veleta, embudo, pluviómetro, placa solar y depósito colector.",
@@ -914,10 +923,10 @@ export const translationRows = [
     "Wetterstation",
   ],
   [
-    "Viento y precipitación",
-    "Wind and rainfall",
-    "Vent et précipitations",
-    "Wind und Niederschlag",
+    "Clima exterior",
+    "Outdoor climate",
+    "Climat extérieur",
+    "Außenklima",
   ],
   [
     "Explorar la estación",
@@ -926,10 +935,10 @@ export const translationRows = [
     "Station entdecken",
   ],
   [
-    "Mide la velocidad y la dirección del viento, y cuánta lluvia cae en tu finca.",
-    "Measures wind speed and direction and rainfall on your farm.",
-    "Mesure la vitesse et la direction du vent ainsi que la pluie sur votre exploitation.",
-    "Misst Windgeschwindigkeit, Windrichtung und die Regenmenge in Ihrer Anlage.",
+    "Mide la temperatura, la humedad, la lluvia, la presión, la radiación y el viento fuera del invernadero.",
+    "Measures temperature, humidity, rainfall, pressure, solar radiation and wind outside the greenhouse.",
+    "Mesure la température, l’humidité, la pluie, la pression, le rayonnement et le vent à l’extérieur de la serre.",
+    "Misst Temperatur, Luftfeuchte, Niederschlag, Luftdruck, Strahlung und Wind außerhalb des Gewächshauses.",
   ],
   [
     "Sonda de temperatura y humedad",

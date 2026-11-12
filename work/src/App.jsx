@@ -9,6 +9,9 @@ import {
   StatementSection,
   ImpactSection,
   JourneySection,
+  IncludedSection,
+  FaqSection,
+  WhatsAppButton,
   ClosingSection,
 } from "./components/ContentSections.jsx";
 import SignalSection from "./components/SignalSection.jsx";
@@ -41,7 +44,7 @@ export default function App() {
       <div ref={progressRef} className="progress" aria-hidden="true" />
       <div ref={cursorRef} className="cursor" aria-hidden="true" />
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      <Header onContact={openContact} />
+      <Header />
       <main>
         <HeroScene onContact={openContact} />
         <LiboxScene />
@@ -51,10 +54,13 @@ export default function App() {
         <SignalSection />
         <ImpactSection />
         <CatalogSection onContact={openContact} />
+        <IncludedSection />
         <JourneySection />
+        <FaqSection onContact={openContact} />
         <ClosingSection onContact={openContact} />
       </main>
       <Footer onContact={openContact} />
+      <WhatsAppButton />
       <ContactDialog
         open={contactOpen}
         onClose={closeContact}

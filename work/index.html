@@ -6,13 +6,40 @@
     <meta name="theme-color" content="#0b1c17" />
     <style>
       html,
-      body {
+      body,
+      #root {
+        min-height: 100%;
+        background: #0b1c17;
+      }
+      html body {
+        background: #0b1c17;
+      }
+      #root {
+        opacity: 0;
+        transition: opacity 0.18s ease;
+      }
+      html.app-ready #root {
+        opacity: 1;
+      }
+      #root:empty {
+        min-height: 100svh;
+      }
+      /* Keep the first paint dark while React and the page stylesheet load. */
+      .sensor-hero {
         background: #000;
       }
-      .sensor-fallback {
+      .sensor-hero .sensor-fallback {
         visibility: hidden;
+        filter: saturate(0.72) brightness(0.55) contrast(1.15);
+        mask-image: radial-gradient(
+          ellipse at 52% 50%,
+          black 18%,
+          rgba(0, 0, 0, 0.84) 52%,
+          transparent 78%
+        );
+        opacity: 0.68;
       }
-      .sensor-fallback.photo-ready {
+      .sensor-hero .sensor-fallback.photo-ready {
         visibility: visible;
       }
       .sensor-hero .sensor-model,
@@ -65,7 +92,7 @@
             "url": "https://hiotera.com/",
             "logo": "https://hiotera.com/brand/icon-256.png",
             "email": "contacto@hiotera.com",
-            "telephone": "+34 698 155 496"
+            "telephone": "+34 624 412 364"
           },
           {
             "@type": "LocalBusiness",
@@ -82,7 +109,7 @@
               "postalCode": "04700",
               "addressCountry": "ES"
             },
-            "telephone": "+34 698 155 496",
+            "telephone": "+34 624 412 364",
             "email": "contacto@hiotera.com",
             "openingHoursSpecification": [{
               "@type": "OpeningHoursSpecification",
@@ -108,7 +135,7 @@
     <div id="root"></div>
     <noscript
       >Activa JavaScript para explorar Hiotera. Puedes contactar con nosotros en
-      el +34 698 155 496.</noscript
+      el +34 624 412 364.</noscript
     >
     <script type="module" src="/src/main.jsx"></script>
   </body>

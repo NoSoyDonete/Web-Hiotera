@@ -18,12 +18,12 @@ function Brand({ footer = false }) {
         width="44"
         height="44"
       />
-      {footer && <span>Hiotera</span>}
+      <span>Hiotera</span>
     </a>,
   );
 }
 
-export function Header({ onContact }) {
+export function Header() {
   const { localize } = useLanguage();
   return localize(
     <header className="topbar" aria-label="Navegación principal">
@@ -39,19 +39,19 @@ export function Header({ onContact }) {
           Catálogo <span aria-hidden="true">↓</span>
         </a>
         <LanguageSelector />
-        <button
+        <a
           className="nav-cta"
-          onClick={onContact}
-          aria-label="Habla con un experto"
+          href="https://demo.hiotera.com/"
+          aria-label="Acceso a la aplicación"
         >
-          <span className="nav-cta-label">Habla con un experto</span>
+          <span className="nav-cta-label">Acceso a la aplicación</span>
           <span className="nav-cta-short" aria-hidden="true">
-            Hablemos
+            Acceder
           </span>
           <span className="arrow" aria-hidden="true">
             ↗
           </span>
-        </button>
+        </a>
       </div>
     </header>,
   );
@@ -73,6 +73,7 @@ export function Footer({ onContact }) {
           <a href={`${home}#nodo`}>El LIBOx</a>
           <a href={`${home}#senal`}>La aplicación</a>
           <a href={`${home}#catalogo`}>Catálogo</a>
+          <a href={`${home}#preguntas`}>Preguntas frecuentes</a>
           <a
             href="https://docs.hiotera.com/"
             target="_blank"

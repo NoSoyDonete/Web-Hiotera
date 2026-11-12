@@ -65,7 +65,7 @@ export default function CatalogSection({ onContact }) {
           </div>
         </div>
         <p className="catalog-count" role="status">
-          {items.length} {items.length === 1 ? "elemento" : "elementos"}
+          {items.length} {items.length === 1 ? "equipo" : "equipos"}
         </p>
         <div className="catalog-grid">
           {items.map((item) => (

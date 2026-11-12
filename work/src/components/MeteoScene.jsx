@@ -55,7 +55,7 @@ export default function MeteoScene() {
     <section
       ref={sectionRef}
       id="meteo"
-      className={`meteo-section meteo-${status}`}
+      className={`meteo-section meteo-status-${status}`}
       data-stage={stage}
       aria-labelledby="meteo-title"
     >
@@ -71,8 +71,7 @@ export default function MeteoScene() {
               <span>Conoce cada pieza.</span>
             </h1>
             <p>
-              Esta estación mide el viento y la lluvia. Baja para separar las
-              piezas y pulsa los números para conocer qué hace cada una.
+              Esta estación mide 12 parámetros del exterior: temperatura, humedad, lluvia, presión, radiación y viento. Baja para separar las piezas y pulsa los números para conocer qué hace cada una.
             </p>
           </div>
 

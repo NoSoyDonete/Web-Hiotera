@@ -1,12 +1,15 @@
 // Datos compartidos de la marca. Cambia aquí el teléfono, la ubicación y los archivos.
 export const site = {
   name: "Hiotera",
-  phone: "+34 698 155 496",
-  phoneHref: "tel:+34698155496",
+  phone: "+34 624 412 364",
+  phoneHref: "tel:+34624412364",
   location: "El Ejido · Almería",
   officeAddress: "Av. de Nicolás Salmerón, 69, 04700 El Ejido, Almería",
   officeMap:
     "https://www.google.com/maps/search/?api=1&query=Av.%20de%20Nicol%C3%A1s%20Salmer%C3%B3n%2069%2C%2004700%20El%20Ejido%2C%20Almer%C3%ADa",
+  // Número del botón de WhatsApp, sin «+» ni espacios. Déjalo vacío ("") para
+  // ocultar el botón.
+  whatsapp: "34624412364",
   email: "contacto@hiotera.com",
   privacyEmail: "dpd@hiotera.com",
   company: "Hiotera, S.L.",

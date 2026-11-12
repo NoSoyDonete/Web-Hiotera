@@ -78,7 +78,7 @@ test("la franja muestra las tres palabras una sola vez y sin movimiento", async 
     component.indexOf("export function Marquee"),
     component.indexOf("export function StatementSection"),
   );
-  for (const word of ["MIDE", "INTERPRETA", "RECOMIENDA"])
+  for (const word of ["MIDE", "CONSULTA", "DECIDE"])
     assert.equal(marquee.split(`<b>${word}</b>`).length - 1, 1);
   const css = await readFile(
     new URL("../src/styles.css", import.meta.url),

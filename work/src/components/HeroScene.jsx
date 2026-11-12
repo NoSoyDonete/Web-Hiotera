@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLanguage } from "./LanguageProvider.jsx";
 import { assetUrl, site } from "../config.js";
 import { heroPhases } from "../content.js";
@@ -6,6 +7,7 @@ import { useHeroPhases } from "../hooks/useHeroPhases.js";
 export default function HeroScene({ onContact }) {
   const { localize } = useLanguage();
   const { phase, selectPhase, onTabKeyDown } = useHeroPhases();
+  const [photoReady, setPhotoReady] = useState(false);
 
   return localize(
     <section
@@ -24,7 +26,22 @@ export default function HeroScene({ onContact }) {
           alt=""
           aria-hidden="true"
           fetchPriority="high"
-          onLoad={(event) => event.currentTarget.classList.add("photo-ready")}
+          decoding="sync"
+          onLoad={(event) => {
+            const image = event.currentTarget;
+            image
+              .decode()
+              .catch(() => undefined)
+              .finally(() => {
+                window.setTimeout(() => {
+                  image.classList.add("photo-ready");
+                    setPhotoReady(true);
+                    document.documentElement.classList.add("app-ready");
+                  }, 650);
+              });
+          }}
+          onError={() => document.documentElement.classList.add("app-ready")}
+          style={photoReady ? undefined : { opacity: 0 }}
         />
         <div className="hero-copy">
           <div className="hero-phases">

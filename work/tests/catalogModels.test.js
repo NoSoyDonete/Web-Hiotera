@@ -17,7 +17,7 @@ test("los ocho productos tienen modelo y el tensiómetro con pantalla se identif
 
 test("la sonda actualizada no incluye textos ni identificadores y el digital incluye pantalla", async () => {
   const probe = catalogItems.find((item) => item.id === "temperature");
-  assert.equal(probe.name, "Sonda de temperatura y humedad");
+  assert.equal(probe.name, "Sonda de suelo");
   assert.equal(probe.model.file, "catalog-models/soil-probe-v2.glb");
   const readModel = async (file) => {
     const data = await readFile(new URL(`../public/${file}`, import.meta.url));

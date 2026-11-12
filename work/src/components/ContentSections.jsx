@@ -1,7 +1,13 @@
 import { useLanguage } from "./LanguageProvider.jsx";
 import { Fragment, useState } from "react";
 import { assetUrl, site } from "../config.js";
-import { impactCards, journeySteps, nodeSteps } from "../content.js";
+import {
+  faqItems,
+  impactCards,
+  includedItems,
+  journeySteps,
+  nodeSteps,
+} from "../content.js";
 
 const indexLabel = (index) => String(index + 1).padStart(2, "0");
 function Lines({ items }) {
@@ -9,7 +15,7 @@ function Lines({ items }) {
   return items.map((line, index) => (
     <Fragment key={t(line)}>
       {index > 0 && <br />}
-      {line}
+      {t(line)}
     </Fragment>
   ));
 }
@@ -17,13 +23,13 @@ function Lines({ items }) {
 export function Marquee() {
   const { localize } = useLanguage();
   return localize(
-    <div className="marquee" aria-label="Mide, interpreta y recomienda">
+    <div className="marquee" aria-label="Mide, consulta y decide">
       <div className="marquee-track">
         <b>MIDE</b>
         <i aria-hidden="true">✳</i>
-        <b>INTERPRETA</b>
+        <b>CONSULTA</b>
         <i aria-hidden="true">✳</i>
-        <b>RECOMIENDA</b>
+        <b>DECIDE</b>
       </div>
     </div>,
   );
@@ -164,9 +170,6 @@ export function ImpactSection() {
                 <Lines items={item.title} />
               </h3>
               <p>{item.description}</p>
-              <span className="impact-stamp">
-                <Lines items={item.stamp} />
-              </span>
             </article>
           ))}
         </div>
@@ -188,8 +191,7 @@ export function JourneySection() {
               simple.
             </h2>
             <p>
-              Empieza por lo que necesitas medir. Podemos ayudarte a elegir los
-              sensores para tu finca.
+              Elige qué quieres medir y nosotros nos encargamos del resto.
             </p>
           </div>
           <div className="step-list">
@@ -206,6 +208,117 @@ export function JourneySection() {
         </div>
       </div>
     </section>,
+  );
+}
+
+export function IncludedSection() {
+  const { localize } = useLanguage();
+  return localize(
+    <section
+      className="section included"
+      id="incluye"
+      aria-labelledby="included-title"
+    >
+      <div className="section-inner">
+        <div className="included-heading">
+          <h2 id="included-title">
+            Todo incluido
+            <br />
+            <span>desde el primer día.</span>
+          </h2>
+          <p>
+            No tienes que preocuparte de montar nada. Nos encargamos de la
+            instalación y te acompañamos después.
+          </p>
+        </div>
+        <div className="included-grid">
+          {includedItems.map((item, index) => (
+            <article className="included-card" key={item.title}>
+              <span className="included-no" aria-hidden="true">
+                {indexLabel(index)}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>,
+  );
+}
+
+export function FaqSection({ onContact }) {
+  const { localize } = useLanguage();
+  return localize(
+    <section
+      className="section faq"
+      id="preguntas"
+      aria-labelledby="faq-title"
+    >
+      <div className="section-inner faq-layout">
+        <div className="faq-intro">
+          <h2 id="faq-title">
+            Preguntas
+            <br />
+            <span>frecuentes.</span>
+          </h2>
+          <aside className="faq-office" aria-label="Oficina de Hiotera">
+            <h3>¿Prefieres hablar con alguien?</h3>
+            <a className="faq-phone" href={site.phoneHref}>
+              {site.phone}
+            </a>
+            <p>Lunes a viernes, de 8:00 a 16:00</p>
+            <p>{site.officeAddress}</p>
+            <div className="faq-office-actions">
+              <button className="button dark-button" onClick={onContact}>
+                Escríbenos <span className="arrow">↗</span>
+              </button>
+              <a
+                className="faq-map"
+                href={site.officeMap}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cómo llegar ↗
+              </a>
+            </div>
+          </aside>
+        </div>
+        <div className="faq-list">
+          {faqItems.map((item) => (
+            <details className="faq-item" key={item.question}>
+              <summary>
+                {item.question}
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>,
+  );
+}
+
+export function WhatsAppButton() {
+  const { localize } = useLanguage();
+  if (!site.whatsapp) return null;
+  return localize(
+    <a
+      className="whatsapp-button"
+      href={`https://wa.me/${site.whatsapp}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escríbenos por WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          fill="currentColor"
+          d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"
+        />
+      </svg>
+      <span>WhatsApp</span>
+    </a>,
   );
 }
 

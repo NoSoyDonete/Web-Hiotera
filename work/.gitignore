@@ -4,3 +4,5 @@ node_modules/
 *.local
 *.log
 /scratch/
+# Archivo local de trabajo, no se publica.
+aplicacion.zip

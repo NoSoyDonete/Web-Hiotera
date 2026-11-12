@@ -13,7 +13,7 @@ export const heroPhases = [
   },
   {
     tab: "Las señales",
-    eyebrow: "01 / CONOCE TU CULTIVO",
+    eyebrow: "CONOCE TU CULTIVO",
     title: "Lo invisible",
     highlight: "señala.",
     description:
@@ -22,7 +22,7 @@ export const heroPhases = [
   },
   {
     tab: "Las decisiones",
-    eyebrow: "02 / DECIDE CON MÁS INFORMACIÓN",
+    eyebrow: "DECIDE CON MÁS INFORMACIÓN",
     title: "Entiende.",
     highlight: "Actúa.",
     description:
@@ -86,49 +86,108 @@ export const signalPanels = {
 
 export const impactCards = [
   {
-    category: "agua",
+    category: "riego",
     title: ["Riega con", "criterio."],
     description:
-      "Consulta la humedad del suelo antes de decidir cuándo volver a regar.",
-    stamp: ["AGUA"],
+      "Mira la humedad del suelo y cuánto les cuesta a las raíces absorber el agua a 15 y 30 cm antes de volver a regar.",
   },
   {
     category: "suelo",
     title: ["Conoce", "tu suelo."],
     description:
-      "Sigue su temperatura, humedad y nivel de sales desde la aplicación.",
-    stamp: ["SUELO"],
+      "Sigue la temperatura, la humedad y la conductividad del suelo, que indica su nivel de sales.",
   },
   {
-    category: "riego",
-    title: ["Lee el suelo.", "Decide el riego."],
+    category: "ambiente",
+    title: ["Vigila", "el clima."],
     description:
-      "Compara a 15 y 30 cm cuánto les cuesta a las raíces absorber el agua del suelo.",
-    stamp: ["RIEGO"],
+      "Comprueba cómo cambian el ambiente del invernadero y el tiempo en el exterior.",
   },
   {
     category: "control",
     title: ["Tu finca.", "Desde cualquier lugar."],
     description:
       "Revisa las lecturas y los avisos desde el móvil o el ordenador.",
-    stamp: ["CONTROL"],
+  },
+];
+
+// Lo que incluye la compra. Datos confirmados en los textos de Hiotera.
+export const includedItems = [
+  {
+    title: "Instalación",
+    description:
+      "Un técnico de Hiotera coloca el LIBOx y los sensores en tu invernadero.",
+  },
+  {
+    title: "Formación",
+    description:
+      "El mismo día de la instalación te enseñamos a usar la aplicación.",
+  },
+  {
+    title: "1 año de mantenimiento",
+    description:
+      "Durante el primer año, el mantenimiento de los equipos es gratis.",
+  },
+  {
+    title: "Atención de oficina",
+    description:
+      "Llámanos o escríbenos de lunes a viernes, de 8:00 a 16:00.",
+  },
+];
+
+// Solo respuestas confirmadas. Añade aquí nuevas preguntas cuando estén validadas.
+export const faqItems = [
+  {
+    question: "¿Necesito un enchufe en el invernadero?",
+    answer:
+      "No. El LIBOx se carga con una placa solar que se conecta debajo de su antena.",
+  },
+  {
+    question: "¿Qué mide la sonda de suelo?",
+    answer:
+      "La temperatura, la humedad y la conductividad del suelo. La conductividad indica su nivel de sales.",
+  },
+  {
+    question: "¿Desde dónde puedo ver los datos?",
+    answer:
+      "Desde la aplicación de Hiotera, en el móvil o en el ordenador. Cada medida tiene su gráfica histórica.",
+  },
+  {
+    question: "¿Quién instala los equipos?",
+    answer:
+      "Un técnico de Hiotera. La instalación está incluida y ese mismo día te enseña a usar el sistema.",
+  },
+  {
+    question: "¿Qué pasa si tengo un problema con un equipo?",
+    answer:
+      "El primer año de mantenimiento es gratis. Además, puedes llamar o escribir a la oficina de lunes a viernes, de 8:00 a 16:00.",
+  },
+  {
+    question: "¿Qué sensores necesita mi finca?",
+    answer:
+      "Depende de tu cultivo y de lo que quieras controlar. Cuéntanos cómo trabajas y te ayudamos a elegir.",
+  },
+  {
+    question: "¿Puedo probar la aplicación antes?",
+    answer:
+      "Sí. En esta página tienes una demostración con datos inventados para ver cómo funciona.",
   },
 ];
 
 export const journeySteps = [
   {
-    title: "Instalación y formación",
+    title: "Cuéntanos qué necesitas",
     description:
-      "La compra de cualquiera de nuestros packs incluye la instalación y un año de mantenimiento gratis. El técnico te enseña a usar el sistema el día de la instalación.",
+      "Llámanos o escríbenos. Te ayudamos a elegir los sensores según tu cultivo y tu finca.",
   },
   {
-    title: "Conoce lo que ocurre",
+    title: "Instalamos y te enseñamos",
     description:
-      "Mira las lecturas y las gráficas para entender cómo cambian el suelo y el ambiente.",
+      "Un técnico instala los equipos y te enseña a usar la aplicación el mismo día.",
   },
   {
-    title: "Atención de oficina",
+    title: "Consulta tu finca cada día",
     description:
-      "Si tienes dudas, puedes llamar o escribir a la oficina de lunes a viernes, de 8:00 a 16:00.",
+      "Mira las lecturas y las gráficas para ver cómo cambian el suelo y el ambiente.",
   },
 ];

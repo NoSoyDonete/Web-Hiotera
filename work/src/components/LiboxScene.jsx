@@ -99,6 +99,7 @@ export default function LiboxScene() {
           <model-viewer
             ref={modelRef}
             className="libox-model"
+            style={status === "ready" ? undefined : { visibility: "hidden" }}
             src={assetUrl(site.modelFile)}
             alt="LIBOx de Hiotera sin cables. Modelo 3D con conexiones para temperatura, tensiómetros, radiación, placa solar, reinicio y encendido."
             camera-orbit={liboxOverview}

@@ -30,7 +30,7 @@
   border-radius: 50%;
   background: #f9fcf0ed;
   color: #416237;
-  font-size: 16px;
+  font-size: 16.8px;
 }
 .catalog-model-tools button:hover:not(:disabled) {
   background: var(--acid);
@@ -54,7 +54,7 @@
   text-align: center;
   color: #5c7951;
   font:
-    8px/1.5 "DM Mono",
+    14.6px/1.5 "DM Mono",
     monospace;
 }
 .catalog-model-frame figcaption span:first-child {
@@ -63,7 +63,7 @@
 }
 .catalog-model-frame figcaption span:last-child {
   opacity: 0.6;
-  font-size: 7px;
+  font-size: 14.35px;
 }
 .catalog-model-status {
   position: absolute;
@@ -75,7 +75,7 @@
   gap: 12px;
   color: #72905e;
   font:
-    9px/1.8 "DM Mono",
+    14.85px/1.8 "DM Mono",
     monospace;
   pointer-events: none;
 }
@@ -89,7 +89,7 @@
   border: 1px solid #71935c66;
   border-radius: 20px;
   padding: 8px 15px;
-  font-size: 11px;
+  font-size: 15.35px;
 }
 .catalog-model-pending {
   height: 265px;
@@ -110,12 +110,12 @@
 }
 .catalog-model-pending p {
   margin: 15px 0 6px;
-  font-size: 12px;
+  font-size: 15.6px;
   color: #5c784a;
 }
 .catalog-model-pending small {
   font:
-    9px/1.8 "DM Mono",
+    14.85px/1.8 "DM Mono",
     monospace;
   max-width: 215px;
   text-transform: none;
@@ -142,7 +142,7 @@
 }
 .catalog-model-dialog-top span {
   font:
-    9px "DM Mono",
+    14.85px "DM Mono",
     monospace;
   color: #7c8c69;
 }
@@ -159,7 +159,7 @@
   border-radius: 25px;
   background: #fcfef5;
   color: #4f6e3c;
-  font-size: 11px;
+  font-size: 15.35px;
   white-space: nowrap;
 }
 .catalog-model-dialog .catalog-model-frame {
@@ -185,7 +185,7 @@
     font-size: 22px;
   }
   .catalog-model-dialog-top span {
-    font-size: 7px;
+    font-size: 14.35px;
   }
   .catalog-model-dialog .catalog-model-frame {
     height: 58svh;

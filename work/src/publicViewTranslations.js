@@ -31,10 +31,10 @@ export const publicViewTranslations = [
     "Lesen Sie das Impressum sowie die Datenschutz- und Cookie-Richtlinie von Hiotera.",
   ],
   [
-    "SENSORES PARA INVERNADEROS · EL EJIDO, ALMERÍA",
-    "GREENHOUSE SENSORS · EL EJIDO, ALMERÍA, SPAIN",
-    "CAPTEURS POUR SERRES · EL EJIDO, ALMERÍA, ESPAGNE",
-    "SENSOREN FÜR GEWÄCHSHÄUSER · EL EJIDO, ALMERÍA, SPANIEN",
+    "SENSORES PARA INVERNADEROS",
+    "GREENHOUSE SENSORS",
+    "CAPTEURS POUR SERRES",
+    "SENSOREN FÜR GEWÄCHSHÄUSER",
   ],
   [
     "Consulta la humedad y la temperatura del suelo y las condiciones del invernadero desde una aplicación sencilla, en el móvil o el ordenador.",

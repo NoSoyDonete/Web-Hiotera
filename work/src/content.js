@@ -2,7 +2,7 @@
 export const heroPhases = [
   {
     tab: "El campo",
-    eyebrow: "SENSORES PARA INVERNADEROS · EL EJIDO, ALMERÍA",
+    eyebrow: "SENSORES PARA INVERNADEROS",
     title: "El campo",
     highlight: "habla.",
     description:

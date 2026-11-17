@@ -11,6 +11,11 @@ export default function SignalSection() {
   const tabs = useRef([]),
     dialog = useRef(null);
   const view = platformViews[active];
+  // En la web se enseñan 4 vistas; fincas y guías siguen dentro de la demo,
+  // en su menú lateral.
+  const tabViews = platformViews.filter(
+    (item) => !["farms", "guides"].includes(item.id),
+  );
   const experience = useDemoExperience();
   const select = (index) => {
     if (index < 0 || index >= platformViews.length) return;
@@ -41,14 +46,16 @@ export default function SignalSection() {
     if (!expanded && element.open) element.close();
   }, [expanded]);
   const keyboard = (event, index) => {
-    let next;
-    if (event.key === "ArrowRight") next = (index + 1) % platformViews.length;
-    else if (event.key === "ArrowLeft")
-      next = (index + platformViews.length - 1) % platformViews.length;
-    else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = platformViews.length - 1;
+    const position = tabViews.indexOf(platformViews[index]);
+    const count = tabViews.length;
+    let target;
+    if (event.key === "ArrowRight") target = (position + 1) % count;
+    else if (event.key === "ArrowLeft") target = (position + count - 1) % count;
+    else if (event.key === "Home") target = 0;
+    else if (event.key === "End") target = count - 1;
     else return;
     event.preventDefault();
+    const next = platformViews.indexOf(tabViews[target]);
     select(next);
     tabs.current[next]?.focus();
   };
@@ -61,17 +68,15 @@ export default function SignalSection() {
       <div className="section-inner">
         <div className="platform-heading">
           <div>
-            <div className="section-label">03 / La aplicación</div>
             <h2 id="platform-title">
-              No son solo datos.
+              La aplicación,
               <br />
-              <span>Es tu cultivo.</span>
+              <span>con una finca de ejemplo.</span>
             </h2>
           </div>
           <p>
-            Consulta tu cultivo desde el móvil o el ordenador. Cada parámetro
-            tiene su propia gráfica histórica para ver cómo cambia con el
-            tiempo. Aquí puedes ver algunos ejemplos con datos inventados.
+            Es una réplica de la que usan nuestros clientes, con datos
+            inventados. Pulsa cualquier lectura para abrir su gráfica.
           </p>
         </div>
         <div
@@ -79,7 +84,9 @@ export default function SignalSection() {
           aria-label="Vistas de la aplicación Hiotera"
           className="platform-tabs"
         >
-          {platformViews.map((item, index) => (
+          {tabViews.map((item) => {
+            const index = platformViews.indexOf(item);
+            return (
             <button
               key={item.id}
               ref={(element) => {
@@ -93,10 +100,10 @@ export default function SignalSection() {
               onClick={() => select(index)}
               onKeyDown={(event) => keyboard(event, index)}
             >
-              <span>0{index + 1}</span>
               {item.tab}
             </button>
-          ))}
+            );
+          })}
         </div>
         <div
           id="platform-panel"

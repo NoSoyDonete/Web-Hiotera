@@ -5,9 +5,7 @@ import LiboxScene from "./components/LiboxScene.jsx";
 import MeteoScene from "./components/MeteoScene.jsx";
 import CatalogSection from "./components/CatalogSection.jsx";
 import {
-  Marquee,
   StatementSection,
-  ImpactSection,
   JourneySection,
   IncludedSection,
   FaqSection,
@@ -26,10 +24,12 @@ export default function App() {
   const { progressRef, cursorRef, ringRef } = usePageEffects();
   const openContact = useCallback(() => setContactOpen(true), []);
   const closeContact = useCallback(() => setContactOpen(false), []);
-  const prepareContact = useCallback(() => {
+  const prepareContact = useCallback((result) => {
     setContactOpen(false);
     setNotice(
-      "Consulta preparada en modo demostración. No se han enviado datos.",
+      result === "sent"
+        ? "Consulta enviada. Te respondemos en horario de oficina."
+        : "Consulta preparada en modo demostración. No se han enviado datos.",
     );
   }, []);
 
@@ -49,10 +49,8 @@ export default function App() {
         <HeroScene onContact={openContact} />
         <LiboxScene />
         <MeteoScene />
-        <Marquee />
         <StatementSection />
         <SignalSection />
-        <ImpactSection />
         <CatalogSection onContact={openContact} />
         <IncludedSection />
         <JourneySection />

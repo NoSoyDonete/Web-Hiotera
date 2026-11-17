@@ -17,7 +17,7 @@ export default function GuidesDemo({ experience }) {
         </button>
         <article className="replica-guide-article">
           <div className="replica-resource-eyebrow">GUÍAS Y MANUALES</div>
-          <h1>{article.title}</h1>
+          <h2>{article.title}</h2>
           <p className="replica-guide-lead">{article.summary}</p>
           <h2>Qué significa</h2>
           <p>{article.body}</p>

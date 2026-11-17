@@ -17,9 +17,7 @@ export default function HeroScene({ onContact }) {
       aria-label="Presentación de Hiotera"
     >
       <div className="sensor-pin">
-        <div className="sensor-radar" aria-hidden="true">
-          <i />
-        </div>
+        <div className="sensor-radar" aria-hidden="true" />
         <img
           className="sensor-fallback"
           src={assetUrl(site.installationPhoto)}
@@ -52,39 +50,52 @@ export default function HeroScene({ onContact }) {
                 role="tabpanel"
                 aria-labelledby={`hero-tab-${index}`}
                 data-phase={index}
-                key={item.eyebrow}
+                key={item.tab}
                 aria-hidden={phase !== index}
                 inert={phase !== index}
                 tabIndex={phase === index ? 0 : -1}
               >
-                <div className="eyebrow">{item.eyebrow}</div>
-                <h1>
-                  {item.title}
-                  <br />
-                  <span>{item.highlight}</span>
-                </h1>
+                {/* Un solo h1 en la página: los demás mensajes son h2. */}
+                {(() => {
+                  const Title = index === 0 ? "h1" : "h2";
+                  return (
+                    <Title className="hero-title">
+                      {item.title}
+                      <br />
+                      <span>{item.highlight}</span>
+                    </Title>
+                  );
+                })()}
                 <p>{item.description}</p>
                 {(item.action || item.contact) && (
                   <div className="hero-actions">
+                    {/* Una acción principal: hablar con un técnico. */}
+                    {item.contact && (
+                      <button
+                        className="button acid"
+                        onClick={onContact}
+                        tabIndex={phase === index ? 0 : -1}
+                      >
+                        Hablar con un técnico{" "}
+                        <span className="arrow">↗</span>
+                      </button>
+                    )}
                     {item.action && (
                       <a
-                        className="button acid"
+                        className={`button ${item.contact ? "outline" : "acid"}`}
                         href={item.action.href}
                         tabIndex={phase === index ? 0 : -1}
                       >
                         {item.action.label} <span className="arrow">↘</span>
                       </a>
                     )}
-                    {item.contact && (
-                      <button
-                        className="button outline"
-                        onClick={onContact}
-                        tabIndex={phase === index ? 0 : -1}
-                      >
-                        Cuéntanos qué necesitas
-                      </button>
-                    )}
                   </div>
+                )}
+                {index === 0 && (
+                  <p className="hero-assurance">
+                    Lo instala un técnico de Hiotera y te enseña a usarlo el
+                    mismo día.
+                  </p>
                 )}
               </div>
             ))}

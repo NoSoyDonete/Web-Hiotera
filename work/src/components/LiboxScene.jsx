@@ -144,16 +144,14 @@ export default function LiboxScene() {
     >
       <div className="libox-pin">
         <div className="libox-heading">
-          <div className="section-label">01 / Nuestro LIBOx</div>
           <h2 id="libox-title">
-            Tus sensores.
+            El LIBOx.
             <br />
-            <span>Un mismo equipo.</span>
+            <span>Aquí van los sensores.</span>
           </h2>
           <p>
-            El LIBOx conecta los sensores con la aplicación. Gira el modelo y
-            pulsa los números para ver dónde se enchufa cada sensor y para qué
-            sirve cada botón.
+            Recoge las lecturas de los sensores y las manda a la aplicación.
+            Pulsa un número para ver qué se enchufa en cada conector.
           </p>
         </div>
         <div className="libox-stage">
@@ -194,7 +192,6 @@ export default function LiboxScene() {
                   onClick={() => select(index)}
                 >
                   <span>{label(index)}</span>
-                  {point === 0 && <b>{item.tag}</b>}
                 </button>
               )),
             )}
@@ -245,6 +242,7 @@ export default function LiboxScene() {
               onClick={() => zoom(0.8)}
               disabled={status !== "ready"}
               aria-label="Acercar LIBOx"
+              title="Acercar"
             >
               +
             </button>
@@ -252,6 +250,7 @@ export default function LiboxScene() {
               onClick={() => zoom(1.25)}
               disabled={status !== "ready"}
               aria-label="Alejar LIBOx"
+              title="Alejar"
             >
               −
             </button>
@@ -259,6 +258,7 @@ export default function LiboxScene() {
               onClick={reset}
               disabled={status !== "ready"}
               aria-label="Restablecer vista del LIBOx"
+              title="Volver a la vista inicial"
             >
               ↺
             </button>
@@ -285,7 +285,7 @@ export default function LiboxScene() {
           aria-label="Conexiones y controles del LIBOx"
         >
           <div className="libox-guide-label">
-            TOCA PARA EXPLORAR <span>↗</span>
+            Conectores y botones
           </div>
           <div className="libox-parts-list">
             {liboxParts.map((item, index) => (
@@ -303,10 +303,10 @@ export default function LiboxScene() {
           </div>
           <div className="libox-detail" aria-live="polite" aria-atomic="true">
             <span>{part?.category ?? "SENSORES, CARGA Y CONTROLES"}</span>
-            <h3>{part?.name ?? "¿Qué se conecta aquí?"}</h3>
+            <h3>{part?.name ?? "Siete puntos que conocer"}</h3>
             <p>
               {part?.description ??
-                "Pulsa un número para ver qué sensor se conecta en ese punto. También puedes localizar la carga solar y los botones de encendido y reinicio."}
+                "Elige un conector de la lista o un número del modelo. Si tiene sensor, verás también su modelo 3D."}
             </p>
             {selected === 1 && (
               <div className="depth-indicators">

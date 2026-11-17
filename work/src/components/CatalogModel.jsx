@@ -116,6 +116,7 @@ function ModelViewer({ item, large, onExpand }) {
             <button
               disabled={status !== "ready"}
               aria-label={`Acercar ${item.name}`}
+              title="Acercar"
               onClick={() => zoom(0.8)}
             >
               +
@@ -123,6 +124,7 @@ function ModelViewer({ item, large, onExpand }) {
             <button
               disabled={status !== "ready"}
               aria-label={`Alejar ${item.name}`}
+              title="Alejar"
               onClick={() => zoom(1.25)}
             >
               −
@@ -132,6 +134,7 @@ function ModelViewer({ item, large, onExpand }) {
         <button
           disabled={status !== "ready"}
           aria-label={`Restablecer vista de ${item.name}`}
+          title="Volver a la vista inicial"
           onClick={reset}
         >
           ↺
@@ -139,9 +142,10 @@ function ModelViewer({ item, large, onExpand }) {
         {!large && (
           <button
             aria-label={`Ampliar modelo 3D de ${item.name}`}
+            className="catalog-model-expand"
             onClick={() => onExpand(item)}
           >
-            ↗
+            <span aria-hidden="true">Ampliar ↗</span>
           </button>
         )}
       </div>

@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b1c17" />
-    <style>html,body,#root{background:#0b1c17;min-height:100%}html body{background:#0b1c17}#root{opacity:0;transition:opacity .18s}html.app-ready #root{opacity:1}#root:empty{min-height:100svh}.sensor-hero{background:#000}.sensor-hero .sensor-fallback{visibility:hidden;filter:saturate(.72)brightness(.55)contrast(1.15);opacity:.68;-webkit-mask-image:radial-gradient(at 52%,#000 18%,#000000d6 52%,#0000 78%);mask-image:radial-gradient(at 52%,#000 18%,#000000d6 52%,#0000 78%)}.sensor-hero .sensor-fallback.photo-ready{visibility:visible}.sensor-hero .sensor-model,.sensor-hero model-viewer{display:none}</style>
+    <style>html,body,#root{background:#0b1c17;min-height:100%}html body{background:#0b1c17}#root{opacity:0;transition:opacity .18s}html.app-ready #root{opacity:1}#root:empty{min-height:100svh}.sensor-hero{background:#0b1c17}.sensor-hero .sensor-fallback{visibility:hidden;filter:saturate(.72)brightness(.55)contrast(1.15);opacity:.68;-webkit-mask-image:radial-gradient(at 52%,#000 18%,#000000d6 52%,#0000 78%);mask-image:radial-gradient(at 52%,#000 18%,#000000d6 52%,#0000 78%)}.sensor-hero .sensor-fallback.photo-ready{visibility:visible}.sensor-hero .sensor-model,.sensor-hero model-viewer{display:none}</style>
+    <!-- La foto de la portada es lo primero que se ve: se pide con prioridad. -->
+    <link
+      rel="preload"
+      as="image"
+      href="./libox-invernadero.webp"
+      fetchpriority="high"
+    />
     <link rel="icon" href="./brand/favicon.ico" sizes="any" />
     <link
       rel="icon"
@@ -88,16 +95,27 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="./assets/main-DWVQqrBA.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/site-services-uqs7H7Na.js">
-    <link rel="modulepreload" crossorigin href="./assets/HeaderFooter-f-GRVQwM.js">
-    <link rel="modulepreload" crossorigin href="./assets/MeteoScene-B-AZlTDE.js">
-    <link rel="stylesheet" crossorigin href="./assets/site-services-B-Y4j9IJ.css">
-    <link rel="stylesheet" crossorigin href="./assets/MeteoScene-CHfNAGRA.css">
-    <link rel="stylesheet" crossorigin href="./assets/main-C9CH04js.css">
+    <script type="module" crossorigin src="./assets/main--Qg0wvi3.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/direction-ps5paLa1.js">
+    <link rel="modulepreload" crossorigin href="./assets/HeaderFooter-CwLuDl6Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/MeteoScene-deiCaNcr.js">
+    <link rel="stylesheet" crossorigin href="./assets/direction-uhRGbtvv.css">
+    <link rel="stylesheet" crossorigin href="./assets/MeteoScene-BJCKFQ4i.css">
+    <link rel="stylesheet" crossorigin href="./assets/main-M3jMjUNL.css">
   </head>
   <body>
     <div id="root"></div>
+    <!-- Copia estática del formulario de contacto para que Netlify Forms lo
+         detecte al publicar. El formulario visible lo pinta React. -->
+    <form name="contacto" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="town" />
+      <input name="crop" />
+      <textarea name="message"></textarea>
+    </form>
     <noscript
       >Activa JavaScript para explorar Hiotera. Puedes contactar con nosotros en
       el +34 624 412 364.</noscript

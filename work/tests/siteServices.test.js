@@ -196,7 +196,7 @@ test("legal pages, public copy and unchanged application render in every languag
           );
       }
       const html = render(App, {}, lang);
-      assert.ok(html.includes(translate("Equipos para", lang)));
+      assert.ok(html.includes(translate("Los equipos.", lang)));
       assert.ok(html.includes(translate("Hablemos", lang)));
       const signal = render(SignalSection, {}, lang);
       assert.match(signal, /lang="es" translate="no"/);

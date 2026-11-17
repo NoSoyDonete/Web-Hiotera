@@ -174,7 +174,7 @@ export default function NotebookDemo({ experience }) {
         </button>
         <section className="replica-notebook-summary">
           <div>
-            <h1>Cuaderno de {demoFarm.person}</h1>
+            <h2>Cuaderno de {demoFarm.person}</h2>
             <p>{demoFarm.name} · Campaña de ejemplo 2030</p>
           </div>
           <button className="replica-primary" onClick={() => edit("entry")}>
@@ -239,7 +239,7 @@ export default function NotebookDemo({ experience }) {
     <div ref={root} className="replica-page replica-notebook">
       <section className="replica-notebook-summary">
         <div>
-          <h1>{demoFarm.person}</h1>
+          <h2>{demoFarm.person}</h2>
           <p>{ready.filter(Boolean).length} de 5 apartados listos</p>
           <div
             className="replica-notebook-progress"

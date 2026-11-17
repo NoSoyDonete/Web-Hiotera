@@ -12,8 +12,10 @@ import "../meteo.css";
 
 const number = (index) => String(index + 1).padStart(2, "0");
 
-export default function MeteoScene() {
+export default function MeteoScene({ standalone = false }) {
   const { localize } = useLanguage();
+  // En la portada el h1 es el de la portada; en meteo.html la meteo es la página.
+  const MeteoTitle = standalone ? "h1" : "h2";
   const sectionRef = useRef(null),
     modelRef = useRef(null),
     progressRef = useRef(null);
@@ -53,19 +55,15 @@ export default function MeteoScene() {
       <div className="meteo-pin">
         <div className="meteo-copy">
           <div className="meteo-heading">
-            <div className="section-label">
-              02 / Conoce la estación meteorológica
-            </div>
-            <h1 id="meteo-title">
-              Viento y lluvia.
+            <MeteoTitle id="meteo-title">
+              La estación
               <br />
-              <span>Conoce cada pieza.</span>
-            </h1>
+              <span>meteorológica.</span>
+            </MeteoTitle>
             <p>
-              Esta estación mide 12 parámetros del exterior: temperatura,
-              humedad, lluvia, presión, radiación y viento. Usa la rueda del
-              ratón sobre la estación para separar las piezas y pulsa los
-              números para conocer qué hace cada una.
+              Mide 12 parámetros fuera del invernadero: temperatura, humedad,
+              lluvia, presión, radiación y viento. Gira la rueda del ratón sobre
+              ella para separar las piezas.
             </p>
           </div>
 
@@ -74,7 +72,7 @@ export default function MeteoScene() {
             aria-label="Partes de la estación meteorológica"
           >
             <div className="meteo-parts-caption">
-              {String(meteoParts.length).padStart(2, "0")} PARTES DESTACADAS
+              Piezas
             </div>
             <div className="meteo-part-list">
               {meteoParts.map((item, index) => (
@@ -140,7 +138,6 @@ export default function MeteoScene() {
                 aria-pressed={selectedIndex === index}
               >
                 <span>{number(index)}</span>
-                <b>{item.name}</b>
               </button>
             ))}
           </model-viewer>

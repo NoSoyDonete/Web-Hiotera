@@ -1515,8 +1515,8 @@ input:focus-visible {
   .form-grid {
     grid-template-columns: 1fr 1fr;
   }
-  .form-grid input[name="crop"],
-  .form-grid textarea,
+  .form-grid .form-field-wide,
+  .form-grid .form-note,
   .form-grid .form-privacy,
   .form-grid .button {
     grid-column: 1 / -1;
@@ -1644,5 +1644,106 @@ input:focus-visible {
   }
   .libox-back {
     animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Repaso de diseño (noviembre 2026): menos adorno y más legibilidad.
+   - Formulario con etiquetas visibles.
+   - Textos secundarios con más contraste.
+   - Tarjetas sin numeración decorativa y con el mismo radio de esquina.
+   - Movimiento corto (≈160 ms) solo como respuesta a la interacción.
+   --------------------------------------------------------------------------- */
+:root {
+  --card-radius: 20px;
+}
+.form-field {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.form-field > span {
+  color: var(--night);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.form-field small {
+  color: rgba(11, 28, 23, 0.62);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.form-grid input::placeholder,
+.form-grid textarea::placeholder {
+  color: rgba(11, 28, 23, 0.5);
+}
+
+/* Textos secundarios: de 55–67 % de opacidad a 78 % (contraste AA sobre crema). */
+.statement-copy,
+.impact-top p,
+.steps-intro p,
+.step p,
+.closing-row p,
+.faq-office p,
+.faq-item p {
+  color: rgba(11, 28, 23, 0.78);
+}
+.impact-card p {
+  opacity: 0.85;
+}
+.catalog-card p,
+.catalog-heading > p,
+.catalog-grow p {
+  color: #4d5e42;
+}
+.platform-heading > p {
+  color: rgba(220, 233, 211, 0.85);
+}
+.included-heading p,
+.included-card p {
+  color: rgba(238, 241, 231, 0.82);
+}
+
+/* Tarjetas: el título es lo que se mide, sin número encima. */
+.impact-card {
+  min-height: 0;
+  gap: 14px;
+  border-radius: var(--card-radius);
+}
+.impact-card h3 {
+  margin: 0;
+}
+.impact-card p {
+  max-width: none;
+}
+.included-card h3 {
+  margin-top: 0;
+}
+.catalog-card,
+.included-card,
+.faq-office {
+  border-radius: var(--card-radius);
+}
+
+/* Movimiento: respuesta breve al pasar el ratón, sin giros decorativos. */
+.impact-card,
+.catalog-card,
+.included-card {
+  transition: transform 0.16s ease;
+}
+.included-card:hover,
+.catalog-card:hover {
+  transform: translateY(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .impact-card:hover,
+  .included-card:hover,
+  .catalog-card:hover {
+    transform: none;
+  }
+}
+@media (min-width: 901px) {
+  .impact-card,
+  .impact-card:nth-child(4) {
+    min-height: 230px;
   }
 }

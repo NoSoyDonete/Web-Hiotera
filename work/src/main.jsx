@@ -5,6 +5,7 @@ import { LanguageProvider } from "./components/LanguageProvider.jsx";
 import "./styles.css";
 import "./experience.css";
 import "./site-services.css";
+import "./direction.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

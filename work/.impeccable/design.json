@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T12:00:00Z",
+  "title": "Design System: Hiotera",
+  "extensions": {
+    "colorMeta": {
+      "verde-senal": { "role": "primary", "displayName": "Verde Señal", "canonical": "#d9ff58", "tonalRamp": ["#2f3a08", "#4d5f10", "#6c8518", "#8fae22", "#b3d82f", "#d9ff58", "#e8ff9a", "#f6ffd9"] },
+      "menta": { "role": "secondary", "displayName": "Menta", "canonical": "#a9ebc1", "tonalRamp": ["#123a24", "#1f5c3a", "#2f8052", "#47a36c", "#73c792", "#a9ebc1", "#cdf4da", "#eefbf2"] },
+      "verde-hoja": { "role": "secondary", "displayName": "Verde Hoja", "canonical": "#69c98e", "tonalRamp": ["#0f3020", "#184d32", "#226b45", "#2e8a59", "#48aa73", "#69c98e", "#a3e0b9", "#e2f6e9"] },
+      "tierra-roja": { "role": "tertiary", "displayName": "Tierra Roja", "canonical": "#ff7252", "tonalRamp": ["#3d1208", "#661e0e", "#902b15", "#ba3a1f", "#e1502f", "#ff7252", "#ffab97", "#ffe5de"] },
+      "noche-invernadero": { "role": "neutral", "displayName": "Noche de Invernadero", "canonical": "#0b1c17", "tonalRamp": ["#0b1c17", "#16302a", "#24463d", "#365f53", "#4f7b6d", "#7a9c90", "#b2c7bf", "#e6eeea"] },
+      "bosque": { "role": "neutral", "displayName": "Bosque", "canonical": "#12372a" },
+      "verde-app": { "role": "neutral", "displayName": "Verde App", "canonical": "#10281f" },
+      "crema-campo": { "role": "neutral", "displayName": "Crema de Campo", "canonical": "#eef1e7" },
+      "papel": { "role": "neutral", "displayName": "Papel", "canonical": "#fbfaf5" },
+      "salvia-clara": { "role": "neutral", "displayName": "Salvia Clara", "canonical": "#e8eddf" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titular de la portada, dos líneas como máximo con la segunda en color." },
+      "headline": { "displayName": "Headline", "purpose": "Título de sección en dos líneas, la segunda en verde." },
+      "title": { "displayName": "Title", "purpose": "Títulos de tarjeta, pasos y preguntas." },
+      "body": { "displayName": "Body", "purpose": "Párrafos de lectura, ancho máximo 600–660 px." },
+      "label": { "displayName": "Label", "purpose": "Rótulos de instrumento: categorías, unidades. Nunca encima de un título." }
+    },
+    "shadows": [
+      { "name": "ventana-flotante", "value": "0 20px 70px #00130740", "purpose": "Ventana de la demo de la aplicación." },
+      { "name": "dialogo", "value": "0 30px 90px rgba(0, 0, 0, 0.3)", "purpose": "Formulario de contacto." },
+      { "name": "boton-flotante", "value": "0 10px 30px rgba(0, 0, 0, 0.25)", "purpose": "Botón de WhatsApp." },
+      { "name": "marcador-3d", "value": "0 2px 12px #182c1910", "purpose": "Números sobre los modelos 3D." }
+    ],
+    "motion": [
+      { "name": "respuesta", "value": "160ms ease", "purpose": "Relieve de tarjetas al pasar el ratón." },
+      { "name": "boton", "value": "200ms", "purpose": "Botones: suben 3 px al pasar el ratón." },
+      { "name": "cambio-de-modelo", "value": "opacity 450ms ease, transform 600ms cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "El LIBOx cede su sitio al modelo del sensor." }
+    ],
+    "breakpoints": [
+      { "name": "movil", "value": "600px" },
+      { "name": "tablet", "value": "900px" },
+      { "name": "zoom-escritorio", "value": "1200px" },
+      { "name": "cuatro-columnas", "value": "1401px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal sobre fondo oscuro.",
+      "html": "<button class=\"ds-btn-primary\">Ver los sensores <span>↘</span></button>",
+      "css": ".ds-btn-primary { min-height: 47px; display: inline-flex; align-items: center; gap: 11px; padding: 0 19px; border-radius: 999px; border: 1px solid #d9ff58; background: #d9ff58; color: #0b1c17; font: 800 0.97rem Manrope, system-ui, sans-serif; cursor: pointer; transition: transform 0.2s, background 0.2s; } .ds-btn-primary:hover { transform: translateY(-3px); background: #eef1e7; border-color: #eef1e7; } .ds-btn-primary:focus-visible { outline: 2px solid #69c98e; outline-offset: 5px; }"
+    },
+    {
+      "name": "Botón oscuro",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Acción principal sobre fondo claro.",
+      "html": "<button class=\"ds-btn-dark\">Hablar con un técnico <span>↗</span></button>",
+      "css": ".ds-btn-dark { min-height: 47px; display: inline-flex; align-items: center; gap: 11px; padding: 0 19px; border-radius: 999px; border: 1px solid #0b1c17; background: #0b1c17; color: #fbfaf5; font: 800 0.97rem Manrope, system-ui, sans-serif; cursor: pointer; transition: transform 0.2s, background 0.2s, color 0.2s; } .ds-btn-dark:hover { transform: translateY(-3px); background: #d9ff58; border-color: #d9ff58; color: #0b1c17; } .ds-btn-dark:focus-visible { outline: 2px solid #69c98e; outline-offset: 5px; }"
+    },
+    {
+      "name": "Botón de contorno",
+      "kind": "button",
+      "refersTo": "button-outline-on-dark",
+      "description": "Acción secundaria sobre fondo oscuro.",
+      "html": "<div style=\"background:#0b1c17;padding:16px\"><button class=\"ds-btn-outline\">Cuéntanos qué necesitas</button></div>",
+      "css": ".ds-btn-outline { min-height: 47px; padding: 0 19px; border-radius: 999px; border: 1px solid rgba(238, 241, 231, 0.3); background: transparent; color: #eef1e7; font: 800 0.97rem Manrope, system-ui, sans-serif; cursor: pointer; transition: transform 0.2s, color 0.2s, border-color 0.2s; } .ds-btn-outline:hover { transform: translateY(-3px); color: #d9ff58; border-color: #d9ff58; } .ds-btn-outline:focus-visible { outline: 2px solid #69c98e; outline-offset: 5px; }"
+    },
+    {
+      "name": "Campo con etiqueta",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo de formulario con etiqueta visible.",
+      "html": "<label class=\"ds-field\"><span>Teléfono <small>(opcional)</small></span><input type=\"tel\"></label>",
+      "css": ".ds-field { display: grid; gap: 6px; font-family: Manrope, system-ui, sans-serif; } .ds-field > span { color: #0b1c17; font-size: 0.95rem; font-weight: 700; } .ds-field small { color: rgba(11, 28, 23, 0.62); font-weight: 500; } .ds-field input { padding: 13px 14px; border: 1px solid rgba(11, 28, 23, 0.16); border-radius: 11px; background: rgba(255, 255, 255, 0.6); color: #0b1c17; outline: none; } .ds-field input:focus { border-color: #69c98e; box-shadow: 0 0 0 3px rgba(105, 201, 142, 0.16); }"
+    },
+    {
+      "name": "Tarjeta de medida",
+      "kind": "card",
+      "refersTo": "card-measure",
+      "description": "Qué se mide: título corto y una frase concreta.",
+      "html": "<article class=\"ds-card\"><h3>Riego</h3><p>Humedad del suelo y tensión a 15 y 30 cm. Sabes si la raíz tiene agua antes de abrir el riego.</p></article>",
+      "css": ".ds-card { max-width: 340px; padding: 30px; border-radius: 20px; background: #a9ebc1; color: #0b1c17; transition: transform 0.16s ease; } .ds-card:hover { transform: translateY(-4px); } .ds-card h3 { margin: 0 0 14px; font: 600 2.2rem/1 'Space Grotesk', sans-serif; letter-spacing: -0.06em; } .ds-card p { margin: 0; font: 400 1.1rem/1.55 Manrope, system-ui, sans-serif; opacity: 0.85; }"
+    },
+    {
+      "name": "Pestaña / filtro",
+      "kind": "chip",
+      "description": "Filtro del catálogo; el seleccionado va relleno.",
+      "html": "<div class=\"ds-chips\"><button aria-pressed=\"true\">Todos</button><button>Sensores</button><button>Energía</button></div>",
+      "css": ".ds-chips { display: flex; gap: 7px; font-family: Manrope, system-ui, sans-serif; } .ds-chips button { padding: 12px 22px; border: 1px solid #5d754a33; border-radius: 30px; background: transparent; color: #49633b; font-size: 1.05rem; cursor: pointer; } .ds-chips button[aria-pressed='true'] { background: #203d2b; color: #f5f8ec; border-color: #203d2b; } .ds-chips button:focus-visible { outline: 2px solid #84ae46; outline-offset: 4px; }"
+    },
+    {
+      "name": "Barra de navegación",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Barra flotante con marca, enlaces y acceso a la app.",
+      "html": "<nav class=\"ds-nav\"><b>Hiotera</b><span><a href=\"#\">El LIBOx</a><a href=\"#\">La meteo</a><a href=\"#\">La aplicación</a><a href=\"#\">Catálogo</a></span><a class=\"ds-nav-cta\" href=\"#\">Acceso a la aplicación ↗</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 14px; border-radius: 20px; background: #0b1c17; color: #eef1e7; font: 700 0.96rem Manrope, system-ui, sans-serif; } .ds-nav span { display: flex; gap: 4px; } .ds-nav a { color: inherit; text-decoration: none; padding: 10px 14px; border-radius: 999px; opacity: 0.66; transition: opacity 0.2s, background 0.2s; } .ds-nav span a:hover { opacity: 1; background: rgba(217, 255, 88, 0.12); } .ds-nav .ds-nav-cta { opacity: 1; border: 1px solid rgba(238, 241, 231, 0.34); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La sonda en el suelo",
+    "overview": "Hiotera es un instrumento de medida que vive en la tierra del invernadero. La web se diseña como esa sonda: precisa en lo que dice y en cómo lo muestra, con los equipos en 3D como protagonistas y los datos escritos con números claros. La precisión no es frialdad: el carácter confirmado es cercano y tranquilo. Se habla de tú, se deja aire alrededor de cada bloque y el contraste fuerte se reserva para lo que importa.",
+    "keyCharacteristics": [
+      "Bloques a sangre que alternan noche de invernadero y crema de campo.",
+      "Verde Señal escaso: acción principal, dato activo y nada más.",
+      "Títulos enormes con interlineado cerrado; texto de lectura amplio y con buen contraste.",
+      "Los equipos se enseñan en 3D, girables, en el mismo encuadre circular.",
+      "Sin rótulos decorativos encima de los títulos ni numeraciones de adorno."
+    ],
+    "rules": [
+      { "name": "The Una Señal Rule", "body": "En cada pantalla el Verde Señal marca una sola cosa principal (la acción o el dato). Si dos elementos compiten por él, uno pasa a contorno.", "section": "colors" },
+      { "name": "The Texto Legible Rule", "body": "El texto secundario no baja del 78 % de opacidad sobre crema ni del 82 % sobre oscuro. Se lee al sol, en el móvil.", "section": "colors" },
+      { "name": "The Dos Líneas Rule", "body": "Un título de sección cabe en dos líneas en escritorio. Si ocupa tres o más, se acorta el texto antes que reducir la letra.", "section": "typography" },
+      { "name": "The Mínimo 15 px Rule", "body": "Ningún texto de lectura baja de 15 px en pantalla; los rótulos mono, de 13 px.", "section": "typography" },
+      { "name": "The Relieve Al Tocar Rule", "body": "Las tarjetas están planas en reposo y suben 4 px al pasar el ratón (160 ms). Nada gira ni rebota.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do reservar el Verde Señal para la acción principal o el dato activo de cada pantalla.",
+      "Do partir los títulos de sección en dos líneas, la segunda en verde (Verde Señal sobre oscuro, verde hoja sobre crema).",
+      "Do mantener el texto secundario a 78 % de opacidad o más y ningún texto de lectura por debajo de 15 px.",
+      "Do dividir cualquier vh/vw por var(--zoom).",
+      "Do poner etiqueta visible a cada campo y marcar los opcionales.",
+      "Do usar movimiento corto (≈160 ms) solo como respuesta a la interacción, y respetar «reducir movimiento»."
+    ],
+    "donts": [
+      "Don't poner rótulos ni numeraciones decorativas encima de los títulos («01 / Sección»).",
+      "Don't usar franjas de palabras sueltas o tríos de eslóganes.",
+      "Don't añadir puntos que laten, giros automáticos ni animaciones ligadas al scroll de la página (el despiece de la meteo va con la rueda dentro de su círculo).",
+      "Don't mezclar en un mismo bloque píldoras y esquinas cortas.",
+      "Don't usar la tierra roja para errores ni como color de acción."
+    ]
+  }
+}

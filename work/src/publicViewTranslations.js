@@ -103,10 +103,10 @@ export const publicViewTranslations = [
     "Messwerte vergleichen und eigene Diagramme erstellen",
   ],
   [
-    "El exterior también cuenta.",
-    "Outside conditions matter too.",
-    "L’extérieur compte aussi.",
-    "Auch das Außenklima zählt.",
+    "Lo que pasa fuera del invernadero.",
+    "What happens outside the greenhouse.",
+    "Ce qui se passe hors de la serre.",
+    "Was außerhalb des Gewächshauses passiert.",
   ],
   [
     "Mira la temperatura, la humedad, la energía del sol, la lluvia y el viento fuera del invernadero. Abre sus gráficas para ver cómo han cambiado.",
@@ -169,10 +169,10 @@ export const publicViewTranslations = [
     "IHR BETRIEB AUF EINEN BLICK",
   ],
   [
-    "Todo empieza en tu finca.",
-    "It all starts on your farm.",
-    "Tout commence dans votre exploitation.",
-    "Alles beginnt auf Ihrem Betrieb.",
+    "Tus fincas, en lista o en el mapa.",
+    "Your farms, as a list or on the map.",
+    "Vos exploitations, en liste ou sur la carte.",
+    "Ihre Betriebe als Liste oder auf der Karte.",
   ],
   [
     "Encuentra tus fincas en una lista o en el mapa. Abre su ficha para ver los cultivos y los sensores. Aquí te mostramos la finca de ejemplo Demo1.",

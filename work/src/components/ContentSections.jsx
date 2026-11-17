@@ -20,21 +20,6 @@ function Lines({ items }) {
   ));
 }
 
-export function Marquee() {
-  const { localize } = useLanguage();
-  return localize(
-    <div className="marquee" aria-label="Mide, consulta y decide">
-      <div className="marquee-track">
-        <b>MIDE</b>
-        <i aria-hidden="true">✳</i>
-        <b>CONSULTA</b>
-        <i aria-hidden="true">✳</i>
-        <b>DECIDE</b>
-      </div>
-    </div>,
-  );
-}
-
 export function StatementSection() {
   const { localize } = useLanguage();
   return localize(
@@ -43,21 +28,19 @@ export function StatementSection() {
         <div className="statement-grid">
           <div>
             <h2>
-              El cultivo
+              A simple vista
               <br />
-              ya está
-              <br />
-              <span>hablando.</span>
+              <span>no se ve todo.</span>
             </h2>
           </div>
           <div className="statement-copy">
             <p>
-              No siempre se ve a simple vista si el suelo necesita agua o si
-              cambia el ambiente del invernadero. Hiotera reúne las lecturas de
-              los sensores para que puedas comprobarlo en la aplicación.
+              Un suelo seco a 30 cm o un invernadero que se calienta a mediodía
+              no siempre se notan mirando las plantas. Los sensores lo miden y
+              tú lo ves en la aplicación.
             </p>
             <a className="micro-link" href="#senal">
-              <b>↘</b> ver la aplicación
+              <b>↘</b> Ver la aplicación de ejemplo
             </a>
           </div>
         </div>
@@ -151,21 +134,18 @@ export function ImpactSection() {
       <div className="section-inner">
         <div className="impact-top">
           <h2>
-            Conoce tu finca.
+            Qué puedes
             <br />
-            Decide <span className="green-text">mejor.</span>
+            <span className="green-text">medir.</span>
           </h2>
           <p>
-            Saber cómo están el suelo y el ambiente te ayuda a decidir qué
-            necesita atención en tu finca.
+            Cada sensor se conecta al LIBOx o a la estación, y sus lecturas
+            llegan a la misma aplicación.
           </p>
         </div>
         <div className="impact-grid">
-          {impactCards.map((item, index) => (
+          {impactCards.map((item) => (
             <article className="impact-card" key={item.category}>
-              <span className="impact-index">
-                {indexLabel(index)} / {item.category}
-              </span>
               <h3>
                 <Lines items={item.title} />
               </h3>
@@ -186,12 +166,12 @@ export function JourneySection() {
         <div className="steps-layout">
           <div className="steps-intro">
             <h2>
-              Empieza
+              Cómo
               <br />
-              simple.
+              empezar.
             </h2>
             <p>
-              Elige qué quieres medir y nosotros nos encargamos del resto.
+              Desde la primera llamada hasta ver tu finca en el móvil.
             </p>
           </div>
           <div className="step-list">
@@ -222,21 +202,18 @@ export function IncludedSection() {
       <div className="section-inner">
         <div className="included-heading">
           <h2 id="included-title">
-            Todo incluido
+            Qué incluye
             <br />
-            <span>desde el primer día.</span>
+            <span>la compra.</span>
           </h2>
           <p>
-            No tienes que preocuparte de montar nada. Nos encargamos de la
-            instalación y te acompañamos después.
+            Tú no montas nada. Un técnico lo instala, te explica la aplicación
+            y el primer año de mantenimiento corre de nuestra cuenta.
           </p>
         </div>
         <div className="included-grid">
-          {includedItems.map((item, index) => (
+          {includedItems.map((item) => (
             <article className="included-card" key={item.title}>
-              <span className="included-no" aria-hidden="true">
-                {indexLabel(index)}
-              </span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </article>
@@ -263,7 +240,7 @@ export function FaqSection({ onContact }) {
             <span>frecuentes.</span>
           </h2>
           <aside className="faq-office" aria-label="Oficina de Hiotera">
-            <h3>¿Prefieres hablar con alguien?</h3>
+            <h3>Oficina de El Ejido</h3>
             <a className="faq-phone" href={site.phoneHref}>
               {site.phone}
             </a>
@@ -271,7 +248,7 @@ export function FaqSection({ onContact }) {
             <p>{site.officeAddress}</p>
             <div className="faq-office-actions">
               <button className="button dark-button" onClick={onContact}>
-                Escríbenos <span className="arrow">↗</span>
+                Enviar una consulta <span className="arrow">↗</span>
               </button>
               <a
                 className="faq-map"
@@ -328,17 +305,17 @@ export function ClosingSection({ onContact }) {
     <section className="closing">
       <div className="closing-inner">
         <h2>
-          Tu mejor
+          Cuéntanos
           <br />
-          cultivo <span>empieza aquí.</span>
+          <span>qué cultivas.</span>
         </h2>
         <div className="closing-row">
           <p>
-            Cuéntanos qué cultivas, cómo trabajas hoy y qué quieres mejorar. Te
-            enseñamos qué puedes medir y cómo verlo en la aplicación.
+            Con eso te decimos qué sensores tienen sentido en tu finca y qué
+            verías después en la aplicación.
           </p>
           <button className="button dark-button" onClick={onContact}>
-            Habla con un experto <span className="arrow">↗</span>
+            Hablar con un técnico <span className="arrow">↗</span>
           </button>
         </div>
       </div>

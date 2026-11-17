@@ -69,22 +69,9 @@ test("los números del modelo son opacos y contrastados, también en móvil", as
   );
 });
 
-test("la franja muestra las tres palabras una sola vez y sin movimiento", async () => {
-  const component = await readFile(
-    new URL("../src/components/ContentSections.jsx", import.meta.url),
-    "utf8",
-  );
-  const marquee = component.slice(
-    component.indexOf("export function Marquee"),
-    component.indexOf("export function StatementSection"),
-  );
-  for (const word of ["MIDE", "CONSULTA", "DECIDE"])
-    assert.equal(marquee.split(`<b>${word}</b>`).length - 1, 1);
-  const css = await readFile(
-    new URL("../src/styles.css", import.meta.url),
-    "utf8",
-  );
-  assert.ok(!css.match(/\.marquee-track\s*\{[^}]*animation:/));
+test("no hay franja decorativa de tres palabras", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  assert.ok(!app.includes("Marquee"));
 });
 
 test("la aplicación explica que todos los parámetros tienen su propio histórico", async () => {
@@ -93,8 +80,8 @@ test("la aplicación explica que todos los parámetros tienen su propio históri
     "utf8",
   );
   const text = source.replace(/\s+/g, " ");
-  assert.match(text, /Cada parámetro tiene su propia gráfica histórica/);
-  assert.match(text, /Aquí puedes ver algunos ejemplos/);
+  assert.match(text, /Pulsa cualquier lectura para abrir su gráfica/);
+  assert.match(text, /datos inventados/);
 });
 
 test("el catálogo filtra por categoría y texto sin distinguir tildes", () => {
@@ -124,7 +111,7 @@ test("el catálogo incluye el tensiómetro digital confirmado y cámaras con con
 test("la portada lleva al catálogo y elimina el acceso directo a la meteo", async () => {
   assert.deepEqual(heroPhases[0].action, {
     href: "#catalogo",
-    label: "Explora el catálogo",
+    label: "Ver los sensores",
   });
   const hero = await readFile(
     new URL("../src/components/HeroScene.jsx", import.meta.url),
@@ -157,14 +144,14 @@ test("la portada es fotográfica y el LIBOx aparece inmediatamente antes de la m
   );
 });
 
-test("la portada conserva los tres textos originales sin depender de un modelo", () => {
+test("la portada tiene tres mensajes concretos sin depender de un modelo", () => {
   assert.deepEqual(
     heroPhases.map((item) => item.title),
-    ["El campo", "Lo invisible", "Entiende."],
+    ["Tu invernadero,", "Riega cuando", "Te avisa"],
   );
   assert.deepEqual(
     heroPhases.map((item) => item.tab),
-    ["El campo", "Las señales", "Las decisiones"],
+    ["El suelo", "El riego", "Los avisos"],
   );
 });
 

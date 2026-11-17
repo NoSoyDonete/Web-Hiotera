@@ -1066,7 +1066,7 @@ button {
   transition: transform 0.25s;
 }
 .impact-card:hover {
-  transform: translateY(-6px) rotate(-0.5deg);
+  transform: translateY(-4px);
 }
 .impact-card:nth-child(2) {
   background: var(--acid);
@@ -1769,7 +1769,7 @@ footer {
 .hero-phase .eyebrow {
   font-size: 0.935rem;
 }
-.hero-phase h1 {
+.hero-phase .hero-title {
   max-width: 680px;
   margin: 25px 0 0;
   font:
@@ -1777,7 +1777,7 @@ footer {
     sans-serif;
   letter-spacing: -0.115em;
 }
-.hero-phase h1 span {
+.hero-phase .hero-title span {
   display: block;
   color: var(--acid);
 }
@@ -1976,7 +1976,7 @@ footer {
     top: 43%;
     width: min(calc(86vw / var(--zoom)), 680px);
   }
-  .hero-phase h1 {
+  .hero-phase .hero-title {
     font-size: clamp(4.3rem, calc(12vw / var(--zoom)), 8rem);
   }
   .hero-phase p {
@@ -2050,7 +2050,7 @@ footer {
   .hero-hud span:first-child {
     max-width: 53%;
   }
-  .hero-phase h1 {
+  .hero-phase .hero-title {
     font-size: clamp(4.1rem, calc(18vw / var(--zoom)), 6.5rem);
     margin-top: 17px;
   }

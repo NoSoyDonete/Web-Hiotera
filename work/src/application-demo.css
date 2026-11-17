@@ -590,7 +590,7 @@
   flex: 1;
   min-width: 0;
 }
-.replica-notebook-summary h1 {
+.replica-notebook-summary h2 {
   font-size: 32px;
   line-height: 1.3;
   margin: 0;
@@ -944,7 +944,7 @@
   font-weight: 800;
   letter-spacing: 1px;
 }
-.replica-guide-article h1 {
+.replica-guide-article h2 {
   font-size: 32px;
   margin: 12px 0;
 }

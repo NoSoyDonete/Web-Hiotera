@@ -1,6 +1,10 @@
 import { useLanguage } from "./LanguageProvider.jsx";
 import { useEffect, useId, useRef, useState } from "react";
-import { catalogCategories, filterCatalog } from "../catalog.js";
+import {
+  catalogCategories,
+  equipmentComparison,
+  filterCatalog,
+} from "../catalog.js";
 import CatalogModel from "./CatalogModel.jsx";
 
 export default function CatalogSection({ onContact }) {
@@ -25,16 +29,15 @@ export default function CatalogSection({ onContact }) {
       <div className="section-inner">
         <div className="catalog-heading">
           <div>
-            <div className="section-label">04 / Catálogo</div>
             <h2 id="catalog-title">
-              Equipos para
+              Los equipos.
               <br />
-              <span>conocer tu cultivo.</span>
+              <span>Uno a uno.</span>
             </h2>
           </div>
           <p>
-            Descubre qué mide cada sensor y para qué sirve cada equipo. Puedes
-            girar los modelos y ampliarlos para verlos de cerca.
+            Arrastra cualquier modelo para girarlo o amplíalo para verlo de
+            cerca. Si no sabes cuál necesitas, te ayudamos a elegir.
           </p>
         </div>
         <div className="catalog-toolbar">
@@ -121,6 +124,37 @@ export default function CatalogSection({ onContact }) {
             </button>
           </div>
         )}
+        <details className="catalog-compare">
+          <summary>
+            Comparar los equipos
+            <span aria-hidden="true">+</span>
+          </summary>
+          <div className="catalog-compare-scroll">
+            <table>
+              <caption>Qué mide cada equipo y dónde se conecta</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Equipo</th>
+                  <th scope="col">Qué mide o hace</th>
+                  <th scope="col">Unidades en la aplicación</th>
+                  <th scope="col">Dónde va</th>
+                </tr>
+              </thead>
+              <tbody>
+                {equipmentComparison.map((row) => (
+                  <tr key={row.name}>
+                    <th scope="row">{row.name}</th>
+                    <td>{row.measures}</td>
+                    <td className="catalog-compare-units">
+                      {row.units || "—"}
+                    </td>
+                    <td>{row.connects}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
         <div className="catalog-grow">
           <span aria-hidden="true">＋</span>
           <div>

@@ -1,0 +1,618 @@
+/* ---------------------------------------------------------------------------
+   Dirección confirmada (DESIGN.md): componentes firmes, de herramienta, y un
+   carácter cercano y tranquilo.
+   Esta hoja se carga la última: si se quita su import, la web vuelve al
+   estilo anterior (píldoras y titulares enormes).
+   --------------------------------------------------------------------------- */
+:root {
+  --edge-sm: 6px; /* campos, chips, controles pequeños */
+  --edge-md: 8px; /* botones */
+  --edge-lg: 12px; /* tarjetas, paneles, barra, diálogos */
+  --edge-line: rgba(11, 28, 23, 0.22);
+  --edge-line-dark: rgba(238, 241, 231, 0.24);
+}
+
+/* Selección de texto y foco con la paleta de la marca. */
+::selection {
+  background: var(--acid);
+  color: var(--night);
+}
+
+/* ---- Botones: rectángulos firmes en lugar de píldoras ---- */
+.button,
+.nav-cta,
+.whatsapp-button,
+.libox-back,
+.footer-contact,
+:root .catalog-model-status button,
+.platform-dialog-top button {
+  border-radius: var(--edge-md);
+}
+.nav-links a,
+.tab,
+.platform-tabs button,
+.catalog-filters button,
+:root .meteo-view-buttons button,
+.depth-indicators span,
+.legal-tabs a,
+.libox-part-loading,
+.toast {
+  border-radius: var(--edge-sm);
+}
+/* Controles de los visores 3D: cuadrados con esquina corta. */
+.libox-tools button,
+:root .meteo-camera-tools button,
+:root .catalog-model-tools button,
+.close-modal {
+  border-radius: var(--edge-sm);
+}
+/* El botón sube menos: respuesta, no espectáculo. */
+.button:hover {
+  transform: translateY(-2px);
+}
+
+/* ---- Tarjetas, paneles y barra: esquina de 12 px y borde visible ---- */
+.topbar,
+.impact-card,
+.catalog-card,
+.included-card,
+.faq-office,
+.platform-window,
+.platform-dialog,
+:root .catalog-model-dialog,
+.modal-card,
+.language-options,
+.legal-identity,
+.mini-reading {
+  border-radius: var(--edge-lg);
+}
+.impact-card {
+  border: 1px solid rgba(11, 28, 23, 0.14);
+}
+.catalog-card {
+  border-color: var(--edge-line);
+}
+.included-card {
+  border-color: var(--edge-line-dark);
+}
+
+/* ---- Campos ---- */
+.form-grid input,
+.form-grid textarea,
+.catalog-search input {
+  border-radius: var(--edge-sm);
+  border-color: var(--edge-line);
+}
+
+/* ---- Carácter tranquilo: titulares contenidos y con aire ----
+   Máximo 6rem, interletraje no menor de -0.04em e interlineado algo más
+   abierto. Se mantiene la estructura de dos líneas con la segunda en color. */
+.hero-phase .hero-title {
+  font-size: clamp(3.4rem, calc(6vw / var(--zoom)), 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.statement h2,
+.impact-top h2,
+.steps h2,
+.platform-heading h2,
+.catalog-heading h2,
+.included-heading h2,
+.faq-intro h2 {
+  font-size: clamp(2.6rem, calc(4.4vw / var(--zoom)), 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+.closing h2 {
+  font-size: clamp(3rem, calc(5.6vw / var(--zoom)), 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.libox-heading h2,
+:root .meteo-heading :is(h1, h2) {
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+.impact-card h3,
+.included-card h3,
+.step h3,
+.catalog-card h3,
+.faq-item summary {
+  letter-spacing: -0.03em;
+}
+/* Más espacio entre el título y lo que sigue. */
+.impact-top,
+.included-heading,
+.platform-heading,
+.catalog-heading {
+  margin-bottom: 56px;
+}
+
+@media (max-width: 600px) {
+  .hero-phase .hero-title {
+    font-size: clamp(2.8rem, 13vw, 3.6rem);
+  }
+  .statement h2,
+  .impact-top h2,
+  .steps h2,
+  .platform-heading h2,
+  .catalog-heading h2,
+  .included-heading h2,
+  .faq-intro h2,
+  .closing h2 {
+    font-size: clamp(2.3rem, 11vw, 3rem);
+  }
+}
+
+/* ---- Contraste y legibilidad (crítica 2026-11-16, problema 2) ----
+   Mínimos: 4.5:1 en texto normal y 3:1 en titulares grandes. */
+:root {
+  --leaf-text: #2b8650; /* verde hoja para texto: 4:1 sobre crema */
+  --muted-green: #4f6340; /* rótulos verdosos: ≥5:1 sobre claros */
+}
+.statement h2 span,
+.closing h2 span,
+.green-text,
+.faq-intro h2 span,
+.signal-head h2 span {
+  color: var(--leaf-text);
+}
+/* Tarjeta coral: texto noche (≈6.8:1) en lugar de crema (2.6:1). */
+.impact-card:nth-child(3),
+.impact-card:nth-child(3) .impact-index {
+  color: var(--night);
+}
+.catalog-card small,
+.catalog-count,
+.catalog-search label,
+.catalog-grow > span,
+:root .catalog-model-status,
+:root .meteo-parts-caption,
+:root .meteo-part-list button span,
+.libox-guide-label,
+.libox-parts-list button > span {
+  color: var(--muted-green);
+}
+/* WhatsApp: blanco sobre verde oscuro (≈6:1). */
+.whatsapp-button {
+  background: #146b39;
+}
+.whatsapp-button:hover {
+  background: #0f5530;
+}
+/* Sin palabras sueltas al final de párrafo; titulares equilibrados. */
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* ---- Primera pantalla (problema 3) ----
+   Mientras llega la foto, la portada ya tiene el tono del invernadero de noche
+   en lugar de un negro vacío. */
+.sensor-pin {
+  background:
+    radial-gradient(ellipse 55% 70% at 66% 50%, #16392b 0%, transparent 70%),
+    var(--night);
+}
+
+/* ---- Llamadas a la acción (problema 5) ---- */
+.hero-assurance {
+  margin: 18px 0 0;
+  max-width: 420px;
+  color: rgba(238, 241, 231, 0.86);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+/* «Acceso a la aplicación» es para clientes: discreto, sin competir. */
+.topbar .nav-cta {
+  border-color: transparent;
+  background: transparent;
+  opacity: 0.85;
+}
+.topbar .nav-cta:hover {
+  opacity: 1;
+  border-color: var(--edge-line-dark);
+}
+/* Botón de ampliar del catálogo con texto visible. */
+:root .catalog-model-tools .catalog-model-expand {
+  width: auto;
+  padding: 0 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ---- Formulario de contacto (problema 1) ---- */
+.contact-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.modal-card .contact-call {
+  color: var(--night);
+  border-color: var(--edge-line);
+  background: transparent;
+}
+.modal-card .contact-call:hover {
+  border-color: var(--night);
+}
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+}
+.form-error {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--edge-sm);
+  background: #fde8e3;
+  color: #8a2410;
+  font-size: 0.95rem;
+}
+.form-grid .button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* ---- Lectura de ejemplo en la portada ----
+   Panel de instrumento: cifras en mono con su unidad, sin adorno. */
+.hero-readout {
+  position: absolute;
+  z-index: 5;
+  right: calc(6vw / var(--zoom));
+  bottom: 96px;
+  width: min(340px, 30vw);
+  padding: 16px 18px;
+  border: 1px solid var(--edge-line-dark);
+  border-radius: var(--edge-lg);
+  background: rgba(7, 19, 16, 0.72);
+  backdrop-filter: blur(8px);
+  color: var(--cream);
+}
+.hero-readout-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+  color: rgba(238, 241, 231, 0.75);
+  font: 0.85rem "DM Mono", monospace;
+}
+.hero-readout-title span {
+  color: var(--acid);
+}
+.hero-readout dl {
+  display: grid;
+  margin: 0;
+}
+.hero-readout dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--edge-line-dark);
+}
+.hero-readout dt {
+  font-size: 0.95rem;
+  color: rgba(238, 241, 231, 0.86);
+}
+.hero-readout dd {
+  margin: 0;
+  font: 500 1.35rem "DM Mono", monospace;
+  font-variant-numeric: tabular-nums;
+}
+.hero-readout dd small {
+  margin-left: 5px;
+  font-size: 0.85rem;
+  color: rgba(238, 241, 231, 0.75);
+}
+@media (max-width: 900px) {
+  .hero-readout {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 28px;
+  }
+  .sensor-pin {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+}
+
+/* ---- Comparativa de equipos ---- */
+.catalog-compare {
+  margin-top: 40px;
+  border-top: 1px solid #7f94613d;
+}
+.catalog-compare summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  cursor: pointer;
+  list-style: none;
+  font: 500 clamp(1.3rem, 1.5vw, 1.7rem) "Space Grotesk", sans-serif;
+  letter-spacing: -0.03em;
+}
+.catalog-compare summary::-webkit-details-marker {
+  display: none;
+}
+.catalog-compare summary span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--edge-sm);
+  background: var(--acid);
+  font-size: 1.4rem;
+  transition: transform 0.16s ease;
+}
+.catalog-compare[open] summary span {
+  transform: rotate(45deg);
+}
+.catalog-compare-scroll {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.catalog-compare table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.catalog-compare caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.catalog-compare th,
+.catalog-compare td {
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--edge-line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.catalog-compare thead th {
+  color: var(--muted-green);
+  font: 0.85rem "DM Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.catalog-compare tbody th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.catalog-compare td {
+  color: rgba(11, 28, 23, 0.82);
+}
+.catalog-compare-units {
+  font-family: "DM Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---- Pantallas anchas ----
+   Portada, LIBOx y meteo colocan sus piezas en porcentajes del ancho. En
+   monitores muy anchos (o con el navegador alejado) se separaban: texto a un
+   lado, modelo en medio y paneles en la otra punta. Su escenario se limita al
+   mismo ancho máximo que el resto (1920 px) y se centra; el color de fondo
+   sigue ocupando toda la ventana. */
+.sensor-hero,
+.libox-section,
+.meteo-section {
+  /* 1920 px reales: con el zoom del 90 % de escritorio el ancho interno es mayor. */
+  --stage-max: calc(1920px / var(--zoom));
+}
+.sensor-hero {
+  background: var(--night);
+}
+.sensor-pin,
+.libox-pin,
+:root .meteo-pin {
+  width: 100%;
+  max-width: var(--stage-max);
+  margin-inline: auto;
+}
+
+/* ---- LIBOx en escritorio: rejilla en lugar de posiciones absolutas ----
+   El título y la lista de conectores iban colocados en porcentajes de la
+   altura y se pisaban en pantallas de 1024–1440 px. Ahora van en columna, uno
+   debajo del otro, y el modelo ocupa la columna derecha. La sección mide como
+   mínimo una pantalla, pero crece si el contenido lo necesita. */
+@media (min-width: 901px) {
+  .libox-pin {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.36fr) minmax(0, 0.64fr);
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(24px, calc(3vw / var(--zoom)), 64px);
+    row-gap: clamp(20px, calc(3svh / var(--zoom)), 40px);
+    height: auto;
+    min-height: calc(100svh / var(--zoom));
+    padding: clamp(96px, calc(13svh / var(--zoom)), 140px) 6% 40px;
+  }
+  .libox-heading,
+  .libox-guide {
+    position: relative;
+    inset: auto;
+    width: auto;
+    grid-column: 1;
+  }
+  .libox-heading {
+    grid-row: 1;
+  }
+  .libox-guide {
+    grid-row: 2;
+    align-self: start;
+  }
+  .libox-stage {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    min-height: min(640px, calc(72svh / var(--zoom)));
+  }
+  .libox-heading h2 {
+    margin-top: 0;
+  }
+}
+
+/* ---- Barra superior en pantallas medianas ----
+   Entre tablet y portátil pequeño el texto largo del acceso se partía en dos
+   líneas: se usa la versión corta «Acceder». */
+@media (max-width: 1279px) {
+  .topbar .nav-cta-label {
+    display: none;
+  }
+  .topbar .nav-cta-short {
+    display: inline;
+  }
+}
+.topbar .nav-cta,
+.nav-links a {
+  white-space: nowrap;
+}
+/* Móviles estrechos (≤420 px): la barra no cabe con el atajo al catálogo,
+   que ya está en la portada como «Ver los sensores». */
+@media (max-width: 420px) {
+  .topbar .nav-meteo-link {
+    display: none;
+  }
+}
+
+/* ---- Meteo en pantallas bajas ----
+   En portátiles de 720 px de alto la columna de texto no cabía y salía una
+   barra de scroll interna. La sección mide al menos una pantalla y crece si
+   hace falta; el modelo conserva una altura mínima. */
+@media (min-width: 901px) {
+  :root .meteo-section {
+    height: auto;
+  }
+  :root .meteo-pin {
+    position: relative;
+    height: auto;
+    min-height: calc(100svh / var(--zoom));
+  }
+  :root .meteo-copy {
+    overflow: visible;
+  }
+  :root .meteo-stage {
+    min-height: min(620px, calc(70svh / var(--zoom)));
+  }
+}
+/* El botón flotante de WhatsApp tapaba «Despiece»: se deja su hueco. */
+:root .meteo-view-buttons {
+  margin-right: 170px;
+}
+@media (max-width: 600px) {
+  :root .meteo-view-buttons {
+    margin-right: 64px;
+  }
+}
+
+/* ---- Meteo en móvil ----
+   Sin ratón no hay rueda: la pista de la rueda sobra y los botones
+   «Montada»/«Despiece» pasan a ocupar el ancho. El modelo gana altura. */
+@media (max-width: 600px) {
+  :root .meteo-stage {
+    min-height: 360px;
+  }
+  :root .meteo-transport {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  :root .meteo-scroll-hint {
+    display: none;
+  }
+  :root .meteo-view-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  :root .meteo-view-buttons button {
+    min-height: 44px;
+  }
+}
+/* Restos del antiguo despiece por scroll: en móvil la sección medía 2,8
+   pantallas y la ficha tenía scroll interno. Ahora fluye con la página. */
+@media (max-width: 900px) {
+  :root .meteo-section {
+    height: auto;
+  }
+  :root .meteo-pin {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+}
+
+/* ---- Meteo en tablet (601–900 px) ----
+   Dos columnas dejaban el modelo diminuto. Se apila como en el móvil:
+   título, modelo grande, piezas y controles. */
+@media (min-width: 601px) and (max-width: 900px) {
+  :root .meteo-pin {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "heading" "model" "parts" "transport";
+    padding: 110px 6% 28px;
+  }
+  :root .meteo-copy {
+    display: contents;
+  }
+  :root .meteo-heading {
+    grid-area: heading;
+  }
+  :root .meteo-stage {
+    grid-area: model;
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 480px;
+  }
+  :root .meteo-parts {
+    grid-area: parts;
+  }
+  :root .meteo-transport {
+    grid-area: transport;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  :root .meteo-heading :is(h1, h2) br {
+    display: none;
+  }
+  :root .meteo-heading :is(h1, h2) span::before {
+    content: " ";
+    white-space: pre;
+  }
+}
+
+/* ---- Círculos de los escenarios 3D ----
+   El círculo se calculaba solo con el ancho: con escenarios más bajos se
+   salía por abajo y se montaba sobre la barra de «Montada / Despiece» y la
+   sección siguiente. Ahora se ajusta al lado más corto del escenario y sus
+   anillos no salen de él. */
+:root .meteo-stage,
+.libox-stage {
+  container-type: size;
+  overflow: clip;
+}
+:root .meteo-stage::before {
+  width: min(76cqw, 92cqh);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.libox-stage::before {
+  width: min(80cqw, 92cqh);
+}

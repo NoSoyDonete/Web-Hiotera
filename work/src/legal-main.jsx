@@ -6,6 +6,7 @@ import { legalDocuments } from "./legalContent.js";
 import "./styles.css";
 import "./experience.css";
 import "./site-services.css";
+import "./direction.css";
 
 const requestedKey = new URLSearchParams(window.location.search).get(
   "document",

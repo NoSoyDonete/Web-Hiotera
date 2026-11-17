@@ -6,3 +6,6 @@ node_modules/
 /scratch/
 # Archivo local de trabajo, no se publica.
 aplicacion.zip
+# Configuración local de herramientas, no se publica.
+.claude/
+.impeccable/hook.cache.json

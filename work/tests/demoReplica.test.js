@@ -111,7 +111,7 @@ test("los seis apartados y los treinta históricos renderizan sin nombres reales
     assert.match(render("farm-telemetry"), /<h2>Telemetría de finca<\/h2>/);
     const notebook = render("notebook"),
       guides = render("guides");
-    assert.match(notebook, /<h1>Demo1<\/h1>/);
+    assert.match(notebook, /<h2>Demo1<\/h2>/);
     assert.match(notebook, /1 de 5 apartados listos/);
     assert.equal(
       (notebook.match(/class="replica-notebook-step"/g) ?? []).length,

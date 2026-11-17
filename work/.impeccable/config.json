@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/application-demo.css"
+        ],
+        "createdAt": "2026-11-16T12:43:48.863Z",
+        "reason": "Claude: la réplica de la app reproduce la interfaz real de clientes según sus capturas (README, apartado La aplicación); los bordes laterales son del original"
+      }
+    ]
+  }
+}

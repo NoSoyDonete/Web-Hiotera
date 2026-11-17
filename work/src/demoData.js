@@ -509,7 +509,7 @@ export const platformViews = [
     id: "meteo",
     tab: "Meteo",
     category: "ESTACIÓN METEOROLÓGICA",
-    title: "El exterior también cuenta.",
+    title: "Lo que pasa fuera del invernadero.",
     description:
       "Mira la temperatura, la humedad, la energía del sol, la lluvia y el viento fuera del invernadero. Abre sus gráficas para ver cómo han cambiado.",
     notes: [
@@ -535,7 +535,7 @@ export const platformViews = [
     id: "farms",
     tab: "Fincas",
     category: "TU EXPLOTACIÓN, EN UN VISTAZO",
-    title: "Todo empieza en tu finca.",
+    title: "Tus fincas, en lista o en el mapa.",
     description:
       "Encuentra tus fincas en una lista o en el mapa. Abre su ficha para ver los cultivos y los sensores. Aquí te mostramos la finca de ejemplo Demo1.",
     notes: ["Finca Demo1", "LIBOx 000 y 001", "Lista, mapa y ficha de finca"],

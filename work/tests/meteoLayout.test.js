@@ -70,7 +70,7 @@ test("every translation keeps heading and parts inside the same responsive colum
         html.includes('<div class="meteo-copy"><div class="meteo-heading">'),
       );
       assert.ok(heading < parts && parts < stage);
-      assert.ok(html.includes(translate("Viento y lluvia.", language)));
+      assert.ok(html.includes(translate("La estación", language)));
       assert.ok(html.includes(translate("Anemómetro", language)));
       assert.match(html, /role="progressbar"/);
       assert.match(html, /animation-name="Viento"/);

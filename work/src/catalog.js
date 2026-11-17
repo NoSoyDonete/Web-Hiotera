@@ -130,3 +130,57 @@ export function filterCatalog(category, query, translate = (value) => value) {
       ).includes(search),
   );
 }
+
+// Comparativa del catálogo. Solo datos confirmados; las unidades son las que
+// muestra la aplicación.
+export const equipmentComparison = [
+  {
+    name: "LIBOx",
+    measures: "Recoge las lecturas de los sensores y las envía a la aplicación",
+    units: "",
+    connects: "Se carga con la placa solar",
+  },
+  {
+    name: "Estación meteorológica",
+    measures:
+      "Temperatura, humedad, punto de rocío, déficit de humedad, lluvia, presión, radiación y viento",
+    units: "°C · % · g/m³ · mm · hPa · W/m² · km/h",
+    connects: "Fuera del invernadero, por su cuenta",
+  },
+  {
+    name: "Sonda de suelo",
+    measures: "Temperatura, humedad y conductividad del suelo",
+    units: "°C · % · dS/m",
+    connects: "LIBOx, salida inferior izquierda",
+  },
+  {
+    name: "Tensiómetros para LIBOx",
+    measures: "Tensión del agua en el suelo a 15 y 30 cm",
+    units: "cbar",
+    connects: "LIBOx, otras dos salidas inferiores",
+  },
+  {
+    name: "Sensor de radiación",
+    measures: "Energía del sol que llega al cultivo",
+    units: "W/m²",
+    connects: "LIBOx, salida superior",
+  },
+  {
+    name: "Placa solar",
+    measures: "Carga la batería del LIBOx",
+    units: "",
+    connects: "LIBOx, conector bajo la antena",
+  },
+  {
+    name: "Tensiómetro digital",
+    measures: "Tensión del agua en el suelo, en su propia pantalla",
+    units: "",
+    connects: "Funciona por su cuenta",
+  },
+  {
+    name: "Cámaras de videovigilancia",
+    measures: "Imagen de la finca y sus instalaciones",
+    units: "",
+    connects: "Te asesoramos según tu finca",
+  },
+];

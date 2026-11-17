@@ -1,34 +1,28 @@
 // Contenido editable: cada objeto representa una pieza de la página.
 export const heroPhases = [
   {
-    tab: "El campo",
-    eyebrow: "SENSORES PARA INVERNADEROS",
-    title: "El campo",
-    highlight: "habla.",
+    tab: "El suelo",
+    title: "Tu invernadero,",
+    highlight: "en el móvil.",
     description:
-      "Consulta la humedad y la temperatura del suelo y las condiciones del invernadero desde una aplicación sencilla, en el móvil o el ordenador.",
-    action: { href: "#catalogo", label: "Explora el catálogo" },
+      "Ponemos sensores en el suelo y en el invernadero. Tú ves la humedad, la temperatura y las sales en una aplicación, en el móvil o en el ordenador.",
+    action: { href: "#catalogo", label: "Ver los sensores" },
     contact: true,
-    note: ["SENSORES EN EL CULTIVO", "información del suelo y del aire"],
   },
   {
-    tab: "Las señales",
-    eyebrow: "CONOCE TU CULTIVO",
-    title: "Lo invisible",
-    highlight: "señala.",
+    tab: "El riego",
+    title: "Riega cuando",
+    highlight: "hace falta.",
     description:
-      "¿Está seco el suelo? ¿Hace demasiado calor? Consulta la humedad, la temperatura y la energía del sol que recibe tu cultivo.",
-    note: ["SUELO Y AMBIENTE", "consulta cómo cambian con el tiempo"],
+      "La sonda mide la humedad del suelo. Los tensiómetros, a 15 y 30 cm, te dicen cuánto le cuesta a la raíz sacar el agua.",
   },
   {
-    tab: "Las decisiones",
-    eyebrow: "DECIDE CON MÁS INFORMACIÓN",
-    title: "Entiende.",
-    highlight: "Actúa.",
+    tab: "Los avisos",
+    title: "Te avisa",
+    highlight: "si algo cambia.",
     description:
-      "Revisa las gráficas y los avisos para decidir mejor cuándo regar o revisar el ambiente del invernadero.",
-    action: { href: "#senal", label: "Ver cómo funciona" },
-    note: ["TODO EN UNA APLICACIÓN", "lecturas, gráficas y avisos"],
+      "Si una medida se sale de lo normal, la aplicación te avisa y te enseña su gráfica para que veas desde cuándo pasa.",
+    action: { href: "#senal", label: "Ver la aplicación" },
   },
 ];
 
@@ -87,27 +81,27 @@ export const signalPanels = {
 export const impactCards = [
   {
     category: "riego",
-    title: ["Riega con", "criterio."],
+    title: ["Riego"],
     description:
-      "Mira la humedad del suelo y cuánto les cuesta a las raíces absorber el agua a 15 y 30 cm antes de volver a regar.",
+      "Humedad del suelo y tensión a 15 y 30 cm. Sabes si la raíz tiene agua antes de abrir el riego.",
   },
   {
     category: "suelo",
-    title: ["Conoce", "tu suelo."],
+    title: ["Suelo"],
     description:
-      "Sigue la temperatura, la humedad y la conductividad del suelo, que indica su nivel de sales.",
+      "Temperatura y conductividad. La conductividad te dice cuántas sales se están acumulando.",
   },
   {
-    category: "ambiente",
-    title: ["Vigila", "el clima."],
+    category: "clima",
+    title: ["Clima"],
     description:
-      "Comprueba cómo cambian el ambiente del invernadero y el tiempo en el exterior.",
+      "Temperatura, humedad, lluvia, viento y radiación fuera del invernadero, con la estación meteorológica.",
   },
   {
-    category: "control",
-    title: ["Tu finca.", "Desde cualquier lugar."],
+    category: "avisos",
+    title: ["Avisos"],
     description:
-      "Revisa las lecturas y los avisos desde el móvil o el ordenador.",
+      "Cuando una medida se sale de lo normal, aparece un aviso en la aplicación con su gráfica.",
   },
 ];
 
@@ -176,9 +170,9 @@ export const faqItems = [
 
 export const journeySteps = [
   {
-    title: "Cuéntanos qué necesitas",
+    title: "Nos cuentas tu finca",
     description:
-      "Llámanos o escríbenos. Te ayudamos a elegir los sensores según tu cultivo y tu finca.",
+      "Por teléfono o por escrito. Con lo que cultivas y cómo riegas, te decimos qué sensores tienen sentido.",
   },
   {
     title: "Instalamos y te enseñamos",
@@ -186,8 +180,8 @@ export const journeySteps = [
       "Un técnico instala los equipos y te enseña a usar la aplicación el mismo día.",
   },
   {
-    title: "Consulta tu finca cada día",
+    title: "Lo miras cuando quieras",
     description:
-      "Mira las lecturas y las gráficas para ver cómo cambian el suelo y el ambiente.",
+      "Abres la aplicación y ves las lecturas de hoy y las gráficas de los últimos días.",
   },
 ];

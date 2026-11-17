@@ -1,11 +1,43 @@
 import { useLanguage } from "./LanguageProvider.jsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { legalUrl } from "../i18n.js";
 import { site } from "../config.js";
+
+// Netlify Forms recoge el envío en producción; en local no hay servidor de
+// formularios, así que se simula sin enviar nada.
+const isLocal = () =>
+  ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
 
 export default function ContactDialog({ open, onClose, onPrepared }) {
   const { localize, language } = useLanguage();
   const dialogRef = useRef(null);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const submit = async (event) => {
+    event.preventDefault();
+    if (sending) return;
+    setError("");
+    if (isLocal()) {
+      onPrepared("demo");
+      return;
+    }
+    setSending(true);
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(event.currentTarget)).toString(),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      onPrepared("sent");
+    } catch {
+      setError(
+        "No se ha podido enviar la consulta. Revisa tu conexión y vuelve a intentarlo, o escríbenos por WhatsApp.",
+      );
+    } finally {
+      setSending(false);
+    }
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -63,68 +95,94 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
         <button className="close-modal" aria-label="Cerrar" onClick={onClose}>
           ×
         </button>
-        <div className="section-label">Hablemos de tu finca</div>
         <h2 id="contact-title">
-          Hagamos que
+          Cuéntanos
           <br />
-          crezca mejor.
+          qué necesitas.
         </h2>
         <p id="contact-description">
-          Cuéntanos cómo es tu cultivo. También puedes llamarnos al{" "}
-          <a href={site.phoneHref}>{site.phone}</a>.
+          Lo más rápido es escribirnos por WhatsApp o llamarnos. Si prefieres,
+          deja tus datos y te respondemos en horario de oficina.
         </p>
+        <div className="contact-quick">
+          {site.whatsapp && (
+            <a
+              className="button acid"
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Escribir por WhatsApp <span className="arrow">↗</span>
+            </a>
+          )}
+          <a className="button contact-call" href={site.phoneHref}>
+            Llamar al {site.phone}
+          </a>
+        </div>
         <form
           className="form-grid"
-          onSubmit={(event) => {
-            event.preventDefault();
-            onPrepared();
-          }}
+          name="contacto"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={submit}
         >
-          <input
-            type="text"
-            name="name"
-            aria-label="Nombre"
-            autoComplete="name"
-            placeholder="Nombre"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            aria-label="Correo electrónico"
-            autoComplete="email"
-            placeholder="Correo electrónico"
-            required
-          />
-          <input
-            type="tel"
-            name="phone"
-            aria-label="Teléfono"
-            autoComplete="tel"
-            placeholder="Teléfono"
-          />
-          <input
-            type="text"
-            name="town"
-            aria-label="Municipio"
-            autoComplete="address-level2"
-            placeholder="Municipio"
-          />
-          <input
-            type="text"
-            name="crop"
-            aria-label="¿Qué cultivas?"
-            placeholder="¿Qué cultivas?"
-            required
-          />
-          <textarea
-            name="message"
-            aria-label="Cuéntanos qué te gustaría mejorar"
-            placeholder="Cuéntanos qué te gustaría mejorar"
-          />
-          <p className="form-note">
-            Formulario de demostración. Los datos todavía no se envían.
+          <input type="hidden" name="form-name" value="contacto" />
+          <p className="form-honeypot" aria-hidden="true">
+            <label>
+              No rellenar <input name="bot-field" tabIndex={-1} />
+            </label>
           </p>
+          <label className="form-field">
+            <span>
+              Nombre
+            </span>
+            <input type="text" name="name" autoComplete="name" required />
+          </label>
+          <label className="form-field">
+            <span>
+              Correo electrónico
+            </span>
+            <input type="email" name="email" autoComplete="email" required />
+          </label>
+          <label className="form-field">
+            <span>
+              Teléfono <small>(opcional)</small>
+            </span>
+            <input type="tel" name="phone" autoComplete="tel" />
+          </label>
+          <label className="form-field">
+            <span>
+              Municipio <small>(opcional)</small>
+            </span>
+            <input
+              type="text"
+              name="town"
+              autoComplete="address-level2"
+            />
+          </label>
+          <label className="form-field form-field-wide">
+            <span>
+              ¿Qué cultivas?
+            </span>
+            <input
+              type="text"
+              name="crop"
+              placeholder="Por ejemplo: pimiento en invernadero"
+              required
+            />
+          </label>
+          <label className="form-field form-field-wide">
+            <span>
+              ¿Qué te gustaría controlar? <small>(opcional)</small>
+            </span>
+            <textarea name="message" />
+          </label>
+          {error && (
+            <p className="form-error" role="alert">
+              {error}
+            </p>
+          )}
           <p className="form-privacy">
             <a
               href={legalUrl("privacidad", language)}
@@ -134,8 +192,9 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
               Política de privacidad
             </a>
           </p>
-          <button className="button" type="submit">
-            Preparar consulta <span className="arrow">↗</span>
+          <button className="button" type="submit" disabled={sending}>
+            {sending ? "Enviando…" : "Enviar consulta"}{" "}
+            <span className="arrow">↗</span>
           </button>
         </form>
       </div>

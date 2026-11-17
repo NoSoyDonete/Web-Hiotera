@@ -26,7 +26,7 @@
       }
       /* Keep the first paint dark while React and the page stylesheet load. */
       .sensor-hero {
-        background: #000;
+        background: #0b1c17;
       }
       .sensor-hero .sensor-fallback {
         visibility: hidden;
@@ -47,6 +47,13 @@
         display: none;
       }
     </style>
+    <!-- La foto de la portada es lo primero que se ve: se pide con prioridad. -->
+    <link
+      rel="preload"
+      as="image"
+      href="./libox-invernadero.webp"
+      fetchpriority="high"
+    />
     <link rel="icon" href="./brand/favicon.ico" sizes="any" />
     <link
       rel="icon"
@@ -133,6 +140,17 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Copia estática del formulario de contacto para que Netlify Forms lo
+         detecte al publicar. El formulario visible lo pinta React. -->
+    <form name="contacto" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="town" />
+      <input name="crop" />
+      <textarea name="message"></textarea>
+    </form>
     <noscript
       >Activa JavaScript para explorar Hiotera. Puedes contactar con nosotros en
       el +34 624 412 364.</noscript

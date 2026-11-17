@@ -9,6 +9,7 @@ import LanguageSelector from "./components/LanguageSelector.jsx";
 import "./styles.css";
 import "./experience.css";
 import "./site-services.css";
+import "./direction.css";
 
 function MeteoPreview() {
   const { localize } = useLanguage();
@@ -19,7 +20,7 @@ function MeteoPreview() {
         <LanguageSelector />
       </header>
       <main>
-        <MeteoScene />
+        <MeteoScene standalone />
       </main>
     </>,
   );

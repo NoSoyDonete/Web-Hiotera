@@ -63,11 +63,10 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
         <button className="close-modal" aria-label="Cerrar" onClick={onClose}>
           ×
         </button>
-        <div className="section-label">Hablemos de tu finca</div>
         <h2 id="contact-title">
-          Hagamos que
+          Te llamamos
           <br />
-          crezca mejor.
+          y lo vemos contigo.
         </h2>
         <p id="contact-description">
           Cuéntanos cómo es tu cultivo. También puedes llamarnos al{" "}

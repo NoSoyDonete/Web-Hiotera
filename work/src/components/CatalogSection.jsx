@@ -16,6 +16,49 @@ export default function CatalogSection({ onContact }) {
     if (!activeModel && dialog.open) dialog.close();
   }, [activeModel]);
   const items = filterCatalog(category, query, t);
+  // Las cámaras no miden el cultivo: van aparte, después de los sensores.
+  const isOther = (item) => item.id === "surveillance-cameras";
+  const mainItems = items.filter((item) => !isOther(item));
+  const otherItems = items.filter(isOther);
+  const renderCard = (item) => (
+    <article className="catalog-card" key={item.id}>
+      <div className={`catalog-visual model-${item.id}`}>
+        <span className="catalog-category">{item.category}</span>
+        <CatalogModel item={item} onExpand={setActiveModel} />
+      </div>
+      <div className="catalog-card-copy">
+        <small>{item.type}</small>
+        <h3>{item.name}</h3>
+        <p>{item.description}</p>
+        {item.contact ? (
+          <button
+            className="catalog-action"
+            onClick={onContact}
+            aria-label={`Consultar ${item.name}`}
+          >
+            {item.action}
+            <span aria-hidden="true">↗</span>
+          </button>
+        ) : (
+          <a
+            className="catalog-action"
+            href={item.href}
+            onClick={() => {
+              if (item.href === "#nodo" && item.id !== "libox")
+                window.dispatchEvent(
+                  new CustomEvent("hiotera:libox-part", {
+                    detail: item.id,
+                  }),
+                );
+            }}
+          >
+            {item.action}
+            <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    </article>
+  );
   return localize(
     <section
       id="catalogo"
@@ -25,11 +68,10 @@ export default function CatalogSection({ onContact }) {
       <div className="section-inner">
         <div className="catalog-heading">
           <div>
-            <div className="section-label">04 / Catálogo</div>
             <h2 id="catalog-title">
-              Equipos para
+              Los equipos
               <br />
-              <span>conocer tu cultivo.</span>
+              <span>que instalamos.</span>
             </h2>
           </div>
           <p>
@@ -67,47 +109,13 @@ export default function CatalogSection({ onContact }) {
         <p className="catalog-count" role="status">
           {items.length} {items.length === 1 ? "equipo" : "equipos"}
         </p>
-        <div className="catalog-grid">
-          {items.map((item) => (
-            <article className="catalog-card" key={item.id}>
-              <div className={`catalog-visual model-${item.id}`}>
-                <span className="catalog-category">{item.category}</span>
-                <CatalogModel item={item} onExpand={setActiveModel} />
-              </div>
-              <div className="catalog-card-copy">
-                <small>{item.type}</small>
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                {item.contact ? (
-                  <button
-                    className="catalog-action"
-                    onClick={onContact}
-                    aria-label={`Consultar ${item.name}`}
-                  >
-                    {item.action}
-                    <span aria-hidden="true">↗</span>
-                  </button>
-                ) : (
-                  <a
-                    className="catalog-action"
-                    href={item.href}
-                    onClick={() => {
-                      if (item.href === "#nodo" && item.id !== "libox")
-                        window.dispatchEvent(
-                          new CustomEvent("hiotera:libox-part", {
-                            detail: item.id,
-                          }),
-                        );
-                    }}
-                  >
-                    {item.action}
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
+        <div className="catalog-grid">{mainItems.map(renderCard)}</div>
+        {otherItems.length > 0 && (
+          <div className="catalog-other">
+            <h3>Otros equipos para la finca</h3>
+            <div className="catalog-grid">{otherItems.map(renderCard)}</div>
+          </div>
+        )}
         {items.length === 0 && (
           <div className="catalog-empty">
             <p>No encontramos equipos con esa búsqueda.</p>
@@ -130,8 +138,8 @@ export default function CatalogSection({ onContact }) {
               elegir.
             </p>
           </div>
-          <button className="button dark-button" onClick={onContact}>
-            Consultar un equipo ↗
+          <button className="button acid" onClick={onContact}>
+            Cuéntanos qué quieres medir
           </button>
         </div>
       </div>

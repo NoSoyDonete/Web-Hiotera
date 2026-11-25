@@ -2,17 +2,18 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <script>document.documentElement.classList.add("js");</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b1c17" />
+    <meta name="theme-color" content="#0e2b1f" />
     <style>
       html,
       body,
       #root {
         min-height: 100%;
-        background: #0b1c17;
+        background: #0e2b1f;
       }
       html body {
-        background: #0b1c17;
+        background: #0e2b1f;
       }
       #root {
         opacity: 0;
@@ -26,7 +27,7 @@
       }
       /* Keep the first paint dark while React and the page stylesheet load. */
       .sensor-hero {
-        background: #000;
+        background: #0e2b1f;
       }
       .sensor-hero .sensor-fallback {
         visibility: hidden;
@@ -70,16 +71,16 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Hiotera" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Sensores para invernaderos en Almería | Hiotera" />
+    <meta property="og:title" content="Sensores para invernaderos | Hiotera" />
     <meta property="og:description" content="Sensores de suelo y clima y una aplicación sencilla para conocer tu cultivo. Instalación, formación y 1 año de mantenimiento gratis. Oficina en El Ejido." />
     <meta property="og:url" content="https://hiotera.com/" />
     <meta property="og:image" content="https://hiotera.com/libox-invernadero.webp" />
     <meta property="og:image:alt" content="Equipo LIBOx instalado entre plantas de un invernadero" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sensores para invernaderos en Almería | Hiotera" />
+    <meta name="twitter:title" content="Sensores para invernaderos | Hiotera" />
     <meta name="twitter:description" content="Sensores de suelo y clima y una aplicación sencilla para conocer tu cultivo. Instalación, formación y 1 año de mantenimiento gratis. Oficina en El Ejido." />
     <meta name="twitter:image" content="https://hiotera.com/libox-invernadero.webp" />
-    <title>Sensores para invernaderos en Almería | Hiotera</title>
+    <title>Sensores para invernaderos | Hiotera</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -117,7 +118,12 @@
               "opens": "08:00",
               "closes": "16:00"
             }],
-            "areaServed": { "@type": "AdministrativeArea", "name": "Almería" }
+            "areaServed": [
+              { "@type": "AdministrativeArea", "name": "Almería" },
+              { "@type": "AdministrativeArea", "name": "Granada" },
+              { "@type": "AdministrativeArea", "name": "Galicia" },
+              { "@type": "AdministrativeArea", "name": "Canarias" }
+            ]
           },
           {
             "@type": "WebSite",

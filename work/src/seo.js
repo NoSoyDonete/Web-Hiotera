@@ -5,7 +5,7 @@ export const publicSiteUrl = "https://hiotera.com";
 export const seoPages = {
   home: {
     path: "/",
-    title: "Sensores para invernaderos en Almería | Hiotera",
+    title: "Sensores para invernaderos | Hiotera",
     description:
       "Sensores de suelo y clima y una aplicación sencilla para conocer tu cultivo. Instalación, formación y 1 año de mantenimiento gratis. Oficina en El Ejido.",
   },

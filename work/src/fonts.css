@@ -85,3 +85,12 @@
   font-display: swap;
   src: url("/fonts/space-grotesk-700.ttf") format("truetype");
 }
+
+/* Tema Hedgerow: Prata para los titulares, servida desde el propio sitio (licencia en prata-OFL.txt). */
+@font-face {
+  font-family: "Prata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/prata-400.woff2") format("woff2");
+}

@@ -17,33 +17,39 @@ export default function HeroScene({ onContact }) {
       aria-label="Presentación de Hiotera"
     >
       <div className="sensor-pin">
-        <div className="sensor-radar" aria-hidden="true">
-          <i />
+        <div className="hero-photo">
+          <div className="sensor-radar" aria-hidden="true">
+            <i />
+          </div>
+          <img
+            className="sensor-fallback"
+            src={assetUrl(site.installationPhoto)}
+            alt="LIBOx instalado en un invernadero entre el cultivo"
+            fetchPriority="high"
+            decoding="sync"
+            onLoad={(event) => {
+              const image = event.currentTarget;
+              image
+                .decode()
+                .catch(() => undefined)
+                .finally(() => {
+                  window.setTimeout(() => {
+                    image.classList.add("photo-ready");
+                      setPhotoReady(true);
+                      document.documentElement.classList.add("app-ready");
+                    }, 650);
+                });
+            }}
+            onError={() => document.documentElement.classList.add("app-ready")}
+            style={photoReady ? undefined : { opacity: 0 }}
+          />
         </div>
-        <img
-          className="sensor-fallback"
-          src={assetUrl(site.installationPhoto)}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          decoding="sync"
-          onLoad={(event) => {
-            const image = event.currentTarget;
-            image
-              .decode()
-              .catch(() => undefined)
-              .finally(() => {
-                window.setTimeout(() => {
-                  image.classList.add("photo-ready");
-                    setPhotoReady(true);
-                    document.documentElement.classList.add("app-ready");
-                  }, 650);
-              });
-          }}
-          onError={() => document.documentElement.classList.add("app-ready")}
-          style={photoReady ? undefined : { opacity: 0 }}
-        />
         <div className="hero-copy">
+          <h1 className="hero-title">
+            Sensores para
+            <br />
+            <span>tu invernadero.</span>
+          </h1>
           <div className="hero-phases">
             {heroPhases.map((item, index) => (
               <div
@@ -57,37 +63,20 @@ export default function HeroScene({ onContact }) {
                 inert={phase !== index}
                 tabIndex={phase === index ? 0 : -1}
               >
-                <div className="eyebrow">{item.eyebrow}</div>
-                <h1>
-                  {item.title}
-                  <br />
-                  <span>{item.highlight}</span>
-                </h1>
+                <p className="hero-phase-title">
+                  {item.title} {item.highlight}
+                </p>
                 <p>{item.description}</p>
-                {(item.action || item.contact) && (
-                  <div className="hero-actions">
-                    {item.action && (
-                      <a
-                        className="button acid"
-                        href={item.action.href}
-                        tabIndex={phase === index ? 0 : -1}
-                      >
-                        {item.action.label} <span className="arrow">↘</span>
-                      </a>
-                    )}
-                    {item.contact && (
-                      <button
-                        className="button outline"
-                        onClick={onContact}
-                        tabIndex={phase === index ? 0 : -1}
-                      >
-                        Cuéntanos qué necesitas
-                      </button>
-                    )}
-                  </div>
-                )}
               </div>
             ))}
+          </div>
+          <div className="hero-actions">
+            <button className="button acid" onClick={onContact}>
+              Cuéntanos qué quieres medir
+            </button>
+            <a className="button outline" href={heroPhases[0].action.href}>
+              {heroPhases[0].action.label}
+            </a>
           </div>
           <div
             className="hero-tabs"
@@ -115,11 +104,6 @@ export default function HeroScene({ onContact }) {
               </button>
             ))}
           </div>
-        </div>
-        <div className="scene-counter">
-          <b>{String(phase + 1).padStart(2, "0")}</b>
-          <span>/</span>
-          {String(heroPhases.length).padStart(2, "0")}
         </div>
       </div>
     </section>,

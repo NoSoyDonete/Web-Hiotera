@@ -6,11 +6,10 @@ import MeteoScene from "./components/MeteoScene.jsx";
 import CatalogSection from "./components/CatalogSection.jsx";
 import {
   Marquee,
-  StatementSection,
   ImpactSection,
   JourneySection,
-  IncludedSection,
   FaqSection,
+  FieldPhotosSection,
   WhatsAppButton,
   ClosingSection,
 } from "./components/ContentSections.jsx";
@@ -50,16 +49,16 @@ export default function App() {
         <LiboxScene />
         <MeteoScene />
         <Marquee />
-        <StatementSection />
-        <SignalSection />
         <ImpactSection />
-        <CatalogSection onContact={openContact} />
-        <IncludedSection />
+        <SignalSection />
         <JourneySection />
+        <CatalogSection onContact={openContact} />
         <FaqSection onContact={openContact} />
-        <ClosingSection onContact={openContact} />
+        <FieldPhotosSection />
       </main>
-      <Footer onContact={openContact} />
+      <Footer onContact={openContact}>
+        <ClosingSection onContact={openContact} />
+      </Footer>
       <WhatsAppButton />
       <ContactDialog
         open={contactOpen}

@@ -1,16 +1,26 @@
-﻿@import "./fonts.css";
+/* Hallmark · shape: Field Guide (the page's own order, products and services parted) · genre: editorial · theme: Hedgerow (deal manual, chosen by the user from three directions) · redesign: full
+ * hero: Poster, the real LIBOx photo full-bleed under a hedge-green scrim · nav: edge-aligned, wordmark and one action · footer: a mast · imagery: the user's installation photo, the product (3D models, the app replica) · signature: the LIBOx in the crop, photographed in shade, under one Prata line · hedgerow: hedge
+ * axes: dark/high-contrast-serif/chromatic-green · posture: drenched · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P3 H3 E3 S3 R2 V3 · weakest: R, the 3D scenes keep their own staging inside the green */
+/* Hallmark · open: #ffffff and #173e30 on .libox-hotspot stay literal because tests/experience.test.js pins them; the replica of the app (application-demo.css, GuidesDemo, NotebookDemo) keeps the product's own look */
+/* Hallmark · dropped the per-tab hero link («Ver cómo funciona» → #senal) · the hero has fixed actions; #senal stays in the nav · dropped the «El cultivo ya está hablando» section · its paragraph and link sit in «Qué vas a poder ver cada día» */
+/* Hallmark · reworded headings: «No son solo datos. Es tu cultivo.» to «Así se ve tu finca en el móvil.», «Conoce tu finca. Decide mejor.» to «Qué vas a poder ver cada día.», «Empieza simple.» to «Lo que hacemos nosotros.», «Todo incluido desde el primer día.» to «Incluido en la compra.», «Equipos para conocer tu cultivo.» to «Los equipos que instalamos.», «Tu mejor cultivo empieza aquí.» to «Cuéntanos qué cultivas y te decimos qué medir.» · 19 names slogan heads */
+@import url("./tokens.css");
+@import url("./base.css");
+@import "./fonts.css";
 
 :root {
-  --night: #0b1c17;
-  --forest: #12372a;
-  --cream: #eef1e7;
-  --paper: #fbfaf5;
-  --acid: #d9ff58;
-  --mint: #a9ebc1;
-  --hot: #ff7252;
-  --line: rgba(11, 28, 23, 0.16);
-  --night-line: rgba(238, 241, 231, 0.18);
-  --radius: 26px;
+  /* Nombres antiguos, ahora apuntan al tema Hedgerow. */
+  --night: var(--color-paper-2);
+  --forest: var(--color-paper-3);
+  --cream: var(--color-ink);
+  --paper: var(--color-paper);
+  --acid: var(--color-accent);
+  --mint: var(--color-ink-2);
+  --hot: var(--color-accent);
+  --line: var(--color-rule);
+  --night-line: var(--color-rule);
+  --radius: var(--radius-card);
   /* Escala general de la página. En escritorio se ve al 90 %, como con el
      zoom del navegador a 90 %. Las unidades vh/vw de todos los estilos se
      dividen por este valor para que lo que ocupa la pantalla la siga llenando. */
@@ -34,7 +44,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--night);
-  font-family: Manrope, system-ui, sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 body.locked {
@@ -89,9 +99,7 @@ button {
   height: 42px;
   border: 1px solid var(--acid);
   transform: translate(-50%, -50%);
-  transition:
-    width 0.25s,
-    height 0.25s;
+  transition: transform 0.25s;
 }
 @media (pointer: fine) {
   .cursor,
@@ -103,13 +111,7 @@ button {
     width: 62px;
     height: 62px;
   }
-  /* Solo se ve el cursor de la web: se oculta el puntero del sistema. */
-  html,
-  body,
-  body *:not(input, textarea, select),
-  model-viewer {
-    cursor: none !important;
-  }
+  /* El puntero del sistema se mantiene siempre visible. */
   /* Los <dialog> ampliados se pintan por encima de todo, incluido el cursor
      de la web; dentro de ellos se usa el puntero normal. */
   dialog[open],
@@ -138,8 +140,8 @@ button {
 .brand {
   display: flex;
   align-items: center;
-  gap: 11px;
-  font-family: "Space Grotesk", sans-serif;
+  gap: var(--space-sm);
+  font-family: var(--font-display);
   font-size: 1.22rem;
   font-weight: 700;
   letter-spacing: -0.08em;
@@ -157,18 +159,18 @@ button {
 }
 .nav-links {
   display: flex;
-  gap: 4px;
+  gap: var(--space-2xs);
   align-items: center;
   justify-self: center;
 }
 .topbar-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-sm);
   justify-self: end;
 }
 .nav-links a {
-  padding: 10px 14px;
+  padding: var(--space-sm) var(--space-md);
   font-size: 0.96rem;
   font-weight: 700;
   opacity: 0.66;
@@ -179,12 +181,12 @@ button {
 }
 .nav-links a:hover {
   opacity: 1;
-  background: rgba(217, 255, 88, 0.12);
+  background: color-mix(in oklab, var(--color-accent) 12%, transparent);
 }
 .nav-meteo-link {
   display: none;
   align-items: center;
-  gap: 7px;
+  gap: var(--space-xs);
   font-size: 0.958rem;
   font-weight: 700;
   color: var(--acid);
@@ -197,18 +199,18 @@ button {
 }
 .topbar.on-meteo .nav-cta {
   color: var(--night);
-  border-color: rgba(11, 28, 23, 0.3);
-  background: rgba(249, 251, 242, 0.85);
+  border-color: color-mix(in oklab, var(--color-rule) 30%, transparent);
+  background: color-mix(in oklab, var(--color-paper) 85%, transparent);
 }
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  border: 1px solid rgba(238, 241, 231, 0.34);
+  gap: var(--space-xs);
+  border: 1px solid color-mix(in oklab, var(--color-rule) 34%, transparent);
   color: var(--cream);
   background: transparent;
   border-radius: 999px;
-  padding: 11px 16px;
+  padding: var(--space-sm) var(--space-md);
   font-size: 0.96rem;
   font-weight: 700;
   transition: 0.2s;
@@ -224,7 +226,7 @@ button {
 }
 .hero {
   min-height: calc(100svh / var(--zoom));
-  padding: 160px calc(6vw / var(--zoom)) 70px;
+  padding: 160px calc(6vw / var(--zoom)) 72px;
   background: var(--night);
   color: var(--cream);
   position: relative;
@@ -244,8 +246,8 @@ button {
   top: calc(-31vw / var(--zoom));
   background: radial-gradient(
     circle,
-    rgba(169, 235, 193, 0.48) 0,
-    rgba(169, 235, 193, 0.12) 29%,
+    color-mix(in oklab, var(--color-paper-3) 48%, transparent) 0,
+    color-mix(in oklab, var(--color-paper-3) 12%, transparent) 29%,
     transparent 68%
   );
 }
@@ -254,11 +256,10 @@ button {
   position: absolute;
   right: calc(6vw / var(--zoom));
   bottom: 28px;
-  color: rgba(238, 241, 231, 0.35);
+  color: color-mix(in oklab, var(--color-ink) 35%, transparent);
   font:
-    0.94rem "DM Mono",
-    monospace;
-  letter-spacing: 0.1em;
+    0.94rem var(--font-body);
+  letter-spacing: 0;
 }
 .hero-grid {
   width: min(1280px, 100%);
@@ -273,12 +274,11 @@ button {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-xs);
   font:
-    0.945rem "DM Mono",
-    monospace;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+    0.945rem var(--font-body);
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--acid);
 }
 .eyebrow::before {
@@ -288,27 +288,25 @@ button {
   background: currentColor;
 }
 .hero h1 {
-  margin: 24px 0 0;
+  margin: var(--space-lg) 0 0;
   font:
-    600 clamp(4.5rem, calc(9.6vw / var(--zoom)), 10rem)/0.82 "Space Grotesk",
-    sans-serif;
+    600 clamp(4.5rem, calc(9.6vw / var(--zoom)), 10rem)/0.82 var(--font-display);
   letter-spacing: -0.11em;
   max-width: 750px;
 }
 .hero h1 span {
-  color: var(--acid);
   display: block;
 }
 .hero-sub {
   max-width: 450px;
-  margin: 34px 0 0;
-  color: rgba(238, 241, 231, 0.64);
+  margin: 36px 0 0;
+  color: color-mix(in oklab, var(--color-ink) 64%, transparent);
   font-size: 1.05rem;
   line-height: 1.7;
 }
 .hero-actions {
   display: flex;
-  gap: 10px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
   margin-top: 32px;
 }
@@ -317,8 +315,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 11px;
-  padding: 0 19px;
+  gap: var(--space-sm);
+  padding: 0 20px;
   border-radius: 999px;
   border: 1px solid currentColor;
   font-size: 0.968rem;
@@ -343,7 +341,7 @@ button {
 .button.outline {
   color: var(--cream);
   background: transparent;
-  border-color: rgba(238, 241, 231, 0.3);
+  border-color: color-mix(in oklab, var(--color-rule) 30%, transparent);
 }
 .button.outline:hover {
   color: var(--acid);
@@ -351,27 +349,26 @@ button {
 }
 .hero-foot {
   display: flex;
-  gap: 16px;
+  gap: var(--space-md);
   align-items: center;
   margin-top: 76px;
-  color: rgba(238, 241, 231, 0.42);
+  color: color-mix(in oklab, var(--color-ink) 42%, transparent);
   font:
-    0.94rem "DM Mono",
-    monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+    0.94rem var(--font-body);
+  text-transform: none;
+  letter-spacing: 0;
 }
 .live-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--acid);
-  box-shadow: 0 0 0 6px rgba(217, 255, 88, 0.1);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-accent) 10%, transparent);
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
   50% {
-    box-shadow: 0 0 0 11px rgba(217, 255, 88, 0);
+    box-shadow: 0 0 0 11px transparent;
   }
 }
 .node-stage {
@@ -385,11 +382,11 @@ button {
   position: absolute;
   width: 76%;
   aspect-ratio: 1;
-  border: 1px solid rgba(217, 255, 88, 0.25);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 25%, transparent);
   border-radius: 50%;
   box-shadow:
-    0 0 0 40px rgba(217, 255, 88, 0.025),
-    0 0 0 80px rgba(217, 255, 88, 0.02);
+    0 0 0 40px color-mix(in oklab, var(--color-accent) 3%, transparent),
+    0 0 0 80px color-mix(in oklab, var(--color-accent) 2%, transparent);
   animation: orbit 24s linear infinite;
 }
 .node-stage::after {
@@ -402,7 +399,7 @@ button {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(217, 255, 88, 0.44),
+    color-mix(in oklab, var(--color-accent) 44%, transparent),
     transparent
   );
   transform: rotate(-22deg);
@@ -418,11 +415,11 @@ button {
   aspect-ratio: 0.88;
   overflow: hidden;
   transform: rotate(6deg);
-  background: #c7d6b4;
-  border: 1px solid rgba(238, 241, 231, 0.45);
+  background: var(--color-paper-3);
+  border: 1px solid color-mix(in oklab, var(--color-rule) 45%, transparent);
   box-shadow:
-    20px 32px 0 rgba(217, 255, 88, 0.12),
-    0 35px 90px rgba(0, 0, 0, 0.35);
+    20px 32px 0 color-mix(in oklab, var(--color-accent) 12%, transparent),
+    0 35px 90px color-mix(in oklab, var(--color-paper-2) 35%, transparent);
   clip-path: polygon(7% 0, 100% 6%, 94% 100%, 0 94%);
 }
 .node-frame img {
@@ -440,9 +437,9 @@ button {
   background: linear-gradient(
     180deg,
     transparent 0 28%,
-    rgba(217, 255, 88, 0.28) 28.4%,
+    color-mix(in oklab, var(--color-accent) 28%, transparent) 28.4%,
     transparent 29.1% 67%,
-    rgba(217, 255, 88, 0.12) 67.4%,
+    color-mix(in oklab, var(--color-accent) 12%, transparent) 67.4%,
     transparent 68%
   );
   mix-blend-mode: screen;
@@ -456,7 +453,7 @@ button {
   background: linear-gradient(
     120deg,
     transparent 25%,
-    rgba(217, 255, 88, 0.17),
+    color-mix(in oklab, var(--color-accent) 17%, transparent),
     transparent 48%
   );
   transform: translateX(-110%);
@@ -486,19 +483,17 @@ button {
   z-index: 5;
   left: 19px;
   top: 20px;
-  padding: 8px 10px;
+  padding: var(--space-xs) var(--space-sm);
   background: var(--acid);
   color: var(--night);
   font:
-    0.933rem "DM Mono",
-    monospace;
+    0.933rem var(--font-body);
   line-height: 1.35;
 }
 .node-frame-label strong {
   display: block;
   font:
-    700 0.983rem Manrope,
-    sans-serif;
+    700 0.983rem var(--font-body);
 }
 .node-pin {
   position: absolute;
@@ -507,7 +502,7 @@ button {
   height: 14px;
   border: 2px solid var(--acid);
   border-radius: 50%;
-  box-shadow: 0 0 0 7px rgba(217, 255, 88, 0.18);
+  box-shadow: 0 0 0 7px color-mix(in oklab, var(--color-accent) 18%, transparent);
 }
 .pin-a {
   top: 33%;
@@ -524,22 +519,20 @@ button {
 .node-callout {
   position: absolute;
   z-index: 7;
-  padding: 10px 12px;
-  background: rgba(11, 28, 23, 0.8);
-  border: 1px solid rgba(217, 255, 88, 0.42);
+  padding: var(--space-sm) var(--space-sm);
+  background: color-mix(in oklab, var(--color-paper-2) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 42%, transparent);
   backdrop-filter: blur(10px);
   color: var(--cream);
   font:
-    0.93rem "DM Mono",
-    monospace;
+    0.93rem var(--font-body);
   line-height: 1.45;
 }
 .node-callout strong {
   display: block;
   color: var(--acid);
   font:
-    700 0.97rem Manrope,
-    sans-serif;
+    700 0.97rem var(--font-body);
 }
 .callout-a {
   top: 13%;
@@ -557,37 +550,35 @@ button {
   position: absolute;
   right: 1%;
   top: 18%;
-  color: rgba(238, 241, 231, 0.42);
+  color: color-mix(in oklab, var(--color-ink) 42%, transparent);
   writing-mode: vertical-rl;
   font:
-    0.938rem "DM Mono",
-    monospace;
-  letter-spacing: 0.14em;
+    0.938rem var(--font-body);
+  letter-spacing: 0;
 }
 .marquee {
   overflow: hidden;
   white-space: nowrap;
   background: var(--acid);
   color: var(--night);
-  padding: 18px 0;
+  padding: 20px 0;
   font:
-    600 clamp(1.013rem, calc(2.8vw / var(--zoom)), 2.8rem)/1 "Space Grotesk",
-    sans-serif;
+    600 clamp(1.013rem, calc(2.8vw / var(--zoom)), 2.8rem)/1 var(--font-display);
   letter-spacing: -0.06em;
 }
 .marquee-track {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(8px, calc(2vw / var(--zoom)), 32px);
-  padding: 0 12px;
+  gap: clamp(var(--space-xs), calc(2vw / var(--zoom)), 32px);
+  padding: 0 var(--space-sm);
 }
 .marquee i {
   opacity: 0.4;
   font-style: normal;
 }
 .section {
-  padding: 150px calc(3vw / var(--zoom));
+  padding: 152px calc(3vw / var(--zoom));
 }
 /* Todas las secciones aprovechan casi todo el ancho, como la meteo y la demo. */
 .section-inner {
@@ -595,13 +586,12 @@ button {
   margin: auto;
 }
 .section-label {
-  margin-bottom: 24px;
-  color: rgba(11, 28, 23, 0.53);
+  margin-bottom: var(--space-lg);
+  color: color-mix(in oklab, var(--color-ink) 53%, transparent);
   font:
-    0.943rem "DM Mono",
-    monospace;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+    0.943rem var(--font-body);
+  letter-spacing: 0;
+  text-transform: none;
 }
 .statement {
   background: var(--cream);
@@ -614,17 +604,15 @@ button {
 .statement h2 {
   margin: 0;
   font:
-    600 clamp(3rem, calc(6.3vw / var(--zoom)), 7.2rem)/0.88 "Space Grotesk",
-    sans-serif;
+    600 clamp(3rem, calc(6.3vw / var(--zoom)), 7.2rem)/0.88 var(--font-display);
   letter-spacing: -0.1em;
 }
 .statement h2 span {
-  color: #69c98e;
 }
 .statement-copy {
   padding-top: 44px;
   max-width: 470px;
-  color: rgba(11, 28, 23, 0.66);
+  color: color-mix(in oklab, var(--color-ink) 66%, transparent);
   line-height: 1.72;
   font-size: 1.05rem;
 }
@@ -634,7 +622,7 @@ button {
 .micro-link {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-xs);
   font-size: 0.973rem;
   font-weight: 800;
 }
@@ -662,17 +650,15 @@ button {
 .lab-top h2 {
   margin: 0;
   font:
-    500 clamp(3.2rem, calc(6.8vw / var(--zoom)), 7.6rem)/0.86 "Space Grotesk",
-    sans-serif;
+    500 clamp(3.2rem, calc(6.8vw / var(--zoom)), 7.6rem)/0.86 var(--font-display);
   letter-spacing: -0.1em;
 }
 .lab-top h2 span {
-  color: var(--acid);
 }
 .lab-top p {
   margin: 0;
   max-width: 370px;
-  color: rgba(238, 241, 231, 0.6);
+  color: color-mix(in oklab, var(--color-ink) 60%, transparent);
   font-size: 1.008rem;
   line-height: 1.65;
 }
@@ -680,7 +666,7 @@ button {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: calc(9vw / var(--zoom));
-  margin-top: 83px;
+  margin-top: 84px;
   align-items: start;
 }
 .lab-visual {
@@ -694,7 +680,7 @@ button {
   aspect-ratio: 0.9;
   background: var(--forest);
   overflow: hidden;
-  border: 1px solid rgba(238, 241, 231, 0.2);
+  border: 1px solid color-mix(in oklab, var(--color-rule) 20%, transparent);
 }
 .lab-photo img {
   width: 100%;
@@ -712,8 +698,8 @@ button {
   z-index: 2;
   inset: 0;
   background-image:
-    linear-gradient(rgba(217, 255, 88, 0.32) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217, 255, 88, 0.32) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklab, var(--color-accent) 32%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-accent) 32%, transparent) 1px, transparent 1px);
   background-size: 45px 45px;
   mix-blend-mode: screen;
   opacity: 0.5;
@@ -726,9 +712,8 @@ button {
   bottom: 13px;
   color: var(--acid);
   font:
-    0.935rem "DM Mono",
-    monospace;
-  letter-spacing: 0.08em;
+    0.935rem var(--font-body);
+  letter-spacing: 0;
 }
 .lab-visual.is-inspecting .lab-photo img {
   filter: grayscale(1) contrast(1.35) brightness(0.8);
@@ -749,9 +734,8 @@ button {
   place-items: center;
   color: var(--acid);
   font:
-    0.925rem "DM Mono",
-    monospace;
-  background: rgba(11, 28, 23, 0.63);
+    0.925rem var(--font-body);
+  background: color-mix(in oklab, var(--color-paper-2) 63%, transparent);
 }
 .lab-mark.m1 {
   top: 17%;
@@ -769,15 +753,14 @@ button {
   display: flex;
   justify-content: space-between;
   width: min(100%, 480px);
-  margin: 12px auto 0;
-  color: rgba(238, 241, 231, 0.4);
+  margin: var(--space-sm) auto 0;
+  color: color-mix(in oklab, var(--color-ink) 40%, transparent);
   font:
-    0.933rem "DM Mono",
-    monospace;
+    0.933rem var(--font-body);
 }
 .inspect-button {
   display: inline-flex;
-  margin-top: 24px;
+  margin-top: var(--space-lg);
   border: 0;
   color: var(--acid);
   padding: 0;
@@ -787,7 +770,7 @@ button {
 }
 .inspect-button span {
   display: inline-block;
-  margin-left: 6px;
+  margin-left: var(--space-xs);
   transition: transform 0.25s;
 }
 .is-inspecting .inspect-button span {
@@ -799,31 +782,29 @@ button {
 .lab-step {
   display: grid;
   grid-template-columns: 65px 1fr;
-  gap: 25px;
+  gap: var(--space-lg);
   border-bottom: 1px solid var(--night-line);
-  padding: 31px 0 36px;
+  padding: 32px 0 36px;
   transition: padding 0.3s;
 }
 .lab-step:hover {
-  padding-left: 12px;
+  padding-left: var(--space-sm);
 }
 .lab-no {
   color: var(--acid);
   font:
-    0.948rem "DM Mono",
-    monospace;
+    0.948rem var(--font-body);
 }
 .lab-step h3 {
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-sm);
   font:
-    500 2.25rem/0.95 "Space Grotesk",
-    sans-serif;
+    500 2.25rem/0.95 var(--font-display);
   letter-spacing: -0.07em;
 }
 .lab-step p {
   max-width: 450px;
   margin: 0;
-  color: rgba(238, 241, 231, 0.57);
+  color: color-mix(in oklab, var(--color-ink) 57%, transparent);
   font-size: 0.993rem;
   line-height: 1.65;
 }
@@ -837,24 +818,22 @@ button {
 .signal-head {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
+  gap: var(--space-xl);
   align-items: end;
-  margin-bottom: 55px;
+  margin-bottom: 56px;
 }
 .signal-head h2 {
   margin: 0;
   font:
-    600 clamp(3rem, calc(6vw / var(--zoom)), 6.8rem)/0.87 "Space Grotesk",
-    sans-serif;
+    600 clamp(3rem, calc(6vw / var(--zoom)), 6.8rem)/0.87 var(--font-display);
   letter-spacing: -0.1em;
 }
 .signal-head h2 span {
-  color: #69c98e;
 }
 .signal-head p {
   max-width: 270px;
   margin: 0;
-  color: rgba(11, 28, 23, 0.57);
+  color: color-mix(in oklab, var(--color-ink) 57%, transparent);
   font-size: 0.988rem;
   line-height: 1.6;
 }
@@ -863,25 +842,25 @@ button {
   color: var(--cream);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 24px 70px rgba(11, 28, 23, 0.18);
+  box-shadow: 0 24px 70px color-mix(in oklab, var(--color-paper-2) 18%, transparent);
 }
 .signal-tabs {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 17px 20px;
+  padding: var(--space-md) 20px;
   border-bottom: 1px solid var(--night-line);
 }
 .tabs {
   display: flex;
-  gap: 5px;
+  gap: var(--space-2xs);
 }
 .tab {
-  padding: 9px 13px;
+  padding: var(--space-xs) var(--space-sm);
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: rgba(238, 241, 231, 0.48);
+  color: color-mix(in oklab, var(--color-ink) 48%, transparent);
   font-size: 0.96rem;
   font-weight: 800;
 }
@@ -891,10 +870,9 @@ button {
   background: var(--acid);
 }
 .signal-time {
-  color: rgba(238, 241, 231, 0.44);
+  color: color-mix(in oklab, var(--color-ink) 44%, transparent);
   font:
-    0.93rem "DM Mono",
-    monospace;
+    0.93rem var(--font-body);
 }
 .signal-main {
   display: grid;
@@ -902,18 +880,17 @@ button {
   min-height: 400px;
 }
 .signal-readout {
-  padding: 31px;
+  padding: 32px;
   border-right: 1px solid var(--night-line);
 }
 .readout-label {
-  margin: 0 0 10px;
-  color: rgba(238, 241, 231, 0.48);
+  margin: 0 0 var(--space-sm);
+  color: color-mix(in oklab, var(--color-ink) 48%, transparent);
   font-size: 0.968rem;
 }
 .readout-number {
   font:
-    500 clamp(5rem, calc(8vw / var(--zoom)), 8.3rem)/0.8 "Space Grotesk",
-    sans-serif;
+    500 clamp(5rem, calc(8vw / var(--zoom)), 8.3rem)/0.8 var(--font-display);
   letter-spacing: -0.13em;
 }
 .readout-number small {
@@ -922,36 +899,34 @@ button {
 }
 .readout-delta {
   display: inline-flex;
-  margin-top: 18px;
+  margin-top: 20px;
   color: var(--acid);
   font:
-    0.943rem "DM Mono",
-    monospace;
+    0.943rem var(--font-body);
 }
 .mini-readings {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 9px;
-  margin-top: 53px;
+  gap: var(--space-xs);
+  margin-top: 52px;
 }
 .mini-reading {
-  padding: 12px;
+  padding: var(--space-sm);
   border: 1px solid var(--night-line);
   border-radius: 12px;
 }
 .mini-reading small {
   display: block;
-  margin-bottom: 8px;
-  color: rgba(238, 241, 231, 0.4);
+  margin-bottom: var(--space-xs);
+  color: color-mix(in oklab, var(--color-ink) 40%, transparent);
   font-size: 0.933rem;
 }
 .mini-reading b {
   font:
-    500 0.993rem "DM Mono",
-    monospace;
+    500 0.993rem var(--font-body);
 }
 .signal-chart {
-  padding: 30px;
+  padding: 32px;
 }
 .chart-caption {
   display: flex;
@@ -960,10 +935,9 @@ button {
   font-size: 0.978rem;
 }
 .chart-caption span {
-  color: rgba(238, 241, 231, 0.42);
+  color: color-mix(in oklab, var(--color-ink) 42%, transparent);
   font:
-    0.933rem "DM Mono",
-    monospace;
+    0.933rem var(--font-body);
 }
 .chart {
   height: 240px;
@@ -973,7 +947,7 @@ button {
     to bottom,
     transparent 0,
     transparent 59px,
-    rgba(238, 241, 231, 0.08) 60px
+    color-mix(in oklab, var(--color-paper) 8%, transparent) 60px
   );
   position: relative;
 }
@@ -992,20 +966,19 @@ button {
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 7px rgba(217, 255, 88, 0.4));
+  filter: drop-shadow(0 0 7px color-mix(in oklab, var(--color-accent) 40%, transparent));
 }
 .chart-tip {
   position: absolute;
   right: 9%;
   top: 4%;
-  padding: 9px 11px;
+  padding: var(--space-xs) var(--space-sm);
   color: var(--acid);
-  border: 1px solid rgba(217, 255, 88, 0.35);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 35%, transparent);
   border-radius: 9px;
   background: var(--night);
   font:
-    0.93rem "DM Mono",
-    monospace;
+    0.93rem var(--font-body);
 }
 .chart-dot {
   position: absolute;
@@ -1016,16 +989,15 @@ button {
   border: 3px solid var(--acid);
   background: var(--night);
   border-radius: 50%;
-  box-shadow: 0 0 0 6px rgba(217, 255, 88, 0.15);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-accent) 15%, transparent);
 }
 .chart-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 11px;
-  color: rgba(238, 241, 231, 0.35);
+  margin-top: var(--space-sm);
+  color: color-mix(in oklab, var(--color-ink) 35%, transparent);
   font:
-    0.93rem "DM Mono",
-    monospace;
+    0.93rem var(--font-body);
 }
 .impact {
   padding-top: 120px;
@@ -1035,31 +1007,30 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  gap: 30px;
-  margin-bottom: 54px;
+  gap: 32px;
+  margin-bottom: 56px;
 }
 .impact-top h2 {
   margin: 0;
   font:
-    600 clamp(3.2rem, calc(6vw / var(--zoom)), 7rem)/0.86 "Space Grotesk",
-    sans-serif;
+    600 clamp(3.2rem, calc(6vw / var(--zoom)), 7rem)/0.86 var(--font-display);
   letter-spacing: -0.1em;
 }
 .impact-top p {
   max-width: 275px;
-  color: rgba(11, 28, 23, 0.57);
+  color: color-mix(in oklab, var(--color-ink) 57%, transparent);
   font-size: 0.993rem;
   line-height: 1.6;
 }
 .impact-grid {
   display: grid;
   grid-template-columns: 1.18fr 0.82fr 0.82fr;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 .impact-card {
   position: relative;
   min-height: 275px;
-  padding: 24px;
+  padding: var(--space-lg);
   overflow: hidden;
   border-radius: 20px;
   background: var(--mint);
@@ -1081,19 +1052,17 @@ button {
   background: var(--paper);
 }
 .impact-index {
-  color: rgba(11, 28, 23, 0.6);
+  color: color-mix(in oklab, var(--color-ink) 60%, transparent);
   font:
-    0.938rem "DM Mono",
-    monospace;
+    0.938rem var(--font-body);
 }
 .impact-card:nth-child(3) .impact-index {
-  color: rgba(251, 250, 245, 0.7);
+  color: color-mix(in oklab, var(--color-ink) 70%, transparent);
 }
 .impact-card h3 {
-  margin: 43px 0 9px;
+  margin: 44px 0 var(--space-xs);
   font:
-    600 2.5rem/0.9 "Space Grotesk",
-    sans-serif;
+    600 2.5rem/0.9 var(--font-display);
   letter-spacing: -0.08em;
 }
 .impact-card p {
@@ -1115,8 +1084,7 @@ button {
   place-items: center;
   opacity: 0.7;
   font:
-    0.933rem "DM Mono",
-    monospace;
+    0.933rem var(--font-body);
   text-align: center;
 }
 .impact-stamp::before {
@@ -1151,51 +1119,48 @@ button {
 .steps h2 {
   margin: 0;
   font:
-    600 clamp(3.6rem, calc(7vw / var(--zoom)), 8rem)/0.82 "Space Grotesk",
-    sans-serif;
+    600 clamp(3.6rem, calc(7vw / var(--zoom)), 8rem)/0.82 var(--font-display);
   letter-spacing: -0.11em;
 }
 .steps-intro p {
   max-width: 315px;
-  margin: 30px 0 0;
-  color: rgba(11, 28, 23, 0.67);
+  margin: 32px 0 0;
+  color: color-mix(in oklab, var(--color-ink) 67%, transparent);
   font-size: 0.993rem;
   line-height: 1.6;
 }
 .step-list {
-  border-top: 1px solid rgba(11, 28, 23, 0.3);
+  border-top: 1px solid color-mix(in oklab, var(--color-rule) 30%, transparent);
 }
 .step {
   display: grid;
   grid-template-columns: 65px 1fr;
-  gap: 27px;
-  border-bottom: 1px solid rgba(11, 28, 23, 0.3);
+  gap: 28px;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-rule) 30%, transparent);
   padding: 28px 0;
 }
 .step-no {
   font:
-    0.95rem "DM Mono",
-    monospace;
+    0.95rem var(--font-body);
   opacity: 0.6;
 }
 .step h3 {
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-sm);
   font:
-    500 2.05rem/0.95 "Space Grotesk",
-    sans-serif;
+    500 2.05rem/0.95 var(--font-display);
   letter-spacing: -0.07em;
 }
 .step p {
   max-width: 450px;
   margin: 0;
-  color: rgba(11, 28, 23, 0.64);
+  color: color-mix(in oklab, var(--color-ink) 64%, transparent);
   font-size: 0.983rem;
   line-height: 1.6;
 }
 .closing {
   position: relative;
   overflow: hidden;
-  padding: 155px calc(6vw / var(--zoom)) 75px;
+  padding: 156px calc(6vw / var(--zoom)) 76px;
   background: var(--paper);
 }
 .closing::after {
@@ -1206,8 +1171,7 @@ button {
   bottom: -29%;
   color: var(--mint);
   font:
-    700 calc(45vw / var(--zoom))/0.65 "Space Grotesk",
-    sans-serif;
+    700 calc(45vw / var(--zoom))/0.65 var(--font-display);
   opacity: 0.37;
   letter-spacing: -0.2em;
 }
@@ -1221,24 +1185,22 @@ button {
   max-width: 950px;
   margin: 0;
   font:
-    600 clamp(4.4rem, calc(9.4vw / var(--zoom)), 10.5rem)/0.8 "Space Grotesk",
-    sans-serif;
+    600 clamp(4.4rem, calc(9.4vw / var(--zoom)), 10.5rem)/0.8 var(--font-display);
   letter-spacing: -0.12em;
 }
 .closing h2 span {
-  color: #69c98e;
 }
 .closing-row {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  gap: 30px;
-  margin-top: 77px;
+  gap: 32px;
+  margin-top: 76px;
 }
 .closing-row p {
   max-width: 350px;
   margin: 0;
-  color: rgba(11, 28, 23, 0.6);
+  color: color-mix(in oklab, var(--color-ink) 60%, transparent);
   font-size: 1.005rem;
   line-height: 1.65;
 }
@@ -1253,7 +1215,7 @@ button {
   border-color: var(--acid);
 }
 footer {
-  padding: 27px calc(6vw / var(--zoom)) 32px;
+  padding: 28px calc(6vw / var(--zoom)) 32px;
   color: var(--cream);
   background: var(--night);
 }
@@ -1268,10 +1230,9 @@ footer {
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: var(--space-sm);
   font:
-    1.25rem "Space Grotesk",
-    sans-serif;
+    1.25rem var(--font-display);
   font-weight: 700;
   letter-spacing: -0.08em;
 }
@@ -1283,13 +1244,12 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: end;
-  gap: 18px;
-  color: rgba(238, 241, 231, 0.46);
+  gap: 20px;
+  color: color-mix(in oklab, var(--color-ink) 46%, transparent);
   font:
-    0.93rem "DM Mono",
-    monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+    0.93rem var(--font-body);
+  text-transform: none;
+  letter-spacing: 0;
 }
 .footer-meta a:hover {
   color: var(--acid);
@@ -1301,7 +1261,7 @@ footer {
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(11, 28, 23, 0.65);
+  background: color-mix(in oklab, var(--color-paper-2) 65%, transparent);
   backdrop-filter: blur(9px);
   opacity: 0;
   pointer-events: none;
@@ -1313,10 +1273,10 @@ footer {
 }
 .modal-card {
   width: min(560px, 100%);
-  padding: 34px;
+  padding: 36px;
   border-radius: 24px;
   background: var(--paper);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 90px color-mix(in oklab, var(--color-paper-2) 30%, transparent);
   position: relative;
   transform: translateY(18px);
   transition: transform 0.25s;
@@ -1340,34 +1300,33 @@ footer {
 .modal-card h2 {
   margin: 0;
   font:
-    600 3.5rem/0.87 "Space Grotesk",
-    sans-serif;
+    600 3.5rem/0.87 var(--font-display);
   letter-spacing: -0.1em;
 }
 .modal-card p {
-  color: rgba(11, 28, 23, 0.58);
+  color: color-mix(in oklab, var(--color-ink) 58%, transparent);
   font-size: 0.993rem;
   line-height: 1.5;
 }
 .form-grid {
   display: grid;
-  gap: 10px;
-  margin-top: 24px;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
 }
 .form-grid input,
 .form-grid textarea {
   width: 100%;
-  padding: 13px 14px;
+  padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--line);
   border-radius: 11px;
   outline: none;
-  background: rgba(255, 255, 255, 0.6);
+  background: color-mix(in oklab, var(--color-paper) 60%, transparent);
   color: var(--night);
 }
-.form-grid input:focus,
-.form-grid textarea:focus {
-  border-color: #69c98e;
-  box-shadow: 0 0 0 3px rgba(105, 201, 142, 0.16);
+.form-grid input:focus-visible,
+.form-grid textarea:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 .form-grid textarea {
   min-height: 105px;
@@ -1389,8 +1348,8 @@ footer {
   z-index: 220;
   bottom: 24px;
   left: 50%;
-  padding: 13px 18px;
-  border: 1px solid rgba(217, 255, 88, 0.35);
+  padding: var(--space-sm) 20px;
+  border: 1px solid color-mix(in oklab, var(--color-accent) 35%, transparent);
   border-radius: 999px;
   color: var(--paper);
   background: var(--night);
@@ -1427,7 +1386,7 @@ footer {
   .signal-main,
   .steps-layout {
     grid-template-columns: 1fr;
-    gap: 45px;
+    gap: 44px;
   }
   .node-stage {
     min-height: 590px;
@@ -1473,10 +1432,10 @@ footer {
     width: calc(100% - 30px);
   }
   .nav-cta {
-    padding: 10px 12px;
+    padding: var(--space-sm) var(--space-sm);
   }
   .hero {
-    padding: 128px 20px 55px;
+    padding: 128px 20px 56px;
   }
   .hero h1 {
     font-size: clamp(4.2rem, calc(20vw / var(--zoom)), 6.7rem);
@@ -1492,7 +1451,7 @@ footer {
   }
   .node-callout {
     font-size: 0.915rem;
-    padding: 8px 9px;
+    padding: var(--space-xs) var(--space-xs);
   }
   .callout-a {
     right: -2%;
@@ -1516,7 +1475,7 @@ footer {
   }
   .lab-step {
     grid-template-columns: 43px 1fr;
-    gap: 13px;
+    gap: var(--space-sm);
   }
   .lab-step h3 {
     font-size: 1.85rem;
@@ -1527,10 +1486,10 @@ footer {
   }
   .signal-readout,
   .signal-chart {
-    padding: 23px;
+    padding: var(--space-lg);
   }
   .mini-readings {
-    margin-top: 38px;
+    margin-top: var(--space-xl);
   }
   .impact-grid {
     grid-template-columns: 1fr;
@@ -1555,7 +1514,7 @@ footer {
     flex-direction: column;
   }
   .modal-card {
-    padding: 28px 22px;
+    padding: 28px var(--space-lg);
   }
   .modal-card h2 {
     font-size: 2.8rem;
@@ -1567,7 +1526,7 @@ footer {
   padding: 0;
   display: block;
   overflow: clip;
-  background: #000;
+  background: var(--color-paper-2);
   isolation: isolate;
 }
 .sensor-hero::before {
@@ -1585,11 +1544,10 @@ footer {
   content: none;
   right: calc(5vw / var(--zoom));
   bottom: 24px;
-  color: rgba(238, 241, 231, 0.34);
+  color: color-mix(in oklab, var(--color-ink) 34%, transparent);
   font:
-    0.928rem "DM Mono",
-    monospace;
-  letter-spacing: 0.14em;
+    0.928rem var(--font-body);
+  letter-spacing: 0;
 }
 .sensor-pin {
   --digital-scene: 1;
@@ -1598,9 +1556,9 @@ footer {
   min-height: calc(100svh / var(--zoom));
   display: flex;
   align-items: center;
-  padding: 175px calc(8vw / var(--zoom)) 115px;
+  padding: 176px calc(8vw / var(--zoom)) 116px;
   overflow: hidden;
-  background: #000;
+  background: var(--color-paper-2);
   color: var(--cream);
 }
 .sensor-pin::before {
@@ -1610,8 +1568,8 @@ footer {
   inset: 0;
   opacity: calc(var(--digital-scene, 0) * 0.15);
   background-image:
-    linear-gradient(rgba(238, 241, 231, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(238, 241, 231, 0.12) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklab, var(--color-rule) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-rule) 12%, transparent) 1px, transparent 1px);
   background-size: 76px 76px;
   mask-image: linear-gradient(90deg, black, transparent 78%);
   pointer-events: none;
@@ -1625,17 +1583,16 @@ footer {
   right: calc(6vw / var(--zoom));
   display: flex;
   justify-content: space-between;
-  color: rgba(238, 241, 231, 0.42);
+  color: color-mix(in oklab, var(--color-ink) 42%, transparent);
   font:
-    0.925rem "DM Mono",
-    monospace;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+    0.925rem var(--font-body);
+  letter-spacing: 0;
+  text-transform: none;
 }
 .hero-hud span:last-child {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-xs);
 }
 .hero-hud span:last-child::before {
   content: "";
@@ -1653,19 +1610,19 @@ footer {
   width: min(calc(60vw / var(--zoom)), 850px);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(217, 255, 88, 0.17);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 17%, transparent);
   border-radius: 50%;
   box-shadow:
-    0 0 0 34px rgba(217, 255, 88, 0.018),
-    0 0 0 84px rgba(217, 255, 88, 0.014),
-    0 0 0 150px rgba(217, 255, 88, 0.01);
+    0 0 0 34px color-mix(in oklab, var(--color-accent) 2%, transparent),
+    0 0 0 84px color-mix(in oklab, var(--color-accent) 1%, transparent),
+    0 0 0 150px color-mix(in oklab, var(--color-accent) 1%, transparent);
 }
 .sensor-radar::before,
 .sensor-radar::after {
   content: "";
   position: absolute;
   inset: 12%;
-  border: 1px solid rgba(217, 255, 88, 0.12);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 12%, transparent);
   border-radius: 50%;
 }
 .sensor-radar::after {
@@ -1679,7 +1636,7 @@ footer {
   height: 6px;
   border-radius: 50%;
   background: var(--acid);
-  box-shadow: 0 0 18px 4px rgba(217, 255, 88, 0.44);
+  box-shadow: 0 0 18px 4px color-mix(in oklab, var(--color-accent) 44%, transparent);
   animation: radar 5.5s linear infinite;
   transform-origin: 0 calc(min(calc(30vw / var(--zoom)), 425px) + 3px);
 }
@@ -1701,7 +1658,7 @@ footer {
   mask-image: radial-gradient(
     ellipse at 52% 50%,
     black 18%,
-    rgba(0, 0, 0, 0.84) 52%,
+    color-mix(in oklab, var(--color-paper-2) 84%, transparent) 52%,
     transparent 78%
   );
   opacity: 0.68;
@@ -1710,7 +1667,7 @@ footer {
 .model-loaded .sensor-fallback {
   opacity: 0;
 }
-.sensor-model {
+.js .sensor-model {
   position: absolute;
   z-index: 3;
   left: calc(36% + min(calc(35vw / var(--zoom)), 490px));
@@ -1719,7 +1676,7 @@ footer {
   height: min(calc(91svh / var(--zoom)), 940px);
   transform: translate(-50%, -50%);
   opacity: 0;
-  filter: drop-shadow(0 35px 60px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 35px 60px color-mix(in oklab, var(--color-paper-2) 35%, transparent));
   transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   --poster-color: transparent;
   --progress-bar-color: var(--acid);
@@ -1745,7 +1702,7 @@ footer {
   display: grid;
   pointer-events: none;
 }
-.hero-phase {
+.js .hero-phase {
   position: relative;
   grid-area: 1 / 1;
   min-width: 0;
@@ -1771,61 +1728,57 @@ footer {
 }
 .hero-phase h1 {
   max-width: 680px;
-  margin: 25px 0 0;
+  margin: var(--space-lg) 0 0;
   font:
-    500 clamp(4.2rem, calc(8.5vw / var(--zoom)), 9.1rem)/0.82 "Space Grotesk",
-    sans-serif;
+    500 clamp(4.2rem, calc(8.5vw / var(--zoom)), 9.1rem)/0.82 var(--font-display);
   letter-spacing: -0.115em;
 }
 .hero-phase h1 span {
   display: block;
-  color: var(--acid);
 }
 .hero-phase p {
   max-width: 350px;
-  margin: 27px 0 0;
-  color: rgba(238, 241, 231, 0.62);
+  margin: 28px 0 0;
+  color: color-mix(in oklab, var(--color-ink) 62%, transparent);
   font-size: 1.008rem;
   line-height: 1.7;
 }
 .hero-phase .hero-actions {
-  margin-top: 25px;
+  margin-top: var(--space-lg);
 }
 .hero-phase .button.outline {
-  background: rgba(7, 19, 16, 0.38);
+  background: color-mix(in oklab, var(--color-paper-2) 38%, transparent);
   backdrop-filter: blur(10px);
 }
 .hero-tabs {
   display: flex;
   gap: clamp(10px, calc(1.5vw / var(--zoom)), 23px);
   margin-top: 36px;
-  border-top: 1px solid #eef1e72b;
+  border-top: 1px solid color-mix(in oklab, var(--color-rule) 17%, transparent);
 }
 .hero-tab {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-xs);
   flex: 1;
   min-width: 0;
   min-height: 48px;
-  padding: 12px 0;
+  padding: var(--space-sm) 0;
   border: 0;
   border-bottom: 2px solid transparent;
-  color: #eef1e79c;
+  color: color-mix(in oklab, var(--color-ink) 61%, transparent);
   background: transparent;
   text-align: left;
   font:
-    500 0.963rem/1.5 "Space Grotesk",
-    sans-serif;
+    500 0.963rem/1.5 var(--font-display);
   transition:
     color 0.2s,
     border-color 0.2s;
 }
 .hero-tab > span {
   font:
-    0.918rem "DM Mono",
-    monospace;
-  color: #eef1e770;
+    0.918rem var(--font-body);
+  color: color-mix(in oklab, var(--color-ink) 44%, transparent);
 }
 .hero-tab[aria-selected="true"] {
   color: var(--acid);
@@ -1846,16 +1799,15 @@ footer {
   position: absolute;
   z-index: 4;
   display: grid;
-  gap: 4px;
-  padding: 10px 13px;
+  gap: var(--space-2xs);
+  padding: var(--space-sm) var(--space-sm);
   border-left: 1px solid var(--acid);
-  background: rgba(7, 19, 16, 0.47);
+  background: color-mix(in oklab, var(--color-paper-2) 47%, transparent);
   backdrop-filter: blur(9px);
   font:
-    0.925rem "DM Mono",
-    monospace;
-  letter-spacing: 0.08em;
-  color: rgba(238, 241, 231, 0.58);
+    0.925rem var(--font-body);
+  letter-spacing: 0;
+  color: color-mix(in oklab, var(--color-ink) 58%, transparent);
   transition:
     opacity 0.45s,
     transform 0.6s;
@@ -1863,9 +1815,8 @@ footer {
 .sensor-note b {
   color: var(--acid);
   font:
-    600 0.953rem "DM Mono",
-    monospace;
-  letter-spacing: 0.11em;
+    600 0.953rem var(--font-body);
+  letter-spacing: 0;
 }
 .sensor-note.note-a {
   top: 28%;
@@ -1879,12 +1830,12 @@ footer {
   top: 25%;
   left: 51%;
 }
-.sensor-hero[data-scene-stage="0"] .note-b,
-.sensor-hero[data-scene-stage="0"] .note-c,
-.sensor-hero[data-scene-stage="1"] .note-a,
-.sensor-hero[data-scene-stage="1"] .note-c,
-.sensor-hero[data-scene-stage="2"] .note-a,
-.sensor-hero[data-scene-stage="2"] .note-b {
+.js .sensor-hero[data-scene-stage="0"] .note-b,
+.js .sensor-hero[data-scene-stage="0"] .note-c,
+.js .sensor-hero[data-scene-stage="1"] .note-a,
+.js .sensor-hero[data-scene-stage="1"] .note-c,
+.js .sensor-hero[data-scene-stage="2"] .note-a,
+.js .sensor-hero[data-scene-stage="2"] .note-b {
   opacity: 0;
   transform: translateY(8px);
 }
@@ -1894,13 +1845,12 @@ footer {
   right: calc(6vw / var(--zoom));
   bottom: 46px;
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs);
   align-items: center;
-  color: rgba(238, 241, 231, 0.4);
+  color: color-mix(in oklab, var(--color-ink) 40%, transparent);
   font:
-    0.92rem "DM Mono",
-    monospace;
-  letter-spacing: 0.13em;
+    0.92rem var(--font-body);
+  letter-spacing: 0;
 }
 .scene-counter b {
   color: var(--acid);
@@ -1913,13 +1863,12 @@ footer {
   bottom: 46px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: rgba(238, 241, 231, 0.48);
+  gap: var(--space-sm);
+  color: color-mix(in oklab, var(--color-ink) 48%, transparent);
   font:
-    0.923rem "DM Mono",
-    monospace;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+    0.923rem var(--font-body);
+  letter-spacing: 0;
+  text-transform: none;
 }
 .scroll-cue i {
   display: block;
@@ -1935,12 +1884,12 @@ footer {
   right: calc(6vw / var(--zoom));
   bottom: 84px;
   display: inline-flex;
-  gap: 10px;
+  gap: var(--space-sm);
   align-items: center;
-  padding: 10px 15px;
-  border: 1px solid rgba(217, 255, 88, 0.32);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 32%, transparent);
   border-radius: 999px;
-  background: rgba(11, 28, 23, 0.75);
+  background: color-mix(in oklab, var(--color-paper-2) 75%, transparent);
   color: var(--acid);
   font-size: 0.95rem;
   font-weight: 600;
@@ -1954,7 +1903,7 @@ footer {
 @media (max-width: 900px) {
   .sensor-pin {
     align-items: flex-end;
-    padding: 240px calc(7vw / var(--zoom)) 110px;
+    padding: 240px calc(7vw / var(--zoom)) 112px;
   }
   .hero-copy {
     width: min(calc(76vw / var(--zoom)), 570px);
@@ -1981,10 +1930,10 @@ footer {
   }
   .hero-phase p {
     max-width: 310px;
-    margin-top: 17px;
+    margin-top: var(--space-md);
   }
   .hero-phase .hero-actions {
-    margin-top: 17px;
+    margin-top: var(--space-md);
   }
   .hero-hud {
     top: 91px;
@@ -2018,7 +1967,7 @@ footer {
 }
 @media (max-width: 560px) {
   .sensor-pin {
-    padding: 230px calc(6vw / var(--zoom)) 95px;
+    padding: 232px calc(6vw / var(--zoom)) var(--space-3xl);
   }
   .hero-copy {
     width: 100%;
@@ -2040,8 +1989,8 @@ footer {
     top: 36%;
     width: calc(112vw / var(--zoom));
     box-shadow:
-      0 0 0 22px rgba(217, 255, 88, 0.018),
-      0 0 0 50px rgba(217, 255, 88, 0.014);
+      0 0 0 22px color-mix(in oklab, var(--color-accent) 2%, transparent),
+      0 0 0 50px color-mix(in oklab, var(--color-accent) 1%, transparent);
   }
   .hero-hud {
     top: 82px;
@@ -2052,26 +2001,26 @@ footer {
   }
   .hero-phase h1 {
     font-size: clamp(4.1rem, calc(18vw / var(--zoom)), 6.5rem);
-    margin-top: 17px;
+    margin-top: var(--space-md);
   }
   .hero-phase p {
     font-size: 0.983rem;
     max-width: 290px;
   }
   .hero-phase .hero-actions {
-    gap: 8px;
+    gap: var(--space-xs);
   }
   .hero-phase .button {
     min-height: 43px;
-    padding: 0 13px;
+    padding: 0 var(--space-sm);
     font-size: 0.948rem;
   }
   .hero-tabs {
-    margin-top: 26px;
-    gap: 12px;
+    margin-top: 28px;
+    gap: var(--space-sm);
   }
   .hero-tab {
-    gap: 6px;
+    gap: var(--space-xs);
     font-size: 0.955rem;
   }
   .hero-tab > span {
@@ -2079,7 +2028,7 @@ footer {
   }
   .sensor-note {
     font-size: 0.905rem;
-    padding: 8px 9px;
+    padding: var(--space-xs) var(--space-xs);
   }
   .sensor-note b {
     font-size: 0.928rem;
@@ -2118,7 +2067,7 @@ footer {
     bottom: 66px;
     right: calc(6vw / var(--zoom));
     font-size: 0.928rem;
-    padding: 8px 11px;
+    padding: var(--space-xs) var(--space-sm);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2145,20 +2094,18 @@ footer {
 
 /* Ajustes de los componentes React y accesibilidad */
 .subdued-label {
-  color: rgba(238, 241, 231, 0.45);
+  color: color-mix(in oklab, var(--color-ink) 45%, transparent);
 }
 .green-text {
-  color: #69c98e;
+  color: var(--color-muted);
 }
 /* El círculo sigue al punto sin retraso: animar left/top lo dejaba atrás,
    sobre todo mientras se cargan los modelos 3D. Solo se anima el tamaño. */
 .cursor-ring {
-  transition:
-    width 0.25s,
-    height 0.25s;
+  transition: transform 0.25s;
 }
 :focus-visible {
-  outline: 2px solid #69c98e;
+  outline: 2px solid var(--color-rule);
   outline-offset: 5px;
 }
 .modal-card {
@@ -2194,22 +2141,22 @@ footer {
   bottom: 18px;
   left: calc(6vw / var(--zoom));
   right: calc(6vw / var(--zoom));
-  color: rgba(238, 241, 231, 0.6);
+  color: color-mix(in oklab, var(--color-ink) 60%, transparent);
   font-size: 0.963rem;
 }
 @media (max-width: 380px) {
   .brand {
     font-size: 1.075rem;
-    gap: 7px;
+    gap: var(--space-xs);
   }
   .nav-cta {
     font-size: 0.938rem;
-    padding: 9px;
-    gap: 5px;
+    padding: var(--space-xs);
+    gap: var(--space-2xs);
   }
   .nav-meteo-link {
     font-size: 0.938rem;
-    gap: 4px;
+    gap: var(--space-2xs);
   }
 }
 @media (prefers-reduced-motion: reduce) {

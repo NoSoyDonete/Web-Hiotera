@@ -1,5 +1,5 @@
 import { useLanguage } from "./LanguageProvider.jsx";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { assetUrl, site } from "../config.js";
 import {
   faqItems,
@@ -8,6 +8,22 @@ import {
   journeySteps,
   nodeSteps,
 } from "../content.js";
+
+// Fotos reales de instalaciones que ha aportado Hiotera.
+const fieldPhotos = [
+  {
+    src: "fotos/libox-vivero.jpg",
+    alt: "LIBOx en un poste de un vivero, con plantas en maceta detrás",
+  },
+  {
+    src: "fotos/libox-poste.jpg",
+    alt: "LIBOx atado a un poste de madera en una finca",
+  },
+  {
+    src: "fotos/libox-placa-berenjena.jpg",
+    alt: "LIBOx con su placa solar en lo alto del poste, entre berenjenas",
+  },
+];
 
 const indexLabel = (index) => String(index + 1).padStart(2, "0");
 function Lines({ items }) {
@@ -26,9 +42,7 @@ export function Marquee() {
     <div className="marquee" aria-label="Mide, consulta y decide">
       <div className="marquee-track">
         <b>MIDE</b>
-        <i aria-hidden="true">✳</i>
         <b>CONSULTA</b>
-        <i aria-hidden="true">✳</i>
         <b>DECIDE</b>
       </div>
     </div>,
@@ -56,9 +70,6 @@ export function StatementSection() {
               cambia el ambiente del invernadero. Hiotera reúne las lecturas de
               los sensores para que puedas comprobarlo en la aplicación.
             </p>
-            <a className="micro-link" href="#senal">
-              <b>↘</b> ver la aplicación
-            </a>
           </div>
         </div>
       </div>
@@ -74,7 +85,6 @@ export function NodeSection() {
       <div className="section-inner">
         <div className="lab-top">
           <div>
-            <div className="section-label subdued-label">02 / el nodo</div>
             <h2>
               Una pieza
               <br />
@@ -151,21 +161,25 @@ export function ImpactSection() {
       <div className="section-inner">
         <div className="impact-top">
           <h2>
-            Conoce tu finca.
+            Qué vas a poder
             <br />
-            Decide <span className="green-text">mejor.</span>
+            <span>ver cada día.</span>
           </h2>
-          <p>
-            Saber cómo están el suelo y el ambiente te ayuda a decidir qué
-            necesita atención en tu finca.
-          </p>
+          <div className="impact-copy">
+            <p>
+              No siempre se ve a simple vista si el suelo necesita agua o si
+              cambia el ambiente del invernadero. Hiotera reúne las lecturas de
+              los sensores para que puedas comprobarlo en la aplicación.
+            </p>
+            <p>
+              Saber cómo están el suelo y el ambiente te ayuda a decidir qué
+              necesita atención en tu finca.
+            </p>
+          </div>
         </div>
         <div className="impact-grid">
           {impactCards.map((item, index) => (
             <article className="impact-card" key={item.category}>
-              <span className="impact-index">
-                {indexLabel(index)} / {item.category}
-              </span>
               <h3>
                 <Lines items={item.title} />
               </h3>
@@ -186,9 +200,9 @@ export function JourneySection() {
         <div className="steps-layout">
           <div className="steps-intro">
             <h2>
-              Empieza
+              Lo que hacemos
               <br />
-              simple.
+              <span>nosotros.</span>
             </h2>
             <p>
               Elige qué quieres medir y nosotros nos encargamos del resto.
@@ -206,40 +220,66 @@ export function JourneySection() {
             ))}
           </div>
         </div>
+        <IncludedRows />
       </div>
     </section>,
+  );
+}
+
+function IncludedRows() {
+  return (
+    <div className="included" id="incluye" aria-labelledby="included-title">
+      <div className="included-heading">
+        <h2 id="included-title">
+          Incluido
+          <br />
+          <span>en la compra.</span>
+        </h2>
+        <p>
+          No tienes que preocuparte de montar nada. Nos encargamos de la
+          instalación y te acompañamos después.
+        </p>
+      </div>
+      <dl className="included-rows">
+        {includedItems.map((item) => (
+          <div className="included-row" key={item.title}>
+            <dt>{item.title}</dt>
+            <dd>{item.description}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
   );
 }
 
 export function IncludedSection() {
   const { localize } = useLanguage();
   return localize(
-    <section
-      className="section included"
-      id="incluye"
-      aria-labelledby="included-title"
-    >
+    <section className="section included-solo">
       <div className="section-inner">
-        <div className="included-heading">
-          <h2 id="included-title">
-            Todo incluido
-            <br />
-            <span>desde el primer día.</span>
-          </h2>
-          <p>
-            No tienes que preocuparte de montar nada. Nos encargamos de la
-            instalación y te acompañamos después.
-          </p>
-        </div>
-        <div className="included-grid">
-          {includedItems.map((item, index) => (
-            <article className="included-card" key={item.title}>
-              <span className="included-no" aria-hidden="true">
-                {indexLabel(index)}
-              </span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </article>
+        <IncludedRows />
+      </div>
+    </section>,
+  );
+}
+
+export function FieldPhotosSection() {
+  const { localize } = useLanguage();
+  return localize(
+    <section className="section field-photos" aria-labelledby="field-photos-title">
+      <div className="section-inner">
+        <h2 id="field-photos-title" className="field-photos-title">
+          Así quedan instalados.
+        </h2>
+        <div className="field-photos-row">
+          {fieldPhotos.map((photo) => (
+            <img
+              key={photo.src}
+              src={assetUrl(photo.src)}
+              alt={photo.alt}
+              loading="lazy"
+              decoding="async"
+            />
           ))}
         </div>
       </div>
@@ -302,10 +342,21 @@ export function FaqSection({ onContact }) {
 
 export function WhatsAppButton() {
   const { localize } = useLanguage();
+  // Se oculta cuando se ve el pie, que ya tiene todos los datos de contacto.
+  const [nearFooter, setNearFooter] = useState(false);
+  useEffect(() => {
+    const footer = document.querySelector(".site-footer");
+    if (!footer || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) =>
+      setNearFooter(entry.isIntersecting),
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
   if (!site.whatsapp) return null;
   return localize(
     <a
-      className="whatsapp-button"
+      className={`whatsapp-button${nearFooter ? " is-hidden" : ""}`}
       href={`https://wa.me/${site.whatsapp}`}
       target="_blank"
       rel="noopener noreferrer"
@@ -325,12 +376,12 @@ export function WhatsAppButton() {
 export function ClosingSection({ onContact }) {
   const { localize } = useLanguage();
   return localize(
-    <section className="closing">
+    <div className="closing" id="contacto">
       <div className="closing-inner">
         <h2>
-          Tu mejor
+          Cuéntanos qué cultivas
           <br />
-          cultivo <span>empieza aquí.</span>
+          <span>y te decimos qué medir.</span>
         </h2>
         <div className="closing-row">
           <p>
@@ -338,10 +389,10 @@ export function ClosingSection({ onContact }) {
             enseñamos qué puedes medir y cómo verlo en la aplicación.
           </p>
           <button className="button dark-button" onClick={onContact}>
-            Habla con un experto <span className="arrow">↗</span>
+            Cuéntanos qué quieres medir
           </button>
         </div>
       </div>
-    </section>,
+    </div>,
   );
 }

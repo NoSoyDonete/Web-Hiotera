@@ -15,7 +15,6 @@ export default function LegalPage({ documentKey = "aviso-legal" }) {
         <LanguageSelector />
       </header>
       <main className="legal-page">
-        <p className="legal-eyebrow">HIOTERA · INFORMACIÓN LEGAL</p>
         <h1>{entry.title}</h1>
         <nav className="legal-tabs" aria-label="Documentos legales">
           {Object.entries(legalDocuments).map(([key, item]) => (

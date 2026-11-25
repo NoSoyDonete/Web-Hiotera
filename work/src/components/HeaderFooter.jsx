@@ -12,13 +12,12 @@ function Brand({ footer = false }) {
       aria-label="Hiotera, inicio"
     >
       <img
-        className="brand-icon"
-        src={assetUrl("brand/icon-128.png")}
+        className="brand-logo"
+        src={assetUrl("brand/hiotera-horizontal-crema.png")}
         alt=""
-        width="44"
-        height="44"
+        width="280"
+        height="53"
       />
-      <span>Hiotera</span>
     </a>,
   );
 }
@@ -30,7 +29,7 @@ export function Header() {
       <Brand />
       <nav className="nav-links">
         <a href="#nodo">El LIBOx</a>
-        <a href="#meteo">La meteo</a>
+        <a href="#meteo">Estación meteorológica</a>
         <a href="#senal">La aplicación</a>
         <a href="#catalogo">Catálogo</a>
       </nav>
@@ -44,7 +43,7 @@ export function Header() {
           href="https://demo.hiotera.com/"
           aria-label="Acceso a la aplicación"
         >
-          <span className="nav-cta-label">Acceso a la aplicación</span>
+          <span className="nav-cta-label">Entrar en la app</span>
           <span className="nav-cta-short" aria-hidden="true">
             Acceder
           </span>
@@ -57,11 +56,12 @@ export function Header() {
   );
 }
 
-export function Footer({ onContact }) {
+export function Footer({ onContact, children }) {
   const { language, localize } = useLanguage();
   const home = `./?lang=${language}`;
   return localize(
     <footer className="site-footer" id="oficina">
+      {children}
       <div className="site-footer-grid">
         <div className="footer-intro">
           <Brand footer />
@@ -71,6 +71,7 @@ export function Footer({ onContact }) {
           <h3>Menú</h3>
           <a href={`${home}#inicio`}>Inicio</a>
           <a href={`${home}#nodo`}>El LIBOx</a>
+          <a href={`${home}#meteo`}>Estación meteorológica</a>
           <a href={`${home}#senal`}>La aplicación</a>
           <a href={`${home}#catalogo`}>Catálogo</a>
           <a href={`${home}#preguntas`}>Preguntas frecuentes</a>

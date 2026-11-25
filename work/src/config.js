@@ -19,7 +19,7 @@ export const site = {
     "Registro Mercantil de Almería, tomo 2027, folio 128, inscripción 1.ª, hoja AL-51829",
   copyright: "© Hiotera 2026",
   modelFile: "libox-sin-cables.glb",
-  installationPhoto: "libox-invernadero.webp",
+  installationPhoto: "fotos/libox-tomate.jpg",
 };
 
 export const assetUrl = (file) => `${import.meta.env.BASE_URL}${file}`;

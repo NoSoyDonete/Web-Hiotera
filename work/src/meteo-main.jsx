@@ -19,7 +19,7 @@ function MeteoPreview() {
         <LanguageSelector />
       </header>
       <main>
-        <MeteoScene />
+        <MeteoScene standalone />
       </main>
     </>,
   );

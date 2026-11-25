@@ -5,6 +5,7 @@ import { LanguageProvider } from "./components/LanguageProvider.jsx";
 import "./styles.css";
 import "./experience.css";
 import "./site-services.css";
+import "./hedgerow.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

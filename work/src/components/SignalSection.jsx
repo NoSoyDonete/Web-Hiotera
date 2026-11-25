@@ -61,11 +61,10 @@ export default function SignalSection() {
       <div className="section-inner">
         <div className="platform-heading">
           <div>
-            <div className="section-label">03 / La aplicación</div>
             <h2 id="platform-title">
-              No son solo datos.
+              Así se ve tu finca
               <br />
-              <span>Es tu cultivo.</span>
+              <span>en el móvil.</span>
             </h2>
           </div>
           <p>
@@ -105,13 +104,7 @@ export default function SignalSection() {
           tabIndex={0}
         >
           <div className="platform-window">
-            <div className="platform-window-bar">
-              <span>
-                <i />
-                <i />
-                <i />
-              </span>
-              <b>HIOTERA / DEMOSTRACIÓN</b>
+            <div className="platform-demo-bar">
               <button
                 onClick={() => setExpanded(true)}
                 aria-label={`Ampliar demostración: ${view.tab}`}

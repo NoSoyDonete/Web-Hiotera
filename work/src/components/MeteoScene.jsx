@@ -12,8 +12,10 @@ import "../meteo.css";
 
 const number = (index) => String(index + 1).padStart(2, "0");
 
-export default function MeteoScene() {
+export default function MeteoScene({ standalone = false }) {
   const { localize } = useLanguage();
+  // En la página principal el h1 es el de la portada; en meteo.html, la meteo.
+  const MeteoTitle = standalone ? "h1" : "h2";
   const sectionRef = useRef(null),
     modelRef = useRef(null),
     progressRef = useRef(null);
@@ -53,20 +55,28 @@ export default function MeteoScene() {
       <div className="meteo-pin">
         <div className="meteo-copy">
           <div className="meteo-heading">
-            <div className="section-label">
-              02 / Conoce la estación meteorológica
-            </div>
-            <h1 id="meteo-title">
+            <MeteoTitle id="meteo-title">
               Viento y lluvia.
               <br />
               <span>Conoce cada pieza.</span>
-            </h1>
+            </MeteoTitle>
             <p>
-              Esta estación mide 12 parámetros del exterior: temperatura,
-              humedad, lluvia, presión, radiación y viento. Usa la rueda del
-              ratón sobre la estación para separar las piezas y pulsa los
-              números para conocer qué hace cada una.
+              Mide 12 parámetros fuera del invernadero. Pulsa «Despiece» para separar las piezas.
             </p>
+            <ul className="meteo-params" aria-label="Los 12 parámetros que mide">
+              <li>Temperatura exterior</li>
+              <li>Humedad</li>
+              <li>Punto de rocío</li>
+              <li>Déficit de humedad</li>
+              <li>Lluvia del momento</li>
+              <li>Lluvia del día</li>
+              <li>Lluvia del año</li>
+              <li>Presión</li>
+              <li>Radiación</li>
+              <li>Velocidad del viento</li>
+              <li>Racha de viento</li>
+              <li>Dirección del viento</li>
+            </ul>
           </div>
 
           <aside
@@ -215,8 +225,8 @@ export default function MeteoScene() {
             <p>
               {stage === "exploded"
                 ? "Cada pieza, al descubierto"
-                : "Usa la rueda sobre la estación"}
-              <small>o pulsa «Montada» y «Despiece»</small>
+                : "Pulsa «Despiece» para separar las piezas"}
+              <small>o usa la rueda del ratón sobre la estación</small>
             </p>
           </div>
           <div

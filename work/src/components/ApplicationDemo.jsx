@@ -520,7 +520,7 @@ function ReadingTable({ group, title, experience }) {
                 <span className="replica-recommendation">
                   {metric.band && (
                     <>
-                      <small>Valor recomendado</small>
+                      <small>Rango de ejemplo</small>
                       {metric.band
                         .map((v) => v.toLocaleString("es-ES"))
                         .join("–")}{" "}

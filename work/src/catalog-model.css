@@ -1,7 +1,7 @@
 .catalog-model-frame {
   position: relative;
   height: 260px;
-  margin: 5px -10px 0;
+  margin: var(--space-2xs) calc(-1 * var(--space-sm)) 0;
   isolation: isolate;
 }
 .catalog-model-viewer {
@@ -9,7 +9,7 @@
   width: 100%;
   height: 100%;
   --poster-color: transparent;
-  --progress-bar-color: #5c8c44;
+  --progress-bar-color: var(--color-paper-2);
   --progress-bar-height: 2px;
 }
 .catalog-model-tools {
@@ -18,7 +18,7 @@
   right: 0;
   z-index: 2;
   display: flex;
-  gap: 5px;
+  gap: var(--space-2xs);
 }
 .catalog-model-tools button {
   display: grid;
@@ -26,21 +26,23 @@
   width: 30px;
   height: 30px;
   padding: 0;
-  border: 1px solid #819b6c55;
+  border: 1px solid color-mix(in oklab, var(--color-rule) 33%, transparent);
   border-radius: 50%;
-  background: #f9fcf0ed;
-  color: #416237;
+  background: color-mix(in oklab, var(--color-paper) 93%, transparent);
+  color: var(--color-muted);
   font-size: 16.8px;
 }
 .catalog-model-tools button:hover:not(:disabled) {
   background: var(--acid);
 }
 .catalog-model-tools button:disabled {
-  opacity: 0.35;
+  background: var(--color-paper-3);
+  color: var(--color-muted);
+  border-color: var(--color-rule);
   cursor: wait;
 }
 .catalog-model-tools button:focus-visible {
-  outline: 2px solid #355929;
+  outline: 2px solid var(--color-rule);
   outline-offset: 3px;
 }
 .catalog-model-frame figcaption {
@@ -49,17 +51,16 @@
   left: 5px;
   right: 5px;
   display: grid;
-  gap: 3px;
+  gap: var(--space-2xs);
   pointer-events: none;
   text-align: center;
-  color: #5c7951;
+  color: var(--color-muted);
   font:
-    14.6px/1.5 "DM Mono",
-    monospace;
+    14.6px/1.5 var(--font-body);
 }
 .catalog-model-frame figcaption span:first-child {
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  text-transform: none;
+  letter-spacing: 0;
 }
 .catalog-model-frame figcaption span:last-child {
   opacity: 0.6;
@@ -72,23 +73,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  color: #72905e;
+  gap: var(--space-sm);
+  color: var(--color-muted);
   font:
-    14.85px/1.8 "DM Mono",
-    monospace;
+    14.85px/1.8 var(--font-body);
   pointer-events: none;
 }
 .catalog-model-error .catalog-model-status {
-  background: #e5edda;
+  background: var(--color-paper-3);
   pointer-events: auto;
 }
 .catalog-model-status button {
-  color: #36592c;
-  background: #f7fbef;
-  border: 1px solid #71935c66;
+  color: var(--color-muted);
+  background: var(--color-paper);
+  border: 1px solid color-mix(in oklab, var(--color-rule) 40%, transparent);
   border-radius: 20px;
-  padding: 8px 15px;
+  padding: var(--space-xs) var(--space-md);
   font-size: 15.35px;
 }
 .catalog-model-pending {
@@ -98,25 +98,23 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #738b60;
+  color: var(--color-muted);
   padding: 20px;
 }
 .catalog-model-pending > span {
   font:
-    500 48px/1 "Space Grotesk",
-    sans-serif;
+    500 48px/1 var(--font-display);
   opacity: 0.22;
   letter-spacing: -0.08em;
 }
 .catalog-model-pending p {
-  margin: 15px 0 6px;
+  margin: var(--space-md) 0 var(--space-xs);
   font-size: 15.6px;
-  color: #5c784a;
+  color: var(--color-muted);
 }
 .catalog-model-pending small {
   font:
-    14.85px/1.8 "DM Mono",
-    monospace;
+    14.85px/1.8 var(--font-body);
   max-width: 215px;
   text-transform: none;
 }
@@ -124,14 +122,14 @@
   width: min(850px, calc(94vw / var(--zoom)));
   max-width: none;
   max-height: calc(92svh / var(--zoom));
-  border: 1px solid #91a17b;
+  border: 1px solid var(--color-rule);
   border-radius: 16px;
-  padding: 24px;
-  color: #203c29;
-  background: radial-gradient(ellipse at center, #fdfdf8, #e7eddb);
+  padding: var(--space-lg);
+  color: var(--color-ink);
+  background: radial-gradient(ellipse at center, var(--color-paper), var(--color-paper-3));
 }
 .catalog-model-dialog::backdrop {
-  background: #06170de0;
+  background: color-mix(in oklab, var(--color-paper-2) 88%, transparent);
   backdrop-filter: blur(8px);
 }
 .catalog-model-dialog-top {
@@ -142,29 +140,27 @@
 }
 .catalog-model-dialog-top span {
   font:
-    14.85px "DM Mono",
-    monospace;
-  color: #7c8c69;
+    14.85px var(--font-body);
+  color: var(--color-muted);
 }
 .catalog-model-dialog h3 {
-  margin: 8px 0 0;
+  margin: var(--space-xs) 0 0;
   font:
-    500 26px/1.2 "Space Grotesk",
-    sans-serif;
+    500 26px/1.2 var(--font-display);
   letter-spacing: -0.05em;
 }
 .catalog-model-dialog-top > button {
-  border: 1px solid #738d5c66;
-  padding: 9px 13px;
+  border: 1px solid color-mix(in oklab, var(--color-rule) 40%, transparent);
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 25px;
-  background: #fcfef5;
-  color: #4f6e3c;
+  background: var(--color-paper);
+  color: var(--color-muted);
   font-size: 15.35px;
   white-space: nowrap;
 }
 .catalog-model-dialog .catalog-model-frame {
   height: min(calc(65svh / var(--zoom)), 600px);
-  margin: 10px 0 0;
+  margin: var(--space-sm) 0 0;
 }
 .catalog-model-dialog .catalog-model-tools {
   right: 5px;
@@ -179,7 +175,7 @@
     height: 280px;
   }
   .catalog-model-dialog {
-    padding: 16px;
+    padding: var(--space-md);
   }
   .catalog-model-dialog h3 {
     font-size: 22px;

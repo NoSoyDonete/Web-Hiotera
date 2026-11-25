@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "./LanguageProvider.jsx";
 import { assetUrl, site } from "../config.js";
 import { heroPhases } from "../content.js";
@@ -8,6 +8,19 @@ export default function HeroScene({ onContact }) {
   const { localize } = useLanguage();
   const { phase, selectPhase, onTabKeyDown } = useHeroPhases();
   const [photoReady, setPhotoReady] = useState(false);
+  const photoRef = useRef(null);
+  // Si la foto ya estaba cargada (caché) antes de que React escuche su
+  // evento load, la página no llegaba a mostrarse. Se marca lista igualmente,
+  // y como seguro se muestra a los 2,5 s pase lo que pase.
+  useEffect(() => {
+    const ready = () => {
+      setPhotoReady(true);
+      document.documentElement.classList.add("app-ready");
+    };
+    if (photoRef.current?.complete) ready();
+    const timeout = window.setTimeout(ready, 2500);
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   return localize(
     <section
@@ -22,6 +35,7 @@ export default function HeroScene({ onContact }) {
             <i />
           </div>
           <img
+            ref={photoRef}
             className="sensor-fallback"
             src={assetUrl(site.installationPhoto)}
             alt="LIBOx instalado en un invernadero entre el cultivo"

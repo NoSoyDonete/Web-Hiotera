@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Modelos de la web | Hiotera</title>
+    <link rel="icon" href="./actual/brand/favicon.ico" sizes="any" />
+    <style>
+      :root {
+        --paper: #f3f1ea;
+        --sheet: #ffffff;
+        --ink: #13201a;
+        --muted: #55615a;
+        --rule: #d9d6cc;
+        --accent: #2f7d32;
+        --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        overflow-x: clip;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font);
+        line-height: 1.55;
+      }
+      main {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 56px clamp(16px, 4vw, 48px) 80px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+      .intro {
+        max-width: 60ch;
+        margin: 0 0 40px;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr));
+        gap: 24px;
+      }
+      article {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--rule);
+        background: var(--sheet);
+      }
+      article img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        border-bottom: 1px solid var(--rule);
+      }
+      .body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 8px;
+        padding: 20px 24px 24px;
+      }
+      h2 {
+        margin: 0;
+        font-size: 1.35rem;
+        line-height: 1.2;
+      }
+      .meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+      .body p {
+        margin: 0;
+      }
+      .open {
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 10px 18px;
+        border: 1.5px solid var(--accent);
+        border-radius: 999px;
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      .open:hover {
+        background: var(--accent);
+        color: var(--sheet);
+      }
+      .open:focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 3px;
+      }
+      .body p:last-of-type {
+        margin-bottom: 12px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .open {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Modelos de la web</h1>
+      <p class="intro">
+        Cada tarjeta abre una versión completa de la web de Hiotera, compilada
+        tal como estaba en su rama o commit. Sirven para compararlas; la web
+        publicada sigue siendo la de la carpeta <code>work</code>.
+      </p>
+      <div class="grid">
+        <article>
+          <img src="./capturas/actual.jpg" alt="Portada de la versión actual de main" />
+          <div class="body">
+            <h2>Versión actual (main)</h2>
+            <p class="meta">Commit beb0b6e</p>
+            <p>
+              La web publicada ahora mismo: portada oscura con la foto del
+              LIBOx, «Tu invernadero, en el móvil».
+            </p>
+            <a class="open" href="./actual/">Abrir este modelo</a>
+          </div>
+        </article>
+        <article>
+          <img src="./capturas/original.jpg" alt="Portada de la versión oscura original" />
+          <div class="body">
+            <h2>Versión oscura original</h2>
+            <p class="meta">Commit a17d5d6</p>
+            <p>
+              La web antes de los rediseños con Hallmark: fondo negro, acento
+              verde ácido y «El campo habla».
+            </p>
+            <a class="open" href="./original/">Abrir este modelo</a>
+          </div>
+        </article>
+        <article>
+          <img src="./capturas/furrow.jpg" alt="Portada de la versión Furrow con el plano de la finca" />
+          <div class="body">
+            <h2>Furrow</h2>
+            <p class="meta">Rediseño Hallmark, sin rama propia</p>
+            <p>
+              Papel manila, un plano topográfico de invernaderos con los
+              sensores marcados y botones mandarina.
+            </p>
+            <a class="open" href="./furrow/">Abrir este modelo</a>
+          </div>
+        </article>
+        <article>
+          <img src="./capturas/hedgerow.jpg" alt="Portada de la versión Hedgerow en verde hoja" />
+          <div class="body">
+            <h2>Hedgerow</h2>
+            <p class="meta">Rama rediseno-hedgerow, commit 8edf9a8</p>
+            <p>
+              Verde hoja con tinta crema, titulares en Prata, productos y
+              servicios separados, y fotos reales de instalaciones.
+            </p>
+            <a class="open" href="./hedgerow/">Abrir este modelo</a>
+          </div>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

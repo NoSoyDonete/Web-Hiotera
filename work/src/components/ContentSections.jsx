@@ -16,8 +16,8 @@ const fieldPhotos = [
     alt: "LIBOx en un poste de un vivero, con plantas en maceta detrás",
   },
   {
-    src: "fotos/libox-poste.jpg",
-    alt: "LIBOx atado a un poste de madera en una finca",
+    src: "fotos/libox-tomate.jpg",
+    alt: "LIBOx en un poste entre tomateras dentro de un invernadero",
   },
   {
     src: "fotos/libox-placa-berenjena.jpg",
@@ -126,7 +126,6 @@ export function NodeSection() {
               onClick={() => setInspecting((value) => !value)}
             >
               {inspecting ? "Desactivar" : "Activar"} modo escáner{" "}
-              <span>↗</span>
             </button>
           </div>
           <div className="lab-steps">
@@ -311,7 +310,7 @@ export function FaqSection({ onContact }) {
             <p>{site.officeAddress}</p>
             <div className="faq-office-actions">
               <button className="button dark-button" onClick={onContact}>
-                Escríbenos <span className="arrow">↗</span>
+                Escríbenos
               </button>
               <a
                 className="faq-map"
@@ -319,7 +318,7 @@ export function FaqSection({ onContact }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Cómo llegar ↗
+                Cómo llegar
               </a>
             </div>
           </aside>

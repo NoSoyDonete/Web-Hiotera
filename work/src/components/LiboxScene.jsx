@@ -274,7 +274,7 @@ export default function LiboxScene() {
                 el índice.
               </p>
               <a href={assetUrl(site.modelFile)} download>
-                Descargar modelo ↗
+                Descargar modelo
               </a>
             </div>
           )}
@@ -283,9 +283,6 @@ export default function LiboxScene() {
           className="libox-guide"
           aria-label="Conexiones y controles del LIBOx"
         >
-          <div className="libox-guide-label">
-            TOCA PARA EXPLORAR <span>↗</span>
-          </div>
           <div className="libox-parts-list">
             {liboxParts.map((item, index) => (
               <button
@@ -296,12 +293,10 @@ export default function LiboxScene() {
               >
                 <span>{label(index)}</span>
                 {item.name}
-                <i aria-hidden="true">↗</i>
               </button>
             ))}
           </div>
           <div className="libox-detail" aria-live="polite" aria-atomic="true">
-            <span>{part?.category ?? "SENSORES, CARGA Y CONTROLES"}</span>
             <h3>{part?.name ?? "¿Qué se conecta aquí?"}</h3>
             <p>
               {part?.description ??

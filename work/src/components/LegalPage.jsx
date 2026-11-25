@@ -57,7 +57,7 @@ export default function LegalPage({ documentKey = "aviso-legal" }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Agencia Española de Protección de Datos ↗
+            Agencia Española de Protección de Datos
           </a>
           <a href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>
         </aside>

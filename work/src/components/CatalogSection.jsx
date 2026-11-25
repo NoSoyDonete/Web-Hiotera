@@ -30,14 +30,13 @@ export default function CatalogSection({ onContact }) {
         <small>{item.type}</small>
         <h3>{item.name}</h3>
         <p>{item.description}</p>
-        {item.contact ? (
+        {!["libox", "meteo"].includes(item.id) ? null : item.contact ? (
           <button
             className="catalog-action"
             onClick={onContact}
             aria-label={`Consultar ${item.name}`}
           >
             {item.action}
-            <span aria-hidden="true">↗</span>
           </button>
         ) : (
           <a
@@ -53,7 +52,6 @@ export default function CatalogSection({ onContact }) {
             }}
           >
             {item.action}
-            <span aria-hidden="true">↗</span>
           </a>
         )}
       </div>
@@ -125,7 +123,7 @@ export default function CatalogSection({ onContact }) {
                 setQuery("");
               }}
             >
-              Ver todo el catálogo ↗
+              Ver todo el catálogo
             </button>
           </div>
         )}

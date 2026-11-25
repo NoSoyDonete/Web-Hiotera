@@ -98,7 +98,7 @@ function ModelViewer({ item, large, onExpand }) {
             <>
               <span>No se ha podido cargar el modelo.</span>
               <button onClick={() => setAttempt((value) => value + 1)}>
-                Reintentar ↗
+                Reintentar
               </button>
             </>
           ) : (
@@ -141,7 +141,7 @@ function ModelViewer({ item, large, onExpand }) {
             aria-label={`Ampliar modelo 3D de ${item.name}`}
             onClick={() => onExpand(item)}
           >
-            ↗
+            +
           </button>
         )}
       </div>

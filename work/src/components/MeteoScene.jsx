@@ -63,29 +63,12 @@ export default function MeteoScene({ standalone = false }) {
             <p>
               Mide 12 parámetros fuera del invernadero. Pulsa «Despiece» para separar las piezas.
             </p>
-            <ul className="meteo-params" aria-label="Los 12 parámetros que mide">
-              <li>Temperatura exterior</li>
-              <li>Humedad</li>
-              <li>Punto de rocío</li>
-              <li>Déficit de humedad</li>
-              <li>Lluvia del momento</li>
-              <li>Lluvia del día</li>
-              <li>Lluvia del año</li>
-              <li>Presión</li>
-              <li>Radiación</li>
-              <li>Velocidad del viento</li>
-              <li>Racha de viento</li>
-              <li>Dirección del viento</li>
-            </ul>
           </div>
 
           <aside
             className="meteo-parts"
             aria-label="Partes de la estación meteorológica"
           >
-            <div className="meteo-parts-caption">
-              {String(meteoParts.length).padStart(2, "0")} PARTES DESTACADAS
-            </div>
             <div className="meteo-part-list">
               {meteoParts.map((item, index) => (
                 <button
@@ -97,7 +80,6 @@ export default function MeteoScene({ standalone = false }) {
                 >
                   <span>{number(index)}</span>
                   {item.name}
-                  <i aria-hidden="true">↗</i>
                 </button>
               ))}
             </div>
@@ -106,7 +88,6 @@ export default function MeteoScene({ standalone = false }) {
               aria-live="polite"
               aria-atomic="true"
             >
-              <span>{part.category}</span>
               <p>{part.description}</p>
             </div>
           </aside>
@@ -213,7 +194,7 @@ export default function MeteoScene({ standalone = false }) {
             <div className="meteo-fallback" role="status">
               <p>No se ha podido cargar la vista 3D.</p>
               <a href={assetUrl(meteoModelFile)} download>
-                Descargar el modelo de la meteo ↗
+                Descargar el modelo de la meteo
               </a>
             </div>
           )}
@@ -256,7 +237,7 @@ export default function MeteoScene({ standalone = false }) {
               onClick={() => goTo(1)}
               disabled={status !== "ready"}
             >
-              Despiece <span aria-hidden="true">↗</span>
+              Despiece
             </button>
           </div>
         </div>

@@ -134,7 +134,7 @@ export default function ContactDialog({ open, onClose, onPrepared }) {
             </a>
           </p>
           <button className="button" type="submit">
-            Preparar consulta <span className="arrow">↗</span>
+            Preparar consulta
           </button>
         </form>
       </div>

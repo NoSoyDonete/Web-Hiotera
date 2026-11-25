@@ -109,7 +109,7 @@ export default function SignalSection() {
                 onClick={() => setExpanded(true)}
                 aria-label={`Ampliar demostración: ${view.tab}`}
               >
-                Ampliar <span aria-hidden="true">↗</span>
+                Ampliar
               </button>
             </div>
             <div lang="es" translate="no">
@@ -129,7 +129,6 @@ export default function SignalSection() {
             <ul>
               {view.notes.map((note) => (
                 <li key={note}>
-                  <span aria-hidden="true">↗</span>
                   {note}
                 </li>
               ))}

@@ -1203,3 +1203,166 @@ select {
     );
   }
 }
+
+/* ---- Ronda de ajustes ---- */
+/* Botones: esquinas suaves en vez de cápsula perfecta. */
+.button,
+.dark-button,
+.catalog-action,
+.footer-contact,
+.inspect-button,
+.topbar .nav-cta,
+.platform-tabs button,
+.catalog-filters button,
+.meteo-view-buttons button,
+.language-trigger {
+  border-radius: 14px;
+}
+.button,
+.dark-button,
+.topbar .nav-cta {
+  padding-inline: 22px;
+  font-weight: 600;
+}
+
+/* Lista de piezas del LIBOx y de la meteo: la barra no toca el número. */
+.libox-parts-list button:not(#_),
+.meteo-part-list button:not(#_) {
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+  border-radius: 0;
+}
+.libox-parts-list button[aria-pressed="true"]:not(#_),
+.meteo-part-list button.is-selected:not(#_) {
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+/* Meteo: título, una frase y la lista de piezas, sin rótulos. */
+.meteo-copy:not(#_) {
+  overflow: visible;
+  gap: var(--space-xl);
+  padding-right: 0;
+}
+.meteo-parts:not(#_) {
+  border-top: 1.5px solid var(--color-accent);
+  padding-top: var(--space-xs);
+}
+.meteo-part-detail:not(#_) {
+  margin-top: var(--space-md);
+}
+.libox-guide:not(#_) {
+  border-top: 1.5px solid var(--color-accent);
+  padding-top: var(--space-xs);
+}
+
+/* «Qué vas a poder ver»: título y texto alineados arriba, sin hueco. */
+.impact .impact-top:not(#_) {
+  align-items: start;
+  margin-bottom: var(--space-xl);
+}
+.impact.section:not(#_) {
+  padding-top: var(--section-gap-s);
+}
+
+/* Los dos botones del catálogo («Explorar el LIBOx», «Explorar la estación»):
+   texto centrado, sin flecha, con un relleno suave. */
+.catalog-card-copy .catalog-action:not(#_) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 var(--space-lg);
+  border: 1.5px solid var(--color-accent);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--color-accent) 10%, transparent);
+  color: var(--color-ink);
+  font: 600 0.9375rem/1 var(--font-body);
+  text-align: center;
+  white-space: nowrap;
+}
+.catalog-card-copy .catalog-action:not(#_):hover {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+.catalog-card-copy .catalog-action::after,
+.catalog-card-copy .catalog-action::before {
+  content: none;
+}
+
+/* «¿No sabes qué equipo necesitas?»: texto y botón con el mismo margen. */
+.catalog-grow:not(#_) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-xl);
+  align-items: center;
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl) var(--space-2xl);
+  border: 0;
+  border-top: 1.5px solid var(--color-accent);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  border-radius: 0;
+  background: var(--color-paper-3);
+}
+.catalog-grow h3:not(#_) {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-2xl);
+}
+.catalog-grow p:not(#_) {
+  margin: 0;
+  color: var(--color-ink-2);
+}
+.catalog-grow .button:not(#_) {
+  margin: 0;
+}
+
+/* Contacto en las preguntas: sin recuadro, como una ficha reglada. */
+.faq-office:not(#_) {
+  margin-top: var(--space-2xl);
+  padding: var(--space-lg) 0 0;
+  border: 0;
+  border-top: 1.5px solid var(--color-accent);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.faq-office h3:not(#_) {
+  margin: 0 0 var(--space-md);
+  color: var(--color-ink-2);
+  font: 500 1rem/1.4 var(--font-body);
+}
+.faq-office .faq-phone:not(#_) {
+  margin: 0 0 var(--space-md);
+  font-size: clamp(2rem, calc(2.6vw / var(--zoom)), 2.8rem);
+  text-decoration: none;
+}
+.faq-office p:not(#_) {
+  margin: 0;
+  padding: var(--space-xs) 0;
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  color: var(--color-ink-2);
+  font-size: 0.9375rem;
+}
+.faq-office .faq-office-actions:not(#_) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+/* Fotos: la de las berenjenas, más baja para centrar el LIBOx. */
+.field-photos-row img:nth-child(3) {
+  object-position: 50% 92%;
+}
+.field-photos-row img:nth-child(2) {
+  object-position: 50% 45%;
+}
+@media (max-width: 700px) {
+  .catalog-grow:not(#_) {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-lg);
+  }
+  .catalog-grow .button:not(#_) {
+    justify-self: start;
+  }
+}

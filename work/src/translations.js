@@ -93,7 +93,7 @@ export const translationRows = [
     "Politique relative aux cookies",
     "Cookie-Richtlinie",
   ],
-  ["Cómo llegar ↗", "Get directions ↗", "Itinéraire ↗", "Anfahrt ↗"],
+  ["Cómo llegar", "Get directions", "Itinéraire", "Anfahrt"],
   [
     "Lunes a viernes, de 8:00 a 16:00",
     "Monday to Friday, 8:00–16:00",
@@ -101,10 +101,10 @@ export const translationRows = [
     "Montag bis Freitag, 8:00–16:00 Uhr",
   ],
   [
-    "Hablar con la oficina ↗",
-    "Contact the office ↗",
-    "Contacter le bureau ↗",
-    "Büro kontaktieren ↗",
+    "Hablar con la oficina",
+    "Contact the office",
+    "Contacter le bureau",
+    "Büro kontaktieren",
   ],
   [
     "UN NUEVO PUNTO DE VISTA",
@@ -231,10 +231,10 @@ export const translationRows = [
     "Das 3D-Modell konnte nicht geladen werden. Sie können die Funktionen weiterhin in der Liste ansehen.",
   ],
   [
-    "Descargar modelo ↗",
-    "Download model ↗",
-    "Télécharger le modèle ↗",
-    "Modell herunterladen ↗",
+    "Descargar modelo",
+    "Download model",
+    "Télécharger le modèle",
+    "Modell herunterladen",
   ],
   [
     "Temperatura del suelo",
@@ -537,10 +537,10 @@ export const translationRows = [
     "Die 3D-Ansicht konnte nicht geladen werden.",
   ],
   [
-    "Descargar el modelo de la meteo ↗",
-    "Download the weather station model ↗",
-    "Télécharger le modèle météo ↗",
-    "Wetterstationsmodell herunterladen ↗",
+    "Descargar el modelo de la meteo",
+    "Download the weather station model",
+    "Télécharger le modèle météo",
+    "Wetterstationsmodell herunterladen",
   ],
   [
     "Controles de la vista 3D",
@@ -863,10 +863,10 @@ export const translationRows = [
     "Keine Geräte entsprechen Ihrer Suche.",
   ],
   [
-    "Ver todo el catálogo ↗",
-    "View the full catalogue ↗",
-    "Voir tout le catalogue ↗",
-    "Gesamten Katalog ansehen ↗",
+    "Ver todo el catálogo",
+    "View the full catalogue",
+    "Voir tout le catalogue",
+    "Gesamten Katalog ansehen",
   ],
   [
     "¿No sabes qué equipo necesitas?",
@@ -881,10 +881,10 @@ export const translationRows = [
     "Sagen Sie uns, was Sie anbauen und messen möchten. Wir helfen Ihnen bei der Auswahl.",
   ],
   [
-    "Consultar un equipo ↗",
-    "Ask about a device ↗",
-    "Se renseigner sur un appareil ↗",
-    "Nach einem Gerät fragen ↗",
+    "Consultar un equipo",
+    "Ask about a device",
+    "Se renseigner sur un appareil",
+    "Nach einem Gerät fragen",
   ],
   [
     "CATÁLOGO HIOTERA / MODELO 3D",
@@ -1068,7 +1068,7 @@ export const translationRows = [
     "Le modèle n’a pas pu être chargé.",
     "Das Modell konnte nicht geladen werden.",
   ],
-  ["Reintentar ↗", "Try again ↗", "Réessayer ↗", "Erneut versuchen ↗"],
+  ["Reintentar", "Try again", "Réessayer", "Erneut versuchen"],
   [
     "Preparando vista 3D…",
     "Loading 3D view…",

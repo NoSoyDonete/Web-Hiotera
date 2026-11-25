@@ -47,9 +47,6 @@ export function Header() {
           <span className="nav-cta-short" aria-hidden="true">
             Acceder
           </span>
-          <span className="arrow" aria-hidden="true">
-            ↗
-          </span>
         </a>
       </div>
     </header>,
@@ -102,7 +99,7 @@ export function Footer({ onContact, children }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Cómo llegar ↗
+            Cómo llegar
           </a>
           <a href={`mailto:${site.email}`}>{site.email}</a>
           <a className="footer-phone" href={site.phoneHref}>
@@ -111,7 +108,7 @@ export function Footer({ onContact, children }) {
           <p>Lunes a viernes, de 8:00 a 16:00</p>
           {onContact && (
             <button className="footer-contact" onClick={onContact}>
-              Hablar con la oficina ↗
+              Hablar con la oficina
             </button>
           )}
         </div>

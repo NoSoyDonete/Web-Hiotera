@@ -22,6 +22,20 @@ export default function HeroScene({ onContact }) {
     return () => window.clearTimeout(timeout);
   }, []);
 
+  // Los tres mensajes se turnan cada 4,5 s. Se detiene con el ratón o el foco
+  // encima y no se mueve si el sistema pide reducir el movimiento.
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    if (paused) return undefined;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)
+      return undefined;
+    const id = window.setInterval(
+      () => selectPhase((current) => (current + 1) % heroPhases.length),
+      4500,
+    );
+    return () => window.clearInterval(id);
+  }, [paused, phase, selectPhase]);
+
   return localize(
     <section
       className="hero sensor-hero photo-hero"
@@ -58,7 +72,13 @@ export default function HeroScene({ onContact }) {
             style={photoReady ? undefined : { opacity: 0 }}
           />
         </div>
-        <div className="hero-copy">
+        <div
+          className="hero-copy"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+        >
           <h1 className="hero-title">
             Sensores para
             <br />

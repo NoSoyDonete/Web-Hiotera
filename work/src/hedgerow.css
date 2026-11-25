@@ -1366,3 +1366,28 @@ select {
     justify-self: start;
   }
 }
+
+/* LIBOx con el mismo fondo y el mismo círculo que la meteo. */
+.libox-section:not(#_),
+.libox-section .libox-pin:not(#_),
+.meteo-section:not(#_),
+.meteo-section .meteo-pin:not(#_) {
+  background: var(--color-paper-3);
+}
+.libox-stage::before {
+  border: 1px solid color-mix(in oklab, var(--color-rule) 40%, transparent);
+  box-shadow:
+    0 0 0 45px color-mix(in oklab, var(--color-rule) 6%, transparent),
+    0 0 0 90px color-mix(in oklab, var(--color-rule) 4%, transparent);
+}
+.libox-detail:not(#_),
+.meteo-part-detail:not(#_) {
+  background: var(--color-paper-2);
+}
+
+/* Fichas de detalle: un paso más claras que el fondo, sin llegar a negro. */
+.libox-detail:not(#_),
+.meteo-part-detail:not(#_) {
+  border-color: color-mix(in oklab, var(--color-ink) 14%, transparent);
+  background: color-mix(in oklab, var(--color-paper-3) 91%, var(--color-ink));
+}
